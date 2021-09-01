@@ -1,11 +1,14 @@
-import React from "react";
+import CelebTab from "./components/item/CelebTab";
+import NewInfo from "./components/main/NewInfo";
+import "./Main.css";
 
 function Main() {
-  return <div>
+  return (
     <div>
-      Carousel
+      <NewInfo/>
+      <CelebTab />
     </div>
-  </div>;
+  );
 }
 
 export default Main;

@@ -1,22 +1,24 @@
 import React from "react";
 import Navbar from "./components/basic/Navbar";
-import { Route, Switch } from "react-router";
+import { Route, Switch, BrowserRouter } from "react-router-dom";
 import Main from "./Main";
 import MainBid from "./MainBid";
 
 function App() {
   return (
-    <div>
+    <BrowserRouter>
+      <div>
         <Navbar />
-      <Switch>
-        <Route path="/" exact>
-          <Main />
-        </Route>
-        <Route path="/bidmarket">
-          <MainBid />
-        </Route>
-      </Switch>
-    </div>
+        <Switch>
+          <Route path="/" exact>
+            <Main />
+          </Route>
+          <Route path="/bidmarket">
+            <MainBid />
+          </Route>
+        </Switch>
+      </div>
+    </BrowserRouter>
   );
 }
 
