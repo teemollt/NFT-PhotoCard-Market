@@ -1,0 +1,42 @@
+spring:
+  datasource:
+    url: jdbc:mariadb://localhost:3306/blockChain
+    #url: jdbc:mariadb://i5d205.p.ssafy.io:3306/blockChain
+    username: ssafy
+    password: ssafy
+    driver-class-name: org.mariadb.jdbc.Driver
+  
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+ #      show_sql: true
+       format_sql: true
+  servlet:
+    multipart:
+      maxFileSize: 5MB
+      maxRequestSize: 5MB
+  cache:
+    type: redis
+  redis:
+    host: localhost
+    port: 6379
+
+jwt:
+  header: Authorization
+  #HS512 알고리즘을 사용할 것이기 때문에 512bit, 즉 64byte 이상의 secret key를 사용해야 한다.
+  #'ssafy_common_project_6to4_algorithm_social_network_service_jwt_authorize_signin'
+  secret: c3NhZnlfY29tbW9uX3Byb2plY3RfNnRvNF9hbGdvcml0aG1fc29jaWFsX25ldHdvcmtfc2VydmljZV9qd3RfYXV0aG9yaXplX3NpZ25pbg
+  #token-validity-in-seconds: 86400 # 토큰 만료시간 86400초 (하루)
+
+        
+logging.level:
+  org.hibernate.SQL: debug
+  
+file:
+  upload:
+    location: /home/ubuntu/CommonProfileImg
+    
+
+  
