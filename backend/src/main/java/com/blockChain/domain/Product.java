@@ -31,4 +31,11 @@ public class Product {
     // 제품설명
 	@Column(name="PRODUCT_DETAIL",length=3000)
     private String productDetail;
+	
+	@ManyToOne
+	@JoinColumn(name="CELEB_NO")
+	private Celeb celeb;
+	
+	@Column(name="PRODUCT_QUANTY")
+	private Long productQuanty;
 }

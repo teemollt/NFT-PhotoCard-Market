@@ -37,9 +37,9 @@ public class Member {
   private Member_Grade memberGrade;
 
   // 팬클럽넘버(클래스타입)
-  @Column(name="MEMBER_FANNO",length=3)
-  @Enumerated(EnumType.STRING)
-  private Fanclub_Class memberFanNo;
+//  @Column(name="MEMBER_FANNO",length=3)
+//  @Enumerated(EnumType.STRING)
+//  private Fanclub_Class memberFanNo;
 
   // 회원이메일
   @Column(name="MEMBER_EMAIL",length=45)
