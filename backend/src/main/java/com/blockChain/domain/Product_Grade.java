@@ -18,4 +18,7 @@ public class Product_Grade {
 
 	@Column(name="PRODUCT_GRADE_NM",length=45)
 	private String productGrade;
+	
+	@Column(name="PRODUCT_ PERCENT")
+    private Long productPercent;
 }
