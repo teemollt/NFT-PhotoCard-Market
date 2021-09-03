@@ -19,10 +19,7 @@
     - 호스트와 가상 머신 간 파일 전송 플러그인 설치
 
       ```
-    > vagrant plugin install vagrant-scp
-      ```
-    
-      
+      > vagrant plugin install vagrant-scp
 
 - 이더리움 네트워크 구축용 VM 2대 생성
 
@@ -172,8 +169,6 @@
 
     - eth0 같은 과정을 거쳐서 구동해줌
 
-    ```
-    
 
 ### Req. 2. 이더리움 계정생성
 
