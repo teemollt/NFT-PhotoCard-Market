@@ -9,9 +9,9 @@
 .signupBox {
   background: #FFFFFF;
   border: 1px solid #C4C4C4;
-  margin-left: 300px;
-  margin-right: 300px;
-  height: 400px;
+  margin-left: 5%;
+  margin-right: 5%;
+  height: 1000px;
   box-sizing: border-box;
   padding: 25px;
   border-radius: 5px 5px 0px 0px;
@@ -19,7 +19,7 @@
 
 .signupLeft {
   float: left;
-  width: 700px;
+  width: 60%;
   padding: 25px;
   border-right:1px solid #C4C4C4;
 }
@@ -37,27 +37,13 @@
 .signupRight {
   float: right;
   padding-top: 25px;
-  width: 450px;
+  width: 33%;
 }
-
-/* .signupInfo {
-  margin-top: 10px;
-} */
-
-/* .signupInfoLeft {
-  float: left;
-  margin-top: 7px;
-  width: 100px;
-}
-
-.signupInfoRight {
-  float: right;
-  width: 550px;
-} */
 
 .require {
   color: red;
-  margin-right: 5px;
+  margin-right: 10px;
+  font-size: 1px;
 }
 
 .phoneInfo {
@@ -69,8 +55,13 @@
 }
 
 .signupTable {
+  width: 100%;
   border-spacing: 20px 15px;
   font-family: Roboto;
+}
+
+th {
+  width: 150px
 }
 
 th, td {
@@ -79,4 +70,17 @@ th, td {
 
 td > p {
   margin: 0;
+}
+
+.signupSelectCeleb {
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+.signupCelebBox {
+  width: 100px;
+  height: 100px;
+  border: 10px solid lightgray;
+  text-align: center;
+  border-radius: 50%;
 }
