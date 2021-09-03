@@ -70,68 +70,6 @@
       		end
       	end
       end
-        # The most common configuration options are documented and commented below.
-        # For a complete reference, please see the online documentation at
-        # https://docs.vagrantup.com.
-      
-        # Every Vagrant development environment requires a box. You can search for
-        # boxes at https://vagrantcloud.com/search.
-        # config.vm.box = "base"
-      
-        # Disable automatic box update checking. If you disable this, then
-        # boxes will only be checked for updates when the user runs
-        # `vagrant box outdated`. This is not recommended.
-        # config.vm.box_check_update = false
-      
-        # Create a forwarded port mapping which allows access to a specific port
-        # within the machine from a port on the host machine. In the example below,
-        # accessing "localhost:8080" will access port 80 on the guest machine.
-        # NOTE: This will enable public access to the opened port
-        # config.vm.network "forwarded_port", guest: 80, host: 8080
-      
-        # Create a forwarded port mapping which allows access to a specific port
-        # within the machine from a port on the host machine and only allow access
-        # via 127.0.0.1 to disable public access
-        # config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
-      
-        # Create a private network, which allows host-only access to the machine
-        # using a specific IP.
-        # config.vm.network "private_network", ip: "192.168.33.10"
-      
-        # Create a public network, which generally matched to bridged network.
-        # Bridged networks make the machine appear as another physical device on
-        # your network.
-        # config.vm.network "public_network"
-      
-        # Share an additional folder to the guest VM. The first argument is
-        # the path on the host to the actual folder. The second argument is
-        # the path on the guest to mount the folder. And the optional third
-        # argument is a set of non-required options.
-        # config.vm.synced_folder "../data", "/vagrant_data"
-      
-        # Provider-specific configuration so you can fine-tune various
-        # backing providers for Vagrant. These expose provider-specific options.
-        # Example for VirtualBox:
-        #
-        # config.vm.provider "virtualbox" do |vb|
-        #   # Display the VirtualBox GUI when booting the machine
-        #   vb.gui = true
-        #
-        #   # Customize the amount of memory on the VM:
-        #   vb.memory = "1024"
-        # end
-        #
-        # View the documentation for the provider you are using for more
-        # information on available options.
-      
-        # Enable provisioning with a shell script. Additional provisioners such as
-        # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
-        # documentation for more information about their specific syntax and use.
-        # config.vm.provision "shell", inline: <<-SHELL
-        #   apt-get update
-        #   apt-get install -y apache2
-        # SHELL
-        # end
       
       ```
 
@@ -242,34 +180,6 @@
 
     ```
     
-    ```
-
-  - Issue
-
-    - ![image-20210902135919218](.\img\req1_geth_error)
-
-    - `Fatal: Failed to create the protocol stack: datadir already used by another process`
-
-      - geth 구동 후 제대로 종료되지 않아 datadir를 사용중이라고 함
-
-      - 해결
-
-        - 프로세스의 PID 알아내야함
-
-          ```
-          $ ps aux|grep geth
-          ```
-
-          ![image-20210902140224625](.\img\req1_geth_error_sol1)
-
-        - kill 
-
-          ```
-          $ kill -9 PID
-          ex) kill -9 3454
-          ```
-
-
 
 ### Req. 2. 이더리움 계정생성
 
@@ -303,7 +213,6 @@
 
   - 채굴 후 보상 받을 계정 설정
 
-![image-20210902141804311](.\img\req2_coinbase)
 
 
 
@@ -321,8 +230,6 @@
   web3.fromWei(eth.getBalance(eth.coinbase), "ether")
   ```
 
-  ![image-20210902141912271](.\img\req2_mining)
-
 
 
 ### Req. 3. 이더리움 트랜잭션 생성
@@ -335,7 +242,6 @@
     admin.nodeInfo.enode
     ```
 
-    ![image-20210902220937731](.\img\req2_endoe)
 
   - eht1에서 계정생성 및 peer 추가
 
@@ -344,7 +250,6 @@
     admin.addPeer("eth0 enode")
     ```
 
-    ![image-20210902221115706](.\img\req2_addPeer)
 
     - eth0 노드 연결 시 eth0의 enode의 @뒤 ip를 vm ip로 바꿔주고 discport도 0으로 바꿔줌
     - `192.168.50.10:30303?discport=0`
@@ -355,7 +260,6 @@
     admin.peers
     ```
 
-    ![image-20210902221159408](.\img\req2_peers)
 
   - 블럭 확인
 
@@ -380,13 +284,11 @@
       personal.unlockAccount(계정, "계정비밀번호")
       ```
 
-      ![image-20210902221623904](.\img\req3_account)
 
       - 이더 전송 할 노드 , 받을 노드 두 계정다 unlock
 
       - 해당 에러가 난다면
 
-        ![image-20210902221907500](.\img\req3_unlockAccount_error)
 
         - geth 설정 시 `--allow-insecure-unlock` 추가 해준다.
         - 자세한 내용은 추후에 알아보자.
@@ -399,8 +301,6 @@
       	to: "받는 곳",
       	value: web3.toWei(보낼 금액, "ether")})
       ```
-
-      ![image-20210902222142807](.\img\req3_sendTransaction)
 
     - 처리하지 않은 Transaction 확인
 
@@ -424,11 +324,9 @@
   eth.pendingTransactions
   ```
 
-  ![image-20210902222517809](.\img\req3_Transction_result)
 
 - 계정 잔고 확인
 
-  ![image-20210902223903798](.\img\req3_getBalance)
 
 
 
@@ -440,11 +338,6 @@
 
   - `VirtualBox 해당 VM 설정 > 네트워크 > 고급 > 포트 포워딩`
 
-    ![image-20210902222632498](.\img\req4_eth0_portfowarding_1)
-
-    ![image-20210902222656483](.\img\req4_eth0_portfowarding_2)
-
-    ![image-20210902222715677](.\img\req4_eth0_portfowarding_3)
 
 - eth0 VM에 대한 포트 포워딩
 
@@ -460,7 +353,6 @@
 
     - VirtualBox 해당 VM 설정 > 공유폴더
 
-      ![image-20210902222930177](.\img\req4_keystore_1)
 
       - 기본 폴더가 생성되어있다.
       - 필요시 오른쪽 + 버튼을 통해 폴더를 생성하면 된다.
@@ -475,8 +367,6 @@
       $ ls
       ```
 
-      ![image-20210902223230851](.\img\req4_keystore_2)
-
       - 해당 디렉토리에 들어가 파일목록을 확인해보면 mount가 된 것을 확인 할 수 있다.
 
     - dev/eth_localdata/keystore에 저장된 계정파일 복사 및 이동
@@ -489,13 +379,6 @@
       $ cd ~/share
       $ ls
       ```
-
-      ![image-20210902223526753](.\img\req4_keystore_3)
-
-      ![image-20210902223605522](.\img\req4_keystore_4)
-
-      ![image-20210902223627179](.\img\req4_keystore_5)
-
       
 
 ##### 4.2 Metamask 설정
@@ -507,20 +390,10 @@
 - Metamask 계정 import
 
   - VM 공유폴더로 공유된 계정파일을 import 시킨다.
-
-  ![image-20210902190141769](.\img\req4_metamask_2)
-
-  ![image-20210902190206458](.\img\req4_metamask_3)
-
   
 
 - 계정 및 잔액 정보확인
 
-  ![image-20210902190100128](.\img\req4_metamask_4)
-
-  - ![image-20210902190112423](.\img\req4_metamask_5)
-
-  
 
 ##### 4.3 스마트 컨트랙트 배포(Remix)
 
