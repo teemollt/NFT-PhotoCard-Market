@@ -8,7 +8,7 @@ plugins {
 	id 'java'
 }
 
-group = 'com.ssafy.common'
+group = 'com.blockChain'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '8'
 //4
