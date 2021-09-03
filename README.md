@@ -16,16 +16,12 @@
       > vagrant version
       ```
 
-      ![image-20210831204353659](.\img\req1_vagrant_version)
-
     - 호스트와 가상 머신 간 파일 전송 플러그인 설치
 
       ```
-      > vagrant plugin install vagrant-scp
+    > vagrant plugin install vagrant-scp
       ```
-
-      ![image-20210831204812177](.\img\req1_vagrant_plugin_install)
-
+    
       
 
 - 이더리움 네트워크 구축용 VM 2대 생성
@@ -35,8 +31,6 @@
     ```
     > vagrant init
     ```
-
-    ![image-20210831204944567](.\img\req1_vagrant_init)
 
   - 생성된 vagrantfile 수정
 
@@ -72,25 +66,25 @@
       end
       
       ```
-
+  
   - 가상머신 구동
 
     - ```
       > vagrant up
       ```
-
+  
   - 가상머신 구동 상태 확인
 
     - ```
       > vagrant status
       ```
-
+  
   - 가상머신 접속(eth0 기준)
 
     - ```
       > vagrant ssh eth0
       ```
-
+  
       
 
 ##### 1.2 이더리움 노드 구성
@@ -286,29 +280,30 @@
 
 
       - 이더 전송 할 노드 , 받을 노드 두 계정다 unlock
-
+    
       - 해당 에러가 난다면
 
 
         - geth 설정 시 `--allow-insecure-unlock` 추가 해준다.
         - 자세한 내용은 추후에 알아보자.
-
+    
     - sendTransaction
-
+    
       ```
       eth.sendTransaction(
       	{from: 보내는 곳,
       	to: "받는 곳",
       	value: web3.toWei(보낼 금액, "ether")})
       ```
-
+    
     - 처리하지 않은 Transaction 확인
-
+    
       ```
       eth.pendingTransactions
       ```
 
-    
+
+​    
 
 ##### 3.2 트랜잭션 결과 확인
 
@@ -326,8 +321,6 @@
 
 
 - 계정 잔고 확인
-
-
 
 
 ### Req. 4. 스마트 컨트랙트 배포
@@ -356,9 +349,9 @@
 
       - 기본 폴더가 생성되어있다.
       - 필요시 오른쪽 + 버튼을 통해 폴더를 생성하면 된다.
-
+    
     - vm에서 공유폴더를 마운트
-
+    
       ```
       $ mkdir share // 마운트할 폴더생성
       $ mount -t vboxsf [공유폴더] [마운트할 폴더]
@@ -366,11 +359,11 @@
       $ cd share 
       $ ls
       ```
-
+    
       - 해당 디렉토리에 들어가 파일목록을 확인해보면 mount가 된 것을 확인 할 수 있다.
-
+    
     - dev/eth_localdata/keystore에 저장된 계정파일 복사 및 이동
-
+    
       ```
       $ cd dev/eth_localdata/keystore
       $ ls
@@ -379,7 +372,7 @@
       $ cd ~/share
       $ ls
       ```
-      
+
 
 ##### 4.2 Metamask 설정
 
@@ -391,7 +384,6 @@
 
   - VM 공유폴더로 공유된 계정파일을 import 시킨다.
   
-
 - 계정 및 잔액 정보확인
 
 
