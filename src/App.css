@@ -1,0 +1,82 @@
+.signupTitle {
+  text-align: center;
+  font-family: Ubuntu;
+  font-size: 64px;
+  line-height: 75px;
+  margin-top: 150px;
+}
+
+.signupBox {
+  background: #FFFFFF;
+  border: 1px solid #C4C4C4;
+  margin-left: 300px;
+  margin-right: 300px;
+  height: 400px;
+  box-sizing: border-box;
+  padding: 25px;
+  border-radius: 5px 5px 0px 0px;
+}
+
+.signupLeft {
+  float: left;
+  width: 700px;
+  padding: 25px;
+  border-right:1px solid #C4C4C4;
+}
+
+.signupRequired {
+  font-size: 11px;
+  margin-left: 15px;
+  color: #C4C4C4;
+}
+
+.signupRequired > span {
+  color: red;
+}
+
+.signupRight {
+  float: right;
+  padding-top: 25px;
+  width: 450px;
+}
+
+/* .signupInfo {
+  margin-top: 10px;
+} */
+
+/* .signupInfoLeft {
+  float: left;
+  margin-top: 7px;
+  width: 100px;
+}
+
+.signupInfoRight {
+  float: right;
+  width: 550px;
+} */
+
+.require {
+  color: red;
+  margin-right: 5px;
+}
+
+.phoneInfo {
+  font-size: 11px;
+}
+
+.signupInfoBtn {
+  margin-left: 20px !important;
+}
+
+.signupTable {
+  border-spacing: 20px 15px;
+  font-family: Roboto;
+}
+
+th, td {
+  text-align: left;
+}
+
+td > p {
+  margin: 0;
+}
