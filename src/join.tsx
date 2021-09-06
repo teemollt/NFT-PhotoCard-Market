@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { TextField, Button } from '@material-ui/core';
 import Snackbar, { SnackbarOrigin } from '@material-ui/core/Snackbar';
 import "./join.css"
-import { AnyRecord } from "dns";
 
 export interface State {
   userId: string,
