@@ -1,0 +1,18 @@
+.mainlogo {
+  text-align: center;
+  margin: auto;
+}
+
+.tablink {
+  margin: 10px;
+  text-decoration: none;
+  text-decoration-color: black;
+  color: black;
+}
+
+
+.navbar {
+  margin-bottom: 20px;
+  text-align: center;
+
+}

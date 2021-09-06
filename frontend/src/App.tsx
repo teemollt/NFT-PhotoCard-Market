@@ -5,6 +5,9 @@ import Main from "./components/pages/Main";
 import Profile from "./components/pages/Profile";
 import MainBid from "./components/pages/MainBid";
 import MainCeleb from "./components/pages/MainCeleb";
+import Gallery from "./components/pages/Gallery";
+import CardPackDetail from "./components/pages/CardPackDetail";
+import Footer from "./components/main/Footer";
 
 function App() {
   return (
@@ -14,16 +17,23 @@ function App() {
         <Route path="/" exact>
           <Main />
         </Route>
-        <Route path="/profile/:id" >
+        <Route path="/profile/:id">
           <Profile />
         </Route>
-        <Route path="/mainceleb/:celeb" >
+        <Route path="/mainceleb/:celeb">
           <MainCeleb />
         </Route>
-        <Route path="/mainbid" >
+        <Route path="/mainbid/:tag?">
           <MainBid />
         </Route>
+        <Route path="/gallery/:id">
+          <Gallery />
+        </Route>
+        <Route path="/cardpackdetail/:cardpackid">
+          <CardPackDetail />
+        </Route>
       </Switch>
+      <Footer />
     </div>
   );
 }

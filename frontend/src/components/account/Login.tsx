@@ -1,4 +1,5 @@
 import React from "react";
+import "./Login.css";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
@@ -18,9 +19,9 @@ function Login() {
   };
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <text className="logintext" onClick={handleClickOpen}>
         Login
-      </Button>
+      </text>
       <Dialog
         open={open}
         onClose={handleClose}

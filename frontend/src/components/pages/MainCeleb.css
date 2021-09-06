@@ -1,3 +1,9 @@
-.celebmaintitle{
-    text-align:center
+.celebmaintitle {
+  text-align: center;
+}
+.linkto {
+  margin: 10px;
+  text-decoration: none;
+  text-decoration-color: black;
+  color: black;
 }
