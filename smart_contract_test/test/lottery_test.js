@@ -10,15 +10,19 @@ contract('Lottery', function ([deployer, user1, user2]) {
         lottery = await Lottery.new()
     })
 
-    it('Basic test', async () => {
-        console.log('Basic test')
-        let owner = await lottery.owner()
-        // Lottery.sol에서 getSomeValue의 리턴값을 5로 설정해줬으므로 value에는 5가 담김
-        let value = await lottery.getSomeValue()
+    // it('Basic test', async () => {
+    //     console.log('Basic test')
+    //     let owner = await lottery.owner()
+    //     // Lottery.sol에서 getSomeValue의 리턴값을 5로 설정해줬으므로 value에는 5가 담김
+    //     let value = await lottery.getSomeValue()
 
-        console.log(`owner : ${owner}`)
-        console.log(`value : ${value}`)
-        // value가 5이므로 뒤의 값과 같으므로 test 실행해보면 passing뜬다
-        assert.equal(value, 5)
+    //     console.log(`owner : ${owner}`)
+    //     console.log(`value : ${value}`)
+    //     // value가 5이므로 뒤의 값과 같으므로 test 실행해보면 passing뜬다
+    //     assert.equal(value, 5)
+    // })
+    it('getPot should return current pot', async () => {
+        let pot = await lottery.getPot()
+        assert.equal(pot, 0)
     })
 })
