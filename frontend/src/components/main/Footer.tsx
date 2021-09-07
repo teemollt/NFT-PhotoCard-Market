@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
 
-function Copyright() {
+function Copyright(): JSX.Element {
   return (
     <Typography variant="body2" color="textSecondary">
       {"Copyright © "}
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     flexDirection: "column",
-    minHeight: "50vh",
+    minHeight: "20vh",
   },
   footer: {
     padding: theme.spacing(3, 2),
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Footer() {
+function Footer(): JSX.Element {
   const classes = useStyles();
   return (
     <div className={classes.root}>

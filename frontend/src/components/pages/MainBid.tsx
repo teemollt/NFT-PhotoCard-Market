@@ -1,10 +1,6 @@
 import React from "react";
 import Container from "@material-ui/core/Container";
-import {
-  DataGrid,
-  GridColDef,
-  GridValueGetterParams,
-} from "@material-ui/data-grid";
+import { DataGrid, GridColDef } from "@material-ui/data-grid";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "No.", width: 100 },
@@ -63,135 +59,135 @@ const rows = [
     id: 1,
     seller: "Snow",
     celeb: "Jon1",
-    description:"아이유S급 팔아요 선제 ㄱㄱ",
+    description: "아이유S급 팔아요 선제 ㄱㄱ",
     price: 100000000,
     startDate: "2021-09-07",
-    endDate:"2021-09-10",
-    result:true
+    endDate: "2021-09-10",
+    result: true,
   },
   {
     id: 2,
     seller: "Snow",
     celeb: "Jon2",
-    description:"아이유S급 팔아요 선제 ㄱㄱ",
+    description: "아이유S급 팔아요 선제 ㄱㄱ",
     price: 100000000,
     startDate: "2021-09-07",
-    endDate:"2021-09-10",
-    result:true
+    endDate: "2021-09-10",
+    result: true,
   },
   {
     id: 3,
     seller: "Snow",
     celeb: "Jon3",
-    description:"아이유S급 팔아요 선제 ㄱㄱ",
+    description: "아이유S급 팔아요 선제 ㄱㄱ",
     price: 100000000,
     startDate: "2021-09-07",
-    endDate:"2021-09-10",
-    result:true
+    endDate: "2021-09-10",
+    result: true,
   },
   {
     id: 4,
     seller: "Snow",
     celeb: "Jon4",
-    description:"아이유S급 팔아요 선제 ㄱㄱ",
+    description: "아이유S급 팔아요 선제 ㄱㄱ",
     price: 100000000,
     startDate: "2021-09-07",
-    endDate:"2021-09-10",
-    result:true
+    endDate: "2021-09-10",
+    result: true,
   },
   {
     id: 5,
     seller: "Snow",
     celeb: "Jon5",
-    description:"아이유S급 팔아요 선제 ㄱㄱ",
+    description: "아이유S급 팔아요 선제 ㄱㄱ",
     price: 100000000,
     startDate: "2021-09-07",
-    endDate:"2021-09-10",
-    result:true
+    endDate: "2021-09-10",
+    result: true,
   },
   {
     id: 6,
     seller: "Snow",
     celeb: "Jon6",
-    description:"아이유S급 팔아요 선제 ㄱㄱ",
+    description: "아이유S급 팔아요 선제 ㄱㄱ",
     price: 100000000,
     startDate: "2021-09-07",
-    endDate:"2021-09-10",
-    result:true
+    endDate: "2021-09-10",
+    result: true,
   },
   {
     id: 7,
     seller: "Snow",
     celeb: "Jon7",
-    description:"아이유S급 팔아요 선제 ㄱㄱ",
+    description: "아이유S급 팔아요 선제 ㄱㄱ",
     price: 100000000,
     startDate: "2021-09-07",
-    endDate:"2021-09-10",
-    result:true
+    endDate: "2021-09-10",
+    result: true,
   },
   {
     id: 8,
     seller: "Snow",
     celeb: "Jon8",
-    description:"아이유S급 팔아요 선제 ㄱㄱ",
+    description: "아이유S급 팔아요 선제 ㄱㄱ",
     price: 100000000,
     startDate: "2021-09-07",
-    endDate:"2021-09-10",
-    result:true
+    endDate: "2021-09-10",
+    result: true,
   },
   {
     id: 9,
     seller: "Snow",
     celeb: "Jon9",
-    description:"아이유S급 팔아요 선제 ㄱㄱ",
+    description: "아이유S급 팔아요 선제 ㄱㄱ",
     price: 100000000,
     startDate: "2021-09-07",
-    endDate:"2021-09-10",
-    result:true
+    endDate: "2021-09-10",
+    result: true,
   },
   {
     id: 10,
     seller: "Snow",
     celeb: "Jon100",
-    description:"아이유S급 팔아adsfasdf요 선제 ㄱㄱ",
+    description: "아이유S급 팔아adsfasdf요 선제 ㄱㄱ",
     price: 100000000,
     startDate: "2021-09-07",
-    endDate:"2021-09-10",
-    result:true
+    endDate: "2021-09-10",
+    result: true,
   },
   {
     id: 11,
     seller: "Snow",
     celeb: "Jon12312",
-    description:"아이유S급 팔아요 선제 ㄱㄱ",
+    description: "아이유S급 팔아요 선제 ㄱㄱ",
     price: 100000000,
     startDate: "2021-09-07",
-    endDate:"2021-09-10",
-    result:true
+    endDate: "2021-09-10",
+    result: true,
   },
   {
     id: 12,
     seller: "Snow",
     celeb: "Jon",
-    description:"아이유S급 팔아요 선제 ㄱㄱ",
+    description: "아이유S급 팔아요 선제 ㄱㄱ",
     price: 100000000,
     startDate: "2021-09-07",
-    endDate:"2021-09-10",
-    result:true
+    endDate: "2021-09-10",
+    result: true,
   },
   {
     id: 13,
     seller: "Snow",
     celeb: "Jon",
-    description:"아이유S급 팔아요 선제 ㄱㄱ",
+    description: "아이유S급 팔아요 선제 ㄱㄱ",
     price: 100000000,
     startDate: "2021-09-07",
-    endDate:"2021-09-10",
-    result:true
+    endDate: "2021-09-10",
+    result: true,
   },
 ];
 
-function MainBid() {
+function MainBid(): JSX.Element {
   return (
     <div>
       <Container>
@@ -200,7 +196,7 @@ function MainBid() {
             rows={rows}
             columns={columns}
             pageSize={10}
-            // disableSelectionOnClick
+            disableSelectionOnClick
           />
         </div>
       </Container>

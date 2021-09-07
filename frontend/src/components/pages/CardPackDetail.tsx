@@ -1,15 +1,14 @@
 import React from "react";
 import "./CardPackDetail.css";
 import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
 import { Button } from "@material-ui/core";
 import CardPackInside from "../cardpack/CardPackInside";
 import Review from "../cardpack/Review";
 
-function CardPackDetail() {
-  function buy() {
-    return;
-  }
+function CardPackDetail(): JSX.Element {
+  // function buy() {
+  //   return;
+  // }
   return (
     <div className="cardpackdetail">
       <div className="cardpackdetail">

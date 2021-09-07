@@ -1,11 +1,7 @@
 import React from 'react'
 
-function Profile() {
-    return (
-        <div>
-            Profile
-        </div>
-    )
+function Profile(): JSX.Element {
+  return <div>Profile</div>;
 }
 
 export default Profile

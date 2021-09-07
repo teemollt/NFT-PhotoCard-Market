@@ -8,8 +8,9 @@ import MainCeleb from "./components/pages/MainCeleb";
 import Gallery from "./components/pages/Gallery";
 import CardPackDetail from "./components/pages/CardPackDetail";
 import Footer from "./components/main/Footer";
+import Service from "./components/pages/Service";
 
-function App() {
+function App(): JSX.Element {
   return (
     <div>
       <Navbar />
@@ -31,6 +32,9 @@ function App() {
         </Route>
         <Route path="/cardpackdetail/:cardpackid">
           <CardPackDetail />
+        </Route>
+        <Route path="/service/:id">
+          <Service />
         </Route>
       </Switch>
       <Footer />

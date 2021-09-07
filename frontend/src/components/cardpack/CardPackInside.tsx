@@ -29,7 +29,7 @@ function generate(element: React.ReactElement) {
     })
   );
 }
-function CardPackInside() {
+function CardPackInside(): JSX.Element {
   const classes = useStyles();
   const [dense, setDense] = React.useState(false);
   const [secondary, setSecondary] = React.useState(false);

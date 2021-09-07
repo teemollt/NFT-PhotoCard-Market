@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function MainCelebList() {
+function MainCelebList(): JSX.Element {
   const classes = useStyles();
   // let [celeb, setceleb] = useState("");
   return (

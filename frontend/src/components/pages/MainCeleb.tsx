@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function MainCeleb() {
+function MainCeleb(): JSX.Element {
   const [spacing, setSpacing] = React.useState<GridSpacing>(2);
   const classes = useStyles();
 
@@ -68,7 +68,11 @@ function MainCeleb() {
                         />
                       </div>
                       <CardActions>
-                        <Button style={{ margin: "auto" }}><Link className="linkto"to="/cardpackdetail/1">BUY</Link></Button>
+                        <Button style={{ margin: "auto" }}>
+                          <Link className="linkto" to="/cardpackdetail/1">
+                            BUY
+                          </Link>
+                        </Button>
                       </CardActions>
                     </Card>
                   </Grid>

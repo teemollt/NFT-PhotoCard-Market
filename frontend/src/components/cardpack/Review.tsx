@@ -7,13 +7,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
-import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import FormControl from "@material-ui/core/FormControl";
 import TextField from "@material-ui/core/TextField";
-import Grid from "@material-ui/core/Grid";
-import AccountCircle from "@material-ui/icons/AccountCircle";
 import SendIcon from "@material-ui/icons/Send";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -34,13 +28,14 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function Review() {
+function Review(): JSX.Element {
   let [review, setreview] = useState("");
   const classes = useStyles();
   return (
     <div>
       <h1>Review</h1>
       <List className={classes.root}>
+        {/* 댓글 반복되는 부분 */}
         <ListItem alignItems="flex-start">
           <ListItemAvatar>
             <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
