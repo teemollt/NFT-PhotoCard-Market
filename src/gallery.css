@@ -1,0 +1,65 @@
+.galleryTop {
+  text-align: left;
+  font-family: 'Gowun Dodum' !important;
+  font-weight: 900 !important;
+}
+
+.galleryTopMenu, .galleryTopLi {
+  padding-top: 20px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.galleryTopMenu {
+  height: 40px;
+  line-height: 20px;
+  background-color: #cfcfcf;
+  color: black;
+}
+
+/* .galleryTopMenu > hr {
+  border: 0.5px solid rgba(0, 0, 0, 0.527);
+  width: 0.1px;
+  height: 50px;
+  margin: 0;
+  margin-left: 550px;
+  display: inline;
+} */
+
+.galleryTopMenuGroup {
+  float: left;
+}
+
+.galleryTopMenuGroup > span, .galleryTopLi > span{
+  margin-left: 40px;
+  padding-bottom: 1px;
+}
+
+.galleryTopMenuView {
+  float: right;
+}
+
+.galleryTopMenuView > span {
+  margin-right: 20px;
+}
+
+/* .galleryTopLi {
+  text-align: left;
+} */
+
+.underline {
+  border-bottom: 2px solid black;
+}
+
+.hidden {
+  display: none;
+}
+
+.galleryBody {
+  /* padding: 100px; */
+  /* min-width: 1357px; */
+  justify-content: center;
+  text-align: center;
+  display: inline-block;
+  padding-top: 100px;
+}
