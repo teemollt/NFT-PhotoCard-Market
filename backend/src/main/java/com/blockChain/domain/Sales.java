@@ -9,9 +9,11 @@ import javax.persistence.ManyToOne;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Getter @Setter
+@ToString
 public class Sales {
 	
     // 판매번호 
@@ -20,10 +22,10 @@ public class Sales {
 	@Column(name="SALES_NO")
     private Long salesNo;
 
-    // 제품번호
-	@ManyToOne
-	@JoinColumn(name="PRODUCT_NO")
-    private Product product;
+//    // 제품번호
+//	@ManyToOne
+//	@JoinColumn(name="PRODUCT_NO")
+//    private Product product;
 
     // 판매상세
 	@Column(name="SALES_DETAIL",length=5000)

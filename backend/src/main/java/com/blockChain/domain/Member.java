@@ -12,9 +12,11 @@ import javax.persistence.ManyToOne;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Getter @Setter
+@ToString
 public class Member {
 
   // 회원번호 
@@ -52,4 +54,7 @@ public class Member {
   // 전화번호
   @Column(name="MEMBER_PHONE",length=11)
   private String memberPhone;
+  //지갑
+  @Column(name="MEMBER_WALLET",length=500)
+  private String memberWallet;
 }

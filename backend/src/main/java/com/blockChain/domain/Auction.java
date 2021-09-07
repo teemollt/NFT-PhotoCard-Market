@@ -25,12 +25,12 @@ public class Auction {
     // 작성자
 	@ManyToOne
     @JoinColumn(name = "MEMBER_NO")
-    private Member memberNo;
+    private Member member;
 
     // 토큰번호
 	@ManyToOne
     @JoinColumn(name = "TOKEN_NO")
-    private Token tokenNo;
+    private Token token;
 
     // 경매명
 	@Column(name="AUCTION_NAME")
@@ -45,9 +45,10 @@ public class Auction {
     private Long auctionImmeprice;
 
     // 경매시작시간 
-	@Column(name="AUCTION_START",updatable = false,
-			  columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-	@CreationTimestamp
+//	@Column(name="AUCTION_START",updatable = false,
+//			  columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+//	@CreationTimestamp
+	@Column(name="AUCTION_START")
     private LocalDateTime auctionStart;
 
     // 경매종료시간 

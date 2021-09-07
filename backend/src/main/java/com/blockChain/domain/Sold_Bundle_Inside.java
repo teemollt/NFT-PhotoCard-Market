@@ -1,4 +1,6 @@
 package com.blockChain.domain;
+
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -7,23 +9,21 @@ import javax.persistence.ManyToOne;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 @Entity
 @Getter @Setter
-@IdClass(Celeb_LikePK.class)
-@ToString
-public class Celeb_Like {
-	
-    // 샐럽번호
-	@Id
-	@ManyToOne
-    @JoinColumn(name = "CELEB_NO")
-    private Celeb celeb;
+@IdClass(Sold_Bundle_InsidePK.class)
+public class Sold_Bundle_Inside {
 
-    // 회원번호
+    // 판매번호 
 	@Id
 	@ManyToOne
-    @JoinColumn(name = "MEMBER_NO")
-    private Member member;
+    @JoinColumn(name = "SALES_ORDER_NO")
+    private Sales sales;
+
+    // 토큰
+	@Id
+	@ManyToOne
+    @JoinColumn(name = "TOKEN")
+    private Token token;
 }

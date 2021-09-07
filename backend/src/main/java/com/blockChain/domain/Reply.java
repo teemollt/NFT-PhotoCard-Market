@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,7 +37,9 @@ public class Reply {
 	@Column(name="REPLY_CONTENT",length=3000)
     private String replyContent;
 
-    // 댓글작성일자 
-	@Column(name="REPLY_DATE")
+    // 댓글작성일자 (초기 날짜순 데이터 입력을 위해 임시로 이렇게 설정. 임시 데이터 입력후 변경할것.)
+//	@Column(name = "REPLY_DATE", updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+//	@CreationTimestamp
+	@Column(name = "REPLY_DATE")
     private LocalDateTime replyDate;
 }

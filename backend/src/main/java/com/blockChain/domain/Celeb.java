@@ -11,10 +11,12 @@ import javax.persistence.ManyToOne;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 //CELEB
 @Entity
 @Getter @Setter
+@ToString
 public class Celeb {
 
   // 샐럽번호

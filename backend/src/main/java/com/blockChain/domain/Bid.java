@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -37,7 +39,9 @@ public class Bid {
     private Long bidPrice;
 	
 	//호가날짜
-	@Column(name="AUCTION_START",updatable = false,
-			  columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+//	@Column(name="BID_DATE",updatable = false,
+//			  columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+//	@CreationTimestamp
+	@Column(name="BID_DATE")
 	private LocalDateTime bidDate;
 }
