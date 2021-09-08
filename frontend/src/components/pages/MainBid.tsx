@@ -1,6 +1,7 @@
 import React from "react";
 import Container from "@material-ui/core/Container";
-import { DataGrid, GridColDef, GridRowParams } from "@material-ui/data-grid";
+import { DataGrid, GridColDef } from "@material-ui/data-grid";
+import { useHistory } from "react-router-dom";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "No.", width: 100 },
@@ -188,6 +189,13 @@ const rows = [
 ];
 
 function MainBid(): JSX.Element {
+  let history = useHistory();
+  function getitem(data: any): object {
+    let itemid: number = data.id;
+    console.log(data);
+    history.push(`/biditem/${itemid}`);
+    return data;
+  }
   return (
     <div>
       <Container>
@@ -197,6 +205,9 @@ function MainBid(): JSX.Element {
             columns={columns}
             pageSize={10}
             disableSelectionOnClick
+            onRowClick={(param) => {
+              getitem(param.row);
+            }}
           />
         </div>
       </Container>

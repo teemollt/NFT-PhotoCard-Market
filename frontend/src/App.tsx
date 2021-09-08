@@ -9,6 +9,7 @@ import Gallery from "./components/pages/Gallery";
 import CardPackDetail from "./components/pages/CardPackDetail";
 import Footer from "./components/main/Footer";
 import Service from "./components/pages/Service";
+import BidItem from "./components/pages/BidItem";
 
 function App(): JSX.Element {
   return (
@@ -35,6 +36,9 @@ function App(): JSX.Element {
         </Route>
         <Route path="/service/:id">
           <Service />
+        </Route>
+        <Route path="/biditem/:id">
+          <BidItem/>
         </Route>
       </Switch>
       <Footer />

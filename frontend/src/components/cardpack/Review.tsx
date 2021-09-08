@@ -1,21 +1,16 @@
 import React, { useState } from "react";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import Divider from "@material-ui/core/Divider";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
-import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import SendIcon from "@material-ui/icons/Send";
-
+import Container from "@material-ui/core/Container";
+import { DataGrid, GridColDef } from "@material-ui/data-grid";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       width: "100%",
       maxWidth: "1000px",
       margin: "auto",
+      maxHeight: 300,
     },
     inline: {
       display: "inline",
@@ -28,91 +23,171 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+const columns: GridColDef[] = [
+  {
+    field: "id",
+    headerName: "No.",
+    width: 100,
+    align: "center",
+    headerAlign: "center",
+  },
+  {
+    field: "user",
+    headerName: "user",
+    width: 150,
+    headerAlign: "center",
+    align: "center",
+  },
+  {
+    field: "card",
+    headerName: "card",
+    align: "center",
+    width: 150,
+    headerAlign: "center",
+  },
+  {
+    field: "content",
+    headerName: "content",
+    width: 680,
+    align: "center",
+    headerAlign: "center",
+  },
+
+  {
+    field: "date",
+    headerName: "Date",
+    type: "date",
+    description: "경매가 시작된 날",
+    sortable: true,
+    width: 150,
+    align: "center",
+    headerAlign: "center",
+  },
+];
+
+const rows = [
+  {
+    id: 1,
+    user: "Snow",
+    card: "S급 아이유카드",
+    content: "아이유!!! 아이유!!!! 꺌꺄랴꺄랶ㄹ꺌ㄹ꺄랶",
+    date: "2021-09-07",
+  },
+  {
+    id: 2,
+    user: "Snow",
+    card: "S급 아이유카드",
+    content: "아이유!!! 아이유!!!! 꺌꺄랴꺄랶ㄹ꺌ㄹ꺄랶",
+    date: "2021-09-07",
+  },
+  {
+    id: 3,
+    user: "Snow",
+    card: "S급 아이유카드",
+    content: "아이유!!! 아이유!!!! 꺌꺄랴꺄랶ㄹ꺌ㄹ꺄랶",
+    date: "2021-09-07",
+  },
+  {
+    id: 4,
+    user: "Snow",
+    card: "S급 아이유카드",
+    content: "아이유!!! 아이유!!!! 꺌꺄랴꺄랶ㄹ꺌ㄹ꺄랶",
+    date: "2021-09-07",
+  },
+  {
+    id: 5,
+    user: "Snow",
+    card: "S급 아이유카드",
+    content: "아이유!!! 아이유!!!! 꺌꺄랴꺄랶ㄹ꺌ㄹ꺄랶",
+    date: "2021-09-07",
+  },
+  {
+    id: 6,
+    user: "Snow",
+    card: "S급 아이유카드",
+    content: "아이유!!! 아이유!!!! 꺌꺄랴꺄랶ㄹ꺌ㄹ꺄랶",
+    date: "2021-09-07",
+  },
+  {
+    id: 7,
+    user: "Snow",
+    card: "S급 아이유카드",
+    content: "아이유!!! 아이유!!!! 꺌꺄랴꺄랶ㄹ꺌ㄹ꺄랶",
+    date: "2021-09-07",
+  },
+  {
+    id: 8,
+    user: "Snow",
+    card: "S급 아이유카드",
+    content: "아이유!!! 아이유!!!! 꺌꺄랴꺄랶ㄹ꺌ㄹ꺄랶",
+    date: "2021-09-07",
+  },
+  {
+    id: 9,
+    user: "Snow",
+    card: "S급 아이유카드",
+    content: "아이유!!! 아이유!!!! 꺌꺄랴꺄랶ㄹ꺌ㄹ꺄랶",
+    date: "2021-09-07",
+  },
+  {
+    id: 10,
+    user: "Snow",
+    card: "S급 아이유카드",
+    content: "아이유!!! 아이유!!!! 꺌꺄랴꺄랶ㄹ꺌ㄹ꺄랶",
+    date: "2021-09-07",
+  },
+  {
+    id: 11,
+    user: "Snow",
+    card: "S급 아이유카드",
+    content: "아이유!!! 아이유!!!! 꺌꺄랴꺄랶ㄹ꺌ㄹ꺄랶",
+    date: "2021-09-07",
+  },
+  {
+    id: 12,
+    user: "Snow",
+    card: "S급 아이유카드",
+    content: "아이유!!! 아이유!!!! 꺌꺄랴꺄랶ㄹ꺌ㄹ꺄랶",
+    date: "2021-09-07",
+  },
+].sort((a, b) => b.id - a.id);
+
 function Review(): JSX.Element {
-  let [review, setreview] = useState("");
+  let [review, setreview] = useState<string>("");
+  function getreview(data: any): object {
+    let reviewid: number = data.id;
+    console.log(data);
+    // history.push(`/biditem/${itemid}`);
+    return data;
+  }
   const classes = useStyles();
   return (
     <div>
       <h1>Review</h1>
-      <List className={classes.root}>
-        {/* 댓글 반복되는 부분 */}
-        <ListItem alignItems="flex-start">
-          <ListItemAvatar>
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-          </ListItemAvatar>
-          <ListItemText
-            primary="Brunch this weekend?"
-            secondary={
-              <React.Fragment>
-                <Typography
-                  component="span"
-                  variant="body2"
-                  className={classes.inline}
-                  color="textPrimary"
-                >
-                  Ali Connors
-                </Typography>
-                {" — I'll be in your neighborhood doing errands this…"}
-              </React.Fragment>
-            }
+      <Container>
+        <div style={{ height: 650, width: "100%" }}>
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            pageSize={10}
+            disableSelectionOnClick
+            onRowClick={(param) => {
+              getreview(param.row);
+            }}
           />
-        </ListItem>
-        <Divider variant="inset" component="li" />
-        <ListItem alignItems="flex-start">
-          <ListItemAvatar>
-            <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-          </ListItemAvatar>
-          <ListItemText
-            primary="Summer BBQ"
-            secondary={
-              <React.Fragment>
-                <Typography
-                  component="span"
-                  variant="body2"
-                  className={classes.inline}
-                  color="textPrimary"
-                >
-                  to Scott, Alex, Jennifer
-                </Typography>
-                {" — Wish I could come, but I'm out of town this…"}
-              </React.Fragment>
-            }
-          />
-        </ListItem>
-        <Divider variant="inset" component="li" />
-        <ListItem alignItems="flex-start">
-          <ListItemAvatar>
-            <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-          </ListItemAvatar>
-          <ListItemText
-            primary="Oui Oui"
-            secondary={
-              <React.Fragment>
-                <Typography
-                  component="span"
-                  variant="body2"
-                  className={classes.inline}
-                  color="textPrimary"
-                >
-                  Sandra Adams
-                </Typography>
-                {" — Do you have Paris recommendations? Have you ever…"}
-              </React.Fragment>
-            }
-          />
-        </ListItem>
-      </List>
+        </div>
+      </Container>
       <div className={classes.root}>
         <TextField
           className={classes.margin}
           id="input-with-icon-grid"
-          label="With a grid"
+          label="Comment"
           onChange={(e) => {
             setreview(e.target.value);
           }}
         />
         <SendIcon
-          style={{ height: "50px" }}
+          style={{ height: "50px", cursor: "pointer" }}
           onClick={() => {
             console.log(review);
           }}
