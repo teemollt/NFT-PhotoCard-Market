@@ -2,13 +2,14 @@ import React from "react";
 import Navbar from "./components/main/Navbar";
 import { Route, Switch } from "react-router-dom";
 import Main from "./components/pages/Main";
-import Profile from "./components/pages/Profile";
+import MyPage from "./components/pages/MyPage";
 import MainBid from "./components/pages/MainBid";
 import MainCeleb from "./components/pages/MainCeleb";
 import Gallery from "./components/pages/Gallery";
 import CardPackDetail from "./components/pages/CardPackDetail";
 import Footer from "./components/main/Footer";
 import Service from "./components/pages/Service";
+import Join from "./components/pages/Join";
 
 function App(): JSX.Element {
   return (
@@ -18,8 +19,8 @@ function App(): JSX.Element {
         <Route path="/" exact>
           <Main />
         </Route>
-        <Route path="/profile/:id">
-          <Profile />
+        <Route path="/mypage">
+          <MyPage />
         </Route>
         <Route path="/mainceleb/:celeb">
           <MainCeleb />
@@ -35,6 +36,9 @@ function App(): JSX.Element {
         </Route>
         <Route path="/service/:id">
           <Service />
+        </Route>
+        <Route path="/join">
+          <Join />
         </Route>
       </Switch>
       <Footer />

@@ -1,0 +1,64 @@
+.mypageTop{
+  height: 400px;
+  padding-top: 130px;
+  padding-left: 50px;
+  padding-right: 50px;
+  background-color: #1C214F;
+  color: white;
+  text-align: left;
+  font-family: 'Gowun Dodum' !important;
+  font-weight: 900 !important;
+}
+
+.mypageUserNick {
+  float: left;
+  display: inline-block;
+}
+
+.mypageUserNick > h1 {
+  margin: 0;
+  margin-right: 10px;
+  font-size: 60px;
+}
+
+.mypageUserInfos {
+  float: left;
+  width: 500px;
+}
+
+.mypageLevel {
+  font-size: 25px;
+  margin-bottom: 0;
+  margin-top: 10px;
+}
+
+.mypageUserUpdate {
+  float: right;
+  text-align: right;
+  width: 170px;
+}
+
+.mypageUpdateBtn {
+  font-family: 'Gowun Dodum' !important;
+  font-weight: 900 !important;
+  background-color: white !important;
+}
+
+.mypageShop {
+  clear: both;
+  padding-top: 40px;
+}
+
+.mypageShop > div > p {
+  font-size: 25px;
+  margin-bottom: 0;
+}
+
+.mypageShop > div > span {
+  font-size: 35px;
+}
+
+.mypageShop > div {
+  float: left;
+  margin-right: 100px;
+}
