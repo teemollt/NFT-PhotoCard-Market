@@ -1,6 +1,6 @@
 import React from "react";
 import Container from "@material-ui/core/Container";
-import { DataGrid, GridColDef } from "@material-ui/data-grid";
+import { DataGrid, GridColDef, GridRowParams } from "@material-ui/data-grid";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "No.", width: 100 },
