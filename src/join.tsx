@@ -12,7 +12,7 @@ export interface State {
   checkEmail: boolean,
   snackId: boolean,
   snackNick: boolean,
-  celeb: string
+  celeb: number
 }
 
 function Join () {
@@ -24,7 +24,7 @@ function Join () {
   const [checkEmail, setCheckEmail] = useState(true)
   const [snackId, setSnackId] = useState(false)
   const [snackNick, setSnackNick] = useState(false)
-  const [celeb, setCeleb] = useState('')
+  const [celeb, setCeleb] = useState(999)
 
   const handleUserId = (e: any) => {
     setUserId(e.target.value)
@@ -67,20 +67,19 @@ function Join () {
     }
   }
 
-  const handleCeleb = (e: any) => {
-    const choice = e.target.innerText
-    if (choice === "김도형") {
-      setCeleb("김도형")
-    } else if (choice === "나비") {
-      setCeleb("나비")
-    }else if (choice === "남근형") {
-      setCeleb("남근형")
-    }else if (choice === "신지현") {
-      setCeleb("신지현")
-    }else if (choice === "조영우") {
-      setCeleb("조영우")
-    }else if (choice === "하지훈") {
-      setCeleb("하지훈")
+  const handleCeleb = (id: number) => {
+    if (id === 0) {
+      setCeleb(0)
+    } else if (id === 1) {
+      setCeleb(1)
+    }else if (id === 2) {
+      setCeleb(2)
+    }else if (id === 3) {
+      setCeleb(3)
+    }else if (id === 4) {
+      setCeleb(4)
+    }else if (id === 5) {
+      setCeleb(5)
     }
   }
 
@@ -196,43 +195,43 @@ function Join () {
         <div className="joinCelebBoxs">
           <div 
             className="joinCelebBox joinKim" 
-            onClick={handleCeleb} 
-            style={{ backgroundColor: celeb === "김도형" ? "rgba(16, 0, 247, 0.329)" : undefined }}
+            onClick={() => handleCeleb(0)} 
+            style={{ backgroundColor: celeb === 0 ? "rgba(16, 0, 247, 0.329)" : undefined }}
           >
             김도형
           </div>
           <div 
             className="joinCelebBox joinNa" 
-            onClick={handleCeleb} 
-            style={{ backgroundColor: celeb === "나비" ? "rgb(232, 248, 10, 0.329)" : undefined }}
+            onClick={() => handleCeleb(1)} 
+            style={{ backgroundColor: celeb === 1 ? "rgb(232, 248, 10, 0.329)" : undefined }}
           >
             나비
           </div>
           <div 
             className="joinCelebBox joinNam" 
-            onClick={handleCeleb}
-            style={{ backgroundColor: celeb === "남근형" ? "rgb(241, 162, 13, 0.329)" : undefined }}
+            onClick={() => handleCeleb(2)}
+            style={{ backgroundColor: celeb === 2 ? "rgb(241, 162, 13, 0.329)" : undefined }}
           >
             남근형
           </div>
           <div 
             className="joinCelebBox joinShin"
-            onClick={handleCeleb}
-            style={{ backgroundColor: celeb === "신지현" ? "rgba(127, 12, 235, 0.329)" : undefined }}
+            onClick={() => handleCeleb(3)}
+            style={{ backgroundColor: celeb === 3 ? "rgba(127, 12, 235, 0.329)" : undefined }}
           >
             신지현
           </div>
           <div 
             className="joinCelebBox joinCho"
-            onClick={handleCeleb}
-            style={{ backgroundColor: celeb === "조영우" ? "rgba(24, 248, 4, 0.329)" : undefined }}
+            onClick={() => handleCeleb(4)}
+            style={{ backgroundColor: celeb === 4 ? "rgba(24, 248, 4, 0.329)" : undefined }}
           >
             조영우
           </div>
           <div 
             className="joinCelebBox joinHa"
-            onClick={handleCeleb}
-            style={{ backgroundColor: celeb === "하지훈" ? "rgb(7, 182, 252, 0.329)" : undefined }}
+            onClick={() => handleCeleb(5)}
+            style={{ backgroundColor: celeb === 5 ? "rgb(7, 182, 252, 0.329)" : undefined }}
           >
             하지훈
           </div>

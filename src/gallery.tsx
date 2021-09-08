@@ -13,6 +13,7 @@ export interface State {
   view: number,
   topLi: boolean,
   topLiMem: number,
+  imgArray: number,
   galleryImg: Array<temp>
 }
 
@@ -34,50 +35,59 @@ function Gallery () {
   const [view, setView] = useState(2)
   const [topLi, setTopLi] = useState(false)
   const [topLiMem, setTopLiMem] = useState(0)
+  const [imgArray, setImgArray] = useState(0)
   const [galleryImg, setGalleryImg] = useState(tempGallery)
 
-  const handleTopMenuGroup = (e: any) => {
-    if (e.target.innerText === "전체") {
+  const handleTopMenuGroup = (id: number) => {
+    if (id === 0) {
       setTopMenu(0)
       setTopLi(false)
-    } else if (e.target.innerText === "김도형") {
+    } else if (id === 1) {
       setTopMenu(1)
       setTopLi(false)
-    } else if (e.target.innerText === "나비") {
+    } else if (id === 2) {
       setTopMenu(2)
       setTopLi(false)
-    } else if (e.target.innerText === "신지현") {
+    } else if (id === 3) {
       setTopMenu(3)
       setTopLi(false)
-    } else if (e.target.innerText === "이태희와 아이들") {
+    } else if (id === 4) {
       setTopMenu(4)
       setTopLi(true)
     }
   }
 
-  const handleTopMenuView = (e: any) => {
-    if (e.target.innerText === "S") {
+  const handleTopMenuView = (id: number) => {
+    if (id === 0) {
+      setView(0)
+    } else if (id === 1) {
       setView(1)
-    } else if (e.target.innerText === "M") {
+    } else if (id === 2) {
       setView(2)
-    } else if (e.target.innerText === "L") {
+    } else if (id === 3) {
       setView(3)
-    } else if (e.target.innerText === "XL") {
-      setView(4)
     }
   }
 
-  const handleTopLiMem = (e: any) => {
-    if (e.target.innerText === "전체") {
+  const handleTopLiMem = (id: number) => {
+    if (id === 0) {
       setTopLiMem(0)
-    } else if (e.target.innerText === "이태희") {
+    } else if (id === 1) {
       setTopLiMem(1)
-    } else if (e.target.innerText === "남근형") {
+    } else if (id === 2) {
       setTopLiMem(2)
-    } else if (e.target.innerText === "조영우") {
+    } else if (id === 3) {
       setTopLiMem(3)
-    } else if (e.target.innerText === "하지훈") {
+    } else if (id === 4) {
       setTopLiMem(4)
+    }
+  }
+
+  const handleImgArray = (id: number) => {
+    if (id === 0) {
+      setImgArray(0)
+    } else {
+      setImgArray(1)
     }
   }
 
@@ -88,69 +98,79 @@ function Gallery () {
           <div className="galleryTopMenuGroup">
             <span 
               className={topMenu === 0 ? "underline" : undefined}
-              onClick={handleTopMenuGroup}
+              onClick={() => handleTopMenuGroup(0)}
             >전체</span>
             <span 
               className={topMenu === 1 ? "underline" : undefined}
-              onClick={handleTopMenuGroup}
+              onClick={() => handleTopMenuGroup(1)}
             >김도형</span>
             <span 
               className={topMenu === 2 ? "underline" : undefined}
-              onClick={handleTopMenuGroup}
+              onClick={() => handleTopMenuGroup(2)}
             >나비</span>
             <span 
               className={topMenu === 3 ? "underline" : undefined}
-              onClick={handleTopMenuGroup}
+              onClick={() => handleTopMenuGroup(3)}
             >신지현</span>
             <span 
               className={topMenu === 4 ? "underline" : undefined}
-              onClick={handleTopMenuGroup}
+              onClick={() => handleTopMenuGroup(4)}
             >이태희와 아이들</span>
           </div>
-
-          {/* <hr /> */}
 
           <div className="galleryTopMenuView">
             <span>VIEW</span>
             <span 
-              className={view === 1 ? "underline" : "undefined"}
-              onClick={handleTopMenuView}
+              className={view === 0 ? "underline" : "undefined"}
+              onClick={() => handleTopMenuView(0)}
             >S</span>
             <span 
-              className={view === 2 ? "underline" : "undefined"}
-              onClick={handleTopMenuView}
+              className={view === 1 ? "underline" : "undefined"}
+              onClick={() => handleTopMenuView(1)}
             >M</span>
             <span 
-              className={view === 3 ? "underline" : "undefined"}
-              onClick={handleTopMenuView}
+              className={view === 2 ? "underline" : "undefined"}
+              onClick={() => handleTopMenuView(2)}
             >L</span>
             <span 
-              className={view === 4 ? "underline" : "undefined"}
-              onClick={handleTopMenuView}
+              className={view === 3 ? "underline" : "undefined"}
+              onClick={() => handleTopMenuView(3)}
             >XL</span>
           </div>
         </div>
-        <div className={topLi ? "galleryTopLi" : "hidden"}>
-          <span
-            className={topLiMem === 0 ? "underline" : undefined}
-            onClick={handleTopLiMem}
-          >전체</span>
-          <span
-            className={topLiMem === 1 ? "underline" : undefined}
-            onClick={handleTopLiMem}
-          >이태희</span>
-          <span
-            className={topLiMem === 2 ? "underline" : undefined}
-            onClick={handleTopLiMem}
-          >남근형</span>
-          <span
-            className={topLiMem === 3 ? "underline" : undefined}
-            onClick={handleTopLiMem}
-          >조영우</span>
-          <span
-            className={topLiMem === 4 ? "underline" : undefined}
-            onClick={handleTopLiMem}
-          >하지훈</span>
+        <div className="galleryTopLi">
+          <div className={topLi ? "galleryBodyLeft" : "hidden"}>
+            <span
+              className={topLiMem === 0 ? "underline" : undefined}
+              onClick={()=>handleTopLiMem(0)}
+            >전체</span>
+            <span
+              className={topLiMem === 1 ? "underline" : undefined}
+              onClick={()=>handleTopLiMem(1)}
+            >이태희</span>
+            <span
+              className={topLiMem === 2 ? "underline" : undefined}
+              onClick={()=>handleTopLiMem(2)}
+            >남근형</span>
+            <span
+              className={topLiMem === 3 ? "underline" : undefined}
+              onClick={()=>handleTopLiMem(3)}
+            >조영우</span>
+            <span
+              className={topLiMem === 4 ? "underline" : undefined}
+              onClick={()=>handleTopLiMem(4)}
+            >하지훈</span>
+          </div>
+          <div className="galleryBodyRight">
+            <span
+              className={imgArray === 0 ? "underline" : undefined}
+              onClick={() => handleImgArray(0)}
+            >최신순</span>
+            <span
+              className={imgArray === 1 ? "underline" : undefined}
+              onClick={() => handleImgArray(1)}
+            >등급순</span>
+          </div>
         </div>
       </div>
 
