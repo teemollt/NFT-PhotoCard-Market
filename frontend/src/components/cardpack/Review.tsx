@@ -156,6 +156,7 @@ function Review(): JSX.Element {
   let [review, setreview] = useState<string>("");
   function getreview(data: any): object {
     let reviewid: number = data.id;
+    console.log(reviewid);
     console.log(data);
     // history.push(`/biditem/${itemid}`);
     return data;
