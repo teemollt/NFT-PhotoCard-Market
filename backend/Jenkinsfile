@@ -1,0 +1,93 @@
+pipeline {
+    agent any
+    stages {
+        stage('Docker Image Remove'){
+            steps{
+                script {
+                    try {
+                        mattermostSend (
+                            color: "#000000", 
+                            message: "*************************************************************************"
+                        )     
+                        mattermostSend (
+                            color: "#2A42EE", 
+                            message: "Remove STARTED: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Link to build>)"
+                        )                   
+                        sh 'docker stop backend || true' 
+                        sh 'docker rm -f backend || true'
+                        sh 'docker rmi backend || true'
+                    } catch(e) {
+                        currentBuild.result = "FAILURE"
+                    } finally {
+                        if(currentBuild.result == "FAILURE") {
+                            mattermostSend (
+                                color: "danger", 
+                                message: "Remove FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Link to build>)"
+                            )
+                        } else {
+                            mattermostSend (
+                                color: "good", 
+                                message: "Remove SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Link to build>)"
+                            )
+                        }                            
+                    }           
+                }
+            }
+        }
+        stage('Build') {
+           steps {  
+                script {
+                    try {
+                        mattermostSend (
+                            color: "#2A42EE", 
+                            message: "Build STARTED: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Link to build>)"
+                        )                   
+                        sh 'docker build -t backend ./Backend/'
+                    } catch(e) {
+                        currentBuild.result = "FAILURE"
+                    } finally {
+                        if(currentBuild.result == "FAILURE") {
+                            mattermostSend (
+                                color: "danger", 
+                                message: "Build FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Link to build>)"
+                            )
+                        } else {
+                            mattermostSend (
+                                color: "good", 
+                                message: "Build SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Link to build>)"
+                            )
+                        }                            
+                    }           
+                }
+            }      
+        }
+        stage('Docker Run'){
+            steps{
+                script {
+                    try {
+                        mattermostSend (
+                            color: "#2A42EE", 
+                            message: "Run STARTED: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Link to build>)"
+                        )                   
+                        sh 'docker run -d -p 8080:8080 --name backend backend'
+                    } catch(e) {
+                        currentBuild.result = "FAILURE"
+                    } finally {
+                        if(currentBuild.result == "FAILURE") {
+                            mattermostSend (
+                                color: "danger", 
+                                message: "Run FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Link to build>)"
+                            )
+                        } else {
+                            mattermostSend (
+                                color: "good", 
+                                message: "Run SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Link to build>)"
+                            )
+                        }                            
+                    }           
+                }
+            }
+        }
+    }
+
+}
