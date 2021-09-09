@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.httpBasic().disable()
 			.authorizeRequests()
 			.antMatchers("/user/**").authenticated()
-			.antMatchers("/Admin/**").hasRole("ADMIN")//어드민만 들어갈 수잇다.
+			//.antMatchers("/Admin/**").hasRole("ADMIN")//어드민만 들어갈 수잇다.
 			.anyRequest().permitAll();//위에 걸어둔거 말고는 누구든 들어올 수 있다.
 			//로그인한 상태를 요구하는 페이지일경우 자동으로 로그인창으로 이동
 		// TODO Auto-generated method stub
