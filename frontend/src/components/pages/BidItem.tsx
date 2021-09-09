@@ -107,8 +107,9 @@ function BidItem(): JSX.Element {
                 <TextField
                   id="input-with-icon-grid"
                   label="Price"
+                  type="number"
                   onChange={(e) => {
-                    console.log(typeof(e.target.value));
+                    console.log(typeof(Number(e.target.value)));
                     setbidprice(2);
                   }}
                 />

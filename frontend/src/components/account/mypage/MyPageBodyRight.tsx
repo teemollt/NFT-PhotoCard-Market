@@ -1,10 +1,14 @@
 import React from 'react';
-import './MyPageBodyLeft.css';
+import './MyPageBodyRight.css';
+import ShopBuy from './shop/ShopBuy';
+import ShopKeep from './shop/ShopKeep';
 
-function MyPageBodyRight() {
+function MyPageBodyRight(prop: any) {
   return (
     <div className="mypageBodyRight">
-      right
+      {prop.myPageMenu === 0 ? <ShopBuy /> : 
+        prop.myPageMenu === 1 ? <ShopKeep /> : null
+      }
     </div>
   )
 }
