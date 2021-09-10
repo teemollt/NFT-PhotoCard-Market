@@ -9,9 +9,10 @@
   font-size: 25px;
 }
 
-.mypageBodyLeft > p {
+.mypageBodyLeft > p, .menuService {
   font-size: 15px;
   margin-left: 30px;
+  color: black;
 }
 
 .mypageBodyLeft > hr {

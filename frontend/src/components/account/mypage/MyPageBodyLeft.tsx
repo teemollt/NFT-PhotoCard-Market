@@ -1,5 +1,6 @@
-import React from 'react'
-import './MyPageBodyLeft.css'
+import React from 'react';
+import { Link } from "react-router-dom";
+import './MyPageBodyLeft.css';
 
 function MyPageBodyLeft(prop: any) {
   return (
@@ -31,9 +32,20 @@ function MyPageBodyLeft(prop: any) {
 
       <h1>고객센터</h1>
       <hr />
-      <p 
+      
+      <Link to={{
+        pathname: '/service/id',
+        state: {
+          index: 1
+        }
+      }}
+        style={{ textDecoration: "none" }}
+      >
+        <p className="menuService">1:1 문의</p>
+      </Link>
+      {/* <p 
         onClick={() => prop.handleMyPageMenu(5)}
-      >1:1 문의</p>
+      >1:1 문의</p> */}
     </div>
   )
 }
