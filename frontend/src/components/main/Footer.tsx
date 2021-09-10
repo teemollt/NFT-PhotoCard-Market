@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     minHeight: "20vh",
+    clear: "both"
   },
   footer: {
     padding: theme.spacing(3, 2),
