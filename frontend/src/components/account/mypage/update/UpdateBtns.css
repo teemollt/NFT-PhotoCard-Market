@@ -1,4 +1,4 @@
-.joinBtns {
+.updateBtns {
   width: 450px;
   margin: 0px auto;
   margin-top: 40px;
@@ -7,13 +7,13 @@
   text-align: left;
 }
 
-.joinCancelBtn {
+.updateCancelBtn {
   margin-right: 30px !important;
   font-family: 'Gowun Dodum' !important;
   font-weight: 900 !important;
 }
 
-.joinCancelBtn, .joinBtn {
+.updateCancelBtn, .updateBtn {
   width: 200px;
   display: inline-block;
   font-family: 'Gowun Dodum' !important;
