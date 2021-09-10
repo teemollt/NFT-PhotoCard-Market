@@ -20,9 +20,7 @@ const columns: GridColDef[] = [
     field: "image",
     headerName: "image",
     width: 260,
-    renderCell: (params) => (
-      <Button>{params.value}</Button>
-    ),
+    renderCell: (params) => <Button>{params.value}</Button>,
   },
   {
     field: "description",
