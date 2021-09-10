@@ -5,9 +5,17 @@ import './ShopCard.css'
 function ShopCard(props: any) {
   return (
     <div className="shopCard">
-      <img src={props.tempCard.imgUrl} alt="" />
-      <span>{props.tempCard.title}</span>
-      <p className="shopPrice">{props.tempCard.price}원</p>
+      <div className="shopCardImg">
+        <img src={props.tempCard.imgUrl} alt="" />
+      </div>
+      <div>
+        <div className="shopCardInfo">
+          <span className="shopCardCeleb">상품 celeb</span>
+          <span className="shopCardPriceTitle">가격</span>
+        </div>
+          <span className="shopCardTitle">{props.tempCard.title}</span>
+          <span className="shopCardPrice">{props.tempCard.price}BTC</span>
+      </div>
     </div>
   )
 }

@@ -3,15 +3,12 @@ import './ShopBuy.css'
 import ShopCard from './ShopCard';
 
 const tempCard: Array<tempCard> = [
-  {imgUrl: "http://m.tcgbox.co.kr/web/product/big/201909/995d394ab4fa78479732c5cd72d65ee2.jpg", title: "카드1", price: 10000},
-  {imgUrl: "http://m.tcgbox.co.kr/web/product/big/201909/995d394ab4fa78479732c5cd72d65ee2.jpg", title: "카드2", price: 10000},
-  {imgUrl: "http://m.tcgbox.co.kr/web/product/big/201909/995d394ab4fa78479732c5cd72d65ee2.jpg", title: "카드3", price: 10000},
-  {imgUrl: "http://m.tcgbox.co.kr/web/product/big/201909/995d394ab4fa78479732c5cd72d65ee2.jpg", title: "카드4", price: 10000},
-  {imgUrl: "http://m.tcgbox.co.kr/web/product/big/201909/995d394ab4fa78479732c5cd72d65ee2.jpg", title: "카드5", price: 10000},
-  {imgUrl: "http://m.tcgbox.co.kr/web/product/big/201909/995d394ab4fa78479732c5cd72d65ee2.jpg", title: "카드6", price: 10000},
-  {imgUrl: "http://m.tcgbox.co.kr/web/product/big/201909/995d394ab4fa78479732c5cd72d65ee2.jpg", title: "카드7", price: 10000},
-  {imgUrl: "http://m.tcgbox.co.kr/web/product/big/201909/995d394ab4fa78479732c5cd72d65ee2.jpg", title: "카드8", price: 10000},
-  {imgUrl: "http://m.tcgbox.co.kr/web/product/big/201909/995d394ab4fa78479732c5cd72d65ee2.jpg", title: "카드9", price: 10000}
+  {imgUrl: "http://m.tcgbox.co.kr/web/product/big/201909/995d394ab4fa78479732c5cd72d65ee2.jpg", title: "카드1", price: 1},
+  {imgUrl: "http://m.tcgbox.co.kr/web/product/big/201909/995d394ab4fa78479732c5cd72d65ee2.jpg", title: "카드2", price: 1},
+  {imgUrl: "http://m.tcgbox.co.kr/web/product/big/201909/995d394ab4fa78479732c5cd72d65ee2.jpg", title: "카드3", price: 1},
+  {imgUrl: "http://m.tcgbox.co.kr/web/product/big/201909/995d394ab4fa78479732c5cd72d65ee2.jpg", title: "카드4", price: 1},
+  {imgUrl: "http://m.tcgbox.co.kr/web/product/big/201909/995d394ab4fa78479732c5cd72d65ee2.jpg", title: "카드5", price: 1},
+  {imgUrl: "http://m.tcgbox.co.kr/web/product/big/201909/995d394ab4fa78479732c5cd72d65ee2.jpg", title: "카드6", price: 1},
 ]
 
 export type tempCard = {

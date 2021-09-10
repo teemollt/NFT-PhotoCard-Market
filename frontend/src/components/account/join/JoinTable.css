@@ -1,6 +1,5 @@
 .joinDuplBtn {
   font-family: 'Gowun Dodum' !important;
-  
   font-weight: 900 !important;
   margin-left: 10px !important;
 }
@@ -18,7 +17,6 @@
 
 .joinTable, .joinSelectCeleb {
   font-family: 'Work Sans', 'Gowun Dodum';
-  /* font-family: 'Gowun Dodum'; */
   margin: 0 auto; 
   width: 450px;
   text-align: left;
