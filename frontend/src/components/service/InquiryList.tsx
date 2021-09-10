@@ -127,7 +127,7 @@ const rows = [
     "title1",
     "환불좀해주세요. 이상한카드만 나와요 ㅠㅠ1",
     "2021-09-08",
-    true
+    false
   ),
   createData(
     2,
@@ -263,8 +263,8 @@ function Inquiry(): JSX.Element {
           </TableFooter>
         </Table>
       </TableContainer>
-      <div style={{marginTop:"10px", textAlign:"center"}}>
-        <WriteInquiry/>
+      <div style={{ marginTop: "10px", textAlign: "center" }}>
+        <WriteInquiry />
       </div>
     </div>
   );
