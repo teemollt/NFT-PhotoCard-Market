@@ -4,6 +4,7 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import { useHistory } from "react-router-dom";
+import "./MainBid.css";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -127,9 +128,19 @@ function MainBid() {
               }}
               style={{ cursor: "pointer" }}
             >
-              <Paper className={classes.paper}>
-                <img src={image.imgUrl} alt="" width="100%" height="100%" />
-              </Paper>
+              <div className="shopCard">
+                <div className="shopCardImg">
+                  <img src={image.imgUrl} alt="" />
+                </div>
+                <div>
+                  <div className="shopCardInfo">
+                    <span className="shopCardCeleb">상품 celeb</span>
+                    <span className="shopCardPriceTitle">가격</span>
+                  </div>
+                  <span className="shopCardTitle">{image.title}</span>
+                  <span className="shopCardPrice">{image.level}</span>
+                </div>
+              </div>
             </Grid>
           ))}
         </Grid>
