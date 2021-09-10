@@ -30,7 +30,7 @@ public class Member {
   private String memberId;
 
   // 회원비밀번호
-  @Column(name="MEMBER_PW",length=45)
+  @Column(name="MEMBER_PW",length=100)
   private String memberPw;
 
   // 회원등급()
