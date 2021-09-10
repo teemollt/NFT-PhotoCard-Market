@@ -3,6 +3,7 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -108,14 +109,26 @@ export type temp = {
 function MainBid() {
   const classes = useStyles();
   const [isHover, setisHover] = useState(false);
+  let history = useHistory();
+  function getitem(data: number) {
+    history.push(`/biditem/${data}`);
+  }
   return (
     <div className={classes.root}>
       <Container>
         <Grid container spacing={3}>
           {tempGallery.map((image) => (
-            <Grid item xs={6} sm={3}>
+            <Grid
+              item
+              xs={6}
+              sm={3}
+              onClick={() => {
+                getitem(image.id);
+              }}
+              style={{ cursor: "pointer" }}
+            >
               <Paper className={classes.paper}>
-              image
+                <img src={image.imgUrl} alt="" width="100%" height="100%" />
               </Paper>
             </Grid>
           ))}
