@@ -8,20 +8,29 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.blockChain.domain.Celeb;
 import com.blockChain.domain.Celeb_Like;
 import com.blockChain.domain.Member;
 import com.blockChain.domain.Member_Grade;
+import com.blockChain.domain.RefreshToken;
+import com.blockChain.dto.TokenDto;
+import com.blockChain.jwt.TokenProvider;
 import com.blockChain.repository.CelebRepo;
 import com.blockChain.repository.Celeb_LikeRepo;
 import com.blockChain.repository.MemberRepo;
 import com.blockChain.repository.Member_GradeRepo;
+import com.blockChain.repository.RefreshTokenRepository;
 
 @Service
 @Transactional
 public class MemberSvcImpl implements MemberSvcInter{
+
 	@Autowired
 	private MemberRepo memberRepo;
 	@Autowired
@@ -30,6 +39,14 @@ public class MemberSvcImpl implements MemberSvcInter{
 	private CelebRepo celebRepo;
 	@Autowired
 	private Celeb_LikeRepo clRepo;
+	@Autowired
+	private AuthenticationManagerBuilder authenticationManagerBuilder;
+	@Autowired
+	private TokenProvider tokenProvider;
+	@Autowired
+	private RefreshTokenRepository refreshTokenRepository;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	@Override
 	public Map<String,Object> signup(Map<String, Object> req){
 		 Map<String, Object> res = new HashMap<String,Object>();
@@ -43,11 +60,12 @@ public class MemberSvcImpl implements MemberSvcInter{
 		 
 		 Member member = new Member();
 		 Optional<Member_Grade> mg = mgRepo.sltByNM("팬");
+		 String pw = (String)req.get("memberPw");
 		 member.setMemberEmail(memberEmail);
 		 member.setMemberGrade(mg.get());
 		 member.setMemberId(memberId);
 		 member.setMemberNick(memberNick);
-		 member.setMemberPw((String)req.get("memberPw"));
+		 member.setMemberPw(passwordEncoder.encode(pw));
 		 member.setMemberPhone((String)req.get("memberPhone"));
 		 Member savedMember = memberRepo.save(member);
 		 res.put("msg", "회원가입 성공");
@@ -69,5 +87,38 @@ public class MemberSvcImpl implements MemberSvcInter{
 				return res;
 		 }
 		 return res;
+	}
+	@Override
+	public TokenDto login(Member member) {
+
+		// 유저 정보 검증
+
+		// -------- 토큰 생성
+		// 유저 id, password를 통해 UsernamePasswordAuthenticationToken객체 생성
+		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+				member.getMemberId(), member.getMemberPw());
+		System.out.println(member.getMemberId() + " " + member.getMemberPw());
+		// authenticationToken를 이용해서 authenticate메소드가 실행이 될때
+		// 아까만든 CustomUserDetailsService의 loadUserByUsername 메소드가 실행됨
+		// 그 결과값을 가지고 Authentication객체가 생성됨
+		System.out.println(authenticationToken);
+		Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+//        SecurityContextHolder.getContext().setAuthentication(authentication);//Authentication객체를 SecurityContext에 저장
+
+		// memberName 가져와서 토큰만들때 집어넣음
+		String memberId = memberRepo.checkId(member.getMemberId()).get().getMemberId();
+		System.out.println(memberId);
+		// Authentication를 이용해 jwt토큰 생성
+		TokenDto jwt = tokenProvider.generateTokenDto(authentication, memberId);
+		System.out.println(jwt);
+		// -------- 토큰 생성완료
+
+		// RefreshToken 저장
+		RefreshToken refreshToken = RefreshToken.builder().key(authentication.getName()).value(jwt.getRefreshToken())
+				.build();
+		System.out.println(refreshToken);
+		refreshTokenRepository.save(refreshToken);
+
+		return jwt;
 	}
 }

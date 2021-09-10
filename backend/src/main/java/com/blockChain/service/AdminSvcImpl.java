@@ -15,6 +15,7 @@ import java.util.Random;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.blockChain.domain.Auction;
@@ -85,6 +86,7 @@ public class AdminSvcImpl implements AdminSvcInter{
     private final String MEMBER_ID_SAMPLE = "test";
     private final String MEMBER_NICK_SAMPLE = "테스트";
     private final String MEMBER_PW = "1234";
+    
     private final String MEMBER_EMAIL = "test@test.com";
     private final String MEMBER_PHONE = "01011112222";
     
@@ -172,6 +174,8 @@ public class AdminSvcImpl implements AdminSvcInter{
 			"주말까지 기다리긴 힘들어\r\n" + 
 			"시간아 달려라 시계를\r\n" + 
 			"더 보채고 싶지만";
+	@Autowired
+	private PasswordEncoder passwordEncoder;
     @Autowired
 	private CelebRepo celebRepo;
 	@Autowired
@@ -307,11 +311,12 @@ public class AdminSvcImpl implements AdminSvcInter{
 		String name = new Object() {}.getClass().getEnclosingMethod().getName();
 		ArrayList<String> msg = new ArrayList<>();
 		List<Member_Grade> aa = memberGradeRepo.findAll();
+		String pp = passwordEncoder.encode(MEMBER_PW);
 		Random random = new Random();
 		for (int i = 0; i < MEMBER_NUMBER;i++) {
 			Member member = new Member();
 			member.setMemberId(MEMBER_ID_SAMPLE + i);
-			member.setMemberPw(MEMBER_PW);
+			member.setMemberPw(pp);
 			member.setMemberGrade(aa.get(random.nextInt(aa.size())));
 			member.setMemberNick(MEMBER_NICK_SAMPLE + i);
 			member.setMemberPhone(MEMBER_PHONE);

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.blockChain.domain.Member;
+import com.blockChain.dto.TokenDto;
 import com.blockChain.service.MemberSvcInter;
 
 @RestController
@@ -21,5 +23,23 @@ public class MemberController {
 	public Map<String,Object> signup(@RequestBody Map<String, Object> req){
 		System.out.println(req);
 		return ms.signup(req);
+	}
+	@PostMapping("/login")
+	public Map<String, Object> login(@RequestBody Member member) {
+		Map<String, Object> ret = new HashMap<>();
+		TokenDto token;
+		try {
+			token = ms.login(member);
+		} catch (IllegalStateException e) {
+			ret.put("success", "False");
+			ret.put("msg", e.getMessage());
+			return ret;
+		}
+
+		ret.put("success", "True");
+		ret.put("msg", "로그인 성공");
+		ret.put("token", token);
+
+		return ret;
 	}
 }
