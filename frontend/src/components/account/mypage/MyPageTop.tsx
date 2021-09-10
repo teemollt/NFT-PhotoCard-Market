@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import './MyPageTop.css';
 
@@ -14,13 +15,15 @@ function MyPageTop() {
           {/* <p className="mypageAccount">0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B</p> */}
         </div>
         <div className="mypageUserUpdate">
-          <Button 
-            className="mypageUpdateBtn"
-            variant="outlined" 
-            size="large" 
-          >
-            정보 수정
-          </Button>
+          <Link className="tablink" to="/update">
+            <Button 
+              className="mypageUpdateBtn"
+              variant="outlined" 
+              size="large" 
+            >
+              정보 수정
+            </Button>
+          </Link>
         </div>
       </div>
 

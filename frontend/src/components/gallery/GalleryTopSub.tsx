@@ -14,18 +14,14 @@ function GalleryTopSub(prop: any) {
         <span
           className={prop.subMem === 1 ? "underline" : undefined}
           onClick={() => prop.handleSubMem(1)}
-        >이태희</span>
+        >남근형</span>
         <span
           className={prop.subMem === 2 ? "underline" : undefined}
           onClick={() => prop.handleSubMem(2)}
-        >남근형</span>
+        >조영우</span>
         <span
           className={prop.subMem === 3 ? "underline" : undefined}
           onClick={() => prop.handleSubMem(3)}
-        >조영우</span>
-        <span
-          className={prop.subMem === 4 ? "underline" : undefined}
-          onClick={() => prop.handleSubMem(4)}
         >하지훈</span>
       </div>
 
