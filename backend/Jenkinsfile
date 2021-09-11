@@ -42,7 +42,7 @@ pipeline {
                             color: "#2A42EE", 
                             message: "Build STARTED: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Link to build>)"
                         )                   
-                        sh 'docker build -t backend ./Backend/'
+                        sh 'docker build -t backend ./backend/'
                     } catch(e) {
                         currentBuild.result = "FAILURE"
                     } finally {
