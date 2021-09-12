@@ -4,24 +4,24 @@ import MyPageBodyRight from './MyPageBodyRight'
 import './MyPageBody.css'
 
 
-export interface State {
-  myPageMenu: number
-}
 
-function MyPageBody() {
-  const [ myPageMenu, setMypageMenu ] = useState(0)
+// export interface State {
+//   myPageMenu: number
+// }
 
-  const handleMyPageMenu = (id: number) => {
-    setMypageMenu(id)
-  }
+function MyPageBody(props: any) {
+  // const [ myPageMenu, setMypageMenu ] = useState(0)
+
+  // const handleMyPageMenu = (id: number) => {
+  //   setMypageMenu(id)
+  // }
 
   return (
     <div className="mypageBody">
-      <MyPageBodyLeft 
-        handleMyPageMenu={handleMyPageMenu}
+      <MyPageBodyLeft
       />
       <MyPageBodyRight 
-        myPageMenu={myPageMenu}
+        // myPageMenu={myPageMenu}
       />
     </div>
   )

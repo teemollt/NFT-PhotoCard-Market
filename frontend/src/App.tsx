@@ -12,9 +12,12 @@ import Service from "./components/pages/Service";
 import Join from "./components/pages/Join";
 import BidItem from "./components/pages/BidItem";
 import MyPageUpdate from "./components/pages/MyPageUpdate";
+import { Provider } from 'react-redux'
+import store from "./redux/store";
 
 function App(): JSX.Element {
   return (
+    <Provider store={store}>
     <div>
       <Navbar />
       <Switch>
@@ -51,6 +54,7 @@ function App(): JSX.Element {
       </Switch>
       <Footer />
     </div>
+    </Provider>
   );
 }
 

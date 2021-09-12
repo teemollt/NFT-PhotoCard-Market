@@ -1,7 +1,8 @@
 import React from 'react';
-import './MyPageBodyRight.css';
+import { connect } from 'react-redux';
 import ShopBuy from './shop/ShopBuy';
 import ShopKeep from './shop/ShopKeep';
+import './MyPageBodyRight.css';
 
 function MyPageBodyRight(prop: any) {
   return (
@@ -13,4 +14,10 @@ function MyPageBodyRight(prop: any) {
   )
 }
 
-export default MyPageBodyRight
+const mapStateToProps = (state: any) => {
+  return {
+    myPageMenu: state.myPageMenu
+  }
+}
+
+export default connect(mapStateToProps)(MyPageBodyRight)
