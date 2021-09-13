@@ -1,11 +1,13 @@
 package com.blockChain.repository.Impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
 import com.blockChain.domain.Celeb_Group;
 import com.blockChain.domain.QCeleb_Group;
+import com.blockChain.dto.CelebDTO;
 import com.blockChain.repository.Celeb_GroupRepoCustom;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
