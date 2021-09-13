@@ -121,4 +121,51 @@ public class MemberSvcImpl implements MemberSvcInter{
 
 		return jwt;
 	}
+	@Override
+	public Map<String,Object> checkId(Map<String, Object> req){
+		Map<String, Object> res = new HashMap<String,Object>();
+		String memberId = (String)req.get("memberId");
+		try {
+			memberRepo.checkId(memberId).ifPresent(m ->{throw new IllegalStateException("이미 존재하는 아이디입니다.");});
+			res.put("msg", "아이디 중복체크 통과");
+			res.put("success", true);
+
+		} catch(IllegalStateException e) {
+			res.put("success", false);
+			res.put("msg", e.getMessage());
+			return res;
+		}
+		return res;
+	}
+	@Override
+	public Map<String,Object> checkNick(Map<String, Object> req){
+		Map<String, Object> res = new HashMap<String,Object>();
+		 String memberNick = (String)req.get("memberNick");
+		try {
+			 memberRepo.checkNick(memberNick).ifPresent(m->{throw new IllegalStateException("이미 존재하는 별명입니다.");});
+			res.put("msg", "닉네임 중복체크 통과");
+			res.put("success", true);
+		} catch(IllegalStateException e) {
+			res.put("success", false);
+			res.put("msg", e.getMessage());
+			return res;
+		}
+		return res;
+	}
+	@Override
+	public Map<String,Object> checkEmail(Map<String, Object> req){
+		Map<String, Object> res = new HashMap<String,Object>();
+		String memberEmail = (String)req.get("memberEmail");
+		try {
+			 memberRepo.checkEmail(memberEmail).ifPresent(m ->{throw new IllegalStateException("이미 존재하는 이메일입니다.");});
+			res.put("msg", "이메일 중복체크 통과");
+			res.put("success", true);
+
+		} catch(IllegalStateException e) {
+			res.put("success", false);
+			res.put("msg", e.getMessage());
+			return res;
+		}
+		return res;
+	}
 }
