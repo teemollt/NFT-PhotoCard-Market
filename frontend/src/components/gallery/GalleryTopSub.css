@@ -1,0 +1,26 @@
+.galleryTopSub {
+  margin-top: 15px;
+}
+
+.galleryTopSubMem {
+  float: left;
+  padding-left: 20px;
+}
+
+.galleryTopSubMem > span{
+  margin-left: 20px;
+  padding-bottom: 1px;
+}
+
+.galleryTopSubImgArray {
+  float: right;
+  padding-right: 20px;
+}
+
+.galleryTopSubImgArray >span {
+  margin-right: 20px;
+}
+
+.hidden {
+  display: none;
+}
