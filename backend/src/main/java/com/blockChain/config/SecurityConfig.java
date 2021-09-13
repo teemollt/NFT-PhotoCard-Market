@@ -34,10 +34,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.csrf().disable() //csrf비활성화
 			.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
 			.accessDeniedHandler(jwtAccessDeniedHandler)
+			.and().cors()
 			.and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()
-			.addFilter(corsFilter)
+//			.addFilter(corsFilter)
 			.formLogin().disable()
 			
 			.httpBasic().disable()
@@ -47,7 +48,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.anyRequest().permitAll()
 			.and().apply(new JwtSecurityConfig(tokenProvider));//위에 걸어둔거 말고는 누구든 들어올 수 있다.
 			//로그인한 상태를 요구하는 페이지일경우 자동으로 로그인창으로 이동
-		// TODO Auto-generated method stub
 //		super.configure(http);
 	}
 }
