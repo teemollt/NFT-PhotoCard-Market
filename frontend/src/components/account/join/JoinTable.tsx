@@ -32,7 +32,7 @@ function JoinTable() {
   }
 
   const handleUserIdDupl = (newSnack: SnackbarOrigin) => (e: any) => {
-    axios.post('/member/checkId', {memberId: userId})
+    axios.post('/api/member/checkId', {memberId: userId})
     .then((res)=> console.log(res))
     .catch((err)=> console.log(err))
     setSnackId(true)
