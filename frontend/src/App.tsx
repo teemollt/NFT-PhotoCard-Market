@@ -18,42 +18,42 @@ import store from "./redux/store";
 function App(): JSX.Element {
   return (
     <Provider store={store}>
-    <div>
-      <Navbar />
-      <Switch>
-        <Route path="/" exact>
-          <Main />
-        </Route>
-        <Route path="/mypage">
-          <MyPage />
-        </Route>
-        <Route path="/mainceleb/:celeb">
-          <MainCeleb />
-        </Route>
-        <Route path="/mainbid/:tag?">
-          <MainBid />
-        </Route>
-        <Route path="/gallery/:id">
-          <Gallery />
-        </Route>
-        <Route path="/cardpackdetail/:cardpackid">
-          <CardPackDetail />
-        </Route>
-        <Route path="/service/:id">
-          <Service />
-        </Route>
-        <Route path="/join">
-          <Join />
-        </Route>
-        <Route path="/biditem/:id">
-          <BidItem/>
-        </Route>
-        <Route path="/update">
-          <MyPageUpdate />
-        </Route>
-      </Switch>
-      <Footer />
-    </div>
+      <div>
+        <Navbar />
+        <Switch>
+          <Route path="/" exact>
+            <Main />
+          </Route>
+          <Route path="/mypage">
+            <MyPage />
+          </Route>
+          <Route path="/mainceleb/:celeb">
+            <MainCeleb />
+          </Route>
+          <Route path="/mainbid/:tag?">
+            <MainBid />
+          </Route>
+          <Route path="/gallery/:id">
+            <Gallery />
+          </Route>
+          <Route path="/cardpackdetail/:cardpackid">
+            <CardPackDetail />
+          </Route>
+          <Route path="/service/:id">
+            <Service />
+          </Route>
+          <Route path="/join">
+            <Join />
+          </Route>
+          <Route path="/biditem/:id">
+            <BidItem/>
+          </Route>
+          <Route path="/update">
+            <MyPageUpdate />
+          </Route>
+        </Switch>
+        <Footer />
+      </div>
     </Provider>
   );
 }
