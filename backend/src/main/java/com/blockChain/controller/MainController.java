@@ -12,15 +12,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.blockChain.service.CelebSvcInter;
 @RestController
 @RequestMapping("/main")
 public class MainController {
+	@Autowired
+	CelebSvcInter celebSvc;
+//	@GetMapping
+//    public HashMap<String,Object> home() {
+//    	HashMap<String, Object> res = new HashMap<String,Object>();
+//    	res.put("msg", "Hello World!");
+//        return res;
+//    }
+	@GetMapping("/celebGroup")
+	public Map<String,Object> celebGroup(){
+		return celebSvc.sltCelebDTObyGroup();
+	}
 	
-	@GetMapping
-    public HashMap<String,Object> home() {
-    	HashMap<String, Object> res = new HashMap<String,Object>();
-    	res.put("msg", "Hello World!");
-        return res;
-    }
-
 }
