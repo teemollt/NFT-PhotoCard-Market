@@ -3,7 +3,7 @@ import Navbar from "./components/main/Navbar";
 import { Route, Switch } from "react-router-dom";
 import Main from "./components/pages/Main";
 import MyPage from "./components/pages/MyPage";
-import MainBid from "./components/pages/MainBid";
+import MainBid from "./components/pages/MainAuction";
 import MainCeleb from "./components/pages/MainCeleb";
 import Gallery from "./components/pages/Gallery";
 import CardPackDetail from "./components/pages/CardPackDetail";
