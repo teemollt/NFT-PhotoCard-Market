@@ -1,8 +1,7 @@
-import React from 'react';
-import UpdateCeleb from '../account/mypage/update/UpdateCeleb';
-import UpdateTable from '../account/mypage/update/UpdateTable';
-import UpdateBtns from '../account/mypage/update/UpdateBtns';
-
+import React from "react";
+import UpdateCeleb from "../account/mypage/update/UpdateCeleb";
+import UpdateTable from "../account/mypage/update/UpdateTable";
+import UpdateBtns from "../account/mypage/update/UpdateBtns";
 
 function MyPageUpdate() {
   return (
@@ -11,7 +10,7 @@ function MyPageUpdate() {
       <UpdateCeleb />
       <UpdateBtns />
     </div>
-  )
+  );
 }
 
-export default MyPageUpdate
+export default MyPageUpdate;

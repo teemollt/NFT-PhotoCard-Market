@@ -1,7 +1,7 @@
-import React from 'react';
-import MyPageBody from '../account/mypage/MyPageBody';
-import MyPageTop from '../account/mypage/MyPageTop';
-import './MyPage.css'
+import React from "react";
+import MyPageBody from "../account/mypage/MyPageBody";
+import MyPageTop from "../account/mypage/MyPageTop";
+import "./MyPage.css";
 
 function Profile(): JSX.Element {
   return (
@@ -9,7 +9,7 @@ function Profile(): JSX.Element {
       <MyPageTop />
       <MyPageBody />
     </div>
-  )
+  );
 }
 
-export default Profile
+export default Profile;

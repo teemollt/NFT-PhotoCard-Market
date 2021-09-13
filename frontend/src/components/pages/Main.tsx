@@ -11,9 +11,9 @@ function Main(): JSX.Element {
       <br />
       <MainCelebList />
       <br />
-      <MainCarousel1/>
+      <MainCarousel1 />
       <br />
-      <MainCarousel2/>
+      <MainCarousel2 />
     </div>
   );
 }

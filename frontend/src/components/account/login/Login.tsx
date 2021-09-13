@@ -1,11 +1,11 @@
-import React from 'react'
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import LoginTable from './LoginTable';
-import LoginBtns from './LoginBtns';
+import React from "react";
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import LoginTable from "./LoginTable";
+import LoginBtns from "./LoginBtns";
 
 export interface State {
-  open: boolean
+  open: boolean;
 }
 
 function Login() {
@@ -31,11 +31,11 @@ function Login() {
       >
         <DialogContent>
           <LoginTable />
-          <LoginBtns handleClose={handleClose}/>
+          <LoginBtns handleClose={handleClose} />
         </DialogContent>
       </Dialog>
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;
