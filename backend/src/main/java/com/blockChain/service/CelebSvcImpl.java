@@ -1,5 +1,6 @@
 package com.blockChain.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.blockChain.domain.Celeb;
 import com.blockChain.domain.Celeb_Group;
+import com.blockChain.dto.CelebDTO;
 import com.blockChain.dto.CelebGroupDTO;
 import com.blockChain.dto.GroupDTO;
 import com.blockChain.repository.CelebRepo;
@@ -30,15 +32,17 @@ public class CelebSvcImpl implements CelebSvcInter{
 		Map<String, Object> res = new HashMap<String,Object>();
 		 ModelMapper mm = new ModelMapper(); 
 		List<Celeb_Group> groupList = cgRepo.findAll();
+		List<CelebGroupDTO> dto = new ArrayList<CelebGroupDTO>();
 		for (int i = 0; i< groupList.size();i++) {
 			
 			CelebGroupDTO cgDTO = new CelebGroupDTO();
 			GroupDTO groupDTO = mm.map(groupList.get(i), GroupDTO.class);
-			System.out.println(groupDTO.toString());
-			Optional<List<Celeb>> celebList= celebRepo.sltCelebDTObyGroup(groupDTO.getGroupNo());
-//			CelebGroupDTO celebGroupDTO = mm.map(celebList, destinationType)
-//			groupDTO.setGroupNo(groupList.get(i).getGroupNo());
+			Optional<List<CelebDTO>> celebList= celebRepo.sltCelebDTOByGroup(groupDTO.getGroupNo());
+			cgDTO.setCelebList(celebList.get());
+			cgDTO.setGroup(groupDTO);
+			dto.add(cgDTO);
 		}
+		res.put("res", dto);
 		return res;
 	}
 

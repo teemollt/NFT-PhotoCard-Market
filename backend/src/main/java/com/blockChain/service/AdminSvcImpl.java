@@ -75,7 +75,7 @@ public class AdminSvcImpl implements AdminSvcInter{
     final int CELEBPEOPLES = 7;
 //    final String[] CELEBS = {"조영우","남근형","하지훈","김도형","신지현","나비","이태희"};
     final List<String> CELEBS = new ArrayList<String>(Arrays.asList("조영우","남근형","하지훈","김도형","신지현","나비","이태희"));
-    final String[] MW = {"M","M","M","M","W","W","W","M"};
+    final String[] MWs = {"M","M","M","M","W","W","W","M"};
     final String[] GROUP = {GROUP1,GROUP1,GROUP1,SOLO,SOLO,SOLO,SOLO};
     final String[] DEBUT = {"20170201","20170201","20180201","20160201","20170201","20200201","19900201"};
     final String[] RETIRE = {"20190201","20200201",null,null,null,null,"20100201"};
@@ -124,6 +124,11 @@ public class AdminSvcImpl implements AdminSvcInter{
     private final String SALES6 = "2019~2021";
     private final List<String> SALES_LIST = new ArrayList<String>(Arrays.asList(SALES1,SALES2,SALES3,SALES4,SALES5,SALES6));
 	private final String SALES_SUBFIX = "카드팩";
+	private final String MW = "MW";
+	private final String group = "GR";
+	private final String year = "YR";
+	private final String celeb = "CL";
+	private final List<String> SALES_DIV = new ArrayList<String>(Arrays.asList(MW,MW,group,group,year,year));
 	//판매 좋아요
 	private final int SL_COUNT = 15;
 	//판매 댓글 개수
@@ -248,7 +253,7 @@ public class AdminSvcImpl implements AdminSvcInter{
 	    	if(existOrNot.isPresent()) {
 		    	Celeb celeb = new Celeb();
 		    	celeb.setCelebNm(CELEBS.get(i));
-		    	celeb.setCelebMw(MW[i]);
+		    	celeb.setCelebMw(MWs[i]);
 		    	celeb.setGroup(existOrNot.get());
 		    	LocalDateTime s = LocalDateTime.parse(DEBUT[i]+" "+time,formatter);
 		    	LocalDateTime e = null;
@@ -528,17 +533,29 @@ public class AdminSvcImpl implements AdminSvcInter{
 	
 	@Override
 	public Map<String,Object> insertSales(){
+		//TODO
 		Map<String, Object> res = new HashMap<String,Object>();
 		String name = new Object() {}.getClass().getEnclosingMethod().getName();
 		ArrayList<String> msg = new ArrayList<>();
 		List<String>products = new ArrayList<>();
 		products.addAll(SALES_LIST);
+		for (int i = 0; i<products.size();i++) {
+			Sales sales = new Sales();
+			sales.setSalesDetail("제품상세 내용");
+			sales.setSalesNm(products.get(i) +" "+ SALES_SUBFIX);
+			sales.setSalesPrice(3L);
+			sales.setSalesDiv(SALES_DIV.get(i));
+			Sales saved = salesRepo.save(sales);
+			msg.add(saved.toString());
+		}
+		products = new ArrayList<>();
 		products.addAll(CELEBS);
 		for (int i = 0; i<products.size();i++) {
 			Sales sales = new Sales();
 			sales.setSalesDetail("제품상세 내용");
 			sales.setSalesNm(products.get(i) +" "+ SALES_SUBFIX);
 			sales.setSalesPrice(3L);
+			sales.setSalesDiv(celeb);
 			Sales saved = salesRepo.save(sales);
 			msg.add(saved.toString());
 		}
