@@ -11,6 +11,9 @@ public interface CelebRepoCustom {
 	Optional<Celeb> sltCeleb(String NM);
 
 
-	Optional<List<Celeb>> sltCelebDTObyGroup(Long GroupNo);
+	Optional<List<CelebDTO>> sltCelebDTOByGroup(Long GroupNo);
+
+
+	Optional<List<Celeb>> sltCelebByGroup(Long GroupNo);
 
 }
