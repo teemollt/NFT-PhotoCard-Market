@@ -42,4 +42,22 @@ public class MemberController {
 
 		return ret;
 	}
+	
+	@PostMapping("/checkId")
+	public Map<String, Object>checkId(@RequestBody  Map<String, Object> req){
+		return ms.checkId(req);
+		
+	}
+	
+	@PostMapping("/checkNick")
+	public Map<String, Object>checkNick(@RequestBody  Map<String, Object> req){
+		return ms.checkNick(req);
+		
+	}
+	
+	@PostMapping("/checkEmail")
+	public Map<String, Object>checkEmail(@RequestBody  Map<String, Object> req){
+		return ms.checkEmail(req);
+		
+	}
 }
