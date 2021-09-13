@@ -4,7 +4,8 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import { useHistory } from "react-router-dom";
-import "./MainBid.css";
+import "./MainAuctionBody.css";
+import AuctionItem from "./AuctionItem";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,6 +28,7 @@ const tempGallery: Array<temp> = [
     title: "아이유꽃",
     level: "S",
     celeb: "1",
+    price: "1btc",
   },
   {
     id: 2,
@@ -35,6 +37,7 @@ const tempGallery: Array<temp> = [
     title: "여신",
     level: "A",
     celeb: "1",
+    price: "1btc",
   },
   {
     id: 3,
@@ -43,6 +46,7 @@ const tempGallery: Array<temp> = [
     title: "연합뉴스",
     level: "A",
     celeb: "1",
+    price: "1btc",
   },
   {
     id: 4,
@@ -51,6 +55,7 @@ const tempGallery: Array<temp> = [
     title: "똥머리",
     level: "B",
     celeb: "1",
+    price: "1btc",
   },
   {
     id: 5,
@@ -59,6 +64,7 @@ const tempGallery: Array<temp> = [
     title: "흑백",
     level: "B",
     celeb: "1",
+    price: "1btc",
   },
   {
     id: 6,
@@ -67,6 +73,7 @@ const tempGallery: Array<temp> = [
     title: "정장",
     level: "B",
     celeb: "1",
+    price: "1btc",
   },
   {
     id: 7,
@@ -74,6 +81,7 @@ const tempGallery: Array<temp> = [
     title: "블랙야크",
     level: "B",
     celeb: "1",
+    price: "1btc",
   },
   {
     id: 8,
@@ -81,6 +89,7 @@ const tempGallery: Array<temp> = [
     title: "하얀색",
     level: "C",
     celeb: "1",
+    price: "1btc",
   },
   {
     id: 9,
@@ -88,6 +97,7 @@ const tempGallery: Array<temp> = [
     title: "라일락",
     level: "C",
     celeb: "1",
+    price: "1btc",
   },
   {
     id: 10,
@@ -96,6 +106,7 @@ const tempGallery: Array<temp> = [
     title: "블루밍",
     level: "C",
     celeb: "1",
+    price: "1btc",
   },
 ];
 
@@ -105,43 +116,17 @@ export type temp = {
   title: string;
   level: string;
   celeb: string;
+  price: string;
 };
 
-function MainBid() {
+function MainAuctionBody() {
   const classes = useStyles();
-  const [isHover, setisHover] = useState(false);
-  let history = useHistory();
-  function getitem(data: number) {
-    history.push(`/biditem/${data}`);
-  }
   return (
     <div className={classes.root}>
       <Container>
         <Grid container spacing={3}>
           {tempGallery.map((image) => (
-            <Grid
-              item
-              xs={6}
-              sm={3}
-              onClick={() => {
-                getitem(image.id);
-              }}
-              style={{ cursor: "pointer" }}
-            >
-              <div className="shopCard">
-                <div className="shopCardImg">
-                  <img src={image.imgUrl} alt="" />
-                </div>
-                <div>
-                  <div className="shopCardInfo">
-                    <span className="shopCardCeleb">상품 celeb</span>
-                    <span className="shopCardPriceTitle">가격</span>
-                  </div>
-                  <span className="shopCardTitle">{image.title}</span>
-                  <span className="shopCardPrice">{image.level}</span>
-                </div>
-              </div>
-            </Grid>
+            <AuctionItem image={image} />
           ))}
         </Grid>
       </Container>
@@ -149,4 +134,4 @@ function MainBid() {
   );
 }
 
-export default MainBid;
+export default MainAuctionBody;

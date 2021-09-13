@@ -1,0 +1,12 @@
+.producttitle {
+  float: left;
+  margin-left: 10px;
+}
+
+.productprice {
+  float: right;
+  margin-right: 10px;
+}
+.itemcardinfo {
+  margin-top: 10px;
+}
