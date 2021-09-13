@@ -340,7 +340,7 @@
   - eht1에서 계정생성 및 peer 추가
 
     ```
-    eth.newAccount("비밀번호")
+    personal.newAccount("비밀번호")
     admin.addPeer("eth0 enode")
     ```
 
