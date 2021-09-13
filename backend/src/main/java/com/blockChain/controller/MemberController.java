@@ -15,7 +15,7 @@ import com.blockChain.dto.TokenDto;
 import com.blockChain.service.MemberSvcInter;
 
 @RestController
-@RequestMapping("/member")
+@RequestMapping("/api/member")
 public class MemberController {
 	@Autowired
 	private MemberSvcInter ms;

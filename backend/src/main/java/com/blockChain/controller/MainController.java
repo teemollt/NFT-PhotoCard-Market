@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.blockChain.service.CelebSvcInter;
 @RestController
-@RequestMapping("/main")
+@RequestMapping("/api/main")
 public class MainController {
 	@Autowired
 	CelebSvcInter celebSvc;
