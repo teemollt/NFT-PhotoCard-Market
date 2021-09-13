@@ -1,7 +1,7 @@
-import React from 'react';
-import JoinTable from '../account/join/JoinTable';
-import JoinCeleb from '../account/join/JoinCeleb';
-import JoinBtns from '../account/join/JoinBtns';
+import React from "react";
+import JoinTable from "../account/join/JoinTable";
+import JoinCeleb from "../account/join/JoinCeleb";
+import JoinBtns from "../account/join/JoinBtns";
 
 function Join() {
   return (
@@ -10,7 +10,7 @@ function Join() {
       <JoinCeleb />
       <JoinBtns />
     </div>
-  )
+  );
 }
 
-export default Join
+export default Join;

@@ -1,14 +1,14 @@
-import React from 'react';
-import { Button } from '@material-ui/core';
-import './LoginBtns.css';
+import React from "react";
+import { Button } from "@material-ui/core";
+import "./LoginBtns.css";
 
 function LoginBtns(props: any) {
-  console.log(props)
+  console.log(props);
 
   const handleToJoin = (e: React.MouseEvent<HTMLButtonElement>) => {
-    window.location.replace('/join')
-  }
-  
+    window.location.replace("/join");
+  };
+
   return (
     <div className="loginBtns">
       <div className="loginBtnsLeft">
@@ -16,10 +16,12 @@ function LoginBtns(props: any) {
       </div>
       <div className="loginBtnsRight">
         <Button color="primary">로그인</Button>
-        <Button onClick={props.handleClose} color="secondary">취소</Button>
+        <Button onClick={props.handleClose} color="secondary">
+          취소
+        </Button>
       </div>
     </div>
-  )
+  );
 }
 
-export default LoginBtns
+export default LoginBtns;

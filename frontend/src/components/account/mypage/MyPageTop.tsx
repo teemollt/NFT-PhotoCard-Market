@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from '@material-ui/core';
-import './MyPageTop.css';
+import React from "react";
+import { Link } from "react-router-dom";
+import { Button } from "@material-ui/core";
+import "./MyPageTop.css";
 
 function MyPageTop() {
   return (
@@ -16,11 +16,7 @@ function MyPageTop() {
         </div>
         <div className="mypageUserUpdate">
           <Link className="tablink" to="/update">
-            <Button 
-              className="mypageUpdateBtn"
-              variant="outlined" 
-              size="large" 
-            >
+            <Button className="mypageUpdateBtn" variant="outlined" size="large">
               정보 수정
             </Button>
           </Link>
@@ -42,7 +38,7 @@ function MyPageTop() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default MyPageTop
+export default MyPageTop;
