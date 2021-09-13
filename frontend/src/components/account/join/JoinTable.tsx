@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TextField, Button } from '@material-ui/core';
 import Snackbar, { SnackbarOrigin } from '@material-ui/core/Snackbar';
+import axios from 'axios';
 import './JoinTable.css';
 
 export interface State {
@@ -14,6 +15,7 @@ export interface State {
   snackNick: boolean,
   celeb: number
 }
+
 
 function JoinTable() {
   const [userId, setUserId] = useState('')
@@ -30,6 +32,9 @@ function JoinTable() {
   }
 
   const handleUserIdDupl = (newSnack: SnackbarOrigin) => (e: any) => {
+    axios.post('/member/checkId', {memberId: userId})
+    .then((res)=> console.log(res))
+    .catch((err)=> console.log(err))
     setSnackId(true)
   }
 

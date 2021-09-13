@@ -23,7 +23,6 @@ export interface State {
 
 function ShopBuy() {
   const [ productTemp, setProductTemp ] = useState(tempCard)
-  console.log(tempCard)
 
   return (
     <div className="shopBuy">

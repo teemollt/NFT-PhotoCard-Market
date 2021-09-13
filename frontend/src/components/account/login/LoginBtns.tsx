@@ -5,7 +5,7 @@ import './LoginBtns.css';
 function LoginBtns(props: any) {
   console.log(props)
 
-  const handleToJoin = () => {
+  const handleToJoin = (e: React.MouseEvent<HTMLButtonElement>) => {
     window.location.replace('/join')
   }
   

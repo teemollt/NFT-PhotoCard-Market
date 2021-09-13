@@ -12,45 +12,49 @@ import Service from "./components/pages/Service";
 import Join from "./components/pages/Join";
 import BidItem from "./components/pages/BidItem";
 import MyPageUpdate from "./components/pages/MyPageUpdate";
+import { Provider } from 'react-redux'
+import store from "./redux/store";
 
 function App(): JSX.Element {
   return (
-    <div>
-      <Navbar />
-      <Switch>
-        <Route path="/" exact>
-          <Main />
-        </Route>
-        <Route path="/mypage">
-          <MyPage />
-        </Route>
-        <Route path="/mainceleb/:celeb">
-          <MainCeleb />
-        </Route>
-        <Route path="/mainbid/:tag?">
-          <MainBid />
-        </Route>
-        <Route path="/gallery/:id">
-          <Gallery />
-        </Route>
-        <Route path="/cardpackdetail/:cardpackid">
-          <CardPackDetail />
-        </Route>
-        <Route path="/service/:id">
-          <Service />
-        </Route>
-        <Route path="/join">
-          <Join />
-        </Route>
-        <Route path="/biditem/:id">
-          <BidItem/>
-        </Route>
-        <Route path="/update">
-          <MyPageUpdate />
-        </Route>
-      </Switch>
-      <Footer />
-    </div>
+    <Provider store={store}>
+      <div>
+        <Navbar />
+        <Switch>
+          <Route path="/" exact>
+            <Main />
+          </Route>
+          <Route path="/mypage">
+            <MyPage />
+          </Route>
+          <Route path="/mainceleb/:celeb">
+            <MainCeleb />
+          </Route>
+          <Route path="/mainbid/:tag?">
+            <MainBid />
+          </Route>
+          <Route path="/gallery/:id">
+            <Gallery />
+          </Route>
+          <Route path="/cardpackdetail/:cardpackid">
+            <CardPackDetail />
+          </Route>
+          <Route path="/service/:id">
+            <Service />
+          </Route>
+          <Route path="/join">
+            <Join />
+          </Route>
+          <Route path="/biditem/:id">
+            <BidItem/>
+          </Route>
+          <Route path="/update">
+            <MyPageUpdate />
+          </Route>
+        </Switch>
+        <Footer />
+      </div>
+    </Provider>
   );
 }
 

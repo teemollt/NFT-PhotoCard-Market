@@ -22,7 +22,6 @@ export interface State {
 
 function ShopKeep() {
   const [ productTemp, setProductTemp ] = useState(tempCard)
-  console.log(tempCard)
 
   return (
     <div className="shopBuy">
