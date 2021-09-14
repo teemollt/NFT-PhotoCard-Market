@@ -3,7 +3,7 @@
   text-decoration: none;
   text-decoration-color: black;
   color: black;
-  font-family: 'Work Sans';
+  font-family: "Work Sans";
 }
 
 .navbar {
@@ -12,4 +12,5 @@
 
 .breadcrumbs {
   text-align: center;
+  margin-bottom: 10px;
 }

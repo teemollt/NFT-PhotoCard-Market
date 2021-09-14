@@ -61,7 +61,7 @@ function CardPackDetail(): JSX.Element {
           </Grid>
         </Grid>
       </Container>
-      <Review />
+      <Review cardpackNo={location.state.data.salesNo} />
     </div>
   );
 }
