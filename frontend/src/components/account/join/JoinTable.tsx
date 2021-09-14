@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { TextField, Button } from "@material-ui/core";
 import axios from "axios";
 import "./JoinTable.css";
+import JoinAlert from "./JoinAlert";
 
 export interface State {
   memberId: string;
@@ -15,6 +16,8 @@ export interface State {
   memberEmail: string;
   checkEmail: number;
   likeCeleb: number;
+  open: boolean;
+  message: string;
 }
 
 function JoinTable(props: any) {
@@ -29,6 +32,12 @@ function JoinTable(props: any) {
   const [emailCheck, setEmailCheck] = useState(0);
   const [checkEmail, setCheckEmail] = useState(true);
   const [likeCeleb, setLikeCeleb] = useState(999);
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleMemberId = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMemberId(e.target.value);
@@ -41,8 +50,9 @@ function JoinTable(props: any) {
     if (memberId.trim().match(/^[a-zA-Z0-9+]{5,15}$/)) {
       axios.post("/api/member/checkId", { memberId: memberId }).then((res) => {
         if (res.data.success) {
+          setMessage("사용 가능한 아이디입니다");
           setMemberIdCheck(1);
-          alert("사용 가능한 아이디입니다");
+          setOpen(true);
         } else {
           setMemberIdCheck(2);
         }
@@ -84,14 +94,16 @@ function JoinTable(props: any) {
         .post("/api/member/checkNick", { memberNick: memberNick })
         .then((res) => {
           if (res.data.success) {
+            setMessage("사용 가능한 닉네임입니다");
             setNickCheck(1);
-            alert("사용 가능한 닉네임입니다");
+            setOpen(true);
           } else {
             setNickCheck(2);
           }
         });
     } else {
-      alert("닉네임을 입력해 주세요");
+      setMessage("닉네임을 입력해 주세요");
+      setOpen(true);
     }
   };
 
@@ -112,19 +124,27 @@ function JoinTable(props: any) {
   };
 
   const handleEmailCheck = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (memberEmail.trim()) {
+    if (
+      memberEmail
+        .trim()
+        .match(
+          /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/
+        )
+    ) {
       axios
         .post("/api/member/checkEmail", { memberEmail: memberEmail })
         .then((res) => {
           if (res.data.success) {
+            setMessage("사용 가능한 이메일입니다");
             setEmailCheck(1);
-            alert("사용 가능한 이메일입니다");
+            setOpen(true);
           } else {
             setEmailCheck(2);
           }
         });
     } else {
-      alert("이메일을 입력해 주세요");
+      setMessage("이메일을 입력해 주세요");
+      setOpen(true);
     }
   };
 
@@ -155,18 +175,24 @@ function JoinTable(props: any) {
             })
             .catch((err) => console.log(err));
         } else {
-          alert("중복 확인을 해 주세요");
+          setMessage("중복 확인을 해 주세요");
+          setOpen(true);
         }
       } else {
-        alert("비밀번호와 비밀번화 확인이 동일하지 않습니다");
+        setMessage("비밀번호와 비밀번화 확인이 동일하지 않습니다");
+        setOpen(true);
       }
     } else {
-      alert("필수 입력 항목들을 입력해 주세요");
+      setMessage("필수 입력 항목들을 입력해 주세요");
+      setOpen(true);
     }
   };
 
   return (
     <div>
+      {open ? (
+        <JoinAlert message={message} handleClose={handleClose} open={open} />
+      ) : null}
       <table className="joinTable">
         <h1>JOIN</h1>
         <tbody>
