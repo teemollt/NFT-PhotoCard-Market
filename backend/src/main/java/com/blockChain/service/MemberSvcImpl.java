@@ -72,6 +72,8 @@ public class MemberSvcImpl implements MemberSvcInter{
 		 Long celebNo =  ((Integer) req.get("likeCeleb")).longValue();
 		 Optional<Celeb> celebOne = celebRepo.findById(celebNo);
 		 System.out.println(celebNo);
+		 System.out.println(celebOne);
+		 System.out.println(celebOne.toString());
 		 Celeb_Like cl = new Celeb_Like();
 		 cl.setCeleb(celebOne.get());
 		 cl.setMember(savedMember);
