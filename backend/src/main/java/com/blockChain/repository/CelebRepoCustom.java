@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.blockChain.domain.Celeb;
+import com.blockChain.dto.ArtistListDTO;
 import com.blockChain.dto.CelebDTO;
 
 public interface CelebRepoCustom {
@@ -15,5 +16,8 @@ public interface CelebRepoCustom {
 
 
 	Optional<List<Celeb>> sltCelebByGroup(Long GroupNo);
+
+
+	Optional<List<ArtistListDTO>> sltArtistListDTO();
 
 }
