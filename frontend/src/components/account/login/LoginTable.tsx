@@ -15,8 +15,9 @@ function LoginTable(props: any) {
     console.log(loginpw);
     axios
       .post("api/member/login", { memberId: loginid, memberPw: loginpw })
-      .then(() => {
-        alert("로그인성공");
+      .then((res) => {
+        localStorage.setItem("token", "Bearer" + res.data.token.accessToken);
+        window.location.reload();
       })
       .catch((err) => {
         console.log(err);

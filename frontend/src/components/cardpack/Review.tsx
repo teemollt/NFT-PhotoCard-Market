@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import SendIcon from "@material-ui/icons/Send";
 import Container from "@material-ui/core/Container";
 import { DataGrid, GridColDef } from "@material-ui/data-grid";
+import axios from "axios";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -152,7 +153,18 @@ const rows = [
   },
 ].sort((a, b) => b.id - a.id);
 
-function Review(): JSX.Element {
+function Review(props:any): JSX.Element {
+  useEffect(() => {
+    axios
+      .get(`/api/cardPack/${props.cardpackNo}/review`)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   let [review, setreview] = useState<string>("");
   function getreview(data: any): object {
     let reviewid: number = data.id;
@@ -161,6 +173,7 @@ function Review(): JSX.Element {
     // history.push(`/biditem/${itemid}`);
     return data;
   }
+
   const classes = useStyles();
   return (
     <div>
