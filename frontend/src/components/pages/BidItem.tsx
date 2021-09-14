@@ -25,9 +25,15 @@ const useStyles = makeStyles((theme: Theme) =>
     paper: {
       padding: theme.spacing(2),
       textAlign: "center",
-      color: theme.palette.text.secondary,
-      height: 370,
-      width: 300,
+      height: "400px",
+    },
+    container: {
+      width: "60%",
+    },
+    paper2: {
+      padding: theme.spacing(2),
+      textAlign: "center",
+      height: "330px",
     },
   })
 );
@@ -70,6 +76,7 @@ function BidItem(): JSX.Element {
   const location: any = useLocation();
   return (
     <div style={{ textAlign: "center" }}>
+      {/* 남은시간 */}
       <div>
         <h1>
           {rest > 0 ? (
@@ -81,9 +88,9 @@ function BidItem(): JSX.Element {
       </div>
       <br />
       <div>
-        <Container>
-          <Grid container style={{ display: "flex", height: "100%" }}>
-            <Grid item xs={4}>
+        <Container className={classes.container}>
+          <Grid container spacing={5}>
+            <Grid item xs={12} lg={6}>
               <Paper className={classes.paper}>
                 <img
                   src={location.state.data.imgUrl}
@@ -93,43 +100,47 @@ function BidItem(): JSX.Element {
                 />
               </Paper>
             </Grid>
-            <Grid item xs={8}>
-              <div className="buybtn">
-                <AuctionBuyItem price={price} />
-              </div>
-
-              <TableContainer component={Paper}>
-                <Table className="" size="small">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell align="center">Price</TableCell>
-                      <TableCell align="center">User</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {rows.map((row) => (
-                      <TableRow key={row.id}>
-                        <TableCell component="th" scope="row" align="center">
-                          {row.bidprice}
-                        </TableCell>
-                        <TableCell align="center">{row.name}</TableCell>
+            <Grid item xs={12} lg={6}>
+              <div className={classes.paper2}>
+                {location.state.data.salesDetail}
+                <div className="buybtn">
+                  <AuctionBuyItem price={price} />
+                </div>
+                최근 입찰 기록
+                <TableContainer>
+                  <Table className="" size="small">
+                    <TableHead style={{ backgroundColor: "#F2F2F2" }}>
+                      <TableRow>
+                        <TableCell align="center">Price</TableCell>
+                        <TableCell align="center">User</TableCell>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-
-              <br />
+                    </TableHead>
+                    <TableBody>
+                      {rows.map((row) => (
+                        <TableRow key={row.id}>
+                          <TableCell component="th" scope="row" align="center">
+                            {row.bidprice}
+                          </TableCell>
+                          <TableCell align="center">{row.name}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </div>
               <div>
                 <TextField
                   id="input-with-icon-grid"
                   label="Price"
                   type="number"
+                  fullWidth
+                  style={{ width: "90%" }}
                   onChange={(e) => {
                     console.log(typeof Number(e.target.value));
                     setbidprice(2);
                   }}
                 />
+                &nbsp;&nbsp;
                 <SendIcon
                   style={{ height: "50px", cursor: "pointer" }}
                   onClick={() => {

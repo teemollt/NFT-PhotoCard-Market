@@ -84,7 +84,7 @@ function AuctionBuyItem(props: any) {
         open={open}
       >
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-          결재하기
+          결제하기
         </DialogTitle>
         <DialogContent dividers>
           <div style={{ width: "550px", height: "300px" }}></div>

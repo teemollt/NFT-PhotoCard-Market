@@ -6,7 +6,6 @@ import {
   WithStyles,
 } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-import Fab from "@material-ui/core/Fab";
 import Dialog from "@material-ui/core/Dialog";
 import MuiDialogTitle from "@material-ui/core/DialogTitle";
 import MuiDialogContent from "@material-ui/core/DialogContent";
@@ -75,21 +74,24 @@ function BuyCardPack() {
   };
   return (
     <div>
-      <Fab variant="extended" color="primary" onClick={handleClickOpen}>
+      <Button
+        variant="contained"
+        color="secondary"
+        onClick={handleClickOpen}
+        fullWidth
+      >
         구매하기
-      </Fab>
+      </Button>
       <Dialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}
       >
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-          결재하기
+          결제하기
         </DialogTitle>
         <DialogContent dividers>
-          <div style={{width:"550px", height:"300px"}}>
-            
-          </div>
+          <div style={{ width: "550px", height: "300px" }}></div>
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose} color="primary">
