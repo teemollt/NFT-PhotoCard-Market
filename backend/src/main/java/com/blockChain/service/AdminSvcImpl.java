@@ -262,6 +262,9 @@ public class AdminSvcImpl implements AdminSvcInter{
 		    	}
 		    	celeb.setCelebDebut(s);
 		    	celeb.setCelebRetire(e);
+		    	Integer temp= i;
+ 		    	Long pk = temp.longValue();
+		    	celeb.setCelebNo(pk);
 		    	celebRepo.save(celeb);
 		    	msg.add(celeb.toString());
 	    	}else {
