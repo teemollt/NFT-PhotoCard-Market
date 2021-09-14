@@ -69,18 +69,23 @@ public class MemberSvcImpl implements MemberSvcInter{
 		 member.setMemberPhone((String)req.get("memberPhone"));
 		 Member savedMember = memberRepo.save(member);
 		 res.put("msg", "회원가입 성공");
-		 List<?> celebNo = (List<?>) req.get("likeCeleb");
+		 Long celebNo =  ((Integer) req.get("likeCeleb")).longValue();
+		 Optional<Celeb> celebOne = celebRepo.findById(celebNo);
 		 System.out.println(celebNo);
-		 int cnt = 0;
-		 for(int i =0;i<celebNo.size();i++) {
-			 cnt++;
-			 Optional<Celeb> celebOne =celebRepo.findById(Long.valueOf(celebNo.get(i).toString()));
-			 Celeb_Like cl = new Celeb_Like();
-			 cl.setCeleb(celebOne.get());
-			 cl.setMember(savedMember);
-			 Celeb_Like savedCL = clRepo.save(cl);
-			 res.put("celebLike"+cnt,"샐럽 좋아요 성공 : "+savedCL.getCeleb().getCelebNo());
-		 }
+		 Celeb_Like cl = new Celeb_Like();
+		 cl.setCeleb(celebOne.get());
+		 cl.setMember(savedMember);
+		 Celeb_Like savedCL = clRepo.save(cl);
+		 res.put("celebLike","샐럽 좋아요 성공 : "+savedCL.getCeleb().getCelebNo());
+//		 for(int i =0;i<celebNo.size();i++) {
+//			 cnt++;
+//			 Optional<Celeb> celebOne =celebRepo.findById(Long.valueOf(celebNo.get(i).toString()));
+//			 Celeb_Like cl = new Celeb_Like();
+//			 cl.setCeleb(celebOne.get());
+//			 cl.setMember(savedMember);
+//			 Celeb_Like savedCL = clRepo.save(cl);
+//			 res.put("celebLike"+cnt,"샐럽 좋아요 성공 : "+savedCL.getCeleb().getCelebNo());
+//		 }
 		 } catch(IllegalStateException e) {
 				res.put("success", false);
 				res.put("msg", e.getMessage());
