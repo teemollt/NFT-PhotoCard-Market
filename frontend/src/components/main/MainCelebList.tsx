@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 
@@ -12,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: "center",
       flexWrap: "wrap",
       "& > *": {
-        margin: theme.spacing(0.5),
+        margin: theme.spacing(1),
       },
     },
   })
@@ -41,21 +40,15 @@ function MainCelebList(): JSX.Element {
   }
   return (
     <div className={classes.root}>
-      <ButtonGroup
-        size="large"
-        variant="text"
-        aria-label="text primary button group"
-      >
-        {celeb.map((group, i) => (
-          <Button
-            onClick={() => {
-              gotocelebmain(group);
-            }}
-          >
-            {group.groupNm}
-          </Button>
-        ))}
-      </ButtonGroup>
+      {celeb.map((group, i) => (
+        <Button
+          onClick={() => {
+            gotocelebmain(group);
+          }}
+        >
+          {group.groupNm}
+        </Button>
+      ))}
     </div>
   );
 }
