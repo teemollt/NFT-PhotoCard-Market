@@ -70,7 +70,7 @@ pipeline {
                     color: "#2A42EE",
                     message: "Run STARTED: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Link to build>)"
                         )
-                    sh 'docker run -d -p 8080:80 --name frontend frontend'
+                    sh 'docker run -d -p 8081:80 --name frontend frontend'
                 } catch(e) {
                 currentBuild.result = "FAILURE"
                 } finally {
