@@ -1,81 +1,81 @@
-import React, { useState, useEffect } from "react";
-import { TextField, Button } from "@material-ui/core";
-import Snackbar, { SnackbarOrigin } from "@material-ui/core/Snackbar";
-import axios from "axios";
-import "./JoinTable.css";
+import React, { useState, useEffect } from "react"
+import { TextField, Button } from "@material-ui/core"
+import Snackbar, { SnackbarOrigin } from "@material-ui/core/Snackbar"
+import axios from "axios"
+import "./JoinTable.css"
 
 export interface State {
-  userId: string;
-  password1: string;
-  password2: string;
-  nickname: string;
-  email: string;
-  checkEmail: boolean;
-  snackId: boolean;
-  snackNick: boolean;
-  celeb: number;
+  userId: string
+  password1: string
+  password2: string
+  nickname: string
+  email: string
+  checkEmail: boolean
+  snackId: boolean
+  snackNick: boolean
+  celeb: number
 }
 
 function JoinTable() {
-  const [userId, setUserId] = useState("");
-  const [password1, setPassword1] = useState("");
-  const [password2, setPassword2] = useState("");
-  const [nickname, setNickname] = useState("");
-  const [email, setEmail] = useState("");
-  const [checkEmail, setCheckEmail] = useState(true);
-  const [snackId, setSnackId] = useState(false);
-  const [snackNick, setSnackNick] = useState(false);
+  const [userId, setUserId] = useState("")
+  const [password1, setPassword1] = useState("")
+  const [password2, setPassword2] = useState("")
+  const [nickname, setNickname] = useState("")
+  const [email, setEmail] = useState("")
+  const [checkEmail, setCheckEmail] = useState(true)
+  const [snackId, setSnackId] = useState(false)
+  const [snackNick, setSnackNick] = useState(false)
 
   const handleUserId = (e: any) => {
-    setUserId(e.target.value);
-  };
+    setUserId(e.target.value)
+  }
 
   const handleUserIdDupl = (newSnack: SnackbarOrigin) => (e: any) => {
     axios
-      .post("/api/member/checkId", {
+      .post("http://j5d102.p.ssafy.io:8080/api/member/checkId", {
         memberId: userId,
       })
       .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-    setSnackId(true);
-  };
+      .catch((err) => console.log(err))
+    setSnackId(true)
+  }
 
   const handleSnackIdClose = (e: any) => {
-    setSnackId(false);
-  };
+    setSnackId(false)
+  }
 
   const handlePassword1 = (e: any) => {
-    setPassword1(e.target.value);
-  };
+    setPassword1(e.target.value)
+  }
 
   const handlePassword2 = (e: any) => {
-    setPassword2(e.target.value);
-  };
+    setPassword2(e.target.value)
+  }
 
   const handleNick = (e: any) => {
-    setNickname(e.target.value);
-  };
+    setNickname(e.target.value)
+  }
 
   const handleNickDupl = (newSnack: SnackbarOrigin) => (e: any) => {
-    setSnackNick(true);
-  };
+    setSnackNick(true)
+  }
 
   const handleSnackNickClose = (e: any) => {
-    setSnackNick(false);
-  };
+    setSnackNick(false)
+  }
 
   const handleEmail = (e: any) => {
-    setEmail(e.target.value);
+    setEmail(e.target.value)
     if (
       e.target.value.match(
         /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i
       )
     ) {
-      setCheckEmail(true);
+      setCheckEmail(true)
     } else {
-      setCheckEmail(false);
+      setCheckEmail(false)
     }
-  };
+  }
 
   return (
     <table className="joinTable">
@@ -180,7 +180,7 @@ function JoinTable() {
         </tr>
       </tbody>
     </table>
-  );
+  )
 }
 
-export default JoinTable;
+export default JoinTable

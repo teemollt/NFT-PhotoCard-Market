@@ -1,0 +1,44 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "id": 2,
+      "address": "0xF9790A50FE009AB34F09b5c43b020764D12cdEF2",
+      "privatekey": {
+        "version": 3,
+        "id": "d4ac13f9-886d-4caa-9768-dc82efeb8700",
+        "address": "f9790a50fe009ab34f09b5c43b020764d12cdef2",
+        "crypto": {
+          "ciphertext": "d2451324fd3a77db1b41609390a4c4f0127444c3578437bd811c44840291dbca",
+          "cipherparams": {
+            "iv": "a06bf60e31deb95a2eb00753f424e3cc"
+          },
+          "cipher": "aes-128-ctr",
+          "kdf": "scrypt",
+          "kdfparams": {
+            "dklen": 32,
+            "salt": "ac1bc4a577834c723099157b4c6ee76ef3387b24d38d773c71bcc0a906a698ae",
+            "n": 8192,
+            "r": 8,
+            "p": 1
+          },
+          "mac": "e8af43736bc956ca230faf91bf040a302297b2929dc1ceb0187208535f983266"
+        }
+      }
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
