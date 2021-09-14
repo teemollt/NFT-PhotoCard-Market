@@ -1,5 +1,5 @@
 # build stage
-FROM node:lts as build-stage
+FROM node:12.2.0-alpine as build-stage
 # 이미지 내에서 명령어를 실행할 디렉토리 설정
 WORKDIR /home/node/app
 COPY package*.json ./
