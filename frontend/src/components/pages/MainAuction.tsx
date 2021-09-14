@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -52,10 +52,14 @@ const useStyles = makeStyles((theme: Theme) => ({
 function Service(): JSX.Element {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
   };
+  // 검색어
+  let [search1, setsearch1] = useState("");
+  let [search2, setsearch2] = useState("");
+  let [search3, setsearch3] = useState("");
+  let [search4, setsearch4] = useState("");
   return (
     <div className={classes.root}>
       <Container>
@@ -78,8 +82,15 @@ function Service(): JSX.Element {
               label="검색어를 입력해주세요"
               placeholder=""
               multiline
+              onChange={(e) => {
+                setsearch1(e.target.value);
+              }}
             />
-            <IconButton aria-label="delete" disabled color="primary">
+            <IconButton
+              aria-label="delete"
+              color="primary"
+              style={{ cursor: "pointer" }}
+            >
               <ImageSearchIcon />
             </IconButton>
           </div>
@@ -93,14 +104,18 @@ function Service(): JSX.Element {
               label="검색어를 입력해주세요"
               placeholder=""
               multiline
+              onChange={(e) => {
+                setsearch2(e.target.value);
+              }}
             />
-            <IconButton aria-label="delete" disabled color="primary">
+            <IconButton
+              aria-label="delete"
+              color="primary"
+              style={{ cursor: "pointer" }}
+            >
               <ImageSearchIcon />
             </IconButton>
           </div>
-          <IconButton aria-label="delete" disabled color="primary">
-            <ImageSearchIcon />
-          </IconButton>
           <br />
           <MainAuctionBody />
         </TabPanel>
@@ -111,8 +126,15 @@ function Service(): JSX.Element {
               label="검색어를 입력해주세요"
               placeholder=""
               multiline
+              onChange={(e) => {
+                setsearch3(e.target.value);
+              }}
             />
-            <IconButton aria-label="delete" disabled color="primary">
+            <IconButton
+              aria-label="delete"
+              color="primary"
+              style={{ cursor: "pointer" }}
+            >
               <ImageSearchIcon />
             </IconButton>
           </div>
@@ -126,8 +148,15 @@ function Service(): JSX.Element {
               label="검색어를 입력해주세요"
               placeholder=""
               multiline
+              onChange={(e) => {
+                setsearch4(e.target.value);
+              }}
             />
-            <IconButton aria-label="delete" disabled color="primary">
+            <IconButton
+              aria-label="delete"
+              color="primary"
+              style={{ cursor: "pointer" }}
+            >
               <ImageSearchIcon />
             </IconButton>
           </div>
