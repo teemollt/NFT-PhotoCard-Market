@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
+import JoinSuccess from "../account/join/JoinSuccess";
 import JoinTable from "../account/join/JoinTable";
-import JoinCeleb from "../account/join/JoinCeleb";
-import JoinBtns from "../account/join/JoinBtns";
+
+export interface State {
+  join: boolean;
+}
 
 function Join() {
+  const [join, setJoin] = useState(false);
+
+  const handleJoin = (e: any) => {
+    setJoin(true);
+  };
+
   return (
     <div className="Join">
-      <JoinTable />
-      <JoinCeleb />
-      <JoinBtns />
+      {join ? <JoinSuccess /> : <JoinTable handleJoin={handleJoin} />}
     </div>
   );
 }
