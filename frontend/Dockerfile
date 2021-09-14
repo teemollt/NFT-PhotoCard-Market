@@ -12,7 +12,8 @@ COPY . .
 RUN npm run build
 # production stage
 FROM nginx:stable-alpine as production-stage
-#COPY --from=build-stage home/node/app/dist /usr/share/nginx/html
+COPY --from=build-stage home/node /usr/share/nginx/html
+# COPY --from=build-stage home/node/app/dist /usr/share/nginx/html
 EXPOSE 80
 # 컨테이너 실행시 실행할 명령어
 CMD ["nginx", "-g", "daemon off;"]
