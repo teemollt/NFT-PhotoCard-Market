@@ -14,7 +14,7 @@ RUN npm run build
 FROM nginx:stable-alpine as production-stage
 RUN rm /etc/nginx/conf.d/default.conf
 COPY ./nginx/homepage.conf /etc/nginx/conf.d/homepage.conf
-COPY --from=build-stage home/node/app/dist /usr/share/nginx/html/homepage
+COPY --from=build-stage home/node /usr/share/nginx/html/homepage
 
 #COPY --from=build-stage home/node /usr/share/nginx/html
 #COPY --from=build-stage home/node/app/dist /usr/share/nginx/html
