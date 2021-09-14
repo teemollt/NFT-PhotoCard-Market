@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router";
 import "./BidItem.css";
 import Countdown from "react-countdown";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -14,10 +15,22 @@ import Fab from "@material-ui/core/Fab";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import SendIcon from "@material-ui/icons/Send";
+import AuctionBuyItem from "../auction/AuctionBuyItem";
 
-const useStyles = makeStyles({
-  table: {},
-});
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      flexGrow: 1,
+    },
+    paper: {
+      padding: theme.spacing(2),
+      textAlign: "center",
+      color: theme.palette.text.secondary,
+      height: 370,
+      width: 300,
+    },
+  })
+);
 
 function createData(id: number, name: string, bidprice: number) {
   return { id, name, bidprice };
@@ -37,11 +50,12 @@ const buynow = () => {
   console.log("성공");
 };
 function BidItem(): JSX.Element {
+  const classes = useStyles();
+
   let [bidprice, setbidprice] = useState<number>(0);
   // axios 경매물품 정보
 
   const price = "1btc";
-  const classes = useStyles();
 
   const moment = require("moment");
   // 현재시간
@@ -52,6 +66,8 @@ function BidItem(): JSX.Element {
   console.log(enddate);
   var duration = moment.duration(enddate.diff(today));
   var rest = duration.asSeconds();
+
+  const location: any = useLocation();
   return (
     <div style={{ textAlign: "center" }}>
       <div>
@@ -68,21 +84,22 @@ function BidItem(): JSX.Element {
         <Container>
           <Grid container style={{ display: "flex", height: "100%" }}>
             <Grid item xs={4}>
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrlm541sni77e78CwZJ5nZH2xIVLbSYSAl3Q9VOntdkQoc0o-rZfLqxmkdLW9d0fK8pNA&usqp=CAU"
-                alt=""
-                width="300"
-              />
+              <Paper className={classes.paper}>
+                <img
+                  src={location.state.data.imgUrl}
+                  alt=""
+                  width="100%"
+                  height="100%"
+                />
+              </Paper>
             </Grid>
             <Grid item xs={8}>
               <div className="buybtn">
-                <Fab variant="extended" color="primary" onClick={buynow}>
-                  즉시구매 {price}
-                </Fab>
+                <AuctionBuyItem price={price} />
               </div>
 
               <TableContainer component={Paper}>
-                <Table className={classes.table} size="small">
+                <Table className="" size="small">
                   <TableHead>
                     <TableRow>
                       <TableCell align="center">Price</TableCell>

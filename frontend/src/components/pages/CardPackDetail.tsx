@@ -1,14 +1,18 @@
 import React from "react";
+import { useLocation } from "react-router";
 import "./CardPackDetail.css";
 import Grid from "@material-ui/core/Grid";
 import { Button } from "@material-ui/core";
 import CardPackInside from "../cardpack/CardPackInside";
 import Review from "../cardpack/Review";
+import BuyCardPack from "../cardpack/BuyCardPack";
 
 function CardPackDetail(): JSX.Element {
   // function buy() {
   //   return;
   // }
+  const location: any = useLocation();
+  console.log(location.state.data);
   return (
     <div className="cardpackdetail">
       <div className="cardpackdetail">
@@ -25,17 +29,9 @@ function CardPackDetail(): JSX.Element {
           <Grid item xs={4}>
             <div>
               <div className="cardpackinfo">
-                <h2>iu의 2021년 카드팩</h2>
-                <p>설명중</p>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => {
-                    console.log("구매");
-                  }}
-                >
-                  구매하기
-                </Button>
+                <h2>{location.state.data.salesNM}</h2>
+                <p>{location.state.data.salesDetail}</p>
+                <BuyCardPack />
               </div>
             </div>
           </Grid>
