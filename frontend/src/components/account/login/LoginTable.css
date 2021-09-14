@@ -12,3 +12,17 @@
   width: 50px;
   height: 50px;
 }
+
+.loginBtns > div > Button {
+  font-family: 'Gowun Dodum' !important;
+  font-weight: 900 !important;
+  margin-top: 20px;
+}
+
+.loginBtnsLeft {
+  float: left;
+}
+
+.loginBtnsRight {
+  float: right;
+}
