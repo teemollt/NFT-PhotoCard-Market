@@ -1,5 +1,6 @@
-import React from "react";
-import "./MainCeleb.css";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import "./CardPackShop.css";
 import Container from "@material-ui/core/Container";
 import { useParams, Link } from "react-router-dom";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
@@ -9,6 +10,7 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import axios from "axios";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,21 +36,31 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function MainCeleb(): JSX.Element {
+function CardPackShop(): JSX.Element {
   const [spacing, setSpacing] = React.useState<GridSpacing>(2);
   const classes = useStyles();
-
   const { celeb } = useParams<{ celeb: string }>();
+  const [cardpack, setcardpack] = useState<any[]>([]);
+  let history = useHistory();
+  function buycardpack(no: number) {
+    console.log(no);
+  }
+
+  useEffect(() => {
+    axios.get("/api/saleCard").then((res) => {
+      console.log(res.data.res);
+      setcardpack(res.data.res);
+    });
+  }, []);
   return (
     <div>
       <Container>
-        <h3>{celeb}의 메인페이지</h3>
         <div>
           <Grid container className={classes.root} spacing={2}>
             <Grid item xs={12}>
               <Grid container justifyContent="center" spacing={spacing}>
-                {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((value) => (
-                  <Grid key={value} item>
+                {cardpack.map((value, i) => (
+                  <Grid key={i} item>
                     <Card className={classes.cardsize}>
                       <CardContent>
                         <Typography
@@ -56,7 +68,7 @@ function MainCeleb(): JSX.Element {
                           color="textSecondary"
                           gutterBottom
                         >
-                          {celeb} 2021년형 카드
+                          {value.salesNM}
                         </Typography>
                       </CardContent>
                       <div>
@@ -67,10 +79,14 @@ function MainCeleb(): JSX.Element {
                         />
                       </div>
                       <CardActions>
-                        <Button style={{ margin: "auto" }}>
-                          <Link className="linkto" to="/cardpackdetail/1">
-                            BUY
-                          </Link>
+                        <Button
+                          style={{ margin: "auto" }}
+                          onClick={() => {
+                            console.log(value.salesNo);
+                            history.push(`/cardpackdetail/${value.salesNo}`);
+                          }}
+                        >
+                          BUY
                         </Button>
                       </CardActions>
                     </Card>
@@ -85,4 +101,4 @@ function MainCeleb(): JSX.Element {
   );
 }
 
-export default MainCeleb;
+export default CardPackShop;

@@ -19,6 +19,9 @@ function Navbar(): JSX.Element {
             <Link className="tablink" to="/">
               Home
             </Link>
+            <Link className="tablink" to="/cardpackshop">
+              Shop
+            </Link>
             <Link className="tablink" to="/gallery/id">
               Gallery
             </Link>
