@@ -69,7 +69,7 @@ pipeline {
                             color: "#2A42EE", 
                             message: "Run STARTED: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Link to build>)"
                         )                   
-                        sh 'docker run -d -v /home/ubuntu/ssh:/home/node/app/ssh -p 80:81 -p 443:443 --name frontend frontend'
+                        sh 'docker run -d -v /home/ubuntu/ssh:/home/node/app/ssh -p 80:80 -p 443:443 --name frontend frontend'
                     } catch(e) {
                         currentBuild.result = "FAILURE"
                     } finally {
