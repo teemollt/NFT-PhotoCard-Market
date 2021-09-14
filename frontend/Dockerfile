@@ -1,5 +1,5 @@
 # build stage
-FROM node:6.2.2 as build-stage
+FROM node as build-stage
 # 이미지 내에서 명령어를 실행할 디렉토리 설정
 WORKDIR /home/node/app
 COPY package*.json ./
