@@ -2,7 +2,7 @@
   display: inline-block;
   justify-content: center;
   text-align: left;
-  font-family: 'Gowun Dodum' !important;
+  font-family: "Gowun Dodum" !important;
   font-weight: 900 !important;
 }
 
@@ -29,7 +29,7 @@
   padding-bottom: 1px;
 }
 
-.galleryTopMenuView{
+.galleryTopMenuView {
   float: right;
 }
 
@@ -50,7 +50,7 @@
   padding-left: 20px;
 }
 
-.galleryTopSubMem > span{
+.galleryTopSubMem > span {
   margin-left: 20px;
   padding-bottom: 1px;
 }
@@ -60,11 +60,10 @@
   padding-right: 20px;
 }
 
-.galleryTopSubImgArray >span {
+.galleryTopSubImgArray > span {
   margin-right: 20px;
 }
 
 .hidden {
   display: none;
 }
-

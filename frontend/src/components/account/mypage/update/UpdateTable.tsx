@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { TextField, Button } from "@material-ui/core";
 import axios from "axios";
 
-
 export interface State {
   likeCeleb: number;
 }
@@ -35,10 +34,7 @@ function JoinTable(props: any) {
               <span>비밀번호</span>
             </th>
             <td>
-              <TextField
-                id="standard-basic"
-                type="password"
-              />
+              <TextField id="standard-basic" type="password" />
             </td>
           </tr>
           <tr id="joinPw2">
@@ -47,10 +43,7 @@ function JoinTable(props: any) {
               <span>비밀번호 확인</span>
             </th>
             <td>
-              <TextField
-                id="standard-basic"
-                type="password"
-              />
+              <TextField id="standard-basic" type="password" />
             </td>
           </tr>
           <tr id="joinNick">
@@ -59,14 +52,8 @@ function JoinTable(props: any) {
               <span>닉네임</span>
             </th>
             <td>
-              <TextField
-                id="standard-basic"
-              />
-              <Button
-                className="joinCheckBtn"
-                variant="outlined"
-                size="small"
-              >
+              <TextField id="standard-basic" />
+              <Button className="joinCheckBtn" variant="outlined" size="small">
                 중복 확인
               </Button>
             </td>
@@ -82,11 +69,7 @@ function JoinTable(props: any) {
                 type="email"
                 autoComplete="email"
               />
-              <Button
-                className="joinCheckBtn"
-                variant="outlined"
-                size="small"
-              >
+              <Button className="joinCheckBtn" variant="outlined" size="small">
                 중복 확인
               </Button>
             </td>
@@ -170,11 +153,7 @@ function JoinTable(props: any) {
             취소
           </Button>
         </Link>
-        <Button
-          className="joinBtn"
-          variant="contained"
-          color="primary"
-        >
+        <Button className="joinBtn" variant="contained" color="primary">
           수정
         </Button>
       </div>

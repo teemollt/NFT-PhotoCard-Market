@@ -1,6 +1,6 @@
-import React from 'react'
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import './JoinSuccess.css'
+import React from "react";
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+import "./JoinSuccess.css";
 
 function JoinSuccess() {
   return (
@@ -9,7 +9,7 @@ function JoinSuccess() {
       <p>회원가입이 완료되었습니다</p>
       <span>환영합니다, 아무개 님!</span>
     </div>
-  )
+  );
 }
 
-export default JoinSuccess
+export default JoinSuccess;

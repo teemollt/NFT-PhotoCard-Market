@@ -54,10 +54,16 @@ function JoinTable(props: any) {
 
   const handleMemberPw = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMemberPw(e.target.value);
-    if (memberPw.trim().match(/(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{1,50}).{8,16}$/)) {
-      setMemberPwCheck(1)
+    if (
+      memberPw
+        .trim()
+        .match(
+          /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{1,50}).{8,16}$/
+        )
+    ) {
+      setMemberPwCheck(1);
     } else {
-      setMemberPwCheck(2)
+      setMemberPwCheck(2);
     }
   };
 
@@ -145,7 +151,7 @@ function JoinTable(props: any) {
               likeCeleb: likeCeleb,
             })
             .then((res) => {
-              props.handleJoin()
+              props.handleJoin();
             })
             .catch((err) => console.log(err));
         } else {
@@ -174,9 +180,17 @@ function JoinTable(props: any) {
                 id="standard-basic"
                 onChange={handleMemberId}
                 helperText={
-                  memberIdCheck === 2 ? "이미 존재하는 아이디입니다" : "영어소문자/숫자, 5~15자"
+                  memberIdCheck === 2
+                    ? "이미 존재하는 아이디입니다"
+                    : "영어소문자/숫자, 5~15자"
                 }
-                error={memberIdCheck === 2 ? true : memberIdCheck === 3 ? true: false}
+                error={
+                  memberIdCheck === 2
+                    ? true
+                    : memberIdCheck === 3
+                    ? true
+                    : false
+                }
               />
               <Button
                 className="joinCheckBtn"
