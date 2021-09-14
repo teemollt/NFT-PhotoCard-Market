@@ -6,10 +6,6 @@ function MainAuctionTab() {
       <div>IU</div>
       <div>SNSD</div>
       <div>BTS</div>
-      <div>main</div>
-      <div>main</div>
-      <div>main</div>
-      <div>main</div>
     </div>
   );
 }

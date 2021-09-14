@@ -2,7 +2,6 @@ import React from "react";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import LoginTable from "./LoginTable";
-import LoginBtns from "./LoginBtns";
 
 export interface State {
   open: boolean;
@@ -21,7 +20,11 @@ function Login() {
 
   return (
     <div>
-      <text className="loginText" onClick={handleClickOpen}>
+      <text
+        className="loginText"
+        onClick={handleClickOpen}
+        style={{ cursor: "poin" }}
+      >
         Login
       </text>
       <Dialog
@@ -30,8 +33,7 @@ function Login() {
         aria-labelledby="form-dialog-title"
       >
         <DialogContent>
-          <LoginTable />
-          <LoginBtns handleClose={handleClose} />
+          <LoginTable handleClose={handleClose} />
         </DialogContent>
       </Dialog>
     </div>
