@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { TextField } from "@material-ui/core";
 import "./LoginTable.css";
 import { Button } from "@material-ui/core";
-import "./LoginBtns.css";
 import axios from "axios";
 
 function LoginTable(props: any) {
