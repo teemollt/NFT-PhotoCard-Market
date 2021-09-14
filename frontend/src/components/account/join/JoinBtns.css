@@ -1,0 +1,21 @@
+.joinBtns {
+  width: 450px;
+  margin: 0px auto;
+  margin-top: 40px;
+  margin-bottom: 50px;
+  clear: both;
+  text-align: left;
+}
+
+.joinCancelBtn {
+  margin-right: 30px !important;
+  font-family: 'Gowun Dodum' !important;
+  font-weight: 900 !important;
+}
+
+.joinCancelBtn, .joinBtn {
+  width: 200px;
+  display: inline-block;
+  font-family: 'Gowun Dodum' !important;
+  font-weight: 900 !important;
+}

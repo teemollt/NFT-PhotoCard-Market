@@ -1,0 +1,12 @@
+.shopBuy {
+  text-align: center;
+}
+
+.shopBuy > h1 {
+  font-size: 25px;
+  text-align: left;
+}
+
+.shopBuy > hr {
+  border: 1px solid #000000;
+}
