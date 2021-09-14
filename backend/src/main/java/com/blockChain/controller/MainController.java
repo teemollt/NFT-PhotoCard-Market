@@ -1,5 +1,4 @@
 package com.blockChain.controller;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +24,17 @@ public class MainController {
 //    	res.put("msg", "Hello World!");
 //        return res;
 //    }
-	@GetMapping("/celebGroup")
-	public Map<String,Object> celebGroup(){
+//	@GetMapping("/celebGroup")
+//	public Map<String,Object> celebGroup(){
+//		return celebSvc.sltCelebDTObyGroup();
+//	}
+	@GetMapping("/celebgrouplist")
+	public Map<String,Object> celebGroupList(){
 		return celebSvc.sltCelebDTObyGroup();
 	}
 	
+	@GetMapping("/artistlist")
+	public Map<String,Object> artistlist(){
+		return celebSvc.artistList();
+	}
 }

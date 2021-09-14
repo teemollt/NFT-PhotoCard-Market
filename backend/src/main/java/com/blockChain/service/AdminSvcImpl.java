@@ -76,7 +76,7 @@ public class AdminSvcImpl implements AdminSvcInter{
 //    final String[] CELEBS = {"조영우","남근형","하지훈","김도형","신지현","나비","이태희"};
     final List<String> CELEBS = new ArrayList<String>(Arrays.asList("조영우","남근형","하지훈","김도형","신지현","나비","이태희"));
     final String[] MWs = {"M","M","M","M","W","W","W","M"};
-    final String[] GROUP = {GROUP1,GROUP1,GROUP1,SOLO,SOLO,SOLO,SOLO};
+    final String[] GROUP = {GROUP1,GROUP1,GROUP1,"김도형","신지현","나비",NONE};
     final String[] DEBUT = {"20170201","20170201","20180201","20160201","20170201","20200201","19900201"};
     final String[] RETIRE = {"20190201","20200201",null,null,null,null,"20100201"};
     final String time = "09:00:00";
@@ -279,9 +279,9 @@ public class AdminSvcImpl implements AdminSvcInter{
 	@Override
 	public Map<String,Object> insertCelebGroup(){
 	    Map<String, Object> res = new HashMap<String,Object>();
-	    String[] celebGroup = {SOLO , GROUP1, NONE};
+	    String[] celebGroup = {"김도형","신지현","나비", GROUP1, NONE};
 	    ArrayList<String> msg = new ArrayList<>();
-	    Long[] peopleNum = {(long) 1,(long) 3, (long) 0};
+	    Long[] peopleNum = { 1L,1L,1L,3L,0L};
 	    for (int i = 0; i < celebGroup.length;i++) {
 	    	Optional<Celeb_Group> existOrNot = celebGroupRepo.sltByCelebGroupNM(celebGroup[i]);
 	    	System.out.println(existOrNot);
