@@ -3,3 +3,16 @@
   width: 80%;
   display: inline-block;
 }
+
+.mypageBodyRightHeader {
+  text-align: center;
+}
+
+.mypageBodyRightHeader > h1 {
+  font-size: 25px;
+  text-align: left;
+}
+
+.mypageBodyRightHeader > hr {
+  border: 1px solid #000000;
+}

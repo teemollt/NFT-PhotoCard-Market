@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./ShopBuy.css";
 import ShopCard from "./ShopCard";
 
 const tempCard: Array<tempCard> = [
@@ -55,7 +54,7 @@ function ShopBuy() {
   const [productTemp, setProductTemp] = useState(tempCard);
 
   return (
-    <div className="shopBuy">
+    <div className="mypageBodyRightHeader">
       <h1>구매 내역</h1>
       <hr />
       {productTemp.map((tempCard) => {

@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import ShopBuy from "./shop/ShopBuy";
 import ShopKeep from "./shop/ShopKeep";
 import "./MyPageBodyRight.css";
+import AuctionMy from "./auction/AuctionMy";
+import AuctionMyBid from "./auction/AuctionMyBid";
 
 function MyPageBodyRight(prop: any) {
   return (
@@ -11,6 +13,10 @@ function MyPageBodyRight(prop: any) {
         <ShopBuy />
       ) : prop.myPageMenu === 1 ? (
         <ShopKeep />
+      ) : prop.myPageMenu === 2 ? (
+        <AuctionMy />
+      ) : prop.myPageMenu === 3 ? (
+        <AuctionMyBid />
       ) : null}
     </div>
   );
