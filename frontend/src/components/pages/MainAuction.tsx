@@ -9,6 +9,7 @@ import MainAuctionBody from "../auction/MainAuctionBody";
 import TextField from "@material-ui/core/TextField";
 import IconButton from "@material-ui/core/IconButton";
 import ImageSearchIcon from "@material-ui/icons/ImageSearch";
+import AuctionRegItem from "../auction/AuctionRegItem";
 interface TabPanelProps {
   children?: React.ReactNode;
   index: any;
@@ -47,6 +48,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexGrow: 1,
   },
   tabs: {},
+  registeritem: {
+    textAlign: "center",
+    marginTop: "20px",
+  },
 }));
 
 function Service(): JSX.Element {
@@ -62,6 +67,7 @@ function Service(): JSX.Element {
   let [search4, setsearch4] = useState("");
   return (
     <div className={classes.root}>
+      <div className={classes.registeritem}><AuctionRegItem/></div>
       <Container>
         <Tabs
           value={value}
