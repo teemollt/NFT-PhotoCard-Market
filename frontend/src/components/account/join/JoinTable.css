@@ -24,8 +24,8 @@
 }
 
 .joinSelectCeleb {
-  font-family: "Gowun Dodum" !important;
-  font-weight: 900 !important;
+  font-family: "Gowun Dodum";
+  font-weight: 900;
 }
 
 .joinCelebInfo {
@@ -50,6 +50,7 @@
   margin-right: 20px;
   line-height: 100px;
   text-align: center;
+  cursor: pointer;
 }
 
 .joinShin,
