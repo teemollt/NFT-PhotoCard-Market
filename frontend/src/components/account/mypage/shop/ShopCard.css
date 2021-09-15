@@ -1,7 +1,8 @@
 .shopCard {
   display: inline-block;
-  font-family: 'Gowun Dodum' !important;
+  font-family: "Gowun Dodum" !important;
   margin: 15px;
+  cursor: pointer;
 }
 
 .shopCardImg {
@@ -18,18 +19,21 @@
   color: lightgray;
 }
 
-.shopCardCeleb, .shopCardTitle {
+.shopCardCeleb,
+.shopCardTitle {
   clear: both;
   float: left;
   margin-left: 10px;
 }
 
-.shopCardPriceTitle, .shopCardPrice {
+.shopCardPriceTitle,
+.shopCardPrice {
   float: right;
   margin-right: 10px;
 }
 
-.shopCardTitle, .shopCardPrice {
+.shopCardTitle,
+.shopCardPrice {
   margin-top: 5px;
   margin-bottom: 5px;
 }

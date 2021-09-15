@@ -6,24 +6,32 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import "./JoinAlert.css";
 
-function JoinAlert(props: any) {
+interface JoinAlertProps {
+  message: string;
+  open: boolean;
+  handleClose: any;
+}
+
+function JoinAlert(props: JoinAlertProps): JSX.Element {
+  const { message, open, handleClose } = props;
+
   return (
     <div>
       <Dialog
-        open={props.open}
-        onClose={props.handleClose}
+        open={open}
+        onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            <p className="joinAlertMsg">{props.message}</p>
+            <p className="joinAlertMsg">{message}</p>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button
             className="joinAlertBtn"
-            onClick={props.handleClose}
+            onClick={handleClose}
             color="primary"
             autoFocus
           >
