@@ -5,13 +5,17 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.blockChain.domain.Member;
 import com.blockChain.dto.TokenDto;
+import com.blockChain.dto.UpdateMemberDTO;
 import com.blockChain.service.MemberSvcInter;
 
 @RestController
@@ -59,5 +63,14 @@ public class MemberController {
 	public Map<String, Object>checkEmail(@RequestBody  Map<String, Object> req){
 		return ms.checkEmail(req);
 		
+	}
+	
+	@PutMapping("/update")
+	public Map<String,Object>updateMember(@RequestBody Map<String, Object> req){
+		return ms.updateMember(req);
+	}
+	@GetMapping("/mypage")
+	public Map<String, Object>myPage(){
+		return ms.myPage();
 	}
 }
