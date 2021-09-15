@@ -42,8 +42,13 @@ function CardPackShop(): JSX.Element {
   const { celeb } = useParams<{ celeb: string }>();
   const [cardpack, setcardpack] = useState<any[]>([]);
   let history = useHistory();
-  function buycardpack(no: number) {
-    console.log(no);
+
+  function buycardpack(data: any) {
+    console.log(data);
+    history.push({
+      pathname: `/cardpackdetail/${data.salesNo}`,
+      state: { data: data },
+    });
   }
 
   useEffect(() => {
@@ -82,8 +87,7 @@ function CardPackShop(): JSX.Element {
                         <Button
                           style={{ margin: "auto" }}
                           onClick={() => {
-                            console.log(value.salesNo);
-                            history.push(`/cardpackdetail/${value.salesNo}`);
+                            buycardpack(value);
                           }}
                         >
                           BUY

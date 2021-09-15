@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import Login from "../account/login/Login";
-import Breadcrumbs from "@material-ui/core/Breadcrumbs";
-
+import Button from "@material-ui/core/Button";
 function Navbar(): JSX.Element {
+  let token: string | null = localStorage.getItem("token");
   return (
     <div>
       <div className="navbar">
@@ -13,35 +13,69 @@ function Navbar(): JSX.Element {
           alt=""
           style={{ width: "100px" }}
         />
-        <br />
-        <div className="breadcrumb">
-          <Breadcrumbs separator=" " aria-label="breadcrumb">
-            <Link className="tablink" to="/">
-              Home
-            </Link>
-            <Link className="tablink" to="/cardpackshop">
-              Shop
-            </Link>
+      </div>
+      <br />
+      <div className="breadcrumbs">
+        <Button>
+          <Link className="tablink" to="/">
+            Home
+          </Link>
+        </Button>
+        <Button>
+          <Link className="tablink" to="/cardpackshop">
+            Shop
+          </Link>
+        </Button>
+        <Button>
+          <Link className="tablink" to="/mainbid">
+            Auction
+          </Link>
+        </Button>
+        {token ? (
+          <Button>
             <Link className="tablink" to="/gallery/id">
               Gallery
             </Link>
-            <Link className="tablink" to="/mainbid">
-              Auction
-            </Link>
+          </Button>
+        ) : null}
+        {token ? (
+          <Button>
             <Link className="tablink" to="/mypage">
               My Page
             </Link>
-            <text className="tablink" to="">
-              <Login />
-            </text>
+          </Button>
+        ) : null}
+        {token ? null : (
+          <Button>
             <Link className="tablink" to="/join">
               Join
             </Link>
-            <Link className="tablink" to="/service/id">
-              Service
+          </Button>
+        )}
+        {token ? null : (
+          <Button>
+            <text className="tablink" to="">
+              <Login />
+            </text>
+          </Button>
+        )}
+        {token ? (
+          <Button
+            onClick={() => {
+              localStorage.removeItem("token");
+              window.location.reload();
+            }}
+          >
+            <Link className="tablink" to="">
+              logout
             </Link>
-          </Breadcrumbs>
-        </div>
+          </Button>
+        ) : null}
+        <Button>
+          <Link className="tablink" to="/service/id">
+            Service
+          </Link>
+        </Button>
       </div>
     </div>
   );
