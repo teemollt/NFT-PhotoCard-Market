@@ -22,7 +22,8 @@ public class ReplyRepoImpl implements ReplyRepoCustom{
 	@Override
 	public Optional<List<ReplyDTO>>sltReviewList(Long cardPK){
 		QReply qr = QReply.reply;
-		return Optional.ofNullable(queryFactory.select(Projections.constructor(ReplyDTO.class
+		System.out.println(cardPK);
+		List<ReplyDTO> aa = queryFactory.select(Projections.constructor(ReplyDTO.class
 				, qr.replyNo
 				, qr.member.memberNick
 				, qr.member.memberNo
@@ -31,6 +32,8 @@ public class ReplyRepoImpl implements ReplyRepoCustom{
 				, qr.replyDate))
 				.from(qr)
 				.where(qr.sales.salesNo.eq(cardPK))
-				.fetch());
+				.fetch();
+		System.out.println(aa.toString());
+		return Optional.ofNullable(aa);
 	}
 }

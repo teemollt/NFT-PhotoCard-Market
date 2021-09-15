@@ -45,6 +45,7 @@ public class SalesSvcImpl implements SalesSvcInter{
 	@Override
 	public Map<String,Object>sltReviewList(long cardpackPK){
 		Map<String, Object> res = new HashMap<String,Object>();
+		System.out.println("here2");
 		res.put("res", replyRepo.sltReviewList(cardpackPK));
 		return res;
 	}
