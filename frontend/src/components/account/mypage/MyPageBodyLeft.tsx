@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { myPageMenu } from "../../../redux/account/mypage/actions";
+import { myPageMenu } from "../../../redux/actions";
 import "./MyPageBodyLeft.css";
 
 interface MyPageBodyLeftProps {
