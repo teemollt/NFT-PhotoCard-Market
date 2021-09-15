@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { myPageMenu } from "../../../redux/account/myapge/actions";
+import { myPageMenu } from "../../../redux/account/mypage/actions";
 import "./MyPageBodyLeft.css";
 
 function MyPageBodyLeft(prop: any) {
