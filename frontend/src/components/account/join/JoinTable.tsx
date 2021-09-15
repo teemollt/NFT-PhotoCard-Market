@@ -40,7 +40,7 @@ function JoinTable(props: any) {
   };
 
   const handleMemberId = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMemberId(e.target.value);
+    setMemberId(e.target.value.trim());
     if (memberId !== e.target.value) {
       setMemberIdCheck(0);
     }
@@ -63,7 +63,7 @@ function JoinTable(props: any) {
   };
 
   const handleMemberPw = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMemberPw(e.target.value);
+    setMemberPw(e.target.value.trim());
     if (
       memberPw
         .trim()
@@ -82,7 +82,7 @@ function JoinTable(props: any) {
   };
 
   const handleMemberNick = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMemberNick(e.target.value);
+    setMemberNick(e.target.value.trim());
     if (memberNick !== e.target.value) {
       setNickCheck(0);
     }
@@ -108,7 +108,7 @@ function JoinTable(props: any) {
   };
 
   const handleMemberEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMemberEmail(e.target.value);
+    setMemberEmail(e.target.value.trim());
     if (
       memberEmail.match(
         /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/

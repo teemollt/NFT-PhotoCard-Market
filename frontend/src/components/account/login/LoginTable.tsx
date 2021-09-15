@@ -17,7 +17,7 @@ function LoginTable(props: any) {
       .post("api/member/login", { memberId: loginid, memberPw: loginpw })
       .then((res) => {
         localStorage.setItem("token", "Bearer" + res.data.token.accessToken);
-        window.location.reload();
+        window.location.replace("/");
       })
       .catch((err) => {
         console.log(err);

@@ -16,41 +16,31 @@ function Navbar(): JSX.Element {
       </div>
       <br />
       <div className="breadcrumbs">
-        <Button>
-          <Link className="tablink" to="/">
-            Home
-          </Link>
-        </Button>
-        <Button>
-          <Link className="tablink" to="/cardpackshop">
-            Shop
-          </Link>
-        </Button>
-        <Button>
-          <Link className="tablink" to="/mainbid">
-            Auction
-          </Link>
-        </Button>
+        <Link className="tablink" to="/">
+          <Button>Home</Button>
+        </Link>
+
+        <Link className="tablink" to="/cardpackshop">
+          <Button>Shop</Button>
+        </Link>
+
+        <Link className="tablink" to="/mainbid">
+          <Button>Auction</Button>
+        </Link>
         {token ? (
-          <Button>
-            <Link className="tablink" to="/gallery/id">
-              Gallery
-            </Link>
-          </Button>
+          <Link className="tablink" to="/gallery/id">
+            <Button>Gallery</Button>
+          </Link>
         ) : null}
         {token ? (
-          <Button>
-            <Link className="tablink" to="/mypage">
-              My Page
-            </Link>
-          </Button>
+          <Link className="tablink" to="/mypage">
+            <Button>My Page</Button>
+          </Link>
         ) : null}
         {token ? null : (
-          <Button>
-            <Link className="tablink" to="/join">
-              Join
-            </Link>
-          </Button>
+          <Link className="tablink" to="/join">
+            <Button>Join</Button>
+          </Link>
         )}
         {token ? null : (
           <Button>
@@ -60,22 +50,20 @@ function Navbar(): JSX.Element {
           </Button>
         )}
         {token ? (
-          <Button
-            onClick={() => {
-              localStorage.removeItem("token");
-              window.location.reload();
-            }}
-          >
-            <Link className="tablink" to="">
+          <Link className="tablink" to="">
+            <Button
+              onClick={() => {
+                localStorage.removeItem("token");
+                window.location.reload();
+              }}
+            >
               logout
-            </Link>
-          </Button>
-        ) : null}
-        <Button>
-          <Link className="tablink" to="/service/id">
-            Service
+            </Button>
           </Link>
-        </Button>
+        ) : null}
+        <Link className="tablink" to="/service/id">
+          <Button>Service</Button>
+        </Link>
       </div>
     </div>
   );
