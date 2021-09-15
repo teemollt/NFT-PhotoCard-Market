@@ -14,11 +14,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.blockChain.config.SecurityUtil;
 import com.blockChain.domain.Celeb;
 import com.blockChain.domain.Celeb_Like;
 import com.blockChain.domain.Member;
 import com.blockChain.domain.Member_Grade;
 import com.blockChain.domain.RefreshToken;
+import com.blockChain.dto.MypageDTO;
 import com.blockChain.dto.TokenDto;
 import com.blockChain.jwt.TokenProvider;
 import com.blockChain.repository.CelebRepo;
@@ -169,6 +171,69 @@ public class MemberSvcImpl implements MemberSvcInter{
 			res.put("success", true);
 
 		} catch(IllegalStateException e) {
+			res.put("success", false);
+			res.put("msg", e.getMessage());
+			return res;
+		}
+		return res;
+	}
+	@Override
+	public Map<String,Object> updateMember(Map<String, Object> req){
+		Map<String, Object> res = new HashMap<String,Object>();
+		try{
+			Member member = memberRepo.findById(SecurityUtil.getCurrentMemberId()).orElseThrow(() -> new IllegalStateException("로그인 유저정보가 없습니다"));
+			String memberEmail = (String)req.get("memberEmail");
+			String memberNick = (String)req.get("memberNick");
+			String memberPw = (String)req.get("memberPw");
+			System.out.println(memberEmail +" "+memberNick+" "+memberPw);
+			if (memberEmail == null){
+				System.out.println("email = null");
+			} else {
+				memberRepo.checkEmail(memberEmail).ifPresent(m ->{throw new IllegalStateException("이미 존재하는 이메일입니다.");});
+				member.setMemberEmail(memberEmail);
+			}
+			if (memberNick == null) {
+				System.out.println("nick = null");
+			} else {
+				memberRepo.checkNick(memberNick).ifPresent(m->{throw new IllegalStateException("이미 존재하는 별명입니다.");});
+				member.setMemberNick(memberNick);
+
+			}
+			if (memberPw == null) {
+				System.out.println("pw=null");
+			}else {
+				member.setMemberPw(passwordEncoder.encode(memberPw));
+			}
+			String tempCelebNo = (String)req.get("celebNo");
+			Optional<Celeb_Like> cl = clRepo.sltByMember(member.getMemberNo());
+			Celeb_Like tempcl = new Celeb_Like();
+			Optional<Celeb> celeb = Optional.ofNullable(celebRepo.findById(Long.parseLong(tempCelebNo)).orElseThrow(() -> new IllegalStateException("존재하지 않는 샐럽입니다.")));
+			if(cl.isPresent()) {
+				clRepo.delete(cl.get());
+				clRepo.flush();
+			}
+			tempcl.setCeleb(celeb.get());
+			tempcl.setMember(member);
+			memberRepo.save(member);
+			clRepo.save(tempcl);
+			res.put("msg", "회원수정 완료");
+			res.put("success", true);
+			}catch(IllegalStateException e) {
+				res.put("success", false);
+				res.put("msg", e.getMessage());
+				return res;
+		 }
+		
+		return res;
+	}
+	@Override
+	public Map<String,Object> myPage(){
+		Map<String, Object> res = new HashMap<String,Object>();
+		try{
+			Member member = memberRepo.findById(SecurityUtil.getCurrentMemberId()).orElseThrow(() -> new IllegalStateException("로그인 유저정보가 없습니다"));
+			MypageDTO mypage = memberRepo.myPage(member.getMemberNo());
+			res.put("mypage", mypage);
+		}catch(IllegalStateException e){
 			res.put("success", false);
 			res.put("msg", e.getMessage());
 			return res;

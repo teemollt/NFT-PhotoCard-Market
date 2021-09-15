@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.blockChain.dto.SalesDTO;
+import com.blockChain.repository.ReplyRepo;
 import com.blockChain.repository.SalesRepo;
 
 @Service
@@ -24,6 +25,8 @@ public class SalesSvcImpl implements SalesSvcInter{
 	private final String celeb = "CL";
 	@Autowired
 	SalesRepo salesRepo;
+	@Autowired
+	ReplyRepo replyRepo;
 	@Override
 	public Map<String,Object>sltSalesByMW(){
 		Map<String, Object> res = new HashMap<String,Object>();
@@ -36,6 +39,13 @@ public class SalesSvcImpl implements SalesSvcInter{
 				}
 		}
 		res.put("res", dto);
+		return res;
+	}
+	
+	@Override
+	public Map<String,Object>sltReviewList(long cardpackPK){
+		Map<String, Object> res = new HashMap<String,Object>();
+		res.put("res", replyRepo.sltReviewList(cardpackPK));
 		return res;
 	}
 }

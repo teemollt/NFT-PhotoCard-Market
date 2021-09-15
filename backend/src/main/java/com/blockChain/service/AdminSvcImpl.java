@@ -328,7 +328,7 @@ public class AdminSvcImpl implements AdminSvcInter{
 			member.setMemberGrade(aa.get(random.nextInt(aa.size())));
 			member.setMemberNick(MEMBER_NICK_SAMPLE + i);
 			member.setMemberPhone(MEMBER_PHONE);
-			member.setMemberEmail(MEMBER_EMAIL);
+			member.setMemberEmail(MEMBER_EMAIL+i);
 			Member saved = memberRepo.save(member);
 			msg.add(saved.toString());
 		}
@@ -350,20 +350,26 @@ public class AdminSvcImpl implements AdminSvcInter{
 		for(int i = 0; i < memberSize; i++){
 			int check[] =new int[celebSize];
 			Member tempMember = members.get(i);
-			int rand = random.nextInt(celebSize);
-			for(int g = 0; g < rand; g++){
-				int rand2 = random.nextInt(celebSize);
-				if (check[rand2]==0){
-					check[rand2]=1;
-					Celeb_Like celebLike = new Celeb_Like();
-					celebLike.setCeleb(celebs.get(rand2));
-					celebLike.setMember(tempMember);
-					Celeb_Like saved = celebLikeRepo.save(celebLike);
-					msg.add(saved.getMember().getMemberNo().toString()+" LIKE "+saved.getCeleb().getCelebNo().toString());
-				}else {
-					g--;
-				}
-			}
+			Celeb_Like celebLike = new Celeb_Like();
+			int rand2 = random.nextInt(celebSize);
+			celebLike.setCeleb(celebs.get(rand2));
+			celebLike.setMember(tempMember);
+			Celeb_Like saved = celebLikeRepo.save(celebLike);
+			msg.add(saved.getMember().getMemberNo().toString()+" LIKE "+saved.getCeleb().getCelebNo().toString());
+//			int rand = random.nextInt(celebSize);
+//			for(int g = 0; g < rand; g++){
+//				int rand2 = random.nextInt(celebSize);
+//				if (check[rand2]==0){
+//					check[rand2]=1;
+//					Celeb_Like celebLike = new Celeb_Like();
+//					celebLike.setCeleb(celebs.get(rand2));
+//					celebLike.setMember(tempMember);
+//					Celeb_Like saved = celebLikeRepo.save(celebLike);
+//					msg.add(saved.getMember().getMemberNo().toString()+" LIKE "+saved.getCeleb().getCelebNo().toString());
+//				}else {
+//					g--;
+//				}
+//			}
 		}
 		res.put(name, msg);
 		return res;
