@@ -5,18 +5,27 @@ import ShopKeep from "./shop/ShopKeep";
 import "./MyPageBodyRight.css";
 import AuctionMy from "./auction/AuctionMy";
 import AuctionMyBid from "./auction/AuctionMyBid";
+import AuctionLike from "./auction/AuctionLike";
+import { myPageMenu } from "../../../redux/account/mypage/actions";
 
-function MyPageBodyRight(prop: any) {
+interface MyPageBodyRightProps {
+  myPageMenu: number;
+}
+
+function MyPageBodyRight(props: MyPageBodyRightProps): JSX.Element {
+  const { myPageMenu } = props;
   return (
     <div className="mypageBodyRight">
-      {prop.myPageMenu === 0 ? (
+      {myPageMenu === 0 ? (
         <ShopBuy />
-      ) : prop.myPageMenu === 1 ? (
+      ) : myPageMenu === 1 ? (
         <ShopKeep />
-      ) : prop.myPageMenu === 2 ? (
+      ) : myPageMenu === 2 ? (
         <AuctionMy />
-      ) : prop.myPageMenu === 3 ? (
+      ) : myPageMenu === 3 ? (
         <AuctionMyBid />
+      ) : myPageMenu === 4 ? (
+        <AuctionLike />
       ) : null}
     </div>
   );

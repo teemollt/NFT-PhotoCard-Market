@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import MyPageBodyLeft from "./MyPageBodyLeft";
 import MyPageBodyRight from "./MyPageBodyRight";
 import "./MyPageBody.css";
 
-function MyPageBody(props: any) {
+function MyPageBody() {
   return (
     <div className="mypageBody">
       <MyPageBodyLeft />

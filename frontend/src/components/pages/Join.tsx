@@ -9,13 +9,13 @@ export interface State {
 function Join() {
   const [join, setJoin] = useState(false);
 
-  const handleJoin = (e: any) => {
+  const handleJoinRes = (e: any) => {
     setJoin(true);
   };
 
   return (
     <div className="Join">
-      {join ? <JoinSuccess /> : <JoinTable handleJoin={handleJoin} />}
+      {join ? <JoinSuccess /> : <JoinTable handleJoinRes={handleJoinRes} />}
     </div>
   );
 }

@@ -5,6 +5,10 @@ import axios from "axios";
 import "./JoinTable.css";
 import JoinAlert from "./JoinAlert";
 
+interface JoinTableProps {
+  handleJoinRes: any;
+}
+
 export interface State {
   memberId: string;
   memberIdCheck: number;
@@ -20,7 +24,9 @@ export interface State {
   message: string;
 }
 
-function JoinTable(props: any) {
+function JoinTable(props: JoinTableProps): JSX.Element {
+  const { handleJoinRes } = props;
+
   const [memberId, setMemberId] = useState("");
   const [memberIdCheck, setMemberIdCheck] = useState(0);
   const [memberPw, setMemberPw] = useState("");
@@ -171,7 +177,7 @@ function JoinTable(props: any) {
               likeCeleb: likeCeleb,
             })
             .then((res) => {
-              props.handleJoin();
+              handleJoinRes();
             })
             .catch((err) => console.log(err));
         } else {

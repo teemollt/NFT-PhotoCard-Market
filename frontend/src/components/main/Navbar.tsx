@@ -54,7 +54,7 @@ function Navbar(): JSX.Element {
             <Button
               onClick={() => {
                 localStorage.removeItem("token");
-                window.location.reload();
+                window.location.replace("/");
               }}
             >
               logout
