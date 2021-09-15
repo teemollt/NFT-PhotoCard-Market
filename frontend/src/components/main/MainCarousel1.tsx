@@ -1,19 +1,32 @@
 import React from "react";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
+import "./MainCarousel.css";
 
 function MainCarousel1(): JSX.Element {
   return (
-    <React.Fragment>
-      <CssBaseline />
+    <div>
       <Container>
-        <img
-          src="https://jamdda.com/files/attach/images/w/560/815/081/6087561e74e690758941835465b16a3e36002911.gif"
-          alt="iu"
-          width="100%"
-        />
+        <Grid container spacing={3}>
+          <Grid item xs={6}>
+            <iframe
+              width="100%"
+              height="300"
+              src="https://www.youtube.com/embed/v7bnOxV4jAc"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </Grid>
+          <Grid item xs={6}>
+            <div className="namebox">
+              <h1 className="name">IU</h1>
+            </div>
+          </Grid>
+        </Grid>
       </Container>
-    </React.Fragment>
+    </div>
   );
 }
 

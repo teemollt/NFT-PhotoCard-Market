@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./AuctionRegItem.css";
-import "./MainAuctionBody.css";
 
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -34,6 +33,10 @@ const useStyles = makeStyles((theme: Theme) =>
     title: {
       marginLeft: theme.spacing(2),
       flex: 1,
+    },
+    container: {
+      width: "300px",
+      position:"fixed"
     },
   })
 );
@@ -146,6 +149,10 @@ export type temp = {
 function AuctionRegItem() {
   const [mycards, setmycards] = useState<any[]>([]);
   const [selectcard, setselectcard] = useState(0);
+  const [selectcardimage, setselectcardimage] = useState<string>("");
+  const [selectcardtitle, setselectcardtitle] = useState<string>("");
+  const [selectcardlevel, setselectcardlevel] = useState<string>("");
+  const [price, setprice] = useState<number>(0);
 
   function createData() {
     return {};
@@ -163,10 +170,13 @@ function AuctionRegItem() {
   const handleClose = () => {
     setOpen(false);
   };
+
   const registerAuction = () => {
-    setOpen(false);
+    console.log(selectcard);
+    console.log(price);
   };
   const classes = useStyles();
+
   return (
     <div style={{ textAlign: "center" }}>
       <Button variant="text" onClick={handleClickOpen}>
@@ -196,12 +206,41 @@ function AuctionRegItem() {
             </Button>
           </Toolbar>
         </AppBar>
-        <div style={{ textAlign: "center", margin: "20px" }}>
-          <TextField
-            placeholder="가격을 입력해주세요"
-            style={{ width: "500px" }}
-          ></TextField>
+
+        <div style={{ margin: "20px" }}>
+          <Container className={classes.container}>
+            <Grid container spacing={3}>
+              <Grid item xs={12}>
+                <Paper
+                  className={classes.paper}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {}}
+                >
+                  <img
+                    src={selectcardimage}
+                    alt=""
+                    width="100%"
+                    height="300px"
+                  />
+                  <div className="itemcardinfo">
+                    <span className="producttitle">{selectcardtitle}</span>
+                    <span className="productprice">{selectcardlevel}</span>
+                  </div>
+                </Paper>
+                <br />
+                <TextField
+                  fullWidth
+                  placeholder="가격을 입력해주세요"
+                  type="number"
+                  onChange={(e: any) => {
+                    setprice(e.target.value);
+                  }}
+                ></TextField>
+              </Grid>
+            </Grid>
+          </Container>
         </div>
+
         <Container>
           <Grid container spacing={3}>
             {tempGallery.map((image) => (
@@ -210,8 +249,10 @@ function AuctionRegItem() {
                   className={classes.paper}
                   style={{ cursor: "pointer" }}
                   onClick={() => {
-                    setselectcard(image.id)
-                    console.log(selectcard);
+                    setselectcard(image.id);
+                    setselectcardimage(image.imgUrl);
+                    setselectcardtitle(image.title);
+                    setselectcardlevel(image.level);
                   }}
                 >
                   <img src={image.imgUrl} alt="" width="100%" height="300px" />
