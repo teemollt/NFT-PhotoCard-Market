@@ -5,6 +5,7 @@ import ShopKeep from "./shop/ShopKeep";
 import "./MyPageBodyRight.css";
 import AuctionMy from "./auction/AuctionMy";
 import AuctionMyBid from "./auction/AuctionMyBid";
+import AuctionLike from "./auction/AuctionLike";
 
 function MyPageBodyRight(prop: any) {
   return (
@@ -17,6 +18,8 @@ function MyPageBodyRight(prop: any) {
         <AuctionMy />
       ) : prop.myPageMenu === 3 ? (
         <AuctionMyBid />
+      ) : prop.myPageMenu === 4 ? (
+        <AuctionLike />
       ) : null}
     </div>
   );
