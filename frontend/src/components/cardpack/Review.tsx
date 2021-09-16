@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import jwt_decode from "jwt-decode";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import SendIcon from "@material-ui/icons/Send";
@@ -12,7 +11,8 @@ const useStyles = makeStyles((theme: Theme) =>
       width: "100%",
       maxWidth: "1000px",
       margin: "auto",
-      maxHeight: 300,
+      marginTop: "10px",
+      // maxHeight: 300,
     },
     inline: {
       display: "inline",
@@ -74,12 +74,7 @@ function Review(props: any): JSX.Element {
       .catch((err) => {
         console.log(err);
       });
-    // return () => {};
-  });
-  const [tokenid, settokenid] = useState<number>(0);
-  useEffect(() => {
-    // 내 정보 가져오기
-    var token = localStorage.getItem("token");
+    return () => {};
   });
 
   let [review, setreview] = useState<string>("");
@@ -91,7 +86,21 @@ function Review(props: any): JSX.Element {
     return data;
   }
   // 리뷰작성
-  function createreview() {}
+  function createreview() {
+    axios
+      .post(
+        `/api/cardPack/${props.cardpackNo}/create/review`,
+        {
+          cardpackNo: props.cardpackNo,
+          reviewContent: review,
+        },
+        { headers: { Authorization: localStorage.getItem("token") } }
+      )
+      .then((res) => {
+        setreview("");
+      })
+      .catch();
+  }
 
   return (
     <div>
@@ -115,6 +124,7 @@ function Review(props: any): JSX.Element {
           className={classes.margin}
           id="input-with-icon-grid"
           label="Comment"
+          value={review}
           onChange={(e) => {
             setreview(e.target.value);
           }}
