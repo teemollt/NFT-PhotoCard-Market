@@ -8,4 +8,6 @@ public interface SalesSvcInter {
 
 	Map<String, Object> sltReviewList(long cardpackPK);
 
+	Map<String, Object> insertReview(long cardpackPK, Map<String, Object> req);
+
 }

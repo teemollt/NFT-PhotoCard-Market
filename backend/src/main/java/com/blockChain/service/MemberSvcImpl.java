@@ -204,10 +204,10 @@ public class MemberSvcImpl implements MemberSvcInter{
 			}else {
 				member.setMemberPw(passwordEncoder.encode(memberPw));
 			}
-			String tempCelebNo = (String)req.get("celebNo");
+			Integer tempCelebNo = (Integer)req.get("celebNo");
 			Optional<Celeb_Like> cl = clRepo.sltByMember(member.getMemberNo());
 			Celeb_Like tempcl = new Celeb_Like();
-			Optional<Celeb> celeb = Optional.ofNullable(celebRepo.findById(Long.parseLong(tempCelebNo)).orElseThrow(() -> new IllegalStateException("존재하지 않는 샐럽입니다.")));
+			Optional<Celeb> celeb = Optional.ofNullable(celebRepo.findById(tempCelebNo.longValue()).orElseThrow(() -> new IllegalStateException("존재하지 않는 샐럽입니다.")));
 			if(cl.isPresent()) {
 				clRepo.delete(cl.get());
 				clRepo.flush();
