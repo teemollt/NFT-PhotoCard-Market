@@ -186,21 +186,22 @@ public class MemberSvcImpl implements MemberSvcInter{
 			String memberNick = (String)req.get("memberNick");
 			String memberPw = (String)req.get("memberPw");
 			System.out.println(memberEmail +" "+memberNick+" "+memberPw);
-			if (memberEmail == null){
-				System.out.println("email = null");
+			if (memberEmail.equals(member.getMemberEmail())){
+				System.out.println("email not changed");
 			} else {
 				memberRepo.checkEmail(memberEmail).ifPresent(m ->{throw new IllegalStateException("이미 존재하는 이메일입니다.");});
 				member.setMemberEmail(memberEmail);
 			}
-			if (memberNick == null) {
-				System.out.println("nick = null");
+			System.out.println(memberNick+ " "+member.getMemberNick());
+			if (memberNick.equals(member.getMemberNick())) {
+				System.out.println("nick not changed");
 			} else {
 				memberRepo.checkNick(memberNick).ifPresent(m->{throw new IllegalStateException("이미 존재하는 별명입니다.");});
 				member.setMemberNick(memberNick);
 
 			}
 			if (memberPw == null) {
-				System.out.println("pw=null");
+				System.out.println("pw not changed");
 			}else {
 				member.setMemberPw(passwordEncoder.encode(memberPw));
 			}
