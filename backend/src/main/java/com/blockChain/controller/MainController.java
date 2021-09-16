@@ -18,16 +18,6 @@ import com.blockChain.service.CelebSvcInter;
 public class MainController {
 	@Autowired
 	CelebSvcInter celebSvc;
-//	@GetMapping
-//    public HashMap<String,Object> home() {
-//    	HashMap<String, Object> res = new HashMap<String,Object>();
-//    	res.put("msg", "Hello World!");
-//        return res;
-//    }
-//	@GetMapping("/celebGroup")
-//	public Map<String,Object> celebGroup(){
-//		return celebSvc.sltCelebDTObyGroup();
-//	}
 	@GetMapping("/celebgrouplist")
 	public Map<String,Object> celebGroupList(){
 		return celebSvc.sltCelebDTObyGroup();

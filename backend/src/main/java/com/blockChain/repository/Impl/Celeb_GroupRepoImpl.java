@@ -34,7 +34,7 @@ public class Celeb_GroupRepoImpl implements Celeb_GroupRepoCustom{
 				,Qcg.groupNm
 				))
 				.from(Qcg)
-				.orderBy(Qcg.groupNm.asc())
+				.orderBy(Qcg.groupNo.asc())
 				.fetch());
 	}
 }

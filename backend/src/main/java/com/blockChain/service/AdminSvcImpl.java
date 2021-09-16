@@ -69,7 +69,7 @@ public class AdminSvcImpl implements AdminSvcInter{
 	//샐럽그룹
     private final String SOLO = "솔로";
     private final String GROUP1 = "태티서";
-    private final String NONE = "해당없음";
+    private final String NONE = "이태희";
     
     //샐럽
     final int CELEBPEOPLES = 7;
@@ -281,8 +281,9 @@ public class AdminSvcImpl implements AdminSvcInter{
 	@Override
 	public Map<String,Object> insertCelebGroup(){
 	    Map<String, Object> res = new HashMap<String,Object>();
-	    String[] celebGroup = {"현아","GD","아이유", GROUP1, NONE};//TODO
 //	    String[] celebGroup = {"김도형","신지현","나비", GROUP1, NONE};
+//	    String[] celebGroup = {"현아","GD","아이유", GROUP1, NONE};
+	    String[] celebGroup = {"아이유","GD","현아", GROUP1, NONE};
 	    ArrayList<String> msg = new ArrayList<>();
 	    Long[] peopleNum = { 1L,1L,1L,3L,0L};
 	    for (int i = 0; i < celebGroup.length;i++) {
