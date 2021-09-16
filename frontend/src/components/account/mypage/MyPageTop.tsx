@@ -4,11 +4,12 @@ import { Button } from "@material-ui/core";
 import "./MyPageTop.css";
 
 interface MyPageTopProps {
-  memberNick: string
+  memberNick: string;
+  memberGrade: string;
 }
 
 function MyPageTop(props: MyPageTopProps): JSX.Element {
-  const { memberNick } = props
+  const { memberNick, memberGrade } = props;
 
   return (
     <div className="mypageTop">
@@ -17,7 +18,7 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
           <h1>{memberNick} 님</h1>
         </div>
         <div className="mypageUserInfos">
-          <p className="mypageLevel">회원등급</p>
+          <p className="mypageGrade">{memberGrade}</p>
           {/* <p className="mypageAccount">0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B</p> */}
         </div>
         <div className="mypageUserUpdate">
