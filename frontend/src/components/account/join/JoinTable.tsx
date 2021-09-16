@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { TextField, Button } from "@material-ui/core";
 import axios from "axios";
-import "./JoinTable.css";
 import JoinAlert from "./JoinAlert";
+import "./JoinTable.css";
 
 interface JoinTableProps {
   handleJoinRes: any;
@@ -139,14 +139,11 @@ function JoinTable(props: JoinTableProps): JSX.Element {
     }
   };
 
-  const handleLikeCeleb = (id: number) => {
-    setLikeCeleb(id);
-  };
-
   const handleJoin = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (
       memberId &&
       memberPw &&
+      memberNick &&
       memberEmail &&
       checkEmail &&
       likeCeleb !== 999
@@ -319,7 +316,7 @@ function JoinTable(props: JoinTableProps): JSX.Element {
         <div className="joinCelebBoxs">
           <div
             className="joinCelebBox joinKim"
-            onClick={() => handleLikeCeleb(0)}
+            onClick={() => setLikeCeleb(0)}
             style={{
               backgroundColor:
                 likeCeleb === 0 ? "rgba(16, 0, 247, 0.329)" : undefined,
@@ -329,7 +326,7 @@ function JoinTable(props: JoinTableProps): JSX.Element {
           </div>
           <div
             className="joinCelebBox joinTi"
-            onClick={() => handleLikeCeleb(1)}
+            onClick={() => setLikeCeleb(1)}
             style={{
               backgroundColor:
                 likeCeleb === 1 ? "rgba(248, 10, 248, 0.329)" : undefined,
@@ -339,7 +336,7 @@ function JoinTable(props: JoinTableProps): JSX.Element {
           </div>
           <div
             className="joinCelebBox joinSeo"
-            onClick={() => handleLikeCeleb(2)}
+            onClick={() => setLikeCeleb(2)}
             style={{
               backgroundColor:
                 likeCeleb === 2 ? "rgb(241, 162, 13, 0.329)" : undefined,
@@ -349,7 +346,7 @@ function JoinTable(props: JoinTableProps): JSX.Element {
           </div>
           <div
             className="joinCelebBox joinHyun"
-            onClick={() => handleLikeCeleb(3)}
+            onClick={() => setLikeCeleb(3)}
             style={{
               backgroundColor:
                 likeCeleb === 3 ? "rgba(235, 12, 49, 0.329)" : undefined,
@@ -359,7 +356,7 @@ function JoinTable(props: JoinTableProps): JSX.Element {
           </div>
           <div
             className="joinCelebBox joinGd"
-            onClick={() => handleLikeCeleb(4)}
+            onClick={() => setLikeCeleb(4)}
             style={{
               backgroundColor:
                 likeCeleb === 4 ? "rgba(235, 231, 12, 0.329)" : undefined,
@@ -369,7 +366,7 @@ function JoinTable(props: JoinTableProps): JSX.Element {
           </div>
           <div
             className="joinCelebBox joinIu"
-            onClick={() => handleLikeCeleb(5)}
+            onClick={() => setLikeCeleb(5)}
             style={{
               backgroundColor:
                 likeCeleb === 5 ? "rgba(176, 235, 12, 0.329)" : undefined,
