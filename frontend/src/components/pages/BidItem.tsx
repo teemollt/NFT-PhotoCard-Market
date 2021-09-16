@@ -68,7 +68,7 @@ function BidItem(): JSX.Element {
   var today = moment();
   console.log(today);
 
-  var enddate = moment("2021-09-10T00:00:00");
+  var enddate = moment("2021-09-20T00:00:00");
   console.log(enddate);
   var duration = moment.duration(enddate.diff(today));
   var rest = duration.asSeconds();
