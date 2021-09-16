@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.blockChain.domain.Member;
 import com.blockChain.domain.QCeleb_Like;
 import com.blockChain.domain.QMember;
+import com.blockChain.domain.QMember_Grade;
 import com.blockChain.dto.MypageDTO;
 import com.blockChain.repository.MemberRepoCustom;
 import com.querydsl.core.types.ExpressionUtils;
@@ -44,8 +45,10 @@ public class MemberRepoImpl implements MemberRepoCustom{
 	public MypageDTO myPage(Long memberNo){
 		QCeleb_Like qcl = QCeleb_Like.celeb_Like;
 		QMember qm = QMember.member;
+		QMember_Grade qmg = QMember_Grade.member_Grade;
 		return queryFactory.select(Projections.constructor(MypageDTO.class
 				, qm.memberNo
+				, qm.memberId
 				, qm.memberEmail
 				, qm.memberNick
 				, ExpressionUtils.as(
@@ -53,7 +56,10 @@ public class MemberRepoImpl implements MemberRepoCustom{
 						.select(qcl.celeb.celebNo)
 						.from(qcl)
 						.where(qcl.member.memberNo.eq(memberNo))
-				, "celebNo")))
+				, "celebNo")
+				, qm.memberGrade.memberGradeNo
+				, qm.memberGrade.memberGradeNm
+				))
 				.from(qm)
 				.where(qm.memberNo.eq(memberNo))
 				.fetchOne();

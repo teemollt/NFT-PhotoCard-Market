@@ -68,15 +68,16 @@ public class AdminSvcImpl implements AdminSvcInter{
 		    .toFormatter();
 	//샐럽그룹
     private final String SOLO = "솔로";
-    private final String GROUP1 = "이태희와 아이들";
+    private final String GROUP1 = "태티서";
     private final String NONE = "해당없음";
     
     //샐럽
     final int CELEBPEOPLES = 7;
 //    final String[] CELEBS = {"조영우","남근형","하지훈","김도형","신지현","나비","이태희"};
-    final List<String> CELEBS = new ArrayList<String>(Arrays.asList("조영우","남근형","하지훈","김도형","신지현","나비","이태희"));
-    final String[] MWs = {"M","M","M","M","W","W","W","M"};
-    final String[] GROUP = {GROUP1,GROUP1,GROUP1,"김도형","신지현","나비",NONE};
+    final List<String> CELEBS = new ArrayList<String>(Arrays.asList("태연","티파니","서현","현아","GD","아이유","이태희"));//TODO
+//    final List<String> CELEBS = new ArrayList<String>(Arrays.asList("조영우","남근형","하지훈","김도형","신지현","나비","이태희"));
+    final String[] MWs = {"W","W","W","W","M","W","M"};
+    final String[] GROUP = {GROUP1,GROUP1,GROUP1,"현아","GD","아이유",NONE};
     final String[] DEBUT = {"20170201","20170201","20180201","20160201","20170201","20200201","19900201"};
     final String[] RETIRE = {"20190201","20200201",null,null,null,null,"20100201"};
     final String time = "09:00:00";
@@ -96,7 +97,8 @@ public class AdminSvcImpl implements AdminSvcInter{
     //제품등급목록
     private final String[] PRODUCT_GRADE = {"SS","S","A","B","C"};
     private final Long[] PRODUCT_GRADE_PERCENT = {3L,7L,25L,30L,35L};
-    private final String[] SPECIAL_CELEB = {"이태희","나비","김도형"};
+    private final String[] SPECIAL_CELEB = {"이태희","아이유","현아"};
+//    private final String[] SPECIAL_CELEB = {"이태희","나비","김도형"};
     private final String[] SPECIAL_PRODUCT_GRADE = {"ONLY","ROYAL-A","ROYAL-B","ROYAL-C"};
     private final Long[] SPECIAL_PRODUCT_SHEETS = {1L,3L,7L,5L};
     private final int COMMON_CARD_NUM = 1000;//기획상 실 사용하는 카드
@@ -118,7 +120,7 @@ public class AdminSvcImpl implements AdminSvcInter{
     //판매
     private final String SALES1 = "여성샐럽";
     private final String SALES2 = "남성샐럽";
-    private final String SALES3 = "이태희와 아이들 샐럽";
+    private final String SALES3 = "태티서";
     private final String SALES4 = "솔로 샐럽";
     private final String SALES5 = "2016~2018";
     private final String SALES6 = "2019~2021";
@@ -279,7 +281,8 @@ public class AdminSvcImpl implements AdminSvcInter{
 	@Override
 	public Map<String,Object> insertCelebGroup(){
 	    Map<String, Object> res = new HashMap<String,Object>();
-	    String[] celebGroup = {"김도형","신지현","나비", GROUP1, NONE};
+	    String[] celebGroup = {"현아","GD","아이유", GROUP1, NONE};//TODO
+//	    String[] celebGroup = {"김도형","신지현","나비", GROUP1, NONE};
 	    ArrayList<String> msg = new ArrayList<>();
 	    Long[] peopleNum = { 1L,1L,1L,3L,0L};
 	    for (int i = 0; i < celebGroup.length;i++) {
@@ -457,10 +460,12 @@ public class AdminSvcImpl implements AdminSvcInter{
 			String celeb = CELEBS.get(c);
 			String[] grades = COMMON_CARDLIST[c];
 			Optional<Celeb> sltCeleb = celebRepo.sltCeleb(celeb);
+			System.out.println(celeb);
+			System.out.println(sltCeleb.toString());
 			for(int i = 0; i<grades.length;i++){
 				Optional<Product_Grade> sltGrade = pgRepo.sltbyGrade(PRODUCT_GRADE[i]);
 				Product tempProduct = new Product();
-				tempProduct.setCeleb(sltCeleb.get());
+				tempProduct.setCeleb(sltCeleb.get());//TODO
 				tempProduct.setProductDetail("");
 				tempProduct.setProductGrade(sltGrade.get());
 				tempProduct.setProductNm(grades[i]+celeb);
@@ -573,22 +578,30 @@ public class AdminSvcImpl implements AdminSvcInter{
 	}
 	@Override
 	public Map<String,Object> insertSalesProduct(){
+		//TODO
 		Map<String, Object> res = new HashMap<String,Object>();
 		String name = new Object() {}.getClass().getEnclosingMethod().getName();
 		ArrayList<String> msg = new ArrayList<>();
 		Sales sales=new Sales();
-		String [] temp1 = {"신지현","나비"};
+		//여성
+		String [] temp1 = {"태연","티파니","서현","현아","아이유"};
 		msg.addAll(insertSPfactory(SALES1+" "+SALES_SUBFIX,temp1));
-		String [] temp2 = {"조영우","남근형","하지훈","김도형","이태희"};
+		//남성
+		String [] temp2 = {"GD","이태희"};
 		msg.addAll(insertSPfactory(SALES2+" "+SALES_SUBFIX,temp2));
-		String [] temp3 = {"조영우","남근형","하지훈"};
+		//태티서
+		String [] temp3 = {"태연","티파니","서현"};
 		msg.addAll(insertSPfactory(SALES3+" "+SALES_SUBFIX,temp3));
-		String[] temp4 = {"김도형","신지현","나비"};
+		//솔로
+		String[] temp4 = {"현아","GD","아이유"};
 		msg.addAll(insertSPfactory(SALES4+" "+SALES_SUBFIX,temp4));
-		String[] temp5 = {"조영우","남근형","하지훈","김도형","신지현"};
-		msg.addAll(insertSPfactory(SALES4+" "+SALES_SUBFIX,temp5));
-		String[] temp6 = {"조영우","남근형","하지훈","김도형","신지현","나비"};
-		msg.addAll(insertSPfactory(SALES4+" "+SALES_SUBFIX,temp6));
+//		"태연","티파니","서현","현아","GD","아이유","이태희"
+		String[] temp5 = {"태연","티파니","서현","현아","GD"};
+//		String[] temp5 = {"조영우","남근형","하지훈","김도형","신지현"};
+		msg.addAll(insertSPfactory(SALES5+" "+SALES_SUBFIX,temp5));
+		String[] temp6 = {"태연","티파니","서현","현아","GD","아이유"};
+//		String[] temp6 = {"조영우","남근형","하지훈","김도형","신지현","나비"};
+		msg.addAll(insertSPfactory(SALES6+" "+SALES_SUBFIX,temp6));
 		res.put(name, msg);
 		return res;
 	}
