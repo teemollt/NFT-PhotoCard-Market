@@ -1,5 +1,5 @@
 import { createStore } from "redux";
-import myPageMenuReducer from "./account/mypage/reducer";
+import myPageMenuReducer from "./reducer";
 
 
 const store = createStore(myPageMenuReducer);

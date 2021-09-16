@@ -6,7 +6,7 @@ import "./MyPageBodyRight.css";
 import AuctionMy from "./auction/AuctionMy";
 import AuctionMyBid from "./auction/AuctionMyBid";
 import AuctionLike from "./auction/AuctionLike";
-import { myPageMenu } from "../../../redux/account/mypage/actions";
+import { myPageMenu } from "../../../redux/actions";
 
 interface MyPageBodyRightProps {
   myPageMenu: number;
