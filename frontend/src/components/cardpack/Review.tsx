@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import jwt_decode from "jwt-decode";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import SendIcon from "@material-ui/icons/Send";
@@ -31,6 +32,7 @@ declare module "axios" {
 }
 
 function Review(props: any): JSX.Element {
+  const classes = useStyles();
   const columns: GridColDef[] = [
     {
       field: "reviewPK",
@@ -47,17 +49,10 @@ function Review(props: any): JSX.Element {
       align: "center",
     },
     {
-      field: "reviewCardpack",
-      headerName: "card",
-      align: "center",
-      width: 150,
-      headerAlign: "center",
-    },
-    {
       field: "reviewContent",
       headerName: "content",
-      width: 680,
-      align: "center",
+      width: 805,
+
       headerAlign: "center",
     },
 
@@ -67,7 +62,7 @@ function Review(props: any): JSX.Element {
       type: "date",
       description: "경매가 시작된 날",
       sortable: true,
-      width: 150,
+      width: 175,
       align: "center",
       headerAlign: "center",
     },
@@ -85,7 +80,13 @@ function Review(props: any): JSX.Element {
       .catch((err) => {
         console.log(err);
       });
-    return () => {};
+    // return () => {};
+  });
+  const [tokenid, settokenid] = useState<number>(0);
+  useEffect(() => {
+    // 내 정보 가져오기
+    var token = localStorage.getItem('token')
+   
   });
 
   let [review, setreview] = useState<string>("");
@@ -96,7 +97,9 @@ function Review(props: any): JSX.Element {
     // history.push(`/biditem/${itemid}`);
     return data;
   }
-  const classes = useStyles();
+  // 리뷰작성
+  function createreview() {}
+
   return (
     <div>
       <h1>Review</h1>
@@ -126,7 +129,7 @@ function Review(props: any): JSX.Element {
         <SendIcon
           style={{ height: "50px", cursor: "pointer" }}
           onClick={() => {
-            console.log(review);
+            createreview();
           }}
         />
       </div>

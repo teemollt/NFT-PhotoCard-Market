@@ -25,7 +25,7 @@ function MainCelebList(): JSX.Element {
   useEffect(() => {
     axios.get("/api/main/celebgrouplist").then((res) => {
       console.log(res.data.res);
-      setceleb(res.data.res.splice(0, 4));
+      setceleb(res.data.res);
     });
   }, []);
 
