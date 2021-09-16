@@ -1,0 +1,19 @@
+.JoinSuccess {
+  text-align: center;
+  font-family: "Gowun Dodum";
+  font-weight: 900;
+}
+
+.joinSuccessIcon {
+  margin-top: 180px;
+  color: rgb(16, 156, 16);
+  font-size: 200px !important;
+}
+
+.JoinSuccess > p {
+  font-size: 30px;
+}
+
+.JoinSuccess > span {
+  font-size: 18px;
+}

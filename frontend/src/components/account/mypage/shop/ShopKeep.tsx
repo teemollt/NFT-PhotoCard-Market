@@ -54,7 +54,7 @@ function ShopKeep() {
   const [productTemp, setProductTemp] = useState(tempCard);
 
   return (
-    <div className="shopBuy">
+    <div className="mypageBodyRightHeader">
       <h1>관심 상품</h1>
       <hr />
       {productTemp.map((tempCard) => {

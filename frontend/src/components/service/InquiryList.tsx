@@ -121,7 +121,7 @@ function createData(
   return { id, title, content, date, reply };
 }
 // 데이터
-const rows = [
+let rows = [
   createData(
     1,
     "title1",

@@ -21,8 +21,13 @@ const useStyles = makeStyles((theme: Theme) =>
 
 function AuctionItem(props: any) {
   let history = useHistory();
-  function getitem(data: number) {
-    history.push(`/biditem/${data}`);
+  function getitem(data: any) {
+    console.log(data);
+
+    history.push({
+      pathname: `/biditem/${data.id}`,
+      state: { data: data },
+    });
   }
   const classes = useStyles();
   return (
@@ -30,8 +35,7 @@ function AuctionItem(props: any) {
       <Paper
         className={classes.paper}
         onClick={() => {
-          getitem(props.image.id);
-          console.log(props.image.id);
+          getitem(props.image);
         }}
         style={{ cursor: "pointer" }}
       >

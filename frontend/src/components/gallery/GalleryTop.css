@@ -2,8 +2,9 @@
   display: inline-block;
   justify-content: center;
   text-align: left;
-  font-family: 'Gowun Dodum' !important;
+  font-family: "Gowun Dodum" !important;
   font-weight: 900 !important;
+  margin-top: 50px;
 }
 
 .galleryTopMenu {
@@ -12,10 +13,6 @@
   width: 1300px;
   height: 50px;
   line-height: 15px;
-  /* background-color: #cfcfcf; */
-  /* color: black; */
-  /* border: 1px solid black; */
-  /* border-radius: 10px; */
 }
 
 .galleryTop > hr {
@@ -26,6 +23,7 @@
 
 .galleryTopMenuGroup {
   float: left;
+  cursor: pointer;
 }
 
 .galleryTopMenuGroup > span {
@@ -33,15 +31,44 @@
   padding-bottom: 1px;
 }
 
-.galleryTopMenuView{
+.galleryTopMenuView {
   float: right;
 }
 
 .galleryTopMenuView > span {
   margin-right: 20px;
+  cursor: pointer;
 }
 
 .underline {
-  /* border-bottom: 2px solid black; */
   color: rgb(38, 104, 202);
+}
+
+.galleryTopSub {
+  margin-top: 15px;
+}
+
+.galleryTopSubMem {
+  float: left;
+  padding-left: 20px;
+}
+
+.galleryTopSubMem > span {
+  margin-left: 20px;
+  padding-bottom: 1px;
+  cursor: pointer;
+}
+
+.galleryTopSubImgArray {
+  float: right;
+  padding-right: 20px;
+}
+
+.galleryTopSubImgArray > span {
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
 }

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { TextField } from "@material-ui/core";
 import "./LoginTable.css";
 import { Button } from "@material-ui/core";
-import "./LoginBtns.css";
 import axios from "axios";
 
 function LoginTable(props: any) {
@@ -16,8 +15,9 @@ function LoginTable(props: any) {
     console.log(loginpw);
     axios
       .post("api/member/login", { memberId: loginid, memberPw: loginpw })
-      .then(() => {
-        alert("로그인성공");
+      .then((res) => {
+        localStorage.setItem("token", "Bearer" + res.data.token.accessToken);
+        window.location.replace("/");
       })
       .catch((err) => {
         console.log(err);

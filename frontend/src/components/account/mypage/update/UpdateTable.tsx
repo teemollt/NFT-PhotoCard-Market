@@ -1,114 +1,164 @@
 import React, { useState } from "react";
-import Snackbar, { SnackbarOrigin } from "@material-ui/core/Snackbar";
+import { Link } from "react-router-dom";
 import { TextField, Button } from "@material-ui/core";
+import axios from "axios";
 
 export interface State {
-  password1: string;
-  password2: string;
-  nickname: string;
-  email: string;
-  checkEmail: boolean;
-  snackNick: boolean;
-  celeb: number;
+  likeCeleb: number;
 }
 
-function UpdateTable() {
-  const [password1, setPassword1] = useState("");
-  const [password2, setPassword2] = useState("");
-  const [nickname, setNickname] = useState("");
-  const [email, setEmail] = useState("");
-  const [checkEmail, setCheckEmail] = useState(true);
-  const [snackNick, setSnackNick] = useState(false);
+function JoinTable(props: any) {
+  const [likeCeleb, setLikeCeleb] = useState(0);
 
-  const handleNickDupl = (newSnack: SnackbarOrigin) => (e: any) => {
-    setSnackNick(true);
-  };
-
-  const handleSnackNickClose = (e: any) => {
-    setSnackNick(false);
+  const handleLikeCeleb = (id: number) => {
+    setLikeCeleb(id);
   };
 
   return (
-    <table className="joinTable">
-      <h1>UPDATE</h1>
-      <tbody>
-        <tr id="updateId">
-          <th>
-            <span className="require">●</span>
-            <span>아이디</span>
-          </th>
-          <td>
-            <p>ssafy</p>
-          </td>
-        </tr>
-
-        <tr id="updatePw1">
-          <th>
-            <span className="require">●</span>
-            <span>비밀번호</span>
-          </th>
-          <td>
-            <TextField id="standard-basic" type="password" />
-          </td>
-        </tr>
-        <tr id="updatePw2">
-          <th>
-            <span className="require">●</span>
-            <span>비밀번호 확인</span>
-          </th>
-          <td>
-            <TextField
-              id="standard-basic"
-              type="password"
-              helperText={
-                password1 !== password2 ? "비밀번호가 일치하지 않습니다" : ""
-              }
-              error={password1 !== password2 ? true : false}
-            />
-          </td>
-        </tr>
-        <tr id="updateNick">
-          <th>
-            <span className="require">●</span>
-            <span>닉네임</span>
-          </th>
-          <td>
-            <TextField id="standard-basic" />
-            <Button
-              className="joinDuplBtn"
-              variant="outlined"
-              size="small"
-              onClick={handleNickDupl({ vertical: "top", horizontal: "right" })}
-            >
-              중복 확인
-            </Button>
-            <Snackbar
-              className="joinSnack"
-              anchorOrigin={{ vertical: "top", horizontal: "right" }}
-              open={snackNick}
-              onClose={handleSnackNickClose}
-              message="사용 가능한 닉네임입니다"
-            />
-          </td>
-        </tr>
-        <tr id="updateNick">
-          <th>
-            <span className="require">●</span>
-            <span>이메일</span>
-          </th>
-          <td>
-            <TextField
-              id="standard-basic"
-              type="email"
-              autoComplete="email"
-              helperText={checkEmail ? "" : "유효하지 않은 메일입니다"}
-              error={checkEmail ? false : true}
-            />
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div>
+      <table className="joinTable">
+        <h1>JOIN</h1>
+        <tbody>
+          <tr id="joinId">
+            <th>
+              <span className="require">●</span>
+              <span>아이디</span>
+            </th>
+            <td>
+              <p>ssafy</p>
+            </td>
+          </tr>
+          <tr id="joinPw1">
+            <th>
+              <span className="require">●</span>
+              <span>비밀번호</span>
+            </th>
+            <td>
+              <TextField id="standard-basic" type="password" />
+            </td>
+          </tr>
+          <tr id="joinPw2">
+            <th>
+              <span className="require">●</span>
+              <span>비밀번호 확인</span>
+            </th>
+            <td>
+              <TextField id="standard-basic" type="password" />
+            </td>
+          </tr>
+          <tr id="joinNick">
+            <th>
+              <span className="require">●</span>
+              <span>닉네임</span>
+            </th>
+            <td>
+              <TextField id="standard-basic" />
+              <Button className="joinCheckBtn" variant="outlined" size="small">
+                중복 확인
+              </Button>
+            </td>
+          </tr>
+          <tr id="joinNick">
+            <th>
+              <span className="require">●</span>
+              <span>이메일</span>
+            </th>
+            <td>
+              <TextField
+                id="standard-basic"
+                type="email"
+                autoComplete="email"
+              />
+              <Button className="joinCheckBtn" variant="outlined" size="small">
+                중복 확인
+              </Button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div className="joinSelectCeleb">
+        <div className="joinCelebInfo">
+          <span className="require">●</span>
+          <span>CELEB 선택</span>
+          <span className="joinCelebSubInfo">
+            좋아하는 CELEB을 선택해 주세요
+          </span>
+        </div>
+        <div className="joinCelebBoxs">
+          <div
+            className="joinCelebBox joinKim"
+            onClick={() => handleLikeCeleb(0)}
+            style={{
+              backgroundColor:
+                likeCeleb === 0 ? "rgba(16, 0, 247, 0.329)" : undefined,
+            }}
+          >
+            김도형
+          </div>
+          <div
+            className="joinCelebBox joinNa"
+            onClick={() => handleLikeCeleb(1)}
+            style={{
+              backgroundColor:
+                likeCeleb === 1 ? "rgb(232, 248, 10, 0.329)" : undefined,
+            }}
+          >
+            나비
+          </div>
+          <div
+            className="joinCelebBox joinNam"
+            onClick={() => handleLikeCeleb(2)}
+            style={{
+              backgroundColor:
+                likeCeleb === 2 ? "rgb(241, 162, 13, 0.329)" : undefined,
+            }}
+          >
+            남근형
+          </div>
+          <div
+            className="joinCelebBox joinShin"
+            onClick={() => handleLikeCeleb(3)}
+            style={{
+              backgroundColor:
+                likeCeleb === 3 ? "rgba(127, 12, 235, 0.329)" : undefined,
+            }}
+          >
+            신지현
+          </div>
+          <div
+            className="joinCelebBox joinCho"
+            onClick={() => handleLikeCeleb(4)}
+            style={{
+              backgroundColor:
+                likeCeleb === 4 ? "rgba(24, 248, 4, 0.329)" : undefined,
+            }}
+          >
+            조영우
+          </div>
+          <div
+            className="joinCelebBox joinHa"
+            onClick={() => handleLikeCeleb(5)}
+            style={{
+              backgroundColor:
+                likeCeleb === 5 ? "rgb(7, 182, 252, 0.329)" : undefined,
+            }}
+          >
+            하지훈
+          </div>
+        </div>
+      </div>
+      <div className="joinBtns">
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <Button className="joinCancelBtn" variant="contained">
+            취소
+          </Button>
+        </Link>
+        <Button className="joinBtn" variant="contained" color="primary">
+          수정
+        </Button>
+      </div>
+    </div>
   );
 }
 
-export default UpdateTable;
+export default JoinTable;
