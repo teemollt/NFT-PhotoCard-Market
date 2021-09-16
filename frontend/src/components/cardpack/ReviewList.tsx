@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
+import "./ReviewList.css";
 import axios from "axios";
-
+import Review from "./Review";
+import Pagination from "./Pagination";
 import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
 import CreateIcon from "@mui/icons-material/Create";
-import Review from "../cardpack/Review";
-import Pagination from "../cardpack/Pagination";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function InquiryList(props: any) {
+function ReviewList(props: any) {
   const classes = useStyles();
 
   const [reviews, setreviews] = useState<any[]>([]);
@@ -43,7 +43,6 @@ function InquiryList(props: any) {
   const [reviewsPerPage, setreviewsPerPage] = useState(10);
 
   useEffect(() => {
-    // 내 문의사항 가져오기
     const fetchReviews = async () => {
       const res = await axios
         .get(`/api/cardPack/${props.cardpackNo}/review`, {
@@ -64,25 +63,29 @@ function InquiryList(props: any) {
   const currentReviews = reviews.slice(indexOfFirstReview, indexOfLastReview);
   const paginate = (pageNumber: any) => setcurrentPage(pageNumber);
 
-  let [inq, setinq] = useState<string>("");
-  // 문의남기기
-  function createinquiry() {
+  let [review, setreview] = useState<string>("");
+  // 리뷰작성
+  function createreview() {
     axios
       .post(
-        `/api/`,
+        `/api/cardPack/${props.cardpackNo}/create/review`,
         {
-          inquiryContent: inq,
+          cardpackNo: props.cardpackNo,
+          reviewContent: review,
         },
         { headers: { Authorization: localStorage.getItem("token") } }
       )
       .then((res) => {
-        setinq("");
+        setreview("");
       })
       .catch();
   }
   return (
     <div>
-      <h1>1:1 Service</h1>
+      <h1>REVIEW</h1>
+      <Container className={classes.container}>
+        <Review reviews={currentReviews} />
+      </Container>
       <Pagination
         reviewsPerPage={reviewsPerPage}
         totalReviews={reviews.length}
@@ -91,28 +94,26 @@ function InquiryList(props: any) {
       <div className={classes.root1}>
         <TextField
           id="standard-basic"
-          label="문의사항을 남겨주세요"
+          label="댓글을 작성해주세요"
           variant="standard"
-          style={{ width: "700px" }}
-          value={inq}
+          fullWidth
+          value={review}
           onChange={(e) => {
-            setinq(e.target.value);
+            setreview(e.target.value);
           }}
         />
+        <br />
+        <br />
         <CreateIcon
           fontSize="large"
           className={classes.createicon}
           onClick={() => {
-            createinquiry();
+            createreview();
           }}
         />
-        <Container className={classes.container}>
-          <Review reviews={currentReviews} />
-          <p>문의사항 테이블</p>
-        </Container>
       </div>
     </div>
   );
 }
 
-export default InquiryList;
+export default ReviewList;

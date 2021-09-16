@@ -7,7 +7,7 @@ import Container from "@material-ui/core/Container";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core";
 import CardPackInside from "../cardpack/CardPackInside";
-import Review from "../cardpack/Review";
+import Review from "../cardpack/ReviewList";
 import BuyCardPack from "../cardpack/BuyCardPack";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
