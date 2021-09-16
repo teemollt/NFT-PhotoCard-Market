@@ -28,7 +28,7 @@ function App(): JSX.Element {
           <MainBid />
         </Route>
         <Route path="/cardpackshop/">
-          <CardPackShop/>
+          <CardPackShop />
         </Route>
         <Route path="/gallery/:id">
           <Gallery />
