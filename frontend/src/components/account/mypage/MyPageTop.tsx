@@ -3,12 +3,18 @@ import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import "./MyPageTop.css";
 
-function MyPageTop() {
+interface MyPageTopProps {
+  memberNick: string
+}
+
+function MyPageTop(props: MyPageTopProps): JSX.Element {
+  const { memberNick } = props
+
   return (
     <div className="mypageTop">
       <div className="mypageUserInfo">
         <div className="mypageUserNick">
-          <h1>아무개 님</h1>
+          <h1>{memberNick} 님</h1>
         </div>
         <div className="mypageUserInfos">
           <p className="mypageLevel">회원등급</p>

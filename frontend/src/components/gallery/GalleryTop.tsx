@@ -70,6 +70,20 @@ const tempGallery: Array<temp> = [
     level: "C",
     celeb: "1",
   },
+  {
+    imgUrl:
+      "https://newsimg.hankookilbo.com/cms/articlerelease/2021/06/01/373cd776-11e3-4bc3-8e60-0963e82e938a.jpg",
+    title: "아이유",
+    level: "B",
+    celeb: "1",
+  },
+  {
+    imgUrl:
+      "https://image.msscdn.net/data/curating/16948/16948_1_org.jpg",
+    title: "선글라스",
+    level: "C",
+    celeb: "1",
+  },
 ];
 
 export type temp = {
