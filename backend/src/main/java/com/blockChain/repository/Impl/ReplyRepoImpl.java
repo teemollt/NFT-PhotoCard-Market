@@ -32,6 +32,7 @@ public class ReplyRepoImpl implements ReplyRepoCustom{
 				, qr.replyDate))
 				.from(qr)
 				.where(qr.sales.salesNo.eq(cardPK))
+				.orderBy(qr.replyDate.desc())
 				.fetch();
 		System.out.println(aa.toString());
 		return Optional.ofNullable(aa);
