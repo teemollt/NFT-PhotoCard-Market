@@ -16,6 +16,7 @@ import CardPackShop from "./components/pages/CardPackShop";
 declare module "axios" {
   interface AxiosRequestConfig {
     cardpackNo?: number;
+    reviewContent?: string;
   }
 }
 
