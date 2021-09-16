@@ -23,6 +23,10 @@
   text-align: left;
 }
 
+.joinTable {
+  margin-top: 50px;
+}
+
 .joinSelectCeleb {
   font-family: "Gowun Dodum";
   font-weight: 900;
@@ -53,9 +57,9 @@
   cursor: pointer;
 }
 
-.joinShin,
-.joinCho,
-.joinHa {
+.joinHyun,
+.joinGd,
+.joinIu {
   margin-bottom: 40px;
 }
 
@@ -64,26 +68,26 @@
 }
 
 .joinKim:hover {
-  background-color: rgba(16, 0, 247, 0.329);
+  background-color: rgba(95, 0, 247, 0.329);
 }
 
-.joinNa:hover {
-  background-color: rgb(232, 248, 10, 0.329);
+.joinTi:hover {
+  background-color: rgba(248, 10, 248, 0.329);
 }
 
-.joinNam:hover {
+.joinSeo:hover {
   background-color: rgb(241, 162, 13, 0.329);
 }
 
-.joinShin:hover {
-  background-color: rgba(127, 12, 235, 0.329);
+.joinHyun:hover {
+  background-color: rgba(235, 12, 49, 0.329);
 }
 
-.joinCho:hover {
-  background-color: rgba(24, 248, 4, 0.329);
+.joinGd:hover {
+  background-color: rgba(235, 231, 12, 0.329);
 }
-.joinHa:hover {
-  background-color: rgb(7, 182, 252, 0.329);
+.joinIu:hover {
+  background-color: rgba(176, 235, 12, 0.329);
 }
 
 .joinBtns {

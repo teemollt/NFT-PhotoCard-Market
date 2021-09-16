@@ -16,7 +16,7 @@ function LoginTable(props: any) {
     axios
       .post("api/member/login", { memberId: loginid, memberPw: loginpw })
       .then((res) => {
-        localStorage.setItem("token", "Bearer" + res.data.token.accessToken);
+        localStorage.setItem("token", "Bearer " + res.data.token.accessToken);
         window.location.replace("/");
       })
       .catch((err) => {

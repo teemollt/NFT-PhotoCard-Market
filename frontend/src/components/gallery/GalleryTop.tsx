@@ -70,6 +70,20 @@ const tempGallery: Array<temp> = [
     level: "C",
     celeb: "1",
   },
+  {
+    imgUrl:
+      "https://newsimg.hankookilbo.com/cms/articlerelease/2021/06/01/373cd776-11e3-4bc3-8e60-0963e82e938a.jpg",
+    title: "아이유",
+    level: "B",
+    celeb: "1",
+  },
+  {
+    imgUrl:
+      "https://image.msscdn.net/data/curating/16948/16948_1_org.jpg",
+    title: "선글라스",
+    level: "C",
+    celeb: "1",
+  },
 ];
 
 export type temp = {
@@ -92,7 +106,7 @@ function GalleryTop() {
   const [topMenu, setTopMenu] = useState(0);
   const [view, setView] = useState(1);
   const [sub, setSub] = useState(false);
-  const [subMem, setSubMem] = useState(0);
+  const [subMem, setSubMem] = useState(99);
   const [imgArray, setImgArray] = useState(0);
   const [galleryImg, setGalleryImg] = useState(tempGallery);
 
@@ -115,39 +129,6 @@ function GalleryTop() {
     }
   };
 
-  const handleTopMenuView = (id: number) => {
-    if (id === 0) {
-      setView(0);
-    } else if (id === 1) {
-      setView(1);
-    } else if (id === 2) {
-      setView(2);
-    } else if (id === 3) {
-      setView(3);
-    }
-  };
-
-  const handleSubMem = (id: number) => {
-    if (id === 0) {
-      setSubMem(0);
-    } else if (id === 1) {
-      setSubMem(1);
-    } else if (id === 2) {
-      setSubMem(2);
-    } else if (id === 3) {
-      setSubMem(3);
-    } else if (id === 4) {
-      setSubMem(4);
-    }
-  };
-
-  const handleImgArray = (id: number) => {
-    if (id === 0) {
-      setImgArray(0);
-    } else {
-      setImgArray(1);
-    }
-  };
 
   return (
     <div>
@@ -164,25 +145,25 @@ function GalleryTop() {
               className={topMenu === 1 ? "underline" : undefined}
               onClick={() => handleTopMenuGroup(1)}
             >
-              김도형
+              현아
             </span>
             <span
               className={topMenu === 2 ? "underline" : undefined}
               onClick={() => handleTopMenuGroup(2)}
             >
-              나비
+              G-DRAGON
             </span>
             <span
               className={topMenu === 3 ? "underline" : undefined}
               onClick={() => handleTopMenuGroup(3)}
             >
-              신지현
+              아이유
             </span>
             <span
               className={topMenu === 4 ? "underline" : undefined}
               onClick={() => handleTopMenuGroup(4)}
             >
-              이태희와 아이들
+              태티서
             </span>
           </div>
 
@@ -190,25 +171,25 @@ function GalleryTop() {
             <span>VIEW</span>
             <span
               className={view === 0 ? "underline" : "undefined"}
-              onClick={() => handleTopMenuView(0)}
+              onClick={() => setView(0)}
             >
               S
             </span>
             <span
               className={view === 1 ? "underline" : "undefined"}
-              onClick={() => handleTopMenuView(1)}
+              onClick={() => setView(1)}
             >
               M
             </span>
             <span
               className={view === 2 ? "underline" : "undefined"}
-              onClick={() => handleTopMenuView(2)}
+              onClick={() => setView(2)}
             >
               L
             </span>
             <span
               className={view === 3 ? "underline" : "undefined"}
-              onClick={() => handleTopMenuView(3)}
+              onClick={() => setView(3)}
             >
               XL
             </span>
@@ -221,41 +202,41 @@ function GalleryTop() {
           <div className="galleryTopSub">
             <div className={sub ? "galleryTopSubMem" : "hidden"}>
               <span
-                className={subMem === 0 ? "underline" : undefined}
-                onClick={() => handleSubMem(0)}
+                className={subMem === 99 ? "underline" : undefined}
+                onClick={() => setSubMem(99)}
               >
                 전체
               </span>
               <span
-                className={subMem === 1 ? "underline" : undefined}
-                onClick={() => handleSubMem(1)}
+                className={subMem === 0 ? "underline" : undefined}
+                onClick={() => setSubMem(0)}
               >
-                남근형
+                태연
+              </span>
+              <span
+                className={subMem === 1 ? "underline" : undefined}
+                onClick={() => setSubMem(1)}
+              >
+                티파니
               </span>
               <span
                 className={subMem === 2 ? "underline" : undefined}
-                onClick={() => handleSubMem(2)}
+                onClick={() => setSubMem(2)}
               >
-                조영우
-              </span>
-              <span
-                className={subMem === 3 ? "underline" : undefined}
-                onClick={() => handleSubMem(3)}
-              >
-                하지훈
+                서현
               </span>
             </div>
 
             <div className="galleryTopSubImgArray">
               <span
                 className={imgArray === 0 ? "underline" : undefined}
-                onClick={() => handleImgArray(0)}
+                onClick={() => setImgArray(0)}
               >
                 최신순
               </span>
               <span
                 className={imgArray === 1 ? "underline" : undefined}
-                onClick={() => handleImgArray(1)}
+                onClick={() => setImgArray(1)}
               >
                 등급순
               </span>

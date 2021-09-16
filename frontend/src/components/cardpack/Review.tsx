@@ -11,7 +11,8 @@ const useStyles = makeStyles((theme: Theme) =>
       width: "100%",
       maxWidth: "1000px",
       margin: "auto",
-      maxHeight: 300,
+      marginTop: "10px",
+      // maxHeight: 300,
     },
     inline: {
       display: "inline",
@@ -24,13 +25,8 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-declare module "axios" {
-  export interface AxiosRequestConfig {
-    cardpackNo: number;
-  }
-}
-
 function Review(props: any): JSX.Element {
+  const classes = useStyles();
   const columns: GridColDef[] = [
     {
       field: "reviewPK",
@@ -47,17 +43,10 @@ function Review(props: any): JSX.Element {
       align: "center",
     },
     {
-      field: "reviewCardpack",
-      headerName: "card",
-      align: "center",
-      width: 150,
-      headerAlign: "center",
-    },
-    {
       field: "reviewContent",
       headerName: "content",
-      width: 680,
-      align: "center",
+      width: 805,
+
       headerAlign: "center",
     },
 
@@ -67,7 +56,7 @@ function Review(props: any): JSX.Element {
       type: "date",
       description: "경매가 시작된 날",
       sortable: true,
-      width: 150,
+      width: 175,
       align: "center",
       headerAlign: "center",
     },
@@ -96,7 +85,23 @@ function Review(props: any): JSX.Element {
     // history.push(`/biditem/${itemid}`);
     return data;
   }
-  const classes = useStyles();
+  // 리뷰작성
+  function createreview() {
+    axios
+      .post(
+        `/api/cardPack/${props.cardpackNo}/create/review`,
+        {
+          cardpackNo: props.cardpackNo,
+          reviewContent: review,
+        },
+        { headers: { Authorization: localStorage.getItem("token") } }
+      )
+      .then((res) => {
+        setreview("");
+      })
+      .catch();
+  }
+
   return (
     <div>
       <h1>Review</h1>
@@ -119,6 +124,7 @@ function Review(props: any): JSX.Element {
           className={classes.margin}
           id="input-with-icon-grid"
           label="Comment"
+          value={review}
           onChange={(e) => {
             setreview(e.target.value);
           }}
@@ -126,7 +132,7 @@ function Review(props: any): JSX.Element {
         <SendIcon
           style={{ height: "50px", cursor: "pointer" }}
           onClick={() => {
-            console.log(review);
+            createreview();
           }}
         />
       </div>

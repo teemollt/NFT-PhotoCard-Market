@@ -13,6 +13,13 @@ import BidItem from "./components/pages/BidItem";
 import MyPageUpdate from "./components/pages/MyPageUpdate";
 import CardPackShop from "./components/pages/CardPackShop";
 
+declare module "axios" {
+  interface AxiosRequestConfig {
+    cardpackNo?: number;
+    reviewContent?: string;
+  }
+}
+
 function App(): JSX.Element {
   return (
     <div>
@@ -28,7 +35,7 @@ function App(): JSX.Element {
           <MainBid />
         </Route>
         <Route path="/cardpackshop/">
-          <CardPackShop/>
+          <CardPackShop />
         </Route>
         <Route path="/gallery/:id">
           <Gallery />

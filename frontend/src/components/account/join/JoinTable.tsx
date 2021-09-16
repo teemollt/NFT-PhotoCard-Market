@@ -2,44 +2,29 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { TextField, Button } from "@material-ui/core";
 import axios from "axios";
-import "./JoinTable.css";
 import JoinAlert from "./JoinAlert";
+import "./JoinTable.css";
 
 interface JoinTableProps {
   handleJoinRes: any;
 }
 
-export interface State {
-  memberId: string;
-  memberIdCheck: number;
-  memberPw: string;
-  memberPwCheck: number;
-  password2: string;
-  memberNick: string;
-  nickCheck: number;
-  memberEmail: string;
-  checkEmail: number;
-  likeCeleb: number;
-  open: boolean;
-  message: string;
-}
-
 function JoinTable(props: JoinTableProps): JSX.Element {
   const { handleJoinRes } = props;
 
-  const [memberId, setMemberId] = useState("");
-  const [memberIdCheck, setMemberIdCheck] = useState(0);
-  const [memberPw, setMemberPw] = useState("");
-  const [memberPwCheck, setMemberPwCheck] = useState(0);
-  const [password2, setPassword2] = useState("");
-  const [memberNick, setMemberNick] = useState("");
-  const [nickCheck, setNickCheck] = useState(0);
-  const [memberEmail, setMemberEmail] = useState("");
-  const [emailCheck, setEmailCheck] = useState(0);
-  const [checkEmail, setCheckEmail] = useState(true);
-  const [likeCeleb, setLikeCeleb] = useState(999);
-  const [open, setOpen] = useState(false);
-  const [message, setMessage] = useState("");
+  const [memberId, setMemberId] = useState<string>("");
+  const [memberIdCheck, setMemberIdCheck] = useState<number>(0);
+  const [memberPw, setMemberPw] = useState<string>("");
+  const [memberPwCheck, setMemberPwCheck] = useState<number>(0);
+  const [password2, setPassword2] = useState<string>("");
+  const [memberNick, setMemberNick] = useState<string>("");
+  const [nickCheck, setNickCheck] = useState<number>(0);
+  const [memberEmail, setMemberEmail] = useState<string>("");
+  const [emailCheck, setEmailCheck] = useState<number>(0);
+  const [checkEmail, setCheckEmail] = useState<boolean>(true);
+  const [likeCeleb, setLikeCeleb] = useState<number>(999);
+  const [open, setOpen] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>("");
 
   const handleClose = () => {
     setOpen(false);
@@ -154,14 +139,11 @@ function JoinTable(props: JoinTableProps): JSX.Element {
     }
   };
 
-  const handleLikeCeleb = (id: number) => {
-    setLikeCeleb(id);
-  };
-
   const handleJoin = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (
       memberId &&
       memberPw &&
+      memberNick &&
       memberEmail &&
       checkEmail &&
       likeCeleb !== 999
@@ -334,63 +316,63 @@ function JoinTable(props: JoinTableProps): JSX.Element {
         <div className="joinCelebBoxs">
           <div
             className="joinCelebBox joinKim"
-            onClick={() => handleLikeCeleb(0)}
+            onClick={() => setLikeCeleb(0)}
             style={{
               backgroundColor:
                 likeCeleb === 0 ? "rgba(16, 0, 247, 0.329)" : undefined,
             }}
           >
-            김도형
+            태연
           </div>
           <div
-            className="joinCelebBox joinNa"
-            onClick={() => handleLikeCeleb(1)}
+            className="joinCelebBox joinTi"
+            onClick={() => setLikeCeleb(1)}
             style={{
               backgroundColor:
-                likeCeleb === 1 ? "rgb(232, 248, 10, 0.329)" : undefined,
+                likeCeleb === 1 ? "rgba(248, 10, 248, 0.329)" : undefined,
             }}
           >
-            나비
+            티파니
           </div>
           <div
-            className="joinCelebBox joinNam"
-            onClick={() => handleLikeCeleb(2)}
+            className="joinCelebBox joinSeo"
+            onClick={() => setLikeCeleb(2)}
             style={{
               backgroundColor:
                 likeCeleb === 2 ? "rgb(241, 162, 13, 0.329)" : undefined,
             }}
           >
-            남근형
+            서현
           </div>
           <div
-            className="joinCelebBox joinShin"
-            onClick={() => handleLikeCeleb(3)}
+            className="joinCelebBox joinHyun"
+            onClick={() => setLikeCeleb(3)}
             style={{
               backgroundColor:
-                likeCeleb === 3 ? "rgba(127, 12, 235, 0.329)" : undefined,
+                likeCeleb === 3 ? "rgba(235, 12, 49, 0.329)" : undefined,
             }}
           >
-            신지현
+            현아
           </div>
           <div
-            className="joinCelebBox joinCho"
-            onClick={() => handleLikeCeleb(4)}
+            className="joinCelebBox joinGd"
+            onClick={() => setLikeCeleb(4)}
             style={{
               backgroundColor:
-                likeCeleb === 4 ? "rgba(24, 248, 4, 0.329)" : undefined,
+                likeCeleb === 4 ? "rgba(235, 231, 12, 0.329)" : undefined,
             }}
           >
-            조영우
+            G-DRAGON
           </div>
           <div
-            className="joinCelebBox joinHa"
-            onClick={() => handleLikeCeleb(5)}
+            className="joinCelebBox joinIu"
+            onClick={() => setLikeCeleb(5)}
             style={{
               backgroundColor:
-                likeCeleb === 5 ? "rgb(7, 182, 252, 0.329)" : undefined,
+                likeCeleb === 5 ? "rgba(176, 235, 12, 0.329)" : undefined,
             }}
           >
-            하지훈
+            아이유
           </div>
         </div>
       </div>
