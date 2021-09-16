@@ -2,26 +2,35 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { TextField, Button } from "@material-ui/core";
 import axios from "axios";
+import JoinAlert from "../../join/JoinAlert";
 
 function JoinTable() {
   const [memberId, setMemberId] = useState<string>("");
-  const [memberPw, setMemberPw] = useState<string | null>(null);
-  const [password2, setPassword2] = useState<string | null>(null);
+  const [memberPw, setMemberPw] = useState<string>("");
+  const [password2, setPassword2] = useState<string>("");
   const [memberPwCheck, setMemberPwCheck] = useState<number>(0);
+  const [Nick, setNick] = useState<string>("");
   const [memberNick, setMemberNick] = useState<string>("");
+  const [nickCheck, setNickCheck] = useState<number>(1);
+  const [Email, setEmail] = useState<string>("");
   const [memberEmail, setMemberEmail] = useState<string>("");
+  const [emailCheck, setEmailCheck] = useState<number>(1);
+  const [checkEmail, setCheckEmail] = useState<boolean>(true);
   const [likeCeleb, setLikeCeleb] = useState<number>(999);
+  const [open, setOpen] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>("");
 
   useEffect(() => {
     axios
       .get("/api/member/mypage", {
-        headers: { Authorization:  localStorage.getItem("token") },
+        headers: { Authorization: localStorage.getItem("token") },
       })
       .then((res) => {
-        console.log(res)
         setMemberId(res.data.mypage.memberId);
         setMemberNick(res.data.mypage.memberNick);
+        setNick(res.data.mypage.memberNick);
         setMemberEmail(res.data.mypage.memberEmail);
+        setEmail(res.data.mypage.memberEmail);
         setLikeCeleb(res.data.mypage.celebNo);
       });
   }, []);
@@ -29,7 +38,6 @@ function JoinTable() {
   const handleMemberPw = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMemberPw(e.target.value.trim());
     if (
-      memberPw !== null &&
       memberPw
         .trim()
         .match(
@@ -42,20 +50,141 @@ function JoinTable() {
     }
   };
 
-  const handleMemberEmail = (e: any) => {
-    setMemberEmail(e.target.value)
-  }
-
   const handlePassword2 = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword2(e.target.value);
   };
 
-  const handleLikeCeleb = (id: number) => {
-    setLikeCeleb(id);
+  const handleMemberNick = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMemberNick(e.target.value.trim());
+    if (memberNick !== e.target.value) {
+      setNickCheck(0);
+    }
+  };
+
+  const handleNickCheck = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (memberNick.trim()) {
+      axios
+        .post("/api/member/checkNick", { memberNick: memberNick })
+        .then((res) => {
+          if (res.data.success) {
+            setMessage("사용 가능한 닉네임입니다");
+            setNickCheck(1);
+            setOpen(true);
+          } else {
+            setNickCheck(2);
+          }
+        });
+    } else {
+      setMessage("닉네임을 입력해 주세요");
+      setOpen(true);
+    }
+  };
+
+  const handleMemberEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMemberEmail(e.target.value.trim());
+    if (
+      memberEmail.match(
+        /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/
+      )
+    ) {
+      setCheckEmail(true);
+      if (memberEmail !== e.target.value) {
+        setEmailCheck(0);
+      }
+    } else {
+      setCheckEmail(false);
+    }
+  };
+
+  const handleEmailCheck = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (
+      memberEmail
+        .trim()
+        .match(
+          /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/
+        )
+    ) {
+      axios
+        .post("/api/member/checkEmail", { memberEmail: memberEmail })
+        .then((res) => {
+          if (res.data.success) {
+            setMessage("사용 가능한 이메일입니다");
+            setEmailCheck(1);
+            setOpen(true);
+          } else {
+            setEmailCheck(2);
+          }
+        });
+    } else {
+      setMessage("이메일을 입력해 주세요");
+      setOpen(true);
+    }
+  };
+
+  const handleUpdate = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (memberEmail && memberNick) {
+      if (memberPw === password2) {
+        if (emailCheck === 1 && nickCheck === 1) {
+          if (memberPw.trim()) {
+            axios
+              .put(
+                "/api/member/update",
+                {
+                  memberPw: memberPw,
+                  memberEmail: memberEmail,
+                  memberNick: memberNick,
+                  celebNo: likeCeleb,
+                },
+                {
+                  headers: { Authorization: localStorage.getItem("token") },
+                }
+              )
+              .then((res) => {
+                setMessage("정보를 수정했습니다");
+                setOpen(true);
+              });
+          } else {
+            axios
+              .put(
+                "/api/member/update",
+                {
+                  memberPw: null,
+                  memberEmail: memberEmail,
+                  memberNick: memberNick,
+                  celebNo: likeCeleb,
+                },
+                {
+                  headers: { Authorization: localStorage.getItem("token") },
+                }
+              )
+              .then((res) => {
+                setMessage("정보를 수정했습니다");
+                setOpen(true);
+              });
+          }
+        } else {
+          setMessage("중복 확인을 해 주세요");
+          setOpen(true);
+        }
+      } else {
+        setMessage("비밀번호가 일치하지 않습니다");
+        setOpen(true);
+      }
+    } else {
+      setMessage("필수 입력 항목들을 입력해 주세요");
+      setOpen(true);
+    }
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   return (
     <div>
+      {open ? (
+        <JoinAlert message={message} handleClose={handleClose} open={open} />
+      ) : null}
       <table className="joinTable">
         <h1>UPDATE</h1>
         <tbody>
@@ -106,8 +235,20 @@ function JoinTable() {
               <span>닉네임</span>
             </th>
             <td>
-              <TextField id="standard-basic" />
-              <Button className="joinCheckBtn" variant="outlined" size="small">
+              <TextField
+                id="standard-basic"
+                value={memberNick}
+                onChange={handleMemberNick}
+                helperText={nickCheck === 2 ? "이미 존재하는 닉네임입니다" : ""}
+                error={nickCheck === 2 ? true : false}
+              />
+              <Button
+                className="joinCheckBtn"
+                variant="outlined"
+                size="small"
+                onClick={handleNickCheck}
+                disabled={nickCheck === 1 ? true : false}
+              >
                 중복 확인
               </Button>
             </td>
@@ -123,9 +264,23 @@ function JoinTable() {
                 type="email"
                 value={memberEmail}
                 onChange={handleMemberEmail}
+                helperText={
+                  checkEmail
+                    ? emailCheck === 2
+                      ? "이미 존재하는 이메일입니다"
+                      : ""
+                    : "유효하지 않은 메일입니다"
+                }
+                error={checkEmail ? (emailCheck === 2 ? true : false) : true}
               />
-              
-              <Button className="joinCheckBtn" variant="outlined" size="small">
+
+              <Button
+                className="joinCheckBtn"
+                variant="outlined"
+                size="small"
+                onClick={handleEmailCheck}
+                disabled={emailCheck === 1 ? true : false}
+              >
                 중복 확인
               </Button>
             </td>
@@ -143,7 +298,7 @@ function JoinTable() {
         <div className="joinCelebBoxs">
           <div
             className="joinCelebBox joinKim"
-            onClick={() => handleLikeCeleb(0)}
+            onClick={() => setLikeCeleb(0)}
             style={{
               backgroundColor:
                 likeCeleb === 0 ? "rgba(95, 0, 247, 0.329)" : undefined,
@@ -153,7 +308,7 @@ function JoinTable() {
           </div>
           <div
             className="joinCelebBox joinTi"
-            onClick={() => handleLikeCeleb(1)}
+            onClick={() => setLikeCeleb(1)}
             style={{
               backgroundColor:
                 likeCeleb === 1 ? "rgba(248, 10, 248, 0.329)" : undefined,
@@ -163,7 +318,7 @@ function JoinTable() {
           </div>
           <div
             className="joinCelebBox joinSeo"
-            onClick={() => handleLikeCeleb(2)}
+            onClick={() => setLikeCeleb(2)}
             style={{
               backgroundColor:
                 likeCeleb === 2 ? "rgb(241, 162, 13, 0.329)" : undefined,
@@ -173,7 +328,7 @@ function JoinTable() {
           </div>
           <div
             className="joinCelebBox joinHyun"
-            onClick={() => handleLikeCeleb(3)}
+            onClick={() => setLikeCeleb(3)}
             style={{
               backgroundColor:
                 likeCeleb === 3 ? "rgba(235, 12, 49, 0.329)" : undefined,
@@ -183,7 +338,7 @@ function JoinTable() {
           </div>
           <div
             className="joinCelebBox joinGd"
-            onClick={() => handleLikeCeleb(4)}
+            onClick={() => setLikeCeleb(4)}
             style={{
               backgroundColor:
                 likeCeleb === 4 ? "rgba(235, 231, 12, 0.329)" : undefined,
@@ -193,7 +348,7 @@ function JoinTable() {
           </div>
           <div
             className="joinCelebBox joinIu"
-            onClick={() => handleLikeCeleb(5)}
+            onClick={() => setLikeCeleb(5)}
             style={{
               backgroundColor:
                 likeCeleb === 5 ? "rgba(176, 235, 12, 0.329)" : undefined,
@@ -209,7 +364,12 @@ function JoinTable() {
             취소
           </Button>
         </Link>
-        <Button className="joinBtn" variant="contained" color="primary">
+        <Button
+          className="joinBtn"
+          variant="contained"
+          color="primary"
+          onClick={handleUpdate}
+        >
           수정
         </Button>
       </div>
