@@ -13,6 +13,12 @@ import BidItem from "./components/pages/BidItem";
 import MyPageUpdate from "./components/pages/MyPageUpdate";
 import CardPackShop from "./components/pages/CardPackShop";
 
+declare module "axios" {
+  interface AxiosRequestConfig {
+    cardpackNo?: number;
+  }
+}
+
 function App(): JSX.Element {
   return (
     <div>

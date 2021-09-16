@@ -25,12 +25,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-declare module "axios" {
-  export interface AxiosRequestConfig {
-    cardpackNo: number;
-  }
-}
-
 function Review(props: any): JSX.Element {
   const classes = useStyles();
   const columns: GridColDef[] = [
@@ -85,8 +79,7 @@ function Review(props: any): JSX.Element {
   const [tokenid, settokenid] = useState<number>(0);
   useEffect(() => {
     // 내 정보 가져오기
-    var token = localStorage.getItem('token')
-   
+    var token = localStorage.getItem("token");
   });
 
   let [review, setreview] = useState<string>("");
