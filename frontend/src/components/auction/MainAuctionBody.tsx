@@ -123,8 +123,8 @@ function MainAuctionBody() {
     <div className={classes.root}>
       <Container>
         <Grid container spacing={3}>
-          {tempGallery.map((image) => (
-            <AuctionItem image={image} />
+          {tempGallery.map((image, i) => (
+            <AuctionItem image={image} key={i} />
           ))}
         </Grid>
       </Container>

@@ -17,6 +17,7 @@ import GalleryBoard from "./components/pages/GalleryBoard";
 declare module "axios" {
   interface AxiosRequestConfig {
     cardpackNo?: number;
+    reviewContent?: string;
   }
 }
 

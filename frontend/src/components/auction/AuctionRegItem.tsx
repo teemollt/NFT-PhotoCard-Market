@@ -36,7 +36,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     container: {
       width: "300px",
-      position:"fixed"
+      position:"fixed",
+      textAlign:"center"
     },
   })
 );
@@ -213,8 +214,6 @@ function AuctionRegItem() {
               <Grid item xs={12}>
                 <Paper
                   className={classes.paper}
-                  style={{ cursor: "pointer" }}
-                  onClick={() => {}}
                 >
                   <img
                     src={selectcardimage}
@@ -243,8 +242,8 @@ function AuctionRegItem() {
 
         <Container>
           <Grid container spacing={3}>
-            {tempGallery.map((image) => (
-              <Grid item xs={3} sm={3}>
+            {tempGallery.map((image,i) => (
+              <Grid item xs={3} sm={3} key={i}>
                 <Paper
                   className={classes.paper}
                   style={{ cursor: "pointer" }}
