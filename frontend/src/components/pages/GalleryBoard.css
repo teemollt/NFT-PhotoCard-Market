@@ -1,0 +1,28 @@
+.galleryTable {
+  margin: auto;
+  padding-top: 50px;
+  width: 1100px;
+  text-align: center;
+  font-family: "Work Sans", "Gowun Dodum" !important;
+  font-weight: 900 !important;
+}
+
+th {
+  text-align: left;
+}
+
+.postNo, .postLike {
+  width: 100px;
+}
+
+.postNick {
+  width: 150px;
+}
+
+.postContent {
+  width: 700px;
+}
+
+.postIcon {
+  font-size: 18px !important;
+}
