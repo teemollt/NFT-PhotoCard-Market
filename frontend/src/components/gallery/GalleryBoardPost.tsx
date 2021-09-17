@@ -1,5 +1,5 @@
 import React from "react";
-import './GalleryBoardPost.css'
+import "./GalleryBoardPost.css";
 
 interface GalleryBoardPostProps {
   post: {

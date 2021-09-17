@@ -1,15 +1,32 @@
-.galleryTable {
-  margin: auto;
-  margin-top: 50px;
+.galleryBoard {
   width: 1100px;
-  text-align: center;
+  margin: auto;
   font-family: "Work Sans", "Gowun Dodum" !important;
   font-weight: 900 !important;
-  border-top: 1px solid lightgray;
-  border-collapse: collapse;
 }
 
-th {
+.galleryBoardBtnDiv {
+  text-align: right;
+  margin-top: 50px;
+}
+
+.galleryBoardBtn {
+  font-family: "Work Sans", "Gowun Dodum" !important;
+  font-weight: 900 !important;
+  background: #1c214f !important;
+}
+
+.galleryTable {
+  margin-top: 20px;
+  width: 1100px;
+  text-align: center;
+  border-top: 1px solid lightgray;
+  border-collapse: collapse;
+  background-color: #fff;
+  clear: both;
+}
+
+.galleryTable > tbody > tr > th {
   border-bottom: 1px solid lightgray;
   text-align: left;
   padding: 20px;
