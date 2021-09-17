@@ -12,6 +12,7 @@ import Join from "./components/pages/Join";
 import BidItem from "./components/pages/BidItem";
 import MyPageUpdate from "./components/pages/MyPageUpdate";
 import CardPackShop from "./components/pages/CardPackShop";
+import GalleryBoard from "./components/pages/GalleryBoard";
 
 declare module "axios" {
   interface AxiosRequestConfig {
@@ -54,6 +55,9 @@ function App(): JSX.Element {
         </Route>
         <Route path="/update">
           <MyPageUpdate />
+        </Route>
+        <Route path="/gboard">
+          <GalleryBoard />
         </Route>
       </Switch>
       <Footer />

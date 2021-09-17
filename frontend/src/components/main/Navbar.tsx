@@ -33,6 +33,11 @@ function Navbar(): JSX.Element {
           </Link>
         ) : null}
         {token ? (
+          <Link className="tablink" to="/gboard">
+            <Button>Board</Button>
+          </Link>
+        ) : null}
+        {token ? (
           <Link className="tablink" to="/mypage">
             <Button>My Page</Button>
           </Link>

@@ -1709,14 +1709,14 @@
     "prop-types" "^15.7.2"
     "react-is" "^17.0.2"
 
-"@mui/core@5.0.0-alpha.45":
-  "integrity" "sha512-Vx+m9QdPps9zo1/HLfTVKqymm8jpGvFYUST7QoxBgqUJ0PTn2sjHvDwJ4C1wSdK0PnREsvSCkRqw4HosU2VJ/g=="
-  "resolved" "https://registry.npmjs.org/@mui/core/-/core-5.0.0-alpha.45.tgz"
-  "version" "5.0.0-alpha.45"
+"@mui/core@5.0.0-alpha.47":
+  "integrity" "sha512-/GCIWOq+ydeY8HTWexrvQw7OsmRRvdzW+BB4vQ+V6alaECKSXPQrTDuQtd+lgI2il4p7uhPIKIqjcaAZ/FaNHA=="
+  "resolved" "https://registry.npmjs.org/@mui/core/-/core-5.0.0-alpha.47.tgz"
+  "version" "5.0.0-alpha.47"
   dependencies:
     "@babel/runtime" "^7.14.8"
     "@emotion/is-prop-valid" "^1.1.0"
-    "@mui/utils" "5.0.0-rc.0"
+    "@mui/utils" "^5.0.0"
     "clsx" "^1.1.1"
     "prop-types" "^15.7.2"
     "react-is" "^17.0.2"
@@ -1728,32 +1728,32 @@
   dependencies:
     "@babel/runtime" "^7.14.8"
 
-"@mui/material@^5.0.0-rc.0":
-  "integrity" "sha512-sbn6rhE7IGsCzh+8UiqQqp3Yczh5n4HViuJtwCBQuZCJKUAyR2l/zT4w2B9Wq7d07+LYifBDf8BZOJD0POej8A=="
-  "resolved" "https://registry.npmjs.org/@mui/material/-/material-5.0.0-rc.0.tgz"
-  "version" "5.0.0-rc.0"
+"@mui/material@^5.0.0", "@mui/material@^5.0.0-rc.0":
+  "integrity" "sha512-XZNPYQocFyS2Q8Wc7PMudazKa8VDaXADK9PxUfOF6Q0GQNXjLkOn1vRWlyF9EOZQ4QLbgJHyHDlH7ELBN0CA0w=="
+  "resolved" "https://registry.npmjs.org/@mui/material/-/material-5.0.0.tgz"
+  "version" "5.0.0"
   dependencies:
     "@babel/runtime" "^7.14.8"
-    "@mui/core" "5.0.0-alpha.45"
-    "@mui/system" "5.0.0-rc.0"
-    "@mui/types" "7.0.0-rc.0"
-    "@mui/utils" "5.0.0-rc.0"
+    "@mui/core" "5.0.0-alpha.47"
+    "@mui/system" "^5.0.0"
+    "@mui/types" "^7.0.0"
+    "@mui/utils" "^5.0.0"
     "@popperjs/core" "^2.4.4"
-    "@types/react-transition-group" "^4.2.0"
+    "@types/react-transition-group" "^4.4.2"
     "clsx" "^1.1.1"
     "csstype" "^3.0.8"
     "hoist-non-react-statics" "^3.3.2"
     "prop-types" "^15.7.2"
     "react-is" "^17.0.2"
-    "react-transition-group" "^4.4.0"
+    "react-transition-group" "^4.4.2"
 
-"@mui/private-theming@5.0.0-rc.0":
-  "integrity" "sha512-odqQokcnVt7D2KA1ME5V1ESZPxtplHrF/C3bUMJCE8q98eKYOJMIzdB8Gu/alE2KUN+Osvk5IeN3odwlcrJ7Mg=="
-  "resolved" "https://registry.npmjs.org/@mui/private-theming/-/private-theming-5.0.0-rc.0.tgz"
-  "version" "5.0.0-rc.0"
+"@mui/private-theming@^5.0.0":
+  "integrity" "sha512-xCaQss6B6EyEPxyn/vv5CwidqihrF6AJlrCYDgOAqYHtCgBhzMjWhh/n4L3jlrt4SmE+STHD2FdA8DImpEgItg=="
+  "resolved" "https://registry.npmjs.org/@mui/private-theming/-/private-theming-5.0.0.tgz"
+  "version" "5.0.0"
   dependencies:
     "@babel/runtime" "^7.14.8"
-    "@mui/utils" "5.0.0-rc.0"
+    "@mui/utils" "^5.0.0"
     "prop-types" "^15.7.2"
 
 "@mui/styled-engine-sc@^5.0.0-rc.0":
@@ -1763,38 +1763,38 @@
   dependencies:
     "prop-types" "^15.7.2"
 
-"@mui/styled-engine@5.0.0-rc.0":
-  "integrity" "sha512-vGEN48vPDChe9SlG8JmNRZ/6j5hRKjY1Xe0VyNLQw+abuFf6jl0LxMHVMbggraUR9dxZn3lqeNhQ82Pc0gbkDw=="
-  "resolved" "https://registry.npmjs.org/@mui/styled-engine/-/styled-engine-5.0.0-rc.0.tgz"
-  "version" "5.0.0-rc.0"
+"@mui/styled-engine@^5.0.0":
+  "integrity" "sha512-JoZLKLB6WoXYPbMNDzz2gC8incY6zyx0dd1jFg3faOzp2NuzEremDbY/Lmo93M22cOjd3cLInoup+Wm7O05d0A=="
+  "resolved" "https://registry.npmjs.org/@mui/styled-engine/-/styled-engine-5.0.0.tgz"
+  "version" "5.0.0"
   dependencies:
     "@babel/runtime" "^7.14.8"
     "@emotion/cache" "^11.4.0"
     "prop-types" "^15.7.2"
 
-"@mui/system@5.0.0-rc.0":
-  "integrity" "sha512-tJgVmxdC42kNhKnLk/DhrOV7j7w2ZnRdY9pLdzWHUrREiycgsUsy38j9gByT40qZpk1whkoKpaO1QFBgQD7xUQ=="
-  "resolved" "https://registry.npmjs.org/@mui/system/-/system-5.0.0-rc.0.tgz"
-  "version" "5.0.0-rc.0"
+"@mui/system@^5.0.0":
+  "integrity" "sha512-CT5HLbQjzPZLMl5EjqY++lVuKVQKGbRNKQtOTpM2ABta6QQSTj/vARbIPYSZnwpDGUyGyzBZp2xfI3X3UNyVOg=="
+  "resolved" "https://registry.npmjs.org/@mui/system/-/system-5.0.0.tgz"
+  "version" "5.0.0"
   dependencies:
     "@babel/runtime" "^7.14.8"
-    "@mui/private-theming" "5.0.0-rc.0"
-    "@mui/styled-engine" "5.0.0-rc.0"
-    "@mui/types" "7.0.0-rc.0"
-    "@mui/utils" "5.0.0-rc.0"
+    "@mui/private-theming" "^5.0.0"
+    "@mui/styled-engine" "^5.0.0"
+    "@mui/types" "^7.0.0"
+    "@mui/utils" "^5.0.0"
     "clsx" "^1.1.1"
     "csstype" "^3.0.8"
     "prop-types" "^15.7.2"
 
-"@mui/types@7.0.0-rc.0":
-  "integrity" "sha512-0IZaZZRQV5F96bMVQtjxLuedwrD0UZ2BR/O2DTP3vuxxHVm6gRywb02HuV3rRLJNMBGd5lkBgCDhiPvRCPYWKg=="
-  "resolved" "https://registry.npmjs.org/@mui/types/-/types-7.0.0-rc.0.tgz"
-  "version" "7.0.0-rc.0"
+"@mui/types@^7.0.0":
+  "integrity" "sha512-M/tkF2pZ4uoPhZ8pnNhlVnOFtz6F3dnYKIsnj8MuXKT6d26IE2u0UjA8B0275ggN74dR9rlHG5xJt5jgDx/Ung=="
+  "resolved" "https://registry.npmjs.org/@mui/types/-/types-7.0.0.tgz"
+  "version" "7.0.0"
 
-"@mui/utils@5.0.0-rc.0":
-  "integrity" "sha512-u65YLalK8Md3HIhCLgD1kPMDxO/XCkUixGyOf6Zb3esSSq7iasLspaBcP2Bt288giM8HB1xlFBfaqoqoT9a4SA=="
-  "resolved" "https://registry.npmjs.org/@mui/utils/-/utils-5.0.0-rc.0.tgz"
-  "version" "5.0.0-rc.0"
+"@mui/utils@^5.0.0":
+  "integrity" "sha512-WGikt+LTiGadqqKIGRwPVGtOUHchEEN6/af/T6nln8REkE2COY5nUirNc89ciPz1AznwZFzLtDmNkeV3NqUz2w=="
+  "resolved" "https://registry.npmjs.org/@mui/utils/-/utils-5.0.0.tgz"
+  "version" "5.0.0"
   dependencies:
     "@babel/runtime" "^7.14.8"
     "@types/prop-types" "^15.7.4"
@@ -2278,7 +2278,7 @@
     "@types/history" "*"
     "@types/react" "*"
 
-"@types/react-transition-group@^4.2.0":
+"@types/react-transition-group@^4.2.0", "@types/react-transition-group@^4.4.2":
   "integrity" "sha512-KibDWL6nshuOJ0fu8ll7QnV/LVTo3PzQ9aCPnRUYPfX7eZohHwLIdNHj7pftanREzHNP4/nJa8oeM73uSiavMQ=="
   "resolved" "https://registry.npmjs.org/@types/react-transition-group/-/react-transition-group-4.4.2.tgz"
   "version" "4.4.2"
@@ -10458,7 +10458,7 @@
   optionalDependencies:
     "fsevents" "^2.1.3"
 
-"react-transition-group@^4.4.0":
+"react-transition-group@^4.4.0", "react-transition-group@^4.4.2":
   "integrity" "sha512-/RNYfRAMlZwDSr6z4zNKV6xu53/e2BuaBbGhbyYIXTrmgu/bGHzmqOs7mJSJBHy9Ud+ApHx3QjrkKSp1pxvlFg=="
   "resolved" "https://registry.npmjs.org/react-transition-group/-/react-transition-group-4.4.2.tgz"
   "version" "4.4.2"
