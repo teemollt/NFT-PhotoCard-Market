@@ -6,7 +6,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Button } from "@mui/material";
-import './GalleryBoardNew.css'
+import "./GalleryBoardNew.css";
 
 interface GalleryBoardNewProps {
   open: boolean;
@@ -21,8 +21,7 @@ function GalleryBoardNew(props: GalleryBoardNewProps) {
         <DialogTitle className="galleryBoardNewTitle">갤러리 자랑</DialogTitle>
         <DialogContent>
           <DialogContentText className="galleryBoardNewContent">
-            다른 유저들이 나의 갤러리에 방문할 수 있도록 나의 갤러리를 자랑해
-            보세요!
+            다른 유저들이 나의 갤러리에 방문할 수 있도록 갤러리를 자랑해 보세요!
           </DialogContentText>
           <TextField
             autoFocus
@@ -33,8 +32,12 @@ function GalleryBoardNew(props: GalleryBoardNewProps) {
           />
         </DialogContent>
         <DialogActions>
-          <Button className="galleryBoardNewBtn" onClick={handleClose}>취소</Button>
-          <Button className="galleryBoardNewBtn" onClick={handleClose}>작성</Button>
+          <Button className="galleryBoardNewBtn" onClick={handleClose}>
+            취소
+          </Button>
+          <Button className="galleryBoardNewBtn" onClick={handleClose}>
+            작성
+          </Button>
         </DialogActions>
       </Dialog>
     </div>
