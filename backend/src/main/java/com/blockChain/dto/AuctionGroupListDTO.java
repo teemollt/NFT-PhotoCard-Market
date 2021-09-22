@@ -8,8 +8,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AuctionGroupListDTO {
-	private MemberDTO memberDTO;
-	private CardDTO cardDTO;
-	private AuctionDTO auctionDTO;
+	private MemberDTO member;
+	private CardDTO card;
+	private AuctionDTO auction;
 	private BidDTO bid;
+//	private 
 }

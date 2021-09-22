@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BidDTO {
-	private Long bidNo;
+//	private Long bidNo;
 	private Long bidPrice;
 }
