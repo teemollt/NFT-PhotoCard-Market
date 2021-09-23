@@ -72,3 +72,7 @@
 .hidden {
   display: none;
 }
+
+.galleryBody {
+  max-width: 1400px !important;
+}

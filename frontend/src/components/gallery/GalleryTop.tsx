@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Pagination } from "@mui/material";
 import GalleryBody from "../gallery/GalleryBody";
-import "./GalleryTop.css";
 import axios from "axios";
+import "./GalleryTop.css";
 
 const tempGallery: Array<temp> = [
   {
@@ -264,6 +264,9 @@ function GalleryTop() {
         {galleryImg.map((temp, index) => {
           return <GalleryBody view={view} temp={temp} key={index} />;
         })}
+        {/* {galleryImg.map((temp, index) => {
+          return <Test view={view} temp={temp} key={index} className="test"/>;
+        })} */}
       </div>
       <Pagination
         className="GalleryBoardPage"
