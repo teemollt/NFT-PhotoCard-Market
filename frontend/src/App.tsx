@@ -12,6 +12,7 @@ import Join from "./components/pages/Join";
 import BidItem from "./components/pages/BidItem";
 import MyPageUpdate from "./components/pages/MyPageUpdate";
 import CardPackShop from "./components/pages/CardPackShop";
+import MainCeleb from "./components/pages/MainCeleb";
 
 declare module "axios" {
   interface AxiosRequestConfig {
@@ -33,6 +34,9 @@ function App(): JSX.Element {
         </Route>
         <Route path="/mainbid/:tag?">
           <MainBid />
+        </Route>
+        <Route path="/mainceleb/:no?">
+          <MainCeleb />
         </Route>
         <Route path="/cardpackshop/">
           <CardPackShop />

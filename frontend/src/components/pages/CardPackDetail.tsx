@@ -37,6 +37,7 @@ function CardPackDetail(): JSX.Element {
   const [islike, setislike] = useState(false);
   useEffect(() => {
     // follow check axios
+    console.log(location.state.data.salesNo);
     //
   }, []);
 
