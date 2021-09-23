@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.blockChain.domain.Member;
-import com.blockChain.dto.GalleryMainDTO;
+import com.blockChain.dto.GalleryArticleDTO;
 import com.blockChain.dto.MypageDTO;
 
 public interface MemberRepoCustom {
@@ -16,7 +16,5 @@ public interface MemberRepoCustom {
 	Optional<Member> checkNick(String email);
 
 	MypageDTO myPage(Long memberNo);
-
-	Optional<List<GalleryMainDTO>> galleryMain();
 
 }

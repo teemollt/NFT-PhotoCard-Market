@@ -1,0 +1,56 @@
+package com.blockChain.repository.Impl;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.stereotype.Repository;
+
+import com.blockChain.domain.Member;
+import com.blockChain.domain.QCeleb_Like;
+import com.blockChain.domain.QGalleryArticle;
+import com.blockChain.domain.QMember;
+import com.blockChain.domain.QMember_Gall_Like;
+import com.blockChain.domain.QMember_Grade;
+import com.blockChain.dto.GalleryArticleDTO;
+import com.blockChain.dto.MemberDTO;
+import com.blockChain.dto.MypageDTO;
+import com.blockChain.repository.GalleryArticleRepoCustom;
+import com.blockChain.repository.MemberRepoCustom;
+import com.querydsl.core.types.ExpressionUtils;
+import com.querydsl.core.types.Projections;
+import com.querydsl.jpa.JPAExpressions;
+import com.querydsl.jpa.impl.JPAQueryFactory;
+
+import lombok.RequiredArgsConstructor;
+
+@Repository
+@RequiredArgsConstructor
+public class GalleryArticleRepoImpl implements GalleryArticleRepoCustom{
+	private final JPAQueryFactory queryFactory;
+	
+	@Override
+	public Optional<List<GalleryArticleDTO>> galleryArticleMain(){
+		QMember qm = QMember.member;
+		QMember_Gall_Like pql = QMember_Gall_Like.member_Gall_Like;
+		QMember_Gall_Like qglFrom = new QMember_Gall_Like("qglFrom");
+		QMember_Gall_Like qglTo = new QMember_Gall_Like("qglTo");
+		QGalleryArticle qg =  QGalleryArticle.galleryArticle;
+		return Optional.ofNullable(queryFactory.select(Projections.constructor(GalleryArticleDTO.class
+				,Projections.constructor(
+						MemberDTO.class
+						, qm.memberNo
+						, qm.memberNick)
+				, qg.galleryArticleNo
+				, qg.galleryArticleContent
+//				, pql.toMember.count()
+				, qm.memberNo
+				
+				))
+				.from(qg)
+				.join(qm).on(qg.member.memberNo.eq(qm.memberNo))
+//				.join(pql).on(pql.toMember.memberNo.eq(qm.memberNo))
+//				.join(qm).on(pql.toMember.memberNo.eq(qm.memberNo))
+				.orderBy(qg.galleryArticleNo.asc())
+				.fetch());
+	}
+}

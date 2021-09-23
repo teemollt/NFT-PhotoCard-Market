@@ -10,7 +10,7 @@ import com.blockChain.domain.QCeleb_Like;
 import com.blockChain.domain.QMember;
 import com.blockChain.domain.QMember_Gall_Like;
 import com.blockChain.domain.QMember_Grade;
-import com.blockChain.dto.GalleryMainDTO;
+import com.blockChain.dto.GalleryArticleDTO;
 import com.blockChain.dto.MemberDTO;
 import com.blockChain.dto.MypageDTO;
 import com.blockChain.repository.MemberRepoCustom;
@@ -69,27 +69,6 @@ public class MemberRepoImpl implements MemberRepoCustom{
 				.fetchOne();
 				
 				
-	}
-	@Override
-	public Optional<List<GalleryMainDTO>> galleryMain(){
-		QMember qm = QMember.member;
-		QMember_Gall_Like pql = QMember_Gall_Like.member_Gall_Like;
-		QMember_Gall_Like qglFrom = new QMember_Gall_Like("qglFrom");
-		QMember_Gall_Like qglTo = new QMember_Gall_Like("qglTo");
-		return Optional.ofNullable(queryFactory.select(Projections.constructor(GalleryMainDTO.class
-				,Projections.constructor(
-						MemberDTO.class
-						, qm.memberNo
-						, qm.memberNick)
-//				, pql.toMember.count()
-				,qm.memberNo
-				
-				))
-				.from(qm)
-//				.join(pql).on(pql.toMember.memberNo.eq(qm.memberNo))
-//				.join(pql).on(qm.memberNo.eq(pql.toMember.memberNo)).groupBy(qm.memberNo)
-				.orderBy(qm.memberNo.asc())
-				.fetch());
 	}
 	
 	
