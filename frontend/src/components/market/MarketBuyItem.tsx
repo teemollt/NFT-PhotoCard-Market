@@ -64,7 +64,7 @@ const DialogActions = withStyles((theme: Theme) => ({
   },
 }))(MuiDialogActions);
 
-function AuctionBuyItem(props: any) {
+function MarketBuyItem(props: any) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -99,4 +99,4 @@ function AuctionBuyItem(props: any) {
   );
 }
 
-export default AuctionBuyItem;
+export default MarketBuyItem;

@@ -3,7 +3,7 @@ import Navbar from "./components/main/Navbar";
 import { Route, Switch } from "react-router-dom";
 import Main from "./components/pages/Main";
 import MyPage from "./components/pages/MyPage";
-import MainBid from "./components/pages/MainAuction";
+import MainMarket from "./components/pages/MainMarket";
 import Gallery from "./components/pages/Gallery";
 import CardPackDetail from "./components/pages/CardPackDetail";
 import Footer from "./components/main/Footer";
@@ -32,8 +32,8 @@ function App(): JSX.Element {
         <Route path="/mypage">
           <MyPage />
         </Route>
-        <Route path="/mainbid/:tag?">
-          <MainBid />
+        <Route path="/market">
+          <MainMarket />
         </Route>
         <Route path="/mainceleb/:no?">
           <MainCeleb />

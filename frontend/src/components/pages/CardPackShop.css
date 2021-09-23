@@ -33,17 +33,16 @@ body {
 }
 
 .container {
-  width: 300px;
-  height: 300px;
-  margin: 15px;
-  transform-style: flat;
+  /* width: 300px;
+  height: 200px; */
+  /* transform-style: flat; */
 }
 
 .container > div {
-  position: absolute;
-  width: 300px;
-  height: 300px;
-  background: white;
+  /* position: absolute; */
+  /* width: 300px;
+  height: 200px; */
+  background: #FAFAFA;
   display: flex;
   align-items: center;
   justify-content: center;

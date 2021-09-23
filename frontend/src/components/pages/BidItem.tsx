@@ -15,7 +15,7 @@ import Fab from "@material-ui/core/Fab";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import SendIcon from "@material-ui/icons/Send";
-import AuctionBuyItem from "../auction/AuctionBuyItem";
+import AuctionBuyItem from "../market/MarketBuyItem";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

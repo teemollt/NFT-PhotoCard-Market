@@ -24,7 +24,7 @@ function Navbar(): JSX.Element {
           <Button>Shop</Button>
         </Link>
 
-        <Link className="tablink" to="/mainbid">
+        <Link className="tablink" to="/market">
           <Button>Market</Button>
         </Link>
         {token ? (

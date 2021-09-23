@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
-import "./ReviewList.css";
+import "./CardpackReviewList.css";
 import axios from "axios";
-import Review from "./Review";
+import CardpackReview from "./CardpackReview";
 import Pagination from "./Pagination";
 import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function ReviewList(props: any) {
+function CardpackReviewList(props: any) {
   const classes = useStyles();
 
   const [reviews, setreviews] = useState<any[]>([]);
@@ -84,7 +84,7 @@ function ReviewList(props: any) {
     <div>
       <h1>REVIEW</h1>
       <Container className={classes.container}>
-        <Review reviews={currentReviews} />
+        <CardpackReview reviews={currentReviews} />
       </Container>
       <Pagination
         reviewsPerPage={reviewsPerPage}
@@ -116,4 +116,4 @@ function ReviewList(props: any) {
   );
 }
 
-export default ReviewList;
+export default CardpackReviewList;

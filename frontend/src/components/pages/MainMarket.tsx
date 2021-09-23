@@ -5,11 +5,11 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
-import MainAuctionBody from "../auction/MainAuctionBody";
+import MainAuctionBody from "../market/MarketBody";
 import TextField from "@material-ui/core/TextField";
 import IconButton from "@material-ui/core/IconButton";
 import ImageSearchIcon from "@material-ui/icons/ImageSearch";
-import AuctionRegItem from "../auction/AuctionRegItem";
+import AuctionRegItem from "../market/MarketRegItem";
 import axios from "axios";
 interface TabPanelProps {
   children?: React.ReactNode;

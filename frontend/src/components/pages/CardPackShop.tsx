@@ -32,7 +32,7 @@ function Stack(props: any) {
         buycardpack(props.cardpackinfo);
       }}
     >
-      {props.cardpackinfo.salesNM}
+      <div style={{ textAlign: "center" }}>{props.cardpackinfo.salesNM}</div>
       {cards.map(({ z, opacity }, index) => (
         <animated.div
           style={{
@@ -46,7 +46,7 @@ function Stack(props: any) {
           {index === 4 && (
             <animated.img
               style={{
-                transform: f.interpolate([1, 0], ["scale(1.2)", "scale(1.5)"]),
+                transform: f.interpolate([1, 0], ["scale(0.5)", "scale(1)"]),
               }}
               src={props.image}
             />
@@ -69,7 +69,7 @@ function CardPackShop() {
     <div className="main">
       {cardpack.map((pack, i) => (
         <Stack
-          image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgSoBsV0_uEb8pqRg4lHQ9DTiPqwot2rEZmg&usqp=CAU"
+          image="/images/cardshop.png"
           background="#52649e"
           cardpackinfo={pack}
         />

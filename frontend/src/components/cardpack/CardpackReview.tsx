@@ -1,12 +1,12 @@
 import React from "react";
-import "./Review.css";
+import "./CardpackReview.css";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 
-function Review(props: any) {
+function CardpackReview(props: any) {
   return (
     <div>
       <div>
@@ -53,4 +53,4 @@ function Review(props: any) {
   );
 }
 
-export default Review;
+export default CardpackReview;

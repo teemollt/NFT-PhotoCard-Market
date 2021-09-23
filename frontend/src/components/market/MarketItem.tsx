@@ -1,5 +1,5 @@
 import React from "react";
-import "./AuctionItem.css";
+import "./MarketItem.css";
 import { useHistory } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function AuctionItem(props: any) {
+function MarketItem(props: any) {
   let history = useHistory();
   function getitem(data: any) {
     console.log(data);
@@ -56,4 +56,4 @@ function AuctionItem(props: any) {
   );
 }
 
-export default AuctionItem;
+export default MarketItem;

@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-import "./MainAuctionBody.css";
-import AuctionItem from "./AuctionItem";
+import "./MarketBody.css";
+import MarketItem from "./MarketItem";
 import axios from "axios";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function MainAuctionBody(props: any): JSX.Element {
+function MarketBody(props: any): JSX.Element {
   const [items, setitems] = useState<any[]>([]);
   const classes = useStyles();
   useEffect(() => {
@@ -39,7 +39,7 @@ function MainAuctionBody(props: any): JSX.Element {
       <Container>
         <Grid container spacing={3}>
           {items.map((item, i) => (
-            <AuctionItem item={item} key={i} />
+            <MarketItem item={item} key={i} />
           ))}
         </Grid>
       </Container>
@@ -47,4 +47,4 @@ function MainAuctionBody(props: any): JSX.Element {
   );
 }
 
-export default MainAuctionBody;
+export default MarketBody;
