@@ -23,6 +23,7 @@ import com.blockChain.domain.Bid;
 import com.blockChain.domain.Celeb;
 import com.blockChain.domain.Celeb_Group;
 import com.blockChain.domain.Celeb_Like;
+import com.blockChain.domain.GalleryArticle;
 import com.blockChain.domain.Member;
 import com.blockChain.domain.Member_Grade;
 import com.blockChain.domain.Product;
@@ -41,6 +42,7 @@ import com.blockChain.repository.BidRepo;
 import com.blockChain.repository.CelebRepo;
 import com.blockChain.repository.Celeb_GroupRepo;
 import com.blockChain.repository.Celeb_LikeRepo;
+import com.blockChain.repository.GalleryArticleRepo;
 import com.blockChain.repository.MemberRepo;
 import com.blockChain.repository.Member_GradeRepo;
 import com.blockChain.repository.ProductRepo;
@@ -219,6 +221,9 @@ public class AdminSvcImpl implements AdminSvcInter{
 	private AuctionRepo auctionRepo;
 	@Autowired
 	private BidRepo bidRepo;
+	
+	@Autowired
+	private GalleryArticleRepo gaRepo;
 	@Override
 	public Map<String,Object> totalData(){
 		Map<String, Object> res = new HashMap<String,Object>();
@@ -239,6 +244,7 @@ public class AdminSvcImpl implements AdminSvcInter{
 		res.put("reply", reply());
 		res.put("insertAuction",insertAuction());
 		res.put("insertBid", insertBid());
+		res.put("insertGalleryArticle", insertGalleryArticle());
 		return res;
 	}
 	//셀럽 초기데이터 입력
@@ -752,6 +758,28 @@ public class AdminSvcImpl implements AdminSvcInter{
 		res.put(name, msg);
 		return res;
 	}
+	public Map<String,Object> insertGalleryArticle(){
+		Map<String, Object> res = new HashMap<String,Object>();
+		String name = new Object() {}.getClass().getEnclosingMethod().getName();
+		ArrayList<String> msg = new ArrayList<>();
+		List<Member> member = memberRepo.findAll();
+		Random random = new Random();
+		int cnt = 0;
+		for(int g = 0; g<member.size();g++){
+			int ran = random.nextInt(4);
+			for(int gg = 0; gg<ran; gg++) {
+				cnt ++;
+				GalleryArticle ga = new GalleryArticle();
+				ga.setGalleryArticleContent("테스트 갤러리 콘텐츠 "+cnt);
+				ga.setMember(member.get(g));
+				GalleryArticle saved = gaRepo.save(ga);
+				msg.add(saved.getMember().getMemberNo()+ "insert" + saved.getGalleryArticleNo() +" "+ saved.getGalleryArticleContent()) ;
+			}
+		
+		}
+		res.put(name, msg);
+		return res;
+		}
 	public Map<String,Object> sample(){
 		Map<String, Object> res = new HashMap<String,Object>();
 		String name = new Object() {}.getClass().getEnclosingMethod().getName();
@@ -759,4 +787,4 @@ public class AdminSvcImpl implements AdminSvcInter{
 		res.put(name, msg);
 		return res;
 	}
-}
+	}
