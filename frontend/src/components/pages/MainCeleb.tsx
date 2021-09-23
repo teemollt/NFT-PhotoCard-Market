@@ -1,11 +1,7 @@
 import React from 'react'
 
-function MainCeleb() {
-    return (
-        <div>
-            
-        </div>
-    )
+function MainCeleb(): JSX.Element {
+  return <div></div>;
 }
 
 export default MainCeleb

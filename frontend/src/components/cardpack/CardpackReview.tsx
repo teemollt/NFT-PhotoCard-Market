@@ -6,7 +6,7 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 
-function CardpackReview(props: any) {
+function CardpackReview(props: any): JSX.Element {
   return (
     <div>
       <div>

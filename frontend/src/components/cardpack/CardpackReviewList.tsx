@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function CardpackReviewList(props: any) {
+function CardpackReviewList(props: any): JSX.Element {
   const classes = useStyles();
 
   const [reviews, setreviews] = useState<any[]>([]);

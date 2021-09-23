@@ -57,12 +57,14 @@ function Stack(props: any) {
   );
 }
 
-function CardPackShop() {
+function CardPackShop(): JSX.Element {
   const [cardpack, setcardpack] = useState<any[]>([]);
   useEffect(() => {
     axios.get("/api/saleCard").then((res) => {
       console.log(res.data.res);
-      setcardpack(res.data.res);
+      setcardpack(
+        res.data.res.sort((a: any, b: any) => (a.salesNM < b.salesNM ? -1 : 1))
+      );
     });
   }, []);
   return (

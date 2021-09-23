@@ -2,7 +2,7 @@ import React from "react";
 import "./Pagination.css";
 import { Button } from "@material-ui/core";
 
-function Pagination(props: any) {
+function Pagination(props: any): JSX.Element {
   const pageNumbers = [];
   for (
     let i = 1;

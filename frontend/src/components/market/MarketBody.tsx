@@ -37,7 +37,7 @@ function MarketBody(props: any): JSX.Element {
   return (
     <div className={classes.root}>
       <Container>
-        <Grid container spacing={3}>
+        <Grid container spacing={2}>
           {items.map((item, i) => (
             <MarketItem item={item} key={i} />
           ))}
