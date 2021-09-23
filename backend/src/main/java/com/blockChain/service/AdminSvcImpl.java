@@ -394,24 +394,28 @@ public class AdminSvcImpl implements AdminSvcInter{
 	}
 	
 	@Override
-	public Map<String,Object> insertTokenOwner(){
+	public Map<String,Object> insertTokenOwner(){//TODO
 		Map<String, Object> res = new HashMap<String,Object>();
 		String name = new Object() {}.getClass().getEnclosingMethod().getName();
 		ArrayList<String> msg = new ArrayList<>();
 		Random random = new Random();
 		List<Member> members = memberRepo.findAll();
 		List<Token> tokens = tokenRepo.findAll();
+		int cnt = 0;
 		for(int i = 0 ; i < members.size();i++) {
 			int rand = random.nextInt(MAX_OWN);
 			int check[] =new int[tokens.size()];
 			for (int g=0 ; g<rand; g++){
 				int tokenRand = random.nextInt(tokens.size());
 				if(check[tokenRand]==0) {
+					cnt ++;
 					check[tokenRand] = 1;
 					Token_Owner tokenOwner = new Token_Owner();
 					tokenOwner.setMember(members.get(i));
 					tokenOwner.setToken(tokens.get(tokenRand));
+					tokenOwner.setOwnDate(LocalDateTime.now().minusDays(cnt%10).minusMinutes(3*cnt));
 					Token_Owner saved = tokenOwnerRepo.save(tokenOwner);
+					
 					msg.add(saved.getMember().getMemberNo() + " Own Token"+ saved.getToken().getTokenNo());
 				}else {
 					g--;
@@ -657,7 +661,7 @@ public class AdminSvcImpl implements AdminSvcInter{
 		return res;
 	}
 	@Override
-	public Map<String,Object> reply(){
+	public Map<String,Object> reply(){//TODO
 		Map<String, Object> res = new HashMap<String,Object>();
 		String name = new Object() {}.getClass().getEnclosingMethod().getName();
 		ArrayList<String> msg = new ArrayList<>();
