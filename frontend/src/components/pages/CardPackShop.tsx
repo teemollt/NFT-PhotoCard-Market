@@ -46,7 +46,7 @@ function Stack(props: any) {
           {index === 4 && (
             <animated.img
               style={{
-                transform: f.interpolate([1, 0], ["scale(0.5)", "scale(1)"]),
+                transform: f.interpolate([1, 0], ["scale(0.5)", "scale(0.6)"]),
               }}
               src={props.image}
             />
