@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class AuctionDTO {
 	private Long auctionNo;
 	private String auctionTitle;
-	private String auctionDetil;
+	private String auctionDetail;
 	private Long price;
 	private LocalDateTime startDate;
 	private LocalDateTime endDate;

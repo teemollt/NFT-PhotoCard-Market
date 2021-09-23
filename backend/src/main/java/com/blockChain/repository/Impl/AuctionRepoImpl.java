@@ -68,7 +68,6 @@ public class AuctionRepoImpl implements AuctionRepoCustom{
 						, qa.auctionStart
 						, qa.auctionDeadline)
 				, Projections.constructor(BidDTO.class
-//						, qb.bidNo
 						, qb.bidPrice.max()
 						)
 				)).from(qa)
