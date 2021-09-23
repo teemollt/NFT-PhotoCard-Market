@@ -10,8 +10,7 @@ const tempCard: Array<tempCard> = [
     imgUrl: "https://newsimg.sedaily.com/2021/03/24/22JXKJ0JJZ_1.jpg",
     title: "블랙야크",
     myPrice: 1,
-    current: 5,
-    end: "종료"
+    end: "21-10-04"
   },
   {
     auctionNo: 2,
@@ -19,7 +18,6 @@ const tempCard: Array<tempCard> = [
     imgUrl: "https://newsimg.sedaily.com/2021/03/24/22JXKJ0JJZ_1.jpg",
     title: "블랙야크",
     myPrice: 1,
-    current: 5,
     end: "21-10-04"
   },
   {
@@ -28,8 +26,7 @@ const tempCard: Array<tempCard> = [
     imgUrl: "https://newsimg.sedaily.com/2021/03/24/22JXKJ0JJZ_1.jpg",
     title: "블랙야크",
     myPrice: 1,
-    current: 5,
-    end: "종료"
+    end: "21-10-04"
   },
   {
     auctionNo: 4,
@@ -37,8 +34,7 @@ const tempCard: Array<tempCard> = [
     imgUrl: "https://newsimg.sedaily.com/2021/03/24/22JXKJ0JJZ_1.jpg",
     title: "블랙야크",
     myPrice: 1,
-    current: 5,
-    end: "종료"
+    end: "21-10-04"
   },
   {
     auctionNo: 5,
@@ -46,8 +42,7 @@ const tempCard: Array<tempCard> = [
     imgUrl: "https://newsimg.sedaily.com/2021/03/24/22JXKJ0JJZ_1.jpg",
     title: "블랙야크",
     myPrice: 1,
-    current: 5,
-    end: "종료"
+    end: "21-10-04"
   },
   {
     auctionNo: 6,
@@ -55,8 +50,7 @@ const tempCard: Array<tempCard> = [
     imgUrl: "https://newsimg.sedaily.com/2021/03/24/22JXKJ0JJZ_1.jpg",
     title: "블랙야크",
     myPrice: 1,
-    current: 5,
-    end: "종료"
+    end: "21-10-04"
   },
   {
     auctionNo: 7,
@@ -64,8 +58,7 @@ const tempCard: Array<tempCard> = [
     imgUrl: "https://newsimg.sedaily.com/2021/03/24/22JXKJ0JJZ_1.jpg",
     title: "블랙야크",
     myPrice: 1,
-    current: 5,
-    end: "종료"
+    end: "21-10-04"
   },
   
 ];
@@ -76,7 +69,6 @@ export type tempCard = {
   imgUrl: string;
   title: string;
   myPrice: number;
-  current: number
   end: string
 };
 
@@ -94,18 +86,17 @@ function AuctionMyBid() {
 
   return (
     <div className="mypageBodyRightHeader">
-      <h1>경매 내역</h1>
+      <h1>장터 내역</h1>
       <hr />
       <table className="myBidTable">
         <tbody>
           <tr>
-            <th className="myBidNo">경매 번호</th>
+            <th className="myBidNo">장터 번호</th>
             <th className="myBidNick">판매자</th>
-            <th className="myBidCard">경매카드</th>
-            <th className="myBidProduct">경매상품</th>
-            <th className="myBidMyPrice">입찰</th>
-            <th className="myBidCurrent">최고가</th>
-            <th className="myBidEnd">경매 종료</th>
+            <th className="myBidCard">장터카드</th>
+            <th className="myBidProduct">장터상품</th>
+            <th className="myBidMyPrice">구매가</th>
+            <th className="myBidEnd">구매일</th>
           </tr>
           {cards.map((card, index) => {
             return <AuctionMyBidTable card={card} key={index}/>

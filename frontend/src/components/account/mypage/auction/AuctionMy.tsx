@@ -10,7 +10,7 @@ const tempCard: Array<tempCard> = [
       "https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/XG2MW2H3ZRW5FHDVSOMF6FDT3E.jpg",
     title: "아이유꽃",
     current: 1,
-    end: "종료"
+    end: "aaa"
   },
   {
     auctionNo: 1,
@@ -18,7 +18,7 @@ const tempCard: Array<tempCard> = [
       "https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/XG2MW2H3ZRW5FHDVSOMF6FDT3E.jpg",
     title: "아이유꽃",
     current: 1,
-    end: "21-10-03"
+    end: "aaa"
   },
   {
     auctionNo: 1,
@@ -26,7 +26,7 @@ const tempCard: Array<tempCard> = [
       "https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/XG2MW2H3ZRW5FHDVSOMF6FDT3E.jpg",
     title: "아이유꽃",
     current: 1,
-    end: "종료"
+    end: "aaa"
   },
   {
     auctionNo: 1,
@@ -34,7 +34,7 @@ const tempCard: Array<tempCard> = [
       "https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/XG2MW2H3ZRW5FHDVSOMF6FDT3E.jpg",
     title: "아이유꽃",
     current: 1,
-    end: "종료"
+    end: "aaa"
   },
   {
     auctionNo: 1,
@@ -42,7 +42,7 @@ const tempCard: Array<tempCard> = [
       "https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/XG2MW2H3ZRW5FHDVSOMF6FDT3E.jpg",
     title: "아이유꽃",
     current: 1,
-    end: "종료"
+    end: "aaa"
   },
   {
     auctionNo: 1,
@@ -50,7 +50,7 @@ const tempCard: Array<tempCard> = [
       "https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/XG2MW2H3ZRW5FHDVSOMF6FDT3E.jpg",
     title: "아이유꽃",
     current: 1,
-    end: "종료"
+    end: "aaa"
   },
   {
     auctionNo: 1,
@@ -58,7 +58,7 @@ const tempCard: Array<tempCard> = [
       "https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/XG2MW2H3ZRW5FHDVSOMF6FDT3E.jpg",
     title: "아이유꽃",
     current: 1,
-    end: "종료"
+    end: "aaa"
   },
 ];
 
@@ -85,16 +85,16 @@ function AuctionMy() {
   return (
     <div>
       <div className="mypageBodyRightHeader">
-        <h1>내가 등록한 경매</h1>
+        <h1>내가 등록한 장터</h1>
         <hr />
         <table className="myAuctionTable">
         <tbody>
           <tr>
-            <th className="myAuctionNo">경매 번호</th>
-            <th className="myAuctionCard">경매카드</th>
-            <th className="myAuctionProduct">경매상품</th>
-            <th className="myAuctionCurrent">최고가</th>
-            <th className="myAuctionEnd">경매 종료</th>
+            <th className="myAuctionNo">장터 번호</th>
+            <th className="myAuctionCard">장터카드</th>
+            <th className="myAuctionProduct">장터상품</th>
+            <th className="myAuctionCurrent">판매가</th>
+            <th className="myAuctionEnd">구매자</th>
           </tr>
           {cards.map((card, index) => {
             return <AuctionMyTable card={card} key={index}/>

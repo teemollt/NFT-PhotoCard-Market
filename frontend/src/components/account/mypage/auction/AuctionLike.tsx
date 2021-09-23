@@ -69,7 +69,7 @@ function AuctionLike() {
   return (
     <div>
       <div className="mypageBodyRightHeader">
-        <h1>관심 경매</h1>
+        <h1>관심 장터</h1>
         <hr />
         {cards.map((card, index) => {
           console.log(card);

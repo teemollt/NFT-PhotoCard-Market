@@ -8,13 +8,12 @@ interface AuctionMyBidTableProps {
     imgUrl: string;
     title: string;
     myPrice: number;
-    current: number;
     end: string;
   };
 }
 
 function AuctionMyBidTable(props: AuctionMyBidTableProps) {
-  const { auctionNo, nick, imgUrl, title, myPrice, current, end } = props.card;
+  const { auctionNo, nick, imgUrl, title, myPrice,  end } = props.card;
   return (
     <tr className="auctionMyBidTable">
       <th className="myBidNo">{auctionNo}</th>
@@ -24,7 +23,6 @@ function AuctionMyBidTable(props: AuctionMyBidTableProps) {
       </th>
       <th className="myBidProduct">{title}</th>
       <th className="myBidMyPrice">{myPrice}</th>
-      <th className="myBidCurrent">{current}</th>
       <th className="myBidEnd">{end}</th>
     </tr>
   );

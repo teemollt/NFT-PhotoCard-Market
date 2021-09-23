@@ -15,7 +15,7 @@ export type temp = {
 
 function GalleryImg(props: GalleryImgProps): JSX.Element {
   const { view, temp } = props;
-  const [isHover, setIsHover] = useState(false);
+  const [isHover, setIsHover] = useState<boolean>(false);
 
   return (
     <div
