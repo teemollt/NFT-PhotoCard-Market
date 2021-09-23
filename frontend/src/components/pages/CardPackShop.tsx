@@ -46,7 +46,7 @@ function Stack(props: any) {
           {index === 4 && (
             <animated.img
               style={{
-                transform: f.interpolate([1, 0], ["scale(0.5)", "scale(1)"]),
+                transform: f.interpolate([1, 0], ["scale(0.5)", "scale(0.6)"]),
               }}
               src={props.image}
             />
@@ -57,12 +57,14 @@ function Stack(props: any) {
   );
 }
 
-function CardPackShop() {
+function CardPackShop(): JSX.Element {
   const [cardpack, setcardpack] = useState<any[]>([]);
   useEffect(() => {
     axios.get("/api/saleCard").then((res) => {
       console.log(res.data.res);
-      setcardpack(res.data.res);
+      setcardpack(
+        res.data.res.sort((a: any, b: any) => (a.salesNM < b.salesNM ? -1 : 1))
+      );
     });
   }, []);
   return (

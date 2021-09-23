@@ -5,11 +5,8 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
-import MainAuctionBody from "../market/MarketBody";
-import TextField from "@material-ui/core/TextField";
-import IconButton from "@material-ui/core/IconButton";
-import ImageSearchIcon from "@material-ui/icons/ImageSearch";
-import AuctionRegItem from "../market/MarketRegItem";
+import MarketBody from "../market/MarketBody";
+import MarketRegItem from "../market/MarketRegItem";
 import axios from "axios";
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -47,6 +44,7 @@ function a11yProps(index: any) {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     flexGrow: 1,
+    width:"800px"
   },
   tabs: {},
   registeritem: {
@@ -61,11 +59,6 @@ function MainAuction(): JSX.Element {
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
   };
-  // 검색어
-  let [search1, setsearch1] = useState("");
-  let [search2, setsearch2] = useState("");
-  let [search3, setsearch3] = useState("");
-  let [search4, setsearch4] = useState("");
   // 아티스트목록
   let [celeb, setceleb] = useState<any[]>([]);
   // 데이터저장하는곳
@@ -78,7 +71,7 @@ function MainAuction(): JSX.Element {
   return (
     <div className={classes.root}>
       <div className={classes.registeritem}>
-        <AuctionRegItem />
+        <MarketRegItem />
       </div>
       <Container>
         <Tabs
@@ -94,29 +87,11 @@ function MainAuction(): JSX.Element {
         </Tabs>
         {celeb.map((group, i) => {
           return (
-            <TabPanel value={value} index={i}>
-              <div style={{ textAlign: "right" }}>
-                <TextField
-                  id="standard-textarea"
-                  label="검색어를 입력해주세요"
-                  placeholder=""
-                  multiline
-                  onChange={(e) => {
-                    setsearch1(e.target.value);
-                  }}
-                />
-                <IconButton
-                  aria-label="delete"
-                  color="primary"
-                  style={{ cursor: "pointer" }}
-                >
-                  <ImageSearchIcon />
-                </IconButton>
-              </div>
-              <div style={{ textAlign: "center" }}>{group.groupNm}</div>
-              <br />
-              <MainAuctionBody celebNo={group.groupNo} />
-            </TabPanel>
+            <div>
+              <TabPanel value={value} index={i}>
+                <MarketBody celebNo={group.groupNo} />
+              </TabPanel>
+            </div>
           );
         })}
       </Container>

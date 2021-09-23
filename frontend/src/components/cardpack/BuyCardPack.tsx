@@ -64,7 +64,7 @@ const DialogActions = withStyles((theme: Theme) => ({
   },
 }))(MuiDialogActions);
 
-function BuyCardPack() {
+function BuyCardPack(): JSX.Element {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {

@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme: Theme) =>
       width: "100%",
       maxWidth: "1000px",
       margin: "auto",
-      marginTop: "10px",
       // maxHeight: 300,
     },
     inline: {
@@ -26,7 +25,6 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: "auto",
     },
     container: {
-      width: "800px",
       margin: "auto",
     },
     createicon: {
@@ -35,12 +33,12 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function CardpackReviewList(props: any) {
+function CardpackReviewList(props: any): JSX.Element {
   const classes = useStyles();
 
   const [reviews, setreviews] = useState<any[]>([]);
   const [currentPage, setcurrentPage] = useState(1);
-  const [reviewsPerPage, setreviewsPerPage] = useState(10);
+  const [reviewsPerPage, setreviewsPerPage] = useState(5);
 
   useEffect(() => {
     const fetchReviews = async () => {

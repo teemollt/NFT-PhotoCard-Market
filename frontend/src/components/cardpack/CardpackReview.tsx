@@ -6,7 +6,7 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 
-function CardpackReview(props: any) {
+function CardpackReview(props: any): JSX.Element {
   return (
     <div>
       <div>
@@ -28,7 +28,7 @@ function CardpackReview(props: any) {
                       >
                         {review.reviewUser}
                       </Typography>
-                      &nbsp;&nbsp;&nbsp;&nbsp;{review.reviewDate.slice(0, 10)}{" "}
+                      &nbsp;&nbsp;&nbsp;&nbsp;{review.reviewDate.slice(0, 10)}
                       {review.reviewDate.slice(14, 19)}
                     </React.Fragment>
                   }

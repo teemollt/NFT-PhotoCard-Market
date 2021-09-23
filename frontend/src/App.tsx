@@ -9,7 +9,7 @@ import CardPackDetail from "./components/pages/CardPackDetail";
 import Footer from "./components/main/Footer";
 import Service from "./components/pages/Service";
 import Join from "./components/pages/Join";
-import BidItem from "./components/pages/BidItem";
+import BidItem from "./components/pages/MarketItem";
 import MyPageUpdate from "./components/pages/MyPageUpdate";
 import CardPackShop from "./components/pages/CardPackShop";
 import GalleryBoard from "./components/pages/GalleryBoard";
@@ -59,6 +59,9 @@ function App(): JSX.Element {
         </Route>
         <Route path="/update">
           <MyPageUpdate />
+        </Route>
+        <Route path="/gboard">
+          <GalleryBoard />
         </Route>
         <Route path="/gboard">
           <GalleryBoard />

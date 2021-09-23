@@ -147,7 +147,7 @@ export type temp = {
   price: string;
 };
 
-function MarketRegItem() {
+function MarketRegItem(): JSX.Element {
   const [mycards, setmycards] = useState<any[]>([]);
   const [selectcard, setselectcard] = useState(0);
   const [selectcardimage, setselectcardimage] = useState<string>("");

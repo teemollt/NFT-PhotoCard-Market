@@ -64,7 +64,7 @@ const DialogActions = withStyles((theme: Theme) => ({
   },
 }))(MuiDialogActions);
 
-function MarketBuyItem(props: any) {
+function MarketBuyItem(props: any): JSX.Element {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {

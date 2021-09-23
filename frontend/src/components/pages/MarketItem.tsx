@@ -1,20 +1,10 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router";
-import "./BidItem.css";
-import Countdown from "react-countdown";
+import "./MarketItem.css";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Fab from "@material-ui/core/Fab";
 import Paper from "@material-ui/core/Paper";
-import TextField from "@material-ui/core/TextField";
-import SendIcon from "@material-ui/icons/Send";
 import AuctionBuyItem from "../market/MarketBuyItem";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -40,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
     iteminfo: {},
   })
 );
-function BidItem(): JSX.Element {
+function MarketItem(): JSX.Element {
   const classes = useStyles();
 
   const location: any = useLocation();
@@ -79,4 +69,4 @@ function BidItem(): JSX.Element {
   );
 }
 
-export default BidItem;
+export default MarketItem;
