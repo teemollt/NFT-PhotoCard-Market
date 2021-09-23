@@ -25,7 +25,7 @@ function CardPackInside(): JSX.Element {
             <div style={{ textAlign: "center" }}>S</div>
           </Grid>
           <Grid item xs={6}>
-            <div style={{ textAlign: "center" }}>test</div>
+            <div style={{ textAlign: "center" }}>???</div>
           </Grid>
         </ListItem>
         <ListItem button>
@@ -33,7 +33,7 @@ function CardPackInside(): JSX.Element {
             <div style={{ textAlign: "center" }}>A</div>
           </Grid>
           <Grid item xs={6}>
-            <div style={{ textAlign: "center" }}>test</div>
+            <div style={{ textAlign: "center" }}>???</div>
           </Grid>
         </ListItem>
         <ListItem button>
@@ -41,7 +41,7 @@ function CardPackInside(): JSX.Element {
             <div style={{ textAlign: "center" }}>B</div>
           </Grid>
           <Grid item xs={6}>
-            <div style={{ textAlign: "center" }}>test</div>
+            <div style={{ textAlign: "center" }}>10</div>
           </Grid>
         </ListItem>
         <ListItem button>
@@ -49,7 +49,7 @@ function CardPackInside(): JSX.Element {
             <div style={{ textAlign: "center" }}>C</div>
           </Grid>
           <Grid item xs={6}>
-            <div style={{ textAlign: "center" }}>test</div>
+            <div style={{ textAlign: "center" }}>20</div>
           </Grid>
         </ListItem>
       </List>
