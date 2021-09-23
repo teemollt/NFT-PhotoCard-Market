@@ -5,7 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
-import AuctionBuyItem from "../market/MarketBuyItem";
+import MarketBuyItem from "../market/MarketBuyItem";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -58,7 +58,7 @@ function MarketItem(): JSX.Element {
               </div>
               <div className={classes.paper2}>
                 <div className="buybtn">
-                  <AuctionBuyItem price={location.state.data.auction.price} />
+                  <MarketBuyItem price={location.state.data.auction.price} />
                 </div>
               </div>
             </Grid>
