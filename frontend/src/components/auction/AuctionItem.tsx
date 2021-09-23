@@ -25,7 +25,7 @@ function AuctionItem(props: any) {
     console.log(data);
 
     history.push({
-      pathname: `/biditem/${data.id}`,
+      pathname: `/biditem/${data.auction.auctionNo}`,
       state: { data: data },
     });
   }
@@ -35,14 +35,21 @@ function AuctionItem(props: any) {
       <Paper
         className={classes.paper}
         onClick={() => {
-          getitem(props.image);
+          getitem(props.item);
         }}
         style={{ cursor: "pointer" }}
       >
-        <img src={props.image.imgUrl} alt="" width="100%" height="300px" />
+        <img
+          src={props.item.card.cardImageUrl}
+          alt=""
+          width="100%"
+          height="300px"
+        />
         <div className="itemcardinfo">
-          <span className="producttitle">{props.image.title}</span>
-          <span className="productprice">{props.image.price}</span>
+          <span className="producttitle">
+            {props.item.auction.auctionTitle}
+          </span>
+          <span className="productprice">{props.item.auction.price}</span>
         </div>
       </Paper>
     </Grid>

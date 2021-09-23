@@ -76,7 +76,7 @@ function AuctionBuyItem(props: any) {
   return (
     <div>
       <Fab variant="extended" color="primary" onClick={handleClickOpen}>
-        바로 구매하기 {props.price}
+        {props.price} eth 구매
       </Fab>
       <Dialog
         onClose={handleClose}

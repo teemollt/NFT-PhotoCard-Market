@@ -115,7 +115,7 @@ function MainAuction(): JSX.Element {
               </div>
               <div style={{ textAlign: "center" }}>{group.groupNm}</div>
               <br />
-              <MainAuctionBody />
+              <MainAuctionBody celebNo={group.groupNo} />
             </TabPanel>
           );
         })}

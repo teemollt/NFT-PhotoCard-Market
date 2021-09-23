@@ -28,69 +28,28 @@ const useStyles = makeStyles((theme: Theme) =>
       height: "400px",
     },
     container: {
-      width: "60%",
+      width: "400px",
     },
     paper2: {
-      padding: theme.spacing(2),
+      padding: theme.spacing(1),
       textAlign: "center",
-      height: "330px",
     },
+    iteminfos: {
+      padding: 0,
+    },
+    iteminfo: {},
   })
 );
-
-function createData(id: number, name: string, bidprice: number) {
-  return { id, name, bidprice };
-}
-
-const rows = [
-  createData(1, "김도형", 159),
-  createData(2, "조영우", 160),
-  createData(3, "하지훈", 161),
-  createData(4, "신지현", 167),
-  createData(5, "남근형", 180),
-]
-  .sort((a, b) => b.bidprice - a.bidprice)
-  .slice(0, 5);
-
-const buynow = () => {
-  console.log("성공");
-};
 function BidItem(): JSX.Element {
   const classes = useStyles();
-
-  let [bidprice, setbidprice] = useState<number>(0);
-  // axios 경매물품 정보
-
-  const price = "1btc";
-
-  const moment = require("moment");
-  // 현재시간
-  var today = moment();
-  console.log(today);
-
-  var enddate = moment("2021-09-20T00:00:00");
-  console.log(enddate);
-  var duration = moment.duration(enddate.diff(today));
-  var rest = duration.asSeconds();
 
   const location: any = useLocation();
   return (
     <div style={{ textAlign: "center" }}>
-      {/* 남은시간 */}
-      <div>
-        <h1>
-          {rest > 0 ? (
-            <Countdown date={Date.now() + rest * 1000} />
-          ) : (
-            "경매가 종료되었습니다"
-          )}
-        </h1>
-      </div>
-      <br />
       <div>
         <Container className={classes.container}>
           <Grid container spacing={5}>
-            <Grid item xs={12} lg={6}>
+            <Grid item xs={12}>
               <Paper className={classes.paper}>
                 <img
                   src={location.state.data.imgUrl}
@@ -100,53 +59,17 @@ function BidItem(): JSX.Element {
                 />
               </Paper>
             </Grid>
-            <Grid item xs={12} lg={6}>
-              <div className={classes.paper2}>
-                {location.state.data.salesDetail}
-                <div className="buybtn">
-                  <AuctionBuyItem price={price} />
-                </div>
-                최근 입찰 기록
-                <TableContainer>
-                  <Table className="" size="small">
-                    <TableHead style={{ backgroundColor: "#F2F2F2" }}>
-                      <TableRow>
-                        <TableCell align="center">Price</TableCell>
-                        <TableCell align="center">User</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {rows.map((row) => (
-                        <TableRow key={row.id}>
-                          <TableCell component="th" scope="row" align="center">
-                            {row.bidprice}
-                          </TableCell>
-                          <TableCell align="center">{row.name}</TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
+            <Grid item xs={12}>
+              <div className={classes.iteminfo}>
+                <h1>{location.state.data.auction.auctionTitle}</h1>
               </div>
-              <div>
-                <TextField
-                  id="input-with-icon-grid"
-                  label="Price"
-                  type="number"
-                  fullWidth
-                  style={{ width: "90%" }}
-                  onChange={(e) => {
-                    console.log(typeof Number(e.target.value));
-                    setbidprice(2);
-                  }}
-                />
-                &nbsp;&nbsp;
-                <SendIcon
-                  style={{ height: "50px", cursor: "pointer" }}
-                  onClick={() => {
-                    console.log(bidprice);
-                  }}
-                />
+              <div className={classes.iteminfo}>
+                {location.state.data.auction.auctionDetil}
+              </div>
+              <div className={classes.paper2}>
+                <div className="buybtn">
+                  <AuctionBuyItem price={location.state.data.auction.price} />
+                </div>
               </div>
             </Grid>
           </Grid>

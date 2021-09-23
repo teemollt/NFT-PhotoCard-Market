@@ -236,10 +236,10 @@ function InquiryList(props: any) {
                       <TableCell style={{}} align="left">
                         {row.salesDetail}
                       </TableCell>
-                      <TableCell style={{width:"150px"}} align="left">
+                      <TableCell style={{ width: "150px" }} align="left">
                         {row.salesDetail}
                       </TableCell>
-                      <TableCell style={{width:"150px"}} align="left">
+                      <TableCell style={{ width: "150px" }} align="left">
                         {row.salesDetail}
                       </TableCell>
                     </TableRow>
