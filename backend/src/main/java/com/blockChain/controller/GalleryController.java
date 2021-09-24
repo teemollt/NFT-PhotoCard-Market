@@ -5,6 +5,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,5 +31,12 @@ public class GalleryController {
 			@PathVariable(name="arraydiv2") Long arraydiv2
 			){
 		return gSvc.galleryList(memberNo, arraydiv1, celebPk, arraydiv2);
+	}
+	
+	@PostMapping("/insert")
+	public Map<String, Object>galleryInsert(
+			@RequestBody Map<String,Object> req
+			){
+		return gSvc.galleryInsert(req);
 	}
 }
