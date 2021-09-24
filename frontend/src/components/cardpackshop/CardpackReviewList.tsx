@@ -54,7 +54,7 @@ function CardpackReviewList(props: any): JSX.Element {
         });
     };
     fetchReviews();
-  });
+  }, []);
   // Get current reviews
   const indexOfLastReview = currentPage * reviewsPerPage;
   const indexOfFirstReview = indexOfLastReview - reviewsPerPage;

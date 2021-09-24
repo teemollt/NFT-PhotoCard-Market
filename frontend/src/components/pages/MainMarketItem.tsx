@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router";
-import "./MarketItem.css";
+import "./MainMarketItem.css";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
@@ -54,7 +54,7 @@ function MarketItem(): JSX.Element {
                 <h1>{location.state.data.auction.auctionTitle}</h1>
               </div>
               <div className={classes.iteminfo}>
-                {location.state.data.auction.auctionDetil}
+                {location.state.data.auction.auctionDetail}
               </div>
               <div className={classes.paper2}>
                 <div className="buybtn">

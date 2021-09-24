@@ -14,6 +14,12 @@ function MarketItem(props: any) {
     }))
   );
   let history = useHistory();
+  function itemdetail(data: any) {
+    history.push({
+      pathname: `/marketitem/${data.card.cardNo}`,
+      state: { data: data },
+    });
+  }
   return (
     <div
       className="container"
@@ -21,10 +27,12 @@ function MarketItem(props: any) {
       onMouseLeave={() => setOpen(false)}
       onClick={() => {
         console.log(props.item);
-
+        itemdetail(props.item);
       }}
     >
-      <div style={{ textAlign: "center" }}>{props.item.auction.auctionTitle}</div>
+      <div style={{ textAlign: "center" }}>
+        {props.item.auction.auctionTitle}
+      </div>
       {cards.map(({ z, opacity }, index) => (
         <animated.div
           style={{
@@ -38,7 +46,7 @@ function MarketItem(props: any) {
           {index === 4 && (
             <animated.img
               style={{
-                transform: f.interpolate([1, 0], ["scale(0.5)", "scale(0.6)"]),
+                transform: f.interpolate([1, 0], ["scale(0.7)", "scale(0.9)"]),
               }}
               src={props.image}
             />
