@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
 import "./MarketBody.css";
 import MarketItem from "./MarketItem";
 import axios from "axios";
@@ -14,8 +12,6 @@ const useStyles = makeStyles((theme: Theme) =>
     paper: {
       padding: theme.spacing(2),
       textAlign: "center",
-      color: theme.palette.text.secondary,
-      height: "300px",
     },
   })
 );
@@ -35,14 +31,15 @@ function MarketBody(props: any): JSX.Element {
       .catch();
   }, []);
   return (
-    <div className={classes.root}>
-      <Container>
-        <Grid container spacing={2}>
-          {items.map((item, i) => (
-            <MarketItem item={item} key={i} />
-          ))}
-        </Grid>
-      </Container>
+    <div className="main">
+      {items.map((item, i) => (
+        <MarketItem
+          // image={item.card.cardImgUrl}
+          image="/images/cardshop.png"
+          background="#52649e"
+          item={item}
+        />
+      ))}
     </div>
   );
 }
