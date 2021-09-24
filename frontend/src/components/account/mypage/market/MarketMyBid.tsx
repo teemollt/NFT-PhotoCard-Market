@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Pagination } from "@mui/material";
-import AuctionMyBidTable from "./AuctionMyBidTable";
-import "./AuctionMyBid.css";
+import MarketMyBidTable from "./MarketMyBidTable";
+import "./MarketMyBid.css";
 
 const tempCard: Array<tempCard> = [
   {
-    auctionNo: 1,
+    marketNo: 1,
     nick: "sss",
     imgUrl: "https://newsimg.sedaily.com/2021/03/24/22JXKJ0JJZ_1.jpg",
     title: "블랙야크",
@@ -13,7 +13,7 @@ const tempCard: Array<tempCard> = [
     end: "21-10-04"
   },
   {
-    auctionNo: 2,
+    marketNo: 2,
     nick: "sss",
     imgUrl: "https://newsimg.sedaily.com/2021/03/24/22JXKJ0JJZ_1.jpg",
     title: "블랙야크",
@@ -21,7 +21,7 @@ const tempCard: Array<tempCard> = [
     end: "21-10-04"
   },
   {
-    auctionNo: 3,
+    marketNo: 3,
     nick: "sss",
     imgUrl: "https://newsimg.sedaily.com/2021/03/24/22JXKJ0JJZ_1.jpg",
     title: "블랙야크",
@@ -29,7 +29,7 @@ const tempCard: Array<tempCard> = [
     end: "21-10-04"
   },
   {
-    auctionNo: 4,
+    marketNo: 4,
     nick: "sss",
     imgUrl: "https://newsimg.sedaily.com/2021/03/24/22JXKJ0JJZ_1.jpg",
     title: "블랙야크",
@@ -37,7 +37,7 @@ const tempCard: Array<tempCard> = [
     end: "21-10-04"
   },
   {
-    auctionNo: 5,
+    marketNo: 5,
     nick: "sss",
     imgUrl: "https://newsimg.sedaily.com/2021/03/24/22JXKJ0JJZ_1.jpg",
     title: "블랙야크",
@@ -45,7 +45,7 @@ const tempCard: Array<tempCard> = [
     end: "21-10-04"
   },
   {
-    auctionNo: 6,
+    marketNo: 6,
     nick: "sss",
     imgUrl: "https://newsimg.sedaily.com/2021/03/24/22JXKJ0JJZ_1.jpg",
     title: "블랙야크",
@@ -53,7 +53,7 @@ const tempCard: Array<tempCard> = [
     end: "21-10-04"
   },
   {
-    auctionNo: 7,
+    marketNo: 7,
     nick: "sss",
     imgUrl: "https://newsimg.sedaily.com/2021/03/24/22JXKJ0JJZ_1.jpg",
     title: "블랙야크",
@@ -64,7 +64,7 @@ const tempCard: Array<tempCard> = [
 ];
 
 export type tempCard = {
-  auctionNo: number
+  marketNo: number
   nick: string
   imgUrl: string;
   title: string;
@@ -76,7 +76,7 @@ export interface State {
   productTemp: Array<tempCard>;
 }
 
-function AuctionMyBid() {
+function MarketMyBid() {
   const [cards, setCards] = useState<Array<tempCard>>(tempCard.slice(0, 5));
 
   const handlePage = (e: any) => {
@@ -99,7 +99,7 @@ function AuctionMyBid() {
             <th className="myBidEnd">구매일</th>
           </tr>
           {cards.map((card, index) => {
-            return <AuctionMyBidTable card={card} key={index}/>
+            return <MarketMyBidTable card={card} key={index}/>
           })}
         </tbody>
       </table>
@@ -115,4 +115,4 @@ function AuctionMyBid() {
   );
 }
 
-export default AuctionMyBid;
+export default MarketMyBid;

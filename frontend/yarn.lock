@@ -2652,10 +2652,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^16.8.6 || ^17.0.0", "@types/react@^17.0.20":
-  "integrity" "sha512-wWZrPlihslrPpcKyCSlmIlruakxr57/buQN1RjlIeaaTWDLtJkTtRW429MoQJergvVKc4IWBpRhWw7YNh/7GVA=="
-  "resolved" "https://registry.npmjs.org/@types/react/-/react-17.0.20.tgz"
-  "version" "17.0.20"
+"@types/react@*", "@types/react@^16.8.6 || ^17.0.0", "@types/react@^17.0.24":
+  "integrity" "sha512-eIpyco99gTH+FTI3J7Oi/OH8MZoFMJuztNRimDOJwH4iGIsKV2qkGnk4M9VzlaVWeEEWLWSQRy0FEA0Kz218cg=="
+  "resolved" "https://registry.npmjs.org/@types/react/-/react-17.0.24.tgz"
+  "version" "17.0.24"
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
