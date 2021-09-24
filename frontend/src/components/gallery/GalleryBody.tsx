@@ -15,21 +15,27 @@ export type temp = {
 
 function GalleryImg(props: GalleryImgProps): JSX.Element {
   const { view, temp } = props;
-  const [isHover, setIsHover] = useState(false);
 
   return (
-    <div
-      className="galleryImg"
-      onMouseEnter={() => setIsHover(true)}
-      onMouseLeave={() => setIsHover(false)}
-    >
-      <p className={isHover ? "galleryImgLevel" + view : "hidden"}>
-        {temp.level}
-      </p>
-      <p className={isHover ? "galleryImgTitle" + view : "hidden"}>
-        {temp.title}
-      </p>
-      <img className={"GalleryGridImg" + view} src={temp.imgUrl} alt="" />
+    <div className={"card " + ("view"+view)}>
+      <div className={"front " + ("view"+view)}>
+        <figure>
+        <img src={temp.imgUrl} className={"view"+view} alt=""/>
+        </figure>
+      </div>
+      <div className={"back " + ("view"+view)} >
+        <figure>
+          <img
+          className={"view"+view} 
+            src="https://mblogthumb-phinf.pstatic.net/20160710_178/wkao9489_1468119896640mjFMx_JPEG/NaverBlog_20160710_120456_08.jpg?type=w2"
+            alt=""
+          />
+          <figcaption>
+            <h3>{temp.title}</h3>
+            <p>{temp.level}</p>
+          </figcaption>
+        </figure>
+      </div>
     </div>
   );
 }

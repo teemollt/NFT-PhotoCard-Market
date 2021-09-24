@@ -1,0 +1,8 @@
+.galleryBoardNewTitle, .galleryBoardNewContent, .galleryBoardNewBtn {
+  font-family: "Work Sans", "Gowun Dodum" !important;
+  font-weight: 900 !important;
+}
+
+.galleryBoardNewContent > p {
+  margin: 0;
+}

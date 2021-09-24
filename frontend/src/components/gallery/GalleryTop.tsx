@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Pagination } from "@mui/material";
 import GalleryBody from "../gallery/GalleryBody";
+import axios from "axios";
 import "./GalleryTop.css";
 
 const tempGallery: Array<temp> = [
@@ -78,8 +80,25 @@ const tempGallery: Array<temp> = [
     celeb: "1",
   },
   {
-    imgUrl:
-      "https://image.msscdn.net/data/curating/16948/16948_1_org.jpg",
+    imgUrl: "https://image.msscdn.net/data/curating/16948/16948_1_org.jpg",
+    title: "선글라스",
+    level: "C",
+    celeb: "1",
+  },
+  {
+    imgUrl: "https://image.msscdn.net/data/curating/16948/16948_1_org.jpg",
+    title: "선글라스",
+    level: "C",
+    celeb: "1",
+  },
+  {
+    imgUrl: "https://image.msscdn.net/data/curating/16948/16948_1_org.jpg",
+    title: "선글라스",
+    level: "C",
+    celeb: "1",
+  },
+  {
+    imgUrl: "https://image.msscdn.net/data/curating/16948/16948_1_org.jpg",
     title: "선글라스",
     level: "C",
     celeb: "1",
@@ -93,22 +112,15 @@ export type temp = {
   celeb: string;
 };
 
-export interface State {
-  topMenu: number;
-  view: number;
-  sub: boolean;
-  subMem: number;
-  imgArray: number;
-  galleryImg: Array<temp>;
-}
-
 function GalleryTop() {
-  const [topMenu, setTopMenu] = useState(0);
-  const [view, setView] = useState(1);
-  const [sub, setSub] = useState(false);
-  const [subMem, setSubMem] = useState(99);
-  const [imgArray, setImgArray] = useState(0);
-  const [galleryImg, setGalleryImg] = useState(tempGallery);
+  const [topMenu, setTopMenu] = useState<number>(0);
+  const [view, setView] = useState<number>(1);
+  const [sub, setSub] = useState<boolean>(false);
+  const [subMem, setSubMem] = useState<number>(99);
+  const [imgArray, setImgArray] = useState<number>(0);
+  const [galleryImg, setGalleryImg] = useState<Array<temp>>(
+    tempGallery.slice(0, 12)
+  );
 
   const handleTopMenuGroup = (id: number) => {
     if (id === 0) {
@@ -129,6 +141,10 @@ function GalleryTop() {
     }
   };
 
+  const handlePage = (e: any) => {
+    const page = Number(e.target.innerText);
+    setGalleryImg(tempGallery.slice(page * 12 - 12, page * 12));
+  };
 
   return (
     <div>
@@ -245,10 +261,21 @@ function GalleryTop() {
         </div>
       </div>
       <div className="galleryBody">
-        {galleryImg.map((temp) => {
-          return <GalleryBody view={view} temp={temp} key={temp.title} />;
+        {galleryImg.map((temp, index) => {
+          return <GalleryBody view={view} temp={temp} key={index} />;
         })}
+        {/* {galleryImg.map((temp, index) => {
+          return <Test view={view} temp={temp} key={index} className="test"/>;
+        })} */}
       </div>
+      <Pagination
+        className="GalleryBoardPage"
+        count={Math.ceil(tempGallery.length / 8)}
+        shape="rounded"
+        onChange={handlePage}
+        hidePrevButton
+        hideNextButton
+      />
     </div>
   );
 }

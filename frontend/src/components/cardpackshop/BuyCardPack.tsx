@@ -64,7 +64,7 @@ const DialogActions = withStyles((theme: Theme) => ({
   },
 }))(MuiDialogActions);
 
-function BuyCardPack() {
+function BuyCardPack(): JSX.Element {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -73,16 +73,22 @@ function BuyCardPack() {
   const handleClose = () => {
     setOpen(false);
   };
+  const pay = () => {
+    setOpen(false);
+    // 도형님의 결제코드
+  };
   return (
     <div>
-      <Button
-        variant="contained"
-        color="secondary"
-        onClick={handleClickOpen}
-        fullWidth
-      >
-        구매하기
-      </Button>
+      <div style={{ textAlign: "center" }}>
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={handleClickOpen}
+          style={{ width: "300px", marginTop: "5px" }}
+        >
+          구매하기
+        </Button>
+      </div>
       <Dialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
@@ -96,7 +102,10 @@ function BuyCardPack() {
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose} color="primary">
-            Save changes
+            cancel
+          </Button>
+          <Button autoFocus onClick={pay} color="primary">
+            pay
           </Button>
         </DialogActions>
       </Dialog>

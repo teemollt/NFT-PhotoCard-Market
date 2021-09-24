@@ -64,7 +64,7 @@ const DialogActions = withStyles((theme: Theme) => ({
   },
 }))(MuiDialogActions);
 
-function AuctionBuyItem(props: any) {
+function MarketBuyItem(props: any): JSX.Element {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -76,7 +76,7 @@ function AuctionBuyItem(props: any) {
   return (
     <div>
       <Fab variant="extended" color="primary" onClick={handleClickOpen}>
-        바로 구매하기 {props.price}
+        {props.price} eth 구매
       </Fab>
       <Dialog
         onClose={handleClose}
@@ -99,4 +99,4 @@ function AuctionBuyItem(props: any) {
   );
 }
 
-export default AuctionBuyItem;
+export default MarketBuyItem;
