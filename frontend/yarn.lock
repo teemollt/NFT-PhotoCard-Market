@@ -2162,7 +2162,6 @@
   "resolved" "https://registry.npmjs.org/@react-spring/types/-/types-9.2.4.tgz"
   "version" "9.2.4"
 
-"@react-spring/web@^9.2.4":
 "@react-spring/web@~9.2.0":
   "integrity" "sha512-vtPvOalLFvuju/MDBtoSnCyt0xXSL6Amyv82fljOuWPl1yGd4M1WteijnYL9Zlriljl0a3oXcPunAVYTD9dbDQ=="
   "resolved" "https://registry.npmjs.org/@react-spring/web/-/web-9.2.4.tgz"
@@ -12003,7 +12002,6 @@
     "strip-ansi" "6.0.0"
     "text-table" "0.2.0"
 
-"react-dom@*", "react-dom@^16.8.0  || ^17.0.0", "react-dom@^16.8.0 || ^17.0.0", "react-dom@^17.0.2", "react-dom@>= 15", "react-dom@>= 16.8.0", "react-dom@>=16.6.0":
 "react-devtools-core@^4.6.0":
   "integrity" "sha512-Kg/LhDkdt9J0ned1D1RfeuSdX4cKW83/valJLYswGdsYc0g2msmD0kfYozsaRacjDoZwcKlxGOES1wrkET5O6Q=="
   "resolved" "https://registry.npmjs.org/react-devtools-core/-/react-devtools-core-4.18.0.tgz"
@@ -12288,7 +12286,6 @@
     "loose-envify" "^1.4.0"
     "prop-types" "^15.6.2"
 
-"react@*", "react@^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0", "react@^16.8.0  || ^17.0.0", "react@^16.8.0 || ^17.0.0", "react@^16.8.3 || ^17", "react@^17.0.0", "react@^17.0.2", "react@>= 15", "react@>= 16", "react@>= 16.8.0", "react@>=15", "react@>=16.6.0", "react@>=16.8.0", "react@17.0.2":
 "react-use-measure@^2.0.4":
   "integrity" "sha512-7K2HIGaPMl3Q9ZQiEVjen3tRXl4UDda8LiTPy/QxP8dP2rl5gPBhf7mMH6MVjjRNv3loU7sNzey/ycPNnHVTxQ=="
   "resolved" "https://registry.npmjs.org/react-use-measure/-/react-use-measure-2.0.4.tgz"
