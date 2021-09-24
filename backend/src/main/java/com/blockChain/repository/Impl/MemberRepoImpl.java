@@ -10,15 +10,25 @@ import com.blockChain.domain.QCeleb_Like;
 import com.blockChain.domain.QMember;
 import com.blockChain.domain.QMember_Gall_Like;
 import com.blockChain.domain.QMember_Grade;
+import com.blockChain.domain.QProduct;
+import com.blockChain.domain.QProduct_Media;
+import com.blockChain.domain.QProduct_Token;
+import com.blockChain.domain.QToken;
+import com.blockChain.domain.QToken_Owner;
 import com.blockChain.dto.GalleryArticleDTO;
+import com.blockChain.dto.GalleryCardDTO;
 import com.blockChain.dto.MemberDTO;
 import com.blockChain.dto.MypageDTO;
+import com.blockChain.dto.TokenDTO;
 import com.blockChain.repository.MemberRepoCustom;
 import com.querydsl.core.types.ExpressionUtils;
+import com.querydsl.core.types.Path;
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.group.GroupBy;
 import lombok.RequiredArgsConstructor;
 
 @Repository
@@ -70,6 +80,53 @@ public class MemberRepoImpl implements MemberRepoCustom{
 				
 				
 	}
+	@Override
+	public List<GalleryCardDTO> galleryList(Long memberNo, Long arraydiv1, Long celebPk, Long arraydiv2){
+		QMember qm = QMember.member;
+		QProduct_Token qpt = QProduct_Token.product_Token;
+		QProduct_Media qpm= QProduct_Media.product_Media;
+		QProduct qp = QProduct.product;
+		QToken qt = QToken.token;
+		QToken_Owner qto= QToken_Owner.token_Owner;
+		BooleanBuilder builder = new BooleanBuilder();
+		builder.and(qto.member.memberNo.eq(memberNo));
+		if(arraydiv1 == 0L) {//전체불러오기
+			
+		}
+		if(arraydiv1 == 1L) { //그룹별
+			builder.and(qp.celeb.group.groupNo.eq(celebPk));
+		}
+		if(arraydiv1 == 2L) {//멤버별
+			builder.and(qp.celeb.celebNo.eq(celebPk));
+		}
+//		Path<Object> fieldPath = Expressions.path(Object.class, QPerson.person, fieldName);
+		
+		
+		List<GalleryCardDTO> aa = queryFactory.from(qto)
+		.join(qt).on(qt.tokenNo.eq(qto.token.tokenNo))
+		.join(qpt).on(qpt.token.tokenNo.eq(qt.tokenNo))
+		.join(qp).on(qpt.product.productNo.eq(qp.productNo))
+		.join(qpm).on(qp.productNo.eq(qpm.product.productNo))
+		.where(builder)
+		.transform(GroupBy.groupBy(qp.productNo)
+				.list(Projections.constructor(GalleryCardDTO.class
+				, qp.productNo
+				, qp.productNm
+				, qpm.productMediaAdres
+				, qp.productGrade.productGradeNo
+				, qp.productGrade.productGrade
+				, GroupBy.list(Projections.constructor(TokenDTO.class
+						, qt.tokenNo
+						, qt.tokenSeriarlizeNo
+						, qto.ownDate
+						)
+					)
+				)));
+		
+		return aa;
+	}
+	
+	
 	
 	
 }

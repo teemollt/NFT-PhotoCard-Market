@@ -21,7 +21,7 @@ import com.blockChain.domain.Member;
 import com.blockChain.domain.Member_Grade;
 import com.blockChain.domain.RefreshToken;
 import com.blockChain.dto.MypageDTO;
-import com.blockChain.dto.TokenDto;
+import com.blockChain.dto.LoginTokenDTO;
 import com.blockChain.jwt.TokenProvider;
 import com.blockChain.repository.CelebRepo;
 import com.blockChain.repository.Celeb_LikeRepo;
@@ -98,7 +98,7 @@ public class MemberSvcImpl implements MemberSvcInter{
 		 return res;
 	}
 	@Override
-	public TokenDto login(Member member) {
+	public LoginTokenDTO login(Member member) {
 
 		// 유저 정보 검증
 
@@ -118,7 +118,7 @@ public class MemberSvcImpl implements MemberSvcInter{
 		String memberId = memberRepo.checkId(member.getMemberId()).get().getMemberId();
 		System.out.println(memberId);
 		// Authentication를 이용해 jwt토큰 생성
-		TokenDto jwt = tokenProvider.generateTokenDto(authentication, memberId);
+		LoginTokenDTO jwt = tokenProvider.generateTokenDto(authentication, memberId);
 		System.out.println(jwt);
 		// -------- 토큰 생성완료
 

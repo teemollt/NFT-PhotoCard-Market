@@ -95,7 +95,7 @@ public class AdminSvcImpl implements AdminSvcInter{
     
     //토큰
     private final int TOKEN_NUM = 1200;
-    private final int MAX_OWN = 15; //예시입력에서 한사람이 가질 수 있는 최대 토큰 수
+    private final int MAX_OWN = 10; //예시입력에서 한사람이 가질 수 있는 최대 토큰 수
     //제품등급목록
     private final String[] PRODUCT_GRADE = {"SS","S","A","B","C"};
     private final Long[] PRODUCT_GRADE_PERCENT = {3L,7L,25L,30L,35L};
@@ -233,13 +233,13 @@ public class AdminSvcImpl implements AdminSvcInter{
 		res.put("insertMember", insertMember());
 		res.put("insertCelebLike", insertCelebLike());
 		res.put("insertToken", insertToken());
-		res.put("insertTokenOwner", insertTokenOwner());
 		res.put("insertProductGrade", insertProductGrade());
 		res.put("insertProduct", insertProduct());
 		res.put("insertProductMedia", insertProductMedia());
 		res.put("insertProductToken", insertProductToken());
 		res.put("insertSales", insertSales());
 		res.put("insertSalesProduct",insertSalesProduct());
+		res.put("insertTokenOwner", insertTokenOwner());
 		res.put("insertSL", insertSL());
 		res.put("reply", reply());
 		res.put("insertAuction",insertAuction());
@@ -406,11 +406,12 @@ public class AdminSvcImpl implements AdminSvcInter{
 		ArrayList<String> msg = new ArrayList<>();
 		Random random = new Random();
 		List<Member> members = memberRepo.findAll();
-		List<Token> tokens = tokenRepo.findAll();
+		List<Product_Token> tokens = ptRepo.findAll();
 		int cnt = 0;
 		for(int i = 0 ; i < members.size();i++) {
-			int rand = random.nextInt(MAX_OWN);
+			int rand = random.nextInt(MAX_OWN)+5;
 			int check[] =new int[tokens.size()];
+			System.out.println(tokens.size());
 			for (int g=0 ; g<rand; g++){
 				int tokenRand = random.nextInt(tokens.size());
 				if(check[tokenRand]==0) {
@@ -418,7 +419,7 @@ public class AdminSvcImpl implements AdminSvcInter{
 					check[tokenRand] = 1;
 					Token_Owner tokenOwner = new Token_Owner();
 					tokenOwner.setMember(members.get(i));
-					tokenOwner.setToken(tokens.get(tokenRand));
+					tokenOwner.setToken(tokens.get(tokenRand).getToken());
 					tokenOwner.setOwnDate(LocalDateTime.now().minusDays(cnt%10).minusMinutes(3*cnt));
 					Token_Owner saved = tokenOwnerRepo.save(tokenOwner);
 					

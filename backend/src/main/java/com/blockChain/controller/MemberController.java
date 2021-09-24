@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.blockChain.domain.Member;
-import com.blockChain.dto.TokenDto;
+import com.blockChain.dto.LoginTokenDTO;
 import com.blockChain.dto.UpdateMemberDTO;
 import com.blockChain.service.MemberSvcInter;
 
@@ -31,7 +31,7 @@ public class MemberController {
 	@PostMapping("/login")
 	public Map<String, Object> login(@RequestBody Member member) {
 		Map<String, Object> ret = new HashMap<>();
-		TokenDto token;
+		LoginTokenDTO token;
 		try {
 			token = ms.login(member);
 		} catch (IllegalStateException e) {

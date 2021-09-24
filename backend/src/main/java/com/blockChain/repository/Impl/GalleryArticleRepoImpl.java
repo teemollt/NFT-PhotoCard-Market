@@ -42,14 +42,12 @@ public class GalleryArticleRepoImpl implements GalleryArticleRepoCustom{
 						, qm.memberNick)
 				, qg.galleryArticleNo
 				, qg.galleryArticleContent
-//				, pql.toMember.count()
-				, qm.memberNo
-				
+				, JPAExpressions.select(pql.count())
+					.from(pql)
+					.where(pql.toMember.memberNo.eq(qm.memberNo))
 				))
 				.from(qg)
 				.join(qm).on(qg.member.memberNo.eq(qm.memberNo))
-//				.join(pql).on(pql.toMember.memberNo.eq(qm.memberNo))
-//				.join(qm).on(pql.toMember.memberNo.eq(qm.memberNo))
 				.orderBy(qg.galleryArticleNo.asc())
 				.fetch());
 	}
