@@ -1,38 +1,43 @@
-import React, { useState } from "react";
+import React from "react";
 import "./GalleryBody.css";
 
-interface GalleryImgProps {
+interface GalleryBodyProps {
   view: number;
-  temp: temp;
+  card: {
+    cardGradeNM: string;
+    cardGradeNo: number;
+    cardImgUrl: string;
+    cardNM: string;
+    cardNo: number;
+    token: {
+      ownDate: string;
+      tokenNo: number;
+      tokenSeriarlizeNo: string;
+    };
+  };
 }
 
-export type temp = {
-  imgUrl: string;
-  title: string;
-  level: string;
-  celeb: string;
-};
-
-function GalleryImg(props: GalleryImgProps): JSX.Element {
-  const { view, temp } = props;
+function GalleryBody(props: GalleryBodyProps) {
+  const { view } = props;
+  const { cardGradeNM, cardImgUrl, cardNM } = props.card;
 
   return (
-    <div className={"card " + ("view"+view)}>
-      <div className={"front " + ("view"+view)}>
+    <div className={"card " + ("view" + view)}>
+      <div className={"front " + ("view" + view)}>
         <figure>
-        <img src={temp.imgUrl} className={"view"+view} alt=""/>
+          <img src={cardImgUrl} className={"view" + view} alt="" />
         </figure>
       </div>
-      <div className={"back " + ("view"+view)} >
+      <div className={"back " + ("view" + view)}>
         <figure>
           <img
-          className={"view"+view} 
+            className={"view" + view}
             src="https://mblogthumb-phinf.pstatic.net/20160710_178/wkao9489_1468119896640mjFMx_JPEG/NaverBlog_20160710_120456_08.jpg?type=w2"
             alt=""
           />
           <figcaption>
-            <h3>{temp.title}</h3>
-            <p>{temp.level}</p>
+            <h3>{cardNM}</h3>
+            <p>{cardGradeNM}</p>
           </figcaption>
         </figure>
       </div>
@@ -40,4 +45,4 @@ function GalleryImg(props: GalleryImgProps): JSX.Element {
   );
 }
 
-export default GalleryImg;
+export default GalleryBody;

@@ -3,21 +3,25 @@ import "./GalleryBoardPost.css";
 
 interface GalleryBoardPostProps {
   post: {
-    postNo: number;
-    nick: string;
-    content: string;
-    like: number;
+    galleryArticleContent: string;
+    galleryArticleNo: number;
+    likes: number;
+    member: {
+      memberNick: string;
+      memberNo: number;
+    };
   };
 }
 
 function GalleryBoardPost(props: GalleryBoardPostProps) {
-  const { postNo, nick, content, like } = props.post;
+  const { galleryArticleContent, galleryArticleNo, likes } = props.post;
+  const { memberNick, memberNo } = props.post.member;
   return (
     <tr className="postBody">
-      <th className="postBodyNo">{postNo}</th>
-      <th className="postBodyNick">{nick}</th>
-      <th className="postBodyContent">{content}</th>
-      <th className="postBodyLike">{like}</th>
+      <th className="postBodyNo">{galleryArticleNo}</th>
+      <th className="postBodyNick">{memberNick}</th>
+      <th className="postBodyContent">{galleryArticleContent}</th>
+      <th className="postBodyLike">{likes}</th>
     </tr>
   );
 }

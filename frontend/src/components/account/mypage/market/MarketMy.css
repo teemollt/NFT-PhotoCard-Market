@@ -1,4 +1,4 @@
-.myAuctionTable {
+.myMarketTable {
   margin-top: 20px;
   width: 100%;
   text-align: center;
@@ -8,22 +8,22 @@
   clear: both;
 }
 
-.myAuctionTable > tbody > tr > th {
+.myMarketTable > tbody > tr > th {
   border-bottom: 1px solid lightgray;
   text-align: left;
   padding: 20px;
 }
 
-.myAuctionCard {
+.myMarketCard {
   width: 100px;
 }
 
-.myAuctionNo,
-.myAuctionEnd,
-.myAuctionCurrent {
+.myMarketNo,
+.myMarketEnd,
+.myMarketCurrent {
   width: 90px;
 }
 
-.myAuctionProduct {
+.myMarketProduct {
   width: 300px;
 }

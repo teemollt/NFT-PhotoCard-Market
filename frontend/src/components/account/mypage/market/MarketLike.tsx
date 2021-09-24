@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Pagination } from "@mui/material";
-import AuctionCard from "./AuctionCard";
+import MarketCard from "./MarketCard";
 
 const tempCard: Array<tempCard> = [
   {
@@ -58,7 +58,7 @@ export type tempCard = {
   price: number;
 };
 
-function AuctionLike() {
+function MarketLike() {
   const [cards, setCards] = useState<Array<tempCard>>(tempCard.slice(0, 6));
 
   const handlePage = (e: any) => {
@@ -73,7 +73,7 @@ function AuctionLike() {
         <hr />
         {cards.map((card, index) => {
           console.log(card);
-          return <AuctionCard card={card} key={index} />;
+          return <MarketCard card={card} key={index} />;
         })}
         <Pagination
           className="GalleryBoardPage"
@@ -88,4 +88,4 @@ function AuctionLike() {
   );
 }
 
-export default AuctionLike;
+export default MarketLike;

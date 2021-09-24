@@ -13,7 +13,7 @@ body {
   background-image: url(https://awv3node-homepage.surge.sh/build/assets/stars.svg);
 }
 
-#root {
+/* #root {
   overflow: hidden;
   margin: 0;
   padding: 0;
@@ -24,7 +24,7 @@ body {
   justify-content: center;
   perspective: 350px;
   perspective-origin: 50% 50%;
-}
+} */
 
 .main {
   display: grid;

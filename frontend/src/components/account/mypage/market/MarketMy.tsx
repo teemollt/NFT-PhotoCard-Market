@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Pagination } from "@mui/material";
-import AuctionMyTable from "./AuctionMyTable";
-import './AuctionMy.css'
+import MarketMyTable from "./MarketMyTable";
+import './MarketMy.css'
 
 const tempCard: Array<tempCard> = [
   {
-    auctionNo: 1,
+    marketNo: 1,
     imgUrl:
       "https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/XG2MW2H3ZRW5FHDVSOMF6FDT3E.jpg",
     title: "아이유꽃",
@@ -13,7 +13,7 @@ const tempCard: Array<tempCard> = [
     end: "aaa"
   },
   {
-    auctionNo: 1,
+    marketNo: 1,
     imgUrl:
       "https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/XG2MW2H3ZRW5FHDVSOMF6FDT3E.jpg",
     title: "아이유꽃",
@@ -21,7 +21,7 @@ const tempCard: Array<tempCard> = [
     end: "aaa"
   },
   {
-    auctionNo: 1,
+    marketNo: 1,
     imgUrl:
       "https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/XG2MW2H3ZRW5FHDVSOMF6FDT3E.jpg",
     title: "아이유꽃",
@@ -29,7 +29,7 @@ const tempCard: Array<tempCard> = [
     end: "aaa"
   },
   {
-    auctionNo: 1,
+    marketNo: 1,
     imgUrl:
       "https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/XG2MW2H3ZRW5FHDVSOMF6FDT3E.jpg",
     title: "아이유꽃",
@@ -37,7 +37,7 @@ const tempCard: Array<tempCard> = [
     end: "aaa"
   },
   {
-    auctionNo: 1,
+    marketNo: 1,
     imgUrl:
       "https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/XG2MW2H3ZRW5FHDVSOMF6FDT3E.jpg",
     title: "아이유꽃",
@@ -45,7 +45,7 @@ const tempCard: Array<tempCard> = [
     end: "aaa"
   },
   {
-    auctionNo: 1,
+    marketNo: 1,
     imgUrl:
       "https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/XG2MW2H3ZRW5FHDVSOMF6FDT3E.jpg",
     title: "아이유꽃",
@@ -53,7 +53,7 @@ const tempCard: Array<tempCard> = [
     end: "aaa"
   },
   {
-    auctionNo: 1,
+    marketNo: 1,
     imgUrl:
       "https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/XG2MW2H3ZRW5FHDVSOMF6FDT3E.jpg",
     title: "아이유꽃",
@@ -63,7 +63,7 @@ const tempCard: Array<tempCard> = [
 ];
 
 export type tempCard = {
-  auctionNo: number
+  marketNo: number
   imgUrl: string;
   title: string;
   current: number
@@ -74,7 +74,7 @@ export interface State {
   productTemp: Array<tempCard>;
 }
 
-function AuctionMy() {
+function MarketMy() {
   const [cards, setCards] = useState<Array<tempCard>>(tempCard.slice(0, 5));
 
   const handlePage = (e: any) => {
@@ -87,17 +87,17 @@ function AuctionMy() {
       <div className="mypageBodyRightHeader">
         <h1>내가 등록한 장터</h1>
         <hr />
-        <table className="myAuctionTable">
+        <table className="myMarketTable">
         <tbody>
           <tr>
-            <th className="myAuctionNo">장터 번호</th>
-            <th className="myAuctionCard">장터카드</th>
-            <th className="myAuctionProduct">장터상품</th>
-            <th className="myAuctionCurrent">판매가</th>
-            <th className="myAuctionEnd">구매자</th>
+            <th className="myMarketNo">장터 번호</th>
+            <th className="myMarketCard">장터카드</th>
+            <th className="myMarketProduct">장터상품</th>
+            <th className="myMarketCurrent">판매가</th>
+            <th className="myMarketEnd">구매자</th>
           </tr>
           {cards.map((card, index) => {
-            return <AuctionMyTable card={card} key={index}/>
+            return <MarketMyTable card={card} key={index}/>
           })}
         </tbody>
       </table>
@@ -114,4 +114,4 @@ function AuctionMy() {
   );
 }
 
-export default AuctionMy;
+export default MarketMy;
