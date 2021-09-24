@@ -115,7 +115,7 @@ public class SalesSvcImpl implements SalesSvcInter{
 	@Override
 	public Map<String,Object>insertLike(Map<String,Object> req){
 		Map<String, Object> res = new HashMap<String,Object>();
-		Long nowLoginMemberNo=0L;
+		Long nowLoginMemberNo=0L;// 샘플 0 
 		try {
 			nowLoginMemberNo=SecurityUtil.getCurrentMemberId();
 		}catch (RuntimeException e) {

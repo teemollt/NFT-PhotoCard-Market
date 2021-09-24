@@ -11,6 +11,6 @@ public class AuctionGroupListDTO {
 	private MemberDTO member;
 	private CardDTO card;
 	private AuctionDTO auction;
-	private BidDTO bid;
+//	private BidDTO bid;
 //	private 
 }

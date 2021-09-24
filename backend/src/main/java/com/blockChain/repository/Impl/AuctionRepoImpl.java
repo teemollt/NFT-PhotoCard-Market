@@ -22,6 +22,7 @@ import com.blockChain.dto.BidDTO;
 import com.blockChain.dto.CardDTO;
 import com.blockChain.dto.MemberDTO;
 import com.blockChain.repository.AuctionRepoCustom;
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.JPAExpressions;
@@ -44,7 +45,10 @@ public class AuctionRepoImpl implements AuctionRepoCustom{
 		QProduct_Media qpm= QProduct_Media.product_Media;
 		QProduct_Grade qpg = QProduct_Grade.product_Grade;
 		QBid qb = QBid.bid;
-		System.out.println(groupNo);
+		BooleanBuilder builder = new BooleanBuilder();
+		if(groupNo != 0L){
+			builder.and(qp.celeb.group.groupNo.eq(groupNo));
+		}
 		List<AuctionGroupListDTO> res = queryFactory.select(Projections.constructor(
 				AuctionGroupListDTO.class
 				, Projections.constructor(
@@ -67,15 +71,13 @@ public class AuctionRepoImpl implements AuctionRepoCustom{
 						, qa.auctionImmeprice
 						, qa.auctionStart
 						, qa.auctionDeadline)
-				, Projections.constructor(BidDTO.class
-						, qb.bidPrice.max()
-						)
+		
+						
 				)).from(qa)
-				.join(qb).on(qa.auctionNo.eq(qb.auction.auctionNo)).groupBy(qa.auctionNo)
 				.join(qpt).on(qa.token.tokenNo.eq(qpt.token.tokenNo))
 				.join(qp).on(qpt.product.productNo.eq(qp.productNo))
 				.join(qpm).on(qp.productNo.eq(qpm.product.productNo))
-				.where(qp.celeb.group.groupNo.eq(groupNo))
+				.where(builder)
 				.orderBy(qa.auctionStart.asc())
 				.fetch();
 		return Optional.ofNullable(res);
