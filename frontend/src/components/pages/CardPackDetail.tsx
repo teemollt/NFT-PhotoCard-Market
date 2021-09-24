@@ -4,9 +4,9 @@ import "./CardPackDetail.css";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import CardPackInside from "../cardpack/CardPackInside";
-import Review from "../cardpack/CardpackReviewList";
-import BuyCardPack from "../cardpack/BuyCardPack";
+import CardPackInside from "../cardpackshop/CardPackInside";
+import Review from "../cardpackshop/CardpackReviewList";
+import BuyCardPack from "../cardpackshop/BuyCardPack";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 const useStyles = makeStyles((theme: Theme) =>
