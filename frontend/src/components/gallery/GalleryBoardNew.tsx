@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -6,7 +6,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Button } from "@mui/material";
-import './GalleryBoardNew.css'
+import "./GalleryBoardNew.css";
 
 interface GalleryBoardNewProps {
   open: boolean;
@@ -15,14 +15,15 @@ interface GalleryBoardNewProps {
 
 function GalleryBoardNew(props: GalleryBoardNewProps) {
   const { open, handleClose } = props;
+  const [content, setContent] = useState<string>("")
   return (
     <div className="galleryBoardNew">
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle className="galleryBoardNewTitle">갤러리 자랑</DialogTitle>
         <DialogContent>
           <DialogContentText className="galleryBoardNewContent">
-            다른 유저들이 나의 갤러리에 방문할 수 있도록 나의 갤러리를 자랑해
-            보세요!
+            <p>다른 유저들이 나의 갤러리에 방문할 수 있도록 갤러리를 자랑해 보세요!</p>
+            <p>(최대 80자)</p>
           </DialogContentText>
           <TextField
             autoFocus
@@ -30,11 +31,20 @@ function GalleryBoardNew(props: GalleryBoardNewProps) {
             id="name"
             fullWidth
             variant="standard"
+            inputProps={{
+              maxlength: 80
+            }}
+            helperText={content.length}
+            onChange={(e)=>setContent(e.target.value)}
           />
         </DialogContent>
         <DialogActions>
-          <Button className="galleryBoardNewBtn" onClick={handleClose}>취소</Button>
-          <Button className="galleryBoardNewBtn" onClick={handleClose}>작성</Button>
+          <Button className="galleryBoardNewBtn" onClick={handleClose}>
+            취소
+          </Button>
+          <Button className="galleryBoardNewBtn" onClick={handleClose}>
+            작성
+          </Button>
         </DialogActions>
       </Dialog>
     </div>

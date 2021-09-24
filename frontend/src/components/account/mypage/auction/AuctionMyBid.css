@@ -1,0 +1,31 @@
+.myBidTable {
+  margin-top: 20px;
+  width: 100%;
+  text-align: center;
+  border-top: 1px solid lightgray;
+  border-collapse: collapse;
+  background-color: #fff;
+  clear: both;
+}
+
+.myBidTable > tbody > tr > th {
+  border-bottom: 1px solid lightgray;
+  text-align: left;
+  padding: 20px;
+}
+
+.myBidCard {
+  width: 100px;
+}
+
+.myBidNo,
+.myBidNick,
+.myBidEnd,
+.myBidMyPrice,
+.myBidCurrent {
+  width: 90px;
+}
+
+.myBidProduct {
+  width: 300px;
+}
