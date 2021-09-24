@@ -7,7 +7,7 @@ plugins {
 	// id "io.franzbecker.gradle-lombok" version "3.0.0"
 	id 'java'
 	//web3j
-	id "org.web3j" version "4.8.7"
+	//id "org.web3j" version "4.8.7"
 }
 
 group = 'com.blockChain'

@@ -2,6 +2,7 @@ package com.blockChain.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +22,7 @@ import lombok.ToString;
 public class Eth_Info {
 
 	// 네트워크 url
+	@Id
 	@Column(name="ETHNET_URL",length=500)
 	private String ethnetURL;
 	
