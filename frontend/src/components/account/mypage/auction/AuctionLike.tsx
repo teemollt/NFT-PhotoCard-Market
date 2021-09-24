@@ -1,22 +1,23 @@
 import React, { useState } from "react";
+import { Pagination } from "@mui/material";
 import AuctionCard from "./AuctionCard";
 
 const tempCard: Array<tempCard> = [
   {
     imgUrl:
-    "https://cdn.dailyimpact.co.kr/news/photo/201901/50650_10024_2221.jpg",
+      "https://cdn.dailyimpact.co.kr/news/photo/201901/50650_10024_2221.jpg",
     title: "흑백",
     price: 1,
   },
   {
     imgUrl:
-    "http://www.polinews.co.kr/data/photos/20200834/art_15980031118376_e6a761.jpg",
+      "http://www.polinews.co.kr/data/photos/20200834/art_15980031118376_e6a761.jpg",
     title: "정장",
     price: 1,
   },
   {
     imgUrl:
-    "https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/XG2MW2H3ZRW5FHDVSOMF6FDT3E.jpg",
+      "https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/XG2MW2H3ZRW5FHDVSOMF6FDT3E.jpg",
     title: "아이유꽃",
     price: 1,
   },
@@ -33,7 +34,19 @@ const tempCard: Array<tempCard> = [
   },
   {
     imgUrl:
-    "https://img4.yna.co.kr/photo/cms/2019/05/02/02/PCM20190502000402370_P2.jpg",
+      "https://img4.yna.co.kr/photo/cms/2019/05/02/02/PCM20190502000402370_P2.jpg",
+    title: "연합뉴스",
+    price: 1,
+  },
+  {
+    imgUrl:
+      "https://img4.yna.co.kr/photo/cms/2019/05/02/02/PCM20190502000402370_P2.jpg",
+    title: "연합뉴스",
+    price: 1,
+  },
+  {
+    imgUrl:
+      "https://img4.yna.co.kr/photo/cms/2019/05/02/02/PCM20190502000402370_P2.jpg",
     title: "연합뉴스",
     price: 1,
   },
@@ -45,23 +58,34 @@ export type tempCard = {
   price: number;
 };
 
-export interface State {
-  productTemp: Array<tempCard>;
-}
-
 function AuctionLike() {
-  const [productTemp, setProductTemp] = useState(tempCard);
+  const [cards, setCards] = useState<Array<tempCard>>(tempCard.slice(0, 6));
+
+  const handlePage = (e: any) => {
+    const page = Number(e.target.innerText);
+    setCards(tempCard.slice(page * 6 - 6, page * 6));
+  };
+
   return (
     <div>
       <div className="mypageBodyRightHeader">
-        <h1>관심 경매</h1>
+        <h1>관심 장터</h1>
         <hr />
-        {productTemp.map((tempCard) => {
-          return <AuctionCard tempCard={tempCard} />;
+        {cards.map((card, index) => {
+          console.log(card);
+          return <AuctionCard card={card} key={index} />;
         })}
+        <Pagination
+          className="GalleryBoardPage"
+          count={Math.ceil(tempCard.length / 6)}
+          shape="rounded"
+          onChange={handlePage}
+          hidePrevButton
+          hideNextButton
+        />
       </div>
     </div>
-  )
+  );
 }
 
-export default AuctionLike
+export default AuctionLike;

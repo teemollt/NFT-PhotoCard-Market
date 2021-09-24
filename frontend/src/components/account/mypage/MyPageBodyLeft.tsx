@@ -20,11 +20,11 @@ function MyPageBodyLeft(props: MyPageBodyLeftProps): JSX.Element {
 
       <br />
 
-      <h1>경매 정보</h1>
+      <h1>장터 정보</h1>
       <hr />
-      <p onClick={() => myPageMenu(2)}>내가 등록한 경매</p>
-      <p onClick={() => myPageMenu(3)}>경매 내역</p>
-      <p onClick={() => myPageMenu(4)}>관심 경매</p>
+      <p onClick={() => myPageMenu(2)}>내가 등록한 장터</p>
+      <p onClick={() => myPageMenu(3)}>장터 구매 내역</p>
+      <p onClick={() => myPageMenu(4)}>관심 장터</p>
 
       <br />
 

@@ -4,7 +4,7 @@ import { useSpring, useSprings, animated, interpolate } from "react-spring";
 import "./CardPackShop.css";
 import axios from "axios";
 
-function Stack(props: any) {
+function Stack(props: any): JSX.Element {
   const [open, setOpen] = useState(false);
   const { f, r } = useSpring({ f: open ? 0 : 1, r: open ? -3 : 3 });
   const cards = useSprings(

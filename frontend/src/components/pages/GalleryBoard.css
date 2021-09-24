@@ -53,3 +53,11 @@
   padding: 0;
   padding-left: 20px;
 }
+
+.GalleryBoardPage {
+  margin-top: 30px;
+}
+
+.MuiPagination-ul {
+  justify-content: center;
+}

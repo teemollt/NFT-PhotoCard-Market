@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Pagination } from "@mui/material";
 import ShopCard from "./ShopCard";
 
 const tempCard: Array<tempCard> = [
@@ -38,6 +39,54 @@ const tempCard: Array<tempCard> = [
     title: "카드6",
     price: 1,
   },
+  {
+    imgUrl:
+      "http://m.tcgbox.co.kr/web/product/big/20191206/585b242c2158a94a993c5fb8a916e6e2.jpg",
+    title: "카드7",
+    price: 1,
+  },
+  {
+    imgUrl:
+      "http://m.tcgbox.co.kr/web/product/big/20191206/585b242c2158a94a993c5fb8a916e6e2.jpg",
+    title: "카드8",
+    price: 1,
+  },
+  {
+    imgUrl:
+      "http://m.tcgbox.co.kr/web/product/big/20191206/585b242c2158a94a993c5fb8a916e6e2.jpg",
+    title: "카드9",
+    price: 1,
+  },
+  {
+    imgUrl:
+      "http://m.tcgbox.co.kr/web/product/big/20191206/585b242c2158a94a993c5fb8a916e6e2.jpg",
+    title: "카드10",
+    price: 1,
+  },
+  {
+    imgUrl:
+      "http://m.tcgbox.co.kr/web/product/big/20191206/585b242c2158a94a993c5fb8a916e6e2.jpg",
+    title: "카드11",
+    price: 1,
+  },
+  {
+    imgUrl:
+      "http://m.tcgbox.co.kr/web/product/big/20191206/585b242c2158a94a993c5fb8a916e6e2.jpg",
+    title: "카드12",
+    price: 1,
+  },
+  {
+    imgUrl:
+      "http://m.tcgbox.co.kr/web/product/big/20191206/585b242c2158a94a993c5fb8a916e6e2.jpg",
+    title: "카드13",
+    price: 1,
+  },
+  {
+    imgUrl:
+      "http://m.tcgbox.co.kr/web/product/big/20191206/585b242c2158a94a993c5fb8a916e6e2.jpg",
+    title: "카드14",
+    price: 1,
+  },
 ];
 
 export type tempCard = {
@@ -52,14 +101,28 @@ export interface State {
 
 function ShopKeep() {
   const [productTemp, setProductTemp] = useState(tempCard);
+  const [cards, setCards] = useState<Array<tempCard>>(tempCard.slice(0, 8));
+
+  const handlePage = (e: any) => {
+    const page = Number(e.target.innerText);
+    setCards(tempCard.slice(page * 8 - 8, page * 8));
+  };
 
   return (
     <div className="mypageBodyRightHeader">
       <h1>관심 상품</h1>
       <hr />
-      {productTemp.map((tempCard) => {
-        return <ShopCard tempCard={tempCard} />;
+      {cards.map((card, index) => {
+        return <ShopCard cards={card} key={index} />;
       })}
+      <Pagination
+        className="GalleryBoardPage"
+        count={Math.ceil(productTemp.length / 8)}
+        shape="rounded"
+        onChange={handlePage}
+        hidePrevButton
+        hideNextButton
+      />
     </div>
   );
 }
