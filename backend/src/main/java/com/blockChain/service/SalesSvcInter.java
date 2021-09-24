@@ -10,4 +10,8 @@ public interface SalesSvcInter {
 
 	Map<String, Object> insertReview(long cardpackPK, Map<String, Object> req);
 
+	Map<String, Object> sltLikeCount(long cardpackPK);
+
+	Map<String, Object> insertLike(Map<String, Object> req);
+
 }

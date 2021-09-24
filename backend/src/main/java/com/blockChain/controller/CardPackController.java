@@ -32,4 +32,15 @@ public class CardPackController {
 			){
 		return salesSvc.insertReview(cardpackPK, req);
 	}
+	
+	@GetMapping("/likecheck/{cardpackPK}")
+	public Map<String,Object> sltLikeCount(@PathVariable(name="cardpackPK") Long cardpackPK){
+		return salesSvc.sltLikeCount(cardpackPK);
+	}
+	@PostMapping("/like")
+	public Map<String,Object>insertLike(@RequestBody Map<String, Object> req){
+		return salesSvc.insertLike(req);
+		
+	}
+	
 }
