@@ -15,7 +15,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import com.blockChain.dto.TokenDto;
+import com.blockChain.dto.LoginTokenDTO;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -44,7 +44,7 @@ public class TokenProvider {
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public TokenDto generateTokenDto(Authentication authentication, String memberName) {
+    public LoginTokenDTO generateTokenDto(Authentication authentication, String memberName) {
         // 권한들 가져오기
         String authorities = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
@@ -69,7 +69,7 @@ public class TokenProvider {
                 .signWith(key, SignatureAlgorithm.HS512)
                 .compact();
 
-        return TokenDto.builder()
+        return LoginTokenDTO.builder()
                 .grantType(BEARER_TYPE)
                 .accessToken(accessToken)
                 .accessTokenExpiresIn(accessTokenExpiresIn.getTime())
