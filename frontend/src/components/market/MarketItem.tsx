@@ -1,5 +1,5 @@
 import React from "react";
-import "./AuctionItem.css";
+import "./MarketItem.css";
 import { useHistory } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
@@ -14,39 +14,46 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(2),
       textAlign: "center",
       color: theme.palette.text.secondary,
-      height: 370,
+      height: 300,
     },
   })
 );
 
-function AuctionItem(props: any) {
+function MarketItem(props: any): JSX.Element {
   let history = useHistory();
   function getitem(data: any) {
     console.log(data);
 
     history.push({
-      pathname: `/biditem/${data.id}`,
+      pathname: `/biditem/${data.auction.auctionNo}`,
       state: { data: data },
     });
   }
   const classes = useStyles();
   return (
-    <Grid item xs={6} sm={3}>
+    <Grid item xs={6} sm={4}>
       <Paper
         className={classes.paper}
         onClick={() => {
-          getitem(props.image);
+          getitem(props.item);
         }}
         style={{ cursor: "pointer" }}
       >
-        <img src={props.image.imgUrl} alt="" width="100%" height="300px" />
+        <img
+          src={props.item.card.cardImageUrl}
+          alt=""
+          width="100%"
+          height="230px"
+        />
         <div className="itemcardinfo">
-          <span className="producttitle">{props.image.title}</span>
-          <span className="productprice">{props.image.price}</span>
+          <span className="producttitle">
+            {props.item.auction.auctionTitle}
+          </span>
+          <span className="productprice">{props.item.auction.price}</span>
         </div>
       </Paper>
     </Grid>
   );
 }
 
-export default AuctionItem;
+export default MarketItem;

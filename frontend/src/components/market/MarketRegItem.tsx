@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./AuctionRegItem.css";
+import "./MarketRegItem.css";
 
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -147,7 +147,7 @@ export type temp = {
   price: string;
 };
 
-function AuctionRegItem() {
+function MarketRegItem(): JSX.Element {
   const [mycards, setmycards] = useState<any[]>([]);
   const [selectcard, setselectcard] = useState(0);
   const [selectcardimage, setselectcardimage] = useState<string>("");
@@ -172,7 +172,7 @@ function AuctionRegItem() {
     setOpen(false);
   };
 
-  const registerAuction = () => {
+  const registerMarket = () => {
     console.log(selectcard);
     console.log(price);
   };
@@ -202,7 +202,7 @@ function AuctionRegItem() {
             <Typography variant="h6" className={classes.title}>
               판매 카드 등록
             </Typography>
-            <Button autoFocus color="inherit" onClick={registerAuction}>
+            <Button autoFocus color="inherit" onClick={registerMarket}>
               Register
             </Button>
           </Toolbar>
@@ -212,9 +212,7 @@ function AuctionRegItem() {
           <Container className={classes.container}>
             <Grid container spacing={3}>
               <Grid item xs={12}>
-                <Paper
-                  className={classes.paper}
-                >
+                <Paper className={classes.paper}>
                   <img
                     src={selectcardimage}
                     alt=""
@@ -242,7 +240,7 @@ function AuctionRegItem() {
 
         <Container>
           <Grid container spacing={3}>
-            {tempGallery.map((image,i) => (
+            {tempGallery.map((image, i) => (
               <Grid item xs={3} sm={3} key={i}>
                 <Paper
                   className={classes.paper}
@@ -269,4 +267,4 @@ function AuctionRegItem() {
   );
 }
 
-export default AuctionRegItem;
+export default MarketRegItem;

@@ -3,16 +3,17 @@ import Navbar from "./components/main/Navbar";
 import { Route, Switch } from "react-router-dom";
 import Main from "./components/pages/Main";
 import MyPage from "./components/pages/MyPage";
-import MainBid from "./components/pages/MainAuction";
+import MainMarket from "./components/pages/MainMarket";
 import Gallery from "./components/pages/Gallery";
 import CardPackDetail from "./components/pages/CardPackDetail";
 import Footer from "./components/main/Footer";
 import Service from "./components/pages/Service";
 import Join from "./components/pages/Join";
-import BidItem from "./components/pages/BidItem";
+import BidItem from "./components/pages/MarketItem";
 import MyPageUpdate from "./components/pages/MyPageUpdate";
 import CardPackShop from "./components/pages/CardPackShop";
 import GalleryBoard from "./components/pages/GalleryBoard";
+import MainCeleb from "./components/pages/MainCeleb";
 
 declare module "axios" {
   interface AxiosRequestConfig {
@@ -32,8 +33,11 @@ function App(): JSX.Element {
         <Route path="/mypage">
           <MyPage />
         </Route>
-        <Route path="/mainbid/:tag?">
-          <MainBid />
+        <Route path="/market">
+          <MainMarket />
+        </Route>
+        <Route path="/mainceleb/:no?">
+          <MainCeleb />
         </Route>
         <Route path="/cardpackshop/">
           <CardPackShop />
@@ -55,6 +59,9 @@ function App(): JSX.Element {
         </Route>
         <Route path="/update">
           <MyPageUpdate />
+        </Route>
+        <Route path="/gboard">
+          <GalleryBoard />
         </Route>
         <Route path="/gboard">
           <GalleryBoard />

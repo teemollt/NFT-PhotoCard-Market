@@ -1,12 +1,12 @@
 import React from "react";
-import "./Review.css";
+import "./CardpackReview.css";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 
-function Review(props: any) {
+function CardpackReview(props: any): JSX.Element {
   return (
     <div>
       <div>
@@ -28,7 +28,7 @@ function Review(props: any) {
                       >
                         {review.reviewUser}
                       </Typography>
-                      &nbsp;&nbsp;&nbsp;&nbsp;{review.reviewDate.slice(0, 10)}{" "}
+                      &nbsp;&nbsp;&nbsp;&nbsp;{review.reviewDate.slice(0, 10)}
                       {review.reviewDate.slice(14, 19)}
                     </React.Fragment>
                   }
@@ -53,4 +53,4 @@ function Review(props: any) {
   );
 }
 
-export default Review;
+export default CardpackReview;

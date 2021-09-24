@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
-import "./ReviewList.css";
+import "./CardpackReviewList.css";
 import axios from "axios";
-import Review from "./Review";
+import CardpackReview from "./CardpackReview";
 import Pagination from "./Pagination";
 import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme: Theme) =>
       width: "100%",
       maxWidth: "1000px",
       margin: "auto",
-      marginTop: "10px",
       // maxHeight: 300,
     },
     inline: {
@@ -26,7 +25,6 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: "auto",
     },
     container: {
-      width: "800px",
       margin: "auto",
     },
     createicon: {
@@ -35,12 +33,12 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function ReviewList(props: any) {
+function CardpackReviewList(props: any): JSX.Element {
   const classes = useStyles();
 
   const [reviews, setreviews] = useState<any[]>([]);
   const [currentPage, setcurrentPage] = useState(1);
-  const [reviewsPerPage, setreviewsPerPage] = useState(10);
+  const [reviewsPerPage, setreviewsPerPage] = useState(5);
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -84,7 +82,7 @@ function ReviewList(props: any) {
     <div>
       <h1>REVIEW</h1>
       <Container className={classes.container}>
-        <Review reviews={currentReviews} />
+        <CardpackReview reviews={currentReviews} />
       </Container>
       <Pagination
         reviewsPerPage={reviewsPerPage}
@@ -116,4 +114,4 @@ function ReviewList(props: any) {
   );
 }
 
-export default ReviewList;
+export default CardpackReviewList;
