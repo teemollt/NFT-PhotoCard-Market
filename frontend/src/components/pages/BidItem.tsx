@@ -1,26 +1,26 @@
-import React, { useState } from "react";
-import "./BidItem.css";
-import Countdown from "react-countdown";
-import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
-import { makeStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Fab from "@material-ui/core/Fab";
-import Paper from "@material-ui/core/Paper";
-import TextField from "@material-ui/core/TextField";
-import SendIcon from "@material-ui/icons/Send";
+import React, { useState } from "react"
+import "./BidItem.css"
+import Countdown from "react-countdown"
+import Grid from "@material-ui/core/Grid"
+import Container from "@material-ui/core/Container"
+import { makeStyles } from "@material-ui/core/styles"
+import Table from "@material-ui/core/Table"
+import TableBody from "@material-ui/core/TableBody"
+import TableCell from "@material-ui/core/TableCell"
+import TableContainer from "@material-ui/core/TableContainer"
+import TableHead from "@material-ui/core/TableHead"
+import TableRow from "@material-ui/core/TableRow"
+import Fab from "@material-ui/core/Fab"
+import Paper from "@material-ui/core/Paper"
+import TextField from "@material-ui/core/TextField"
+import SendIcon from "@material-ui/icons/Send"
 
 const useStyles = makeStyles({
   table: {},
-});
+})
 
 function createData(id: number, name: string, bidprice: number) {
-  return { id, name, bidprice };
+  return { id, name, bidprice }
 }
 
 const rows = [
@@ -31,27 +31,27 @@ const rows = [
   createData(5, "남근형", 180),
 ]
   .sort((a, b) => b.bidprice - a.bidprice)
-  .slice(0, 5);
+  .slice(0, 5)
 
 const buynow = () => {
-  console.log("성공");
-};
+  console.log("성공")
+}
 function BidItem(): JSX.Element {
-  let [bidprice, setbidprice] = useState<number>(0);
+  let [bidprice, setbidprice] = useState<number>(0)
   // axios 경매물품 정보
 
-  const price = "1btc";
-  const classes = useStyles();
+  const price = "1btc"
+  const classes = useStyles()
 
-  const moment = require("moment");
+  const moment = require("moment")
   // 현재시간
-  var today = moment();
-  console.log(today);
+  var today = moment()
+  console.log(today)
 
-  var enddate = moment("2021-09-10T00:00:00");
-  console.log(enddate);
-  var duration = moment.duration(enddate.diff(today));
-  var rest = duration.asSeconds();
+  var enddate = moment("2021-09-10T00:00:00")
+  console.log(enddate)
+  var duration = moment.duration(enddate.diff(today))
+  var rest = duration.asSeconds()
   return (
     <div style={{ textAlign: "center" }}>
       <div>
@@ -109,14 +109,14 @@ function BidItem(): JSX.Element {
                   label="Price"
                   type="number"
                   onChange={(e) => {
-                    console.log(typeof Number(e.target.value));
-                    setbidprice(2);
+                    console.log(typeof Number(e.target.value))
+                    setbidprice(2)
                   }}
                 />
                 <SendIcon
                   style={{ height: "50px", cursor: "pointer" }}
                   onClick={() => {
-                    console.log(bidprice);
+                    console.log(bidprice)
                   }}
                 />
               </div>
@@ -125,7 +125,7 @@ function BidItem(): JSX.Element {
         </Container>
       </div>
     </div>
-  );
+  )
 }
 
-export default BidItem;
+export default BidItem
