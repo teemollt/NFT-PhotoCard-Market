@@ -32,7 +32,9 @@ function Stack(props: any): JSX.Element {
         buycardpack(props.cardpackinfo);
       }}
     >
-      <div style={{ textAlign: "center" }}>{props.cardpackinfo.salesNM}</div>
+      <div style={{ textAlign: "center" }}>
+        <h3>{props.cardpackinfo.salesNM}</h3>
+      </div>
       {cards.map(({ z, opacity }, index) => (
         <animated.div
           style={{
@@ -46,7 +48,7 @@ function Stack(props: any): JSX.Element {
           {index === 4 && (
             <animated.img
               style={{
-                transform: f.interpolate([1, 0], ["scale(0.5)", "scale(0.6)"]),
+                transform: f.interpolate([1, 0], ["scale(0.7)", "scale(1.0)"]),
               }}
               src={props.image}
             />
