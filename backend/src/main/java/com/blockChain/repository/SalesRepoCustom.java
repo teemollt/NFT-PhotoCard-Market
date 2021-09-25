@@ -16,4 +16,6 @@ public interface SalesRepoCustom {
 
 	Optional<List<CardForSalesDTO>> gainCardList(Long salesPK);
 
+	Optional<Sales> sltByContainSalesNM(String NM);
+
 }

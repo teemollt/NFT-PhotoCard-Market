@@ -52,17 +52,6 @@ public class SalesRepoImpl implements SalesRepoCustom{
 		QProduct qp = QProduct.product;
 		QProduct_Media qpm= QProduct_Media.product_Media;
 		QSales_Product qsp = QSales_Product.sales_Product;
-//		return Optional.ofNullable(queryFactory.select(Projections.constructor(
-//				CardForSalesDTO.class
-//				, qsp.product.productNo
-//				, qsp.product.productNm
-//				, qpm.productMediaAdres
-//				, qsp.product.productGrade.productGradeNo
-//				, qsp.product.productGrade.productGrade
-//				))
-//				.from(qsp)
-//				.join(qpm).on(qp.productNo.eq(qpm.product.productNo))
-//				.where(qsp.sales.salesNo.eq(salesPK)).fetch());
 		return Optional.ofNullable(queryFactory.select(Projections.constructor(
 				CardForSalesDTO.class
 				, qp.productNo
@@ -76,5 +65,11 @@ public class SalesRepoImpl implements SalesRepoCustom{
 				.join(qpm).on(qp.productNo.eq(qpm.product.productNo))
 				.orderBy(qp.productGrade.productGradeNo.asc())
 				.where(qsp.sales.salesNo.eq(salesPK)).fetch());
+	}
+	@Override
+	public Optional<Sales> sltByContainSalesNM(String NM){
+		QSales qsl = QSales.sales;
+		Sales res = queryFactory.selectFrom(qsl).where(qsl.salesNm.contains(NM)).fetchOne();
+		return Optional.ofNullable(res);
 	}
 }
