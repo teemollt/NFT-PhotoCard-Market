@@ -14,4 +14,6 @@ public interface SalesSvcInter {
 
 	Map<String, Object> insertLike(Map<String, Object> req);
 
+	Map<String, Object> gainCardList(Long cardpackPK);
+
 }
