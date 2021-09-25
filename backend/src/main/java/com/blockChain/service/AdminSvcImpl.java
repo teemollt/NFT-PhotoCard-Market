@@ -594,7 +594,7 @@ public class AdminSvcImpl implements AdminSvcInter{
 		Map<String, Object> res = new HashMap<String,Object>();
 		String name = new Object() {}.getClass().getEnclosingMethod().getName();
 		ArrayList<String> msg = new ArrayList<>();
-		Sales sales=new Sales();
+//		Sales sales=new Sales();
 		//여성
 		String [] temp1 = {"태연","티파니","서현","현아","아이유"};
 		msg.addAll(insertSPfactory(SALES1+" "+SALES_SUBFIX,temp1));
@@ -614,6 +614,24 @@ public class AdminSvcImpl implements AdminSvcInter{
 		String[] temp6 = {"태연","티파니","서현","현아","GD","아이유"};
 //		String[] temp6 = {"조영우","남근형","하지훈","김도형","신지현","나비"};
 		msg.addAll(insertSPfactory(SALES6+" "+SALES_SUBFIX,temp6));
+		
+		String[] celebs = {"태연","티파니","서현","현아","GD","아이유","이태희"};
+		for (int i = 0; i< celebs.length; i++) {
+			Celeb celeb = celebRepo.getById(Long.valueOf(i));
+			Optional<List<Product>> products = productRepo.sltByCelebNo(celeb.getCelebNo());
+			if (products.isPresent()) {
+				List<Product> aa= products.get();
+				Optional<Sales> sales = salesRepo.sltByContainSalesNM(celebs[i]);
+				for(int g =0; g< aa.size();g++) {
+					Sales_Product sp = new Sales_Product();
+					sp.setProduct(aa.get(g));
+					sp.setSales(sales.get());
+					Sales_Product saved = spRepo.save(sp);
+					msg.add(saved.getSales().getSalesNo()+" with " +saved.getProduct().getProductNo());
+				}
+				
+			}
+		}
 		res.put(name, msg);
 		return res;
 	}
@@ -624,10 +642,10 @@ public class AdminSvcImpl implements AdminSvcInter{
 			Sales_Product sp = new Sales_Product();
 			Optional<List<Product>> products = productRepo.sltByCelebNM(param[i]);
 			for (int g = 0; g< products.get().size(); g++) {
-			sp.setSales(divs.get());
-			sp.setProduct(products.get().get(g));
-			Sales_Product saved = spRepo.save(sp);
-			msg.add(saved.getSales().getSalesNo()+" with " +saved.getProduct().getProductNo());
+				sp.setSales(divs.get());
+				sp.setProduct(products.get().get(g));
+				Sales_Product saved = spRepo.save(sp);
+				msg.add(saved.getSales().getSalesNo()+" with " +saved.getProduct().getProductNo());
 			}
 		}
 		
