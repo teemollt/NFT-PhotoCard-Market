@@ -72,4 +72,20 @@ public class SalesRepoImpl implements SalesRepoCustom{
 		Sales res = queryFactory.selectFrom(qsl).where(qsl.salesNm.contains(NM)).fetchOne();
 		return Optional.ofNullable(res);
 	}
+	@Override
+	public Optional<List<SalesDTO>> searchSales(String NM){
+		QSales qsl = QSales.sales;
+//		List<SalesDTO> res = queryFactory.selectFrom(qsl).where(qsl.salesNm.contains(NM)).fetch();
+//		return Optional.ofNullable(res);
+		return  Optional.ofNullable(queryFactory.select(Projections.constructor(SalesDTO.class
+				,qsl.salesNo
+				,qsl.salesNm
+				,qsl.salesDetail
+				,qsl.salesPrice
+				,qsl.salesDiv
+				))
+				.from(qsl)
+				.where(qsl.salesNm.contains(NM))
+				.fetch());
+	}
 }
