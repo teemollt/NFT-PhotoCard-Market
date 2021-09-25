@@ -5,8 +5,13 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
+import com.blockChain.domain.QProduct;
+import com.blockChain.domain.QProduct_Media;
 import com.blockChain.domain.QSales;
+import com.blockChain.domain.QSales_Product;
 import com.blockChain.domain.Sales;
+import com.blockChain.dto.CardDTO;
+import com.blockChain.dto.CardForSalesDTO;
 import com.blockChain.dto.SalesDTO;
 import com.blockChain.repository.SalesRepoCustom;
 import com.querydsl.core.types.Projections;
@@ -39,5 +44,37 @@ public class SalesRepoImpl implements SalesRepoCustom{
 				.from(qsl)
 				.where(qsl.salesDiv.eq(div))
 				.fetch());
+	}
+	
+	@Override
+	public Optional<List<CardForSalesDTO>>gainCardList(Long salesPK){
+		QSales qs = QSales.sales;
+		QProduct qp = QProduct.product;
+		QProduct_Media qpm= QProduct_Media.product_Media;
+		QSales_Product qsp = QSales_Product.sales_Product;
+//		return Optional.ofNullable(queryFactory.select(Projections.constructor(
+//				CardForSalesDTO.class
+//				, qsp.product.productNo
+//				, qsp.product.productNm
+//				, qpm.productMediaAdres
+//				, qsp.product.productGrade.productGradeNo
+//				, qsp.product.productGrade.productGrade
+//				))
+//				.from(qsp)
+//				.join(qpm).on(qp.productNo.eq(qpm.product.productNo))
+//				.where(qsp.sales.salesNo.eq(salesPK)).fetch());
+		return Optional.ofNullable(queryFactory.select(Projections.constructor(
+				CardForSalesDTO.class
+				, qp.productNo
+				, qp.productNm
+				, qpm.productMediaAdres
+				, qp.productGrade.productGradeNo
+				, qp.productGrade.productGrade
+				))
+				.from(qsp)
+				.join(qp).on(qsp.product.productNo.eq(qp.productNo))
+				.join(qpm).on(qp.productNo.eq(qpm.product.productNo))
+				.orderBy(qp.productGrade.productGradeNo.asc())
+				.where(qsp.sales.salesNo.eq(salesPK)).fetch());
 	}
 }

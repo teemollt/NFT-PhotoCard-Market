@@ -42,5 +42,8 @@ public class CardPackController {
 		return salesSvc.insertLike(req);
 		
 	}
-	
+	@GetMapping("/cardList/{cardpackPK}")
+	public Map<String,Object>gainCardList(@PathVariable(name="cardpackPK") Long cardpackPK){
+		return salesSvc.gainCardList(cardpackPK);
+	}
 }
