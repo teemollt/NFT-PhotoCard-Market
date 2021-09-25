@@ -40,4 +40,10 @@ public class ProductRepoImpl implements ProductRepoCustom{
 		QProduct qp = QProduct.product;
 		return Optional.ofNullable(queryFactory.selectFrom(qp).where(qp.celeb.celebNm.eq(NM)).fetch());
 	}
+	@Override
+	public Optional<List<Product>> searchCard(String NM){
+		QProduct qp = QProduct.product;
+		return Optional.ofNullable(queryFactory.selectFrom(qp).where(qp.celeb.celebNm.contains(NM)).fetch());
+
+	}
 }

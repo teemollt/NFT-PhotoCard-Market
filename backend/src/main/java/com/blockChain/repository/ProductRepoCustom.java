@@ -15,4 +15,6 @@ public interface ProductRepoCustom {
 
 	Optional<List<Product>> sltByCelebNM(String NM);
 
+	Optional<List<Product>> searchCard(String NM);
+
 }

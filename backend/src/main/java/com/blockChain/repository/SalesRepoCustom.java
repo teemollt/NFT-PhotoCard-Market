@@ -18,4 +18,6 @@ public interface SalesRepoCustom {
 
 	Optional<Sales> sltByContainSalesNM(String NM);
 
+	Optional<List<SalesDTO>> searchSales(String NM);
+
 }
