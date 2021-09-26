@@ -129,7 +129,7 @@ function CardPackDetail(): JSX.Element {
               <div className={classes.paper2}>
                 <hr />
                 <div>
-                  <CardPackInside />
+                  <CardPackInside cardpackNo={location.state.data.salesNo} />
                 </div>
               </div>
             </div>

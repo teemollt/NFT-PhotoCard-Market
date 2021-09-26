@@ -20,6 +20,8 @@ declare module "axios" {
     cardpackNo?: number;
     reviewContent?: string;
     salesNo?: number;
+    cardpackId?: number;
+    keyword?: string;
   }
 }
 

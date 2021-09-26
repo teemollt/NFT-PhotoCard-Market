@@ -71,13 +71,18 @@ function MainMarket(): JSX.Element {
     });
   }, []);
   // 검색
+  const [clicksearch, setclicksearch] = useState(false);
   const [search, setsearch] = useState<string>("");
   function searchitem(data: string) {
     // 찾기해서 결과값 가져오기
-    axios.get("/api/main/celebgrouplist").then((res) => {
-      console.log(res.data.res);
-      setceleb(res.data.res);
-    });
+    axios
+      .get(`/api/search/all/${data}`, {
+        keyword: data,
+      })
+      .then((res) => {
+        console.log(res.data.cardList);
+        setclicksearch(true);
+      });
   }
   return (
     <div className={classes.root}>
@@ -95,7 +100,12 @@ function MainMarket(): JSX.Element {
                 placeholder="검색어를 입력해주세요"
                 onChange={(e) => {
                   console.log(e.target.value);
-                  searchitem(e.target.value);
+                  setsearch(e.target.value);
+                }}
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    searchitem(search);
+                  }
                 }}
               />
             </div>
