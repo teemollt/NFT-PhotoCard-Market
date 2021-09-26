@@ -7,7 +7,10 @@ import org.springframework.stereotype.Repository;
 
 import com.blockChain.domain.Product;
 import com.blockChain.domain.QProduct;
+import com.blockChain.domain.QProduct_Media;
+import com.blockChain.dto.CardForSalesDTO;
 import com.blockChain.repository.ProductRepoCustom;
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import lombok.RequiredArgsConstructor;
@@ -41,9 +44,21 @@ public class ProductRepoImpl implements ProductRepoCustom{
 		return Optional.ofNullable(queryFactory.selectFrom(qp).where(qp.celeb.celebNm.eq(NM)).fetch());
 	}
 	@Override
-	public Optional<List<Product>> searchCard(String NM){
+	public Optional<List<CardForSalesDTO>> searchCard(String NM){
 		QProduct qp = QProduct.product;
-		return Optional.ofNullable(queryFactory.selectFrom(qp).where(qp.celeb.celebNm.contains(NM)).fetch());
+		QProduct_Media qpm= QProduct_Media.product_Media;
 
+		return Optional.ofNullable(queryFactory.select(Projections.constructor(
+				CardForSalesDTO.class
+				, qp.productNo
+				, qp.productNm
+				, qpm.productMediaAdres
+				, qp.productGrade.productGradeNo
+				, qp.productGrade.productGrade
+				)).from(qp)
+				.join(qpm).on(qp.productNo.eq(qpm.product.productNo))
+				.where(qp.celeb.celebNm.contains(NM))
+				.fetch());
+		
 	}
 }
