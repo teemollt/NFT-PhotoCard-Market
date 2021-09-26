@@ -47,13 +47,13 @@
   align-self: center;
   border: none;
   cursor: pointer;
-  background-color: #102770;
-  color: #ffeba7;
+  background-color: #dadada;
+  color: black;
   box-shadow: 0 12px 35px 0 rgba(16, 39, 112, 0.25);
 }
 .modal-btn:not(:checked) + label:hover {
-  background-color: #ffeba7;
-  color: #102770;
+  background-color: #bebebe;
+  color: black;
 }
 .modal-btn:checked + label .uil,
 .modal-btn:not(:checked) + label .uil {
@@ -72,8 +72,8 @@
   text-align: center;
   line-height: 30px;
   font-size: 18px;
-  background-color: #ffeba7;
-  color: #102770;
+  background-color: #ffffff;
+  color: #dd3434;
   font-family: "unicons";
   content: "\eac6";
   box-shadow: 0 12px 25px 0 rgba(16, 39, 112, 0.25);
@@ -84,8 +84,8 @@
 }
 .modal-btn:checked + label:hover:after,
 .modal-btn:not(:checked) + label:hover:after {
-  background-color: #102770;
-  color: #ffeba7;
+  background-color: #c42f2f;
+  color: #ffffff;
 }
 .modal-btn:checked + label:after {
   transition: opacity 300ms 300ms ease, transform 300ms 300ms ease,
@@ -121,8 +121,8 @@
   transition: all 300ms ease-in-out;
 }
 .modal-wrap {
-  position: relative;
   display: block;
+  width: 90%;
   min-height: 500px;
   margin: 0 auto;
   margin-top: 20px;
@@ -185,13 +185,12 @@
 .page-content {
   display: grid;
   grid-gap: 1rem;
-  padding: 5px;
   max-width: 300px;
   margin: 0 auto;
   font-family: var(--font-sans);
 }
 
-@media (min-width: 800px) {
+@media (min-width: 500px) {
   .page-content {
     grid-template-columns: repeat(1, 1fr);
   }
@@ -203,7 +202,7 @@
   align-items: flex-end;
   overflow: hidden;
   padding: 1rem;
-  width: 100%;
+  width: 90%;
   text-align: center;
   color: whitesmoke;
   background-color: whitesmoke;
@@ -211,10 +210,10 @@
     0 4px 4px rgba(0, 0, 0, 0.1), 0 8px 8px rgba(0, 0, 0, 0.1),
     0 16px 16px rgba(0, 0, 0, 0.1);
 }
-@media (min-width: 600px) {
-  .card {
-    height: 350px;
-  }
+/* @media (min-width: 600px) {
+} */
+.card {
+  height: 200px;
 }
 .card:before {
   content: "";

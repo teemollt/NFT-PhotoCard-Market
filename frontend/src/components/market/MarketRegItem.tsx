@@ -3,8 +3,21 @@ import jwt_decode from "jwt-decode";
 import axios from "axios";
 import Grid from "@mui/material/Grid";
 import "./MarketRegItem.css";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
 function MarketRegItem() {
+  // 선택하고 가격적어 올리는 창
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+  // 내 카드 리스트목록
   const [mycardlist, setmycardlist] = useState<any[]>([]);
   useEffect(() => {
     var token: string | null = localStorage.getItem("token");
@@ -16,8 +29,19 @@ function MarketRegItem() {
       setmycardlist(res.data.res);
     });
   }, []);
+  //
+  const [inputprice, setinputprice] = useState<string>("");
+  const [selectedcardNo, setselectedcardNo] = useState<number>(0);
+  const [selectedcardNm, setselectedcardNm] = useState<string>("");
   function register(data: any) {
-    console.log(data);
+    setOpen(true);
+    setselectedcardNo(data.cardNo);
+    setselectedcardNm(data.cardNM);
+  }
+  function successregister() {
+    setOpen(false);
+    // 정말 카드등록하는 api
+    //
   }
   return (
     <div className="section full-height">
@@ -32,9 +56,8 @@ function MarketRegItem() {
       </label>
       <div className="modal">
         <div className="modal-wrap">
-          <div>카드 선택</div>
           <br />
-          <div>
+          <div style={{}}>
             <Grid
               container
               rowSpacing={1}
@@ -46,9 +69,8 @@ function MarketRegItem() {
                     <div
                       className="card"
                       style={{
-                        backgroundImage: "url(/images/지도.png)",
-                        width: "",
-                        height: "",
+                        backgroundImage: "url(/images/iu1.jpg)",
+                        backgroundSize: "100% 100%",
                       }}
                     >
                       <div className="content">
@@ -56,7 +78,7 @@ function MarketRegItem() {
                         <button
                           className="btn"
                           onClick={() => {
-                            register(card.cardNo);
+                            register(card);
                           }}
                         >
                           등록
@@ -70,6 +92,33 @@ function MarketRegItem() {
           </div>
         </div>
       </div>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>나의 카드 판매 등록</DialogTitle>
+        <DialogContent>
+          <DialogContentText style={{ width: "500px", textAlign: "center" }}>
+            {selectedcardNo}번 {selectedcardNm} 카드를 판매하시겠습니까?
+            <br />
+            <br />
+            내가 설정한 금액 : <h1>{inputprice}</h1>
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="판매하고 싶은 가격을 입력해주세요"
+            type="number"
+            fullWidth
+            variant="standard"
+            onChange={(e) => {
+              setinputprice(e.target.value);
+            }}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>취소</Button>
+          <Button onClick={successregister}>판매등록</Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
