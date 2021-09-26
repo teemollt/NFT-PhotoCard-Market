@@ -8,7 +8,6 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-//import org.web3j.crypto.Wallet;
 
 import com.blockChain.domain.Member;
 import com.blockChain.domain.Wallets;
