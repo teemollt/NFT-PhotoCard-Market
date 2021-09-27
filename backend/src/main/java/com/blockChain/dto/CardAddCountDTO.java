@@ -9,10 +9,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CardForSalesDTO {
+public class CardAddCountDTO {
     private Long cardNo; 
     private String cardNM;
     private String cardImgUrl;
     private Long cardGradeNo;
     private String cardGradeNM;
+    private Long cardCount;
 }

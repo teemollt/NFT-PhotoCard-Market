@@ -5,8 +5,9 @@ import java.util.Optional;
 
 import com.blockChain.domain.Sales;
 import com.blockChain.dto.SalesDTO;
+import com.blockChain.dto.CardAddCountDTO;
 import com.blockChain.dto.CardDTO;
-import com.blockChain.dto.CardForSalesDTO;
+import com.blockChain.dto.CardGenerateDTO;
 
 public interface SalesRepoCustom {
 
@@ -14,10 +15,12 @@ public interface SalesRepoCustom {
 
 	Optional<List<SalesDTO>> slyBySalesDiv(String Div);
 
-	Optional<List<CardForSalesDTO>> gainCardList(Long salesPK);
+	Optional<List<CardGenerateDTO>> gainCardList(Long salesPK);
 
 	Optional<Sales> sltByContainSalesNM(String NM);
 
 	Optional<List<SalesDTO>> searchSales(String NM);
+
+	Optional<List<CardAddCountDTO>> gainCardListAddNum(Long salesPK);
 
 }
