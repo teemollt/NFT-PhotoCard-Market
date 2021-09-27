@@ -48,7 +48,8 @@ function Stack(props: any): JSX.Element {
           {index === 4 && (
             <animated.img
               style={{
-                transform: f.to([1, 0], ["scale(0.7)", "scale(1.0)"]),
+                transform: f.to([1, 0], ["scale(1)", "scale(1.3)"]),
+                width: "70%",
               }}
               src={props.image}
             />
@@ -73,7 +74,7 @@ function CardPackShop(): JSX.Element {
     <div className="main">
       {cardpack.map((pack, i) => (
         <Stack
-          image="/image/cardshop.png"
+          image="/image/cardpack.png"
           background="#52649e"
           cardpackinfo={pack}
         />
