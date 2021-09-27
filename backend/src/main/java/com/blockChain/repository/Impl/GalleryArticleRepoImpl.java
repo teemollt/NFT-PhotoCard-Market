@@ -32,8 +32,6 @@ public class GalleryArticleRepoImpl implements GalleryArticleRepoCustom{
 	public Optional<List<GalleryArticleDTO>> galleryArticleMain(){
 		QMember qm = QMember.member;
 		QMember_Gall_Like pql = QMember_Gall_Like.member_Gall_Like;
-		QMember_Gall_Like qglFrom = new QMember_Gall_Like("qglFrom");
-		QMember_Gall_Like qglTo = new QMember_Gall_Like("qglTo");
 		QGalleryArticle qg =  QGalleryArticle.galleryArticle;
 		return Optional.ofNullable(queryFactory.select(Projections.constructor(GalleryArticleDTO.class
 				,Projections.constructor(
@@ -48,7 +46,7 @@ public class GalleryArticleRepoImpl implements GalleryArticleRepoCustom{
 				))
 				.from(qg)
 				.join(qm).on(qg.member.memberNo.eq(qm.memberNo))
-				.orderBy(qg.galleryArticleNo.asc())
+				.orderBy(qg.galleryArticleNo.desc())
 				.fetch());
 	}
 }
