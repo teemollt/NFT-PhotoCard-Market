@@ -38,10 +38,11 @@ function Navbar(): JSX.Element {
         <Link className="tablink" to="/cardpackshop">
           <Button>Shop</Button>
         </Link>
-
-        <Link className="tablink" to="/market">
-          <Button>Market</Button>
-        </Link>
+        {token ? (
+          <Link className="tablink" to="/market">
+            <Button>Market</Button>
+          </Link>
+        ) : null}
         {token ? (
           <Link className="tablink" to={"/gallery/" + pk}>
             <Button>Gallery</Button>

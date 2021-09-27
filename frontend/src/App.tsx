@@ -9,7 +9,7 @@ import CardPackDetail from "./components/pages/CardPackDetail";
 import Footer from "./components/main/Footer";
 import Service from "./components/pages/Service";
 import Join from "./components/pages/Join";
-import BidItem from "./components/pages/MarketItem";
+import MainMarketItem from "./components/pages/MainMarketItem";
 import MyPageUpdate from "./components/pages/MyPageUpdate";
 import CardPackShop from "./components/pages/CardPackShop";
 import GalleryBoard from "./components/pages/GalleryBoard";
@@ -19,6 +19,9 @@ declare module "axios" {
   interface AxiosRequestConfig {
     cardpackNo?: number;
     reviewContent?: string;
+    salesNo?: number;
+    cardpackId?: number;
+    keyword?: string;
   }
 }
 
@@ -54,8 +57,8 @@ function App(): JSX.Element {
         <Route path="/join">
           <Join />
         </Route>
-        <Route path="/biditem/:id">
-          <BidItem />
+        <Route path="/marketitem/:id">
+          <MainMarketItem />
         </Route>
         <Route path="/update">
           <MyPageUpdate />
