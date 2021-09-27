@@ -45,7 +45,7 @@ function App(): JSX.Element {
         <Route path="/cardpackshop/">
           <CardPackShop />
         </Route>
-        <Route path="/gallery/:id">
+        <Route path="/gallery/:pk">
           <Gallery />
         </Route>
         <Route path="/cardpackdetail/:cardpackid">

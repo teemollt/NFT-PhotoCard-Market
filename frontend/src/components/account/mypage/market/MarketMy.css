@@ -8,22 +8,29 @@
   clear: both;
 }
 
-.myMarketTable > tbody > tr > th {
+.myMarketTable > tbody > tr > th,
+.myMarketTable > tbody > tr > td {
   border-bottom: 1px solid lightgray;
   text-align: left;
   padding: 20px;
 }
 
-.myMarketCard {
-  width: 100px;
+.myMarketTable > tbody > tr > th {
+  background-color: rgb(245, 244, 244);
 }
 
 .myMarketNo,
+.myMarketCard,
 .myMarketEnd,
 .myMarketCurrent {
-  width: 90px;
+  width: 10%;
 }
 
 .myMarketProduct {
-  width: 300px;
+  width: 40%;
+}
+
+.marketMyTable:hover {
+  cursor: pointer;
+  background-color: rgba(149, 214, 214, 0.144);
 }

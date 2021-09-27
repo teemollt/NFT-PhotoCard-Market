@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Pagination } from "@mui/material";
 import MarketMyTable from "./MarketMyTable";
-import './MarketMy.css'
+import "./MarketMy.css";
 
 const tempCard: Array<tempCard> = [
   {
@@ -10,7 +10,7 @@ const tempCard: Array<tempCard> = [
       "https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/XG2MW2H3ZRW5FHDVSOMF6FDT3E.jpg",
     title: "아이유꽃",
     current: 1,
-    end: "aaa"
+    end: "aaa",
   },
   {
     marketNo: 1,
@@ -18,7 +18,7 @@ const tempCard: Array<tempCard> = [
       "https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/XG2MW2H3ZRW5FHDVSOMF6FDT3E.jpg",
     title: "아이유꽃",
     current: 1,
-    end: "aaa"
+    end: "aaa",
   },
   {
     marketNo: 1,
@@ -26,7 +26,15 @@ const tempCard: Array<tempCard> = [
       "https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/XG2MW2H3ZRW5FHDVSOMF6FDT3E.jpg",
     title: "아이유꽃",
     current: 1,
-    end: "aaa"
+    end: "aaa",
+  },
+  {
+    marketNo: 1,
+    imgUrl:
+      "https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/XG2MW2H3ZRW5FHDVSOMF6FDT3E.jpg",
+    title: "아이유꽃aaaaa",
+    current: 1,
+    end: "aaa",
   },
   {
     marketNo: 1,
@@ -34,7 +42,7 @@ const tempCard: Array<tempCard> = [
       "https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/XG2MW2H3ZRW5FHDVSOMF6FDT3E.jpg",
     title: "아이유꽃",
     current: 1,
-    end: "aaa"
+    end: "aaa",
   },
   {
     marketNo: 1,
@@ -42,32 +50,24 @@ const tempCard: Array<tempCard> = [
       "https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/XG2MW2H3ZRW5FHDVSOMF6FDT3E.jpg",
     title: "아이유꽃",
     current: 1,
-    end: "aaa"
+    end: "aaa",
   },
   {
     marketNo: 1,
     imgUrl:
       "https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/XG2MW2H3ZRW5FHDVSOMF6FDT3E.jpg",
-    title: "아이유꽃",
+    title: "아이유꽃111111122222222333",
     current: 1,
-    end: "aaa"
-  },
-  {
-    marketNo: 1,
-    imgUrl:
-      "https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/XG2MW2H3ZRW5FHDVSOMF6FDT3E.jpg",
-    title: "아이유꽃",
-    current: 1,
-    end: "aaa"
+    end: "aaa",
   },
 ];
 
 export type tempCard = {
-  marketNo: number
+  marketNo: number;
   imgUrl: string;
   title: string;
-  current: number
-  end: string
+  current: number;
+  end: string;
 };
 
 export interface State {
@@ -88,19 +88,19 @@ function MarketMy() {
         <h1>내가 등록한 장터</h1>
         <hr />
         <table className="myMarketTable">
-        <tbody>
-          <tr>
-            <th className="myMarketNo">장터 번호</th>
-            <th className="myMarketCard">장터카드</th>
-            <th className="myMarketProduct">장터상품</th>
-            <th className="myMarketCurrent">판매가</th>
-            <th className="myMarketEnd">구매자</th>
-          </tr>
-          {cards.map((card, index) => {
-            return <MarketMyTable card={card} key={index}/>
-          })}
-        </tbody>
-      </table>
+          <tbody>
+            <tr>
+              <th className="myMarketNo">장터 번호</th>
+              <th className="myMarketCard">등록 카드</th>
+              <th className="myMarketProduct">등록 상품</th>
+              <th className="myMarketCurrent">판매가</th>
+              <th className="myMarketEnd">구매자</th>
+            </tr>
+            {cards.map((card, index) => {
+              return <MarketMyTable card={card} key={index} />;
+            })}
+          </tbody>
+        </table>
         <Pagination
           className="GalleryBoardPage"
           count={Math.ceil(tempCard.length / 5)}
