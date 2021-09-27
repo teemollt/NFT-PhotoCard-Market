@@ -59,7 +59,6 @@ public class MemberSvcImpl implements MemberSvcInter{
 		 memberRepo.checkId(memberId).ifPresent(m ->{throw new IllegalStateException("이미 존재하는 아이디입니다.");});
 		 memberRepo.checkEmail(memberEmail).ifPresent(m ->{throw new IllegalStateException("이미 존재하는 이메일입니다.");});
 		 memberRepo.checkNick(memberNick).ifPresent(m->{throw new IllegalStateException("이미 존재하는 별명입니다.");});
-		 
 		 Member member = new Member();
 		 Optional<Member_Grade> mg = mgRepo.sltByNM("팬");
 		 String pw = (String)req.get("memberPw");

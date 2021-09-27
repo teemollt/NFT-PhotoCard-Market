@@ -58,6 +58,8 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.modelmapper/modelmapper
 	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.0'
 	
+	//web3j
+	implementation ('org.web3j:core:4.8.7')
 }
 
 test {

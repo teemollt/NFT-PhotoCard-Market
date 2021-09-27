@@ -5,12 +5,17 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
+import com.blockChain.domain.Product;
 import com.blockChain.domain.QProduct;
+import com.blockChain.domain.QProduct_Grade;
 import com.blockChain.domain.QProduct_Media;
 import com.blockChain.domain.QProduct_Token;
 import com.blockChain.domain.QSales;
 import com.blockChain.domain.QSales_Product;
+import com.blockChain.domain.QToken;
+import com.blockChain.domain.QToken_Owner;
 import com.blockChain.domain.Sales;
+import com.blockChain.domain.Sales_Product;
 import com.blockChain.dto.CardAddCountDTO;
 import com.blockChain.dto.CardDTO;
 import com.blockChain.dto.CardGenerateDTO;
@@ -96,21 +101,47 @@ public class SalesRepoImpl implements SalesRepoCustom{
 		QProduct_Media qpm= QProduct_Media.product_Media;
 		QSales_Product qsp = QSales_Product.sales_Product;
 		QProduct_Token qpt = QProduct_Token.product_Token;
+		QToken_Owner qto = QToken_Owner.token_Owner;
+		QToken qt = QToken.token;
+		QProduct_Grade qpg = QProduct_Grade.product_Grade;
 		return Optional.ofNullable(queryFactory.select(Projections.constructor(
 				CardAddCountDTO.class
 				, qp.productNo
 				, qp.productNm
 				, qpm.productMediaAdres
-				, qp.productGrade.productGradeNo
-				, qp.productGrade.productGrade
-				, qpt.product.productNo.count()
+				, qpg.productGradeNo
+				, qpg.productGrade
+				, qpt.token.count()
 				))
 				.from(qsp)
 				.join(qp).on(qsp.product.productNo.eq(qp.productNo))
 				.join(qpm).on(qp.productNo.eq(qpm.product.productNo))
 				.join(qpt).on(qp.productNo.eq(qpt.product.productNo))
+//				.join(qt).on(qpt.token.eq(qt))
+//				.leftJoin(qto).on(qt.eq(qto.token))
+//				.join(qto).on(qt.eq(qto.token))
+				.fetchJoin()
+				.join(qpg).on(qp.productGrade.eq(qpg))
 				.orderBy(qp.productGrade.productGradeNo.asc())
-				.groupBy(qpt.product.productNo)
+				.groupBy(qp.productNo)
 				.where(qsp.sales.salesNo.eq(salesPK)).fetch());
+	}
+	@Override
+	public Long countLeftCard (Long cardPK){
+		QProduct_Token qpt = QProduct_Token.product_Token;
+		QToken_Owner qto = QToken_Owner.token_Owner;
+		Long res = queryFactory.select(qpt.count()).from(qpt)
+				.where(qpt.product.productNo.eq(cardPK))
+				.leftJoin(qto).on(qpt.token.tokenNo.eq(qto.token.tokenNo))
+				.fetchCount();
+		System.out.println(res);
+		return cardPK;
+		
+	}
+	@Override
+	public List<Product>cardListByPack(Long cardPackPk){
+		QSales_Product qsp = QSales_Product.sales_Product;
+		QProduct qp = QProduct.product;
+		return queryFactory.selectFrom(qp).where(qsp.sales.salesNo.eq(cardPackPk)).fetch();
 	}
 }

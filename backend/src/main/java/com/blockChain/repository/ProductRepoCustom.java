@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.blockChain.domain.Product;
+import com.blockChain.domain.Token;
 import com.blockChain.dto.CardGenerateDTO;
 
 public interface ProductRepoCustom {
@@ -17,5 +18,7 @@ public interface ProductRepoCustom {
 	Optional<List<Product>> sltByCelebNM(String NM);
 
 	Optional<List<CardGenerateDTO>> searchCard(String NM);
+
+	CardGenerateDTO sltByTokenNo(Token token);
 
 }

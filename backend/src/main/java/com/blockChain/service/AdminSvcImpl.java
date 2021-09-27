@@ -71,13 +71,13 @@ public class AdminSvcImpl implements AdminSvcInter{
 	//샐럽그룹
     private final String SOLO = "솔로";
     private final String GROUP1 = "태티서";
-    private final String NONE = "이태희";
+    private final String NONE = "차은우";
     
     //샐럽
     final int CELEBPEOPLES = 7;
-//    final String[] CELEBS = {"조영우","남근형","하지훈","김도형","신지현","나비","이태희"};
-    final List<String> CELEBS = new ArrayList<String>(Arrays.asList("태연","티파니","서현","현아","GD","아이유","이태희"));//TODO
-//    final List<String> CELEBS = new ArrayList<String>(Arrays.asList("조영우","남근형","하지훈","김도형","신지현","나비","이태희"));
+//    final String[] CELEBS = {"조영우","남근형","하지훈","김도형","신지현","나비","차은우"};
+    final List<String> CELEBS = new ArrayList<String>(Arrays.asList("태연","티파니","서현","현아","GD","아이유","차은우"));//TODO
+//    final List<String> CELEBS = new ArrayList<String>(Arrays.asList("조영우","남근형","하지훈","김도형","신지현","나비","차은우"));
     final String[] MWs = {"W","W","W","W","M","W","M"};
     final String[] GROUP = {GROUP1,GROUP1,GROUP1,"현아","GD","아이유",NONE};
     final String[] DEBUT = {"20170201","20170201","20180201","20160201","20170201","20200201","19900201"};
@@ -99,8 +99,8 @@ public class AdminSvcImpl implements AdminSvcInter{
     //제품등급목록
     private final String[] PRODUCT_GRADE = {"SS","S","A","B","C"};
     private final Long[] PRODUCT_GRADE_PERCENT = {3L,7L,25L,30L,35L};
-    private final String[] SPECIAL_CELEB = {"이태희","아이유","현아"};
-//    private final String[] SPECIAL_CELEB = {"이태희","나비","김도형"};
+    private final String[] SPECIAL_CELEB = {"차은우","아이유","현아"};
+//    private final String[] SPECIAL_CELEB = {"차은우","나비","김도형"};
     private final String[] SPECIAL_PRODUCT_GRADE = {"ONLY","ROYAL-A","ROYAL-B","ROYAL-C"};
     private final Long[] SPECIAL_PRODUCT_SHEETS = {1L,3L,7L,5L};
     private final int COMMON_CARD_NUM = 1000;//기획상 실 사용하는 카드
@@ -295,15 +295,15 @@ public class AdminSvcImpl implements AdminSvcInter{
 	    for (int i = 0; i < celebGroup.length;i++) {
 	    	Optional<Celeb_Group> existOrNot = celebGroupRepo.sltByCelebGroupNM(celebGroup[i]);
 	    	System.out.println(existOrNot);
-	    	if (existOrNot.isEmpty()){
-		    	Celeb_Group celebGroupOne = new Celeb_Group();
-		    	celebGroupOne.setGroupNm(celebGroup[i]);
-		    	celebGroupOne.setGroupNofp(peopleNum[i]);
-		    	celebGroupRepo.save(celebGroupOne);
-		    	msg.add(celebGroup[i] + peopleNum[i] + " 정상 입력");
-	    	}else {
-	    		msg.add(celebGroup[i] + peopleNum[i] + " 등록 안됨");
-	    	}
+//	    	if (existOrNot.isEmpty()){
+//		    	Celeb_Group celebGroupOne = new Celeb_Group();
+//		    	celebGroupOne.setGroupNm(celebGroup[i]);
+//		    	celebGroupOne.setGroupNofp(peopleNum[i]);
+//		    	celebGroupRepo.save(celebGroupOne);
+//		    	msg.add(celebGroup[i] + peopleNum[i] + " 정상 입력");
+//	    	}else {
+//	    		msg.add(celebGroup[i] + peopleNum[i] + " 등록 안됨");
+//	    	}
 	    }
 	    res.put("셀럽그룹 등록로그", msg);
 	    return res;
@@ -437,6 +437,15 @@ public class AdminSvcImpl implements AdminSvcInter{
 		Map<String, Object> res = new HashMap<String,Object>();
 		String name = new Object() {}.getClass().getEnclosingMethod().getName();
 		ArrayList<String> msg = new ArrayList<>();
+		//특수카드
+		for (int i = 0; i < SPECIAL_PRODUCT_GRADE.length;i++){
+			Product_Grade pg =new Product_Grade();
+			pg.setProductSheets(SPECIAL_PRODUCT_SHEETS[i]);
+			pg.setProductGrade(SPECIAL_PRODUCT_GRADE[i]);
+			pg.setProductPercent(null);
+			Product_Grade saved = pgRepo.save(pg);
+			msg.add(saved.toString());
+		}
 		//일반카드
 		for (int i = 0; i < PRODUCT_GRADE.length; i++) {
 			Product_Grade pg =new Product_Grade();
@@ -444,15 +453,6 @@ public class AdminSvcImpl implements AdminSvcInter{
 			pg.setProductGrade(PRODUCT_GRADE[i]);
 			pg.setProductPercent(PRODUCT_GRADE_PERCENT[i]);
 			pg.setProductSheets((COMMON_CARD_NUM*PRODUCT_GRADE_PERCENT[i])/100);
-			Product_Grade saved = pgRepo.save(pg);
-			msg.add(saved.toString());
-		}
-		//특수카드
-		for (int i = 0; i < SPECIAL_PRODUCT_GRADE.length;i++){
-			Product_Grade pg =new Product_Grade();
-			pg.setProductSheets(SPECIAL_PRODUCT_SHEETS[i]);
-			pg.setProductGrade(SPECIAL_PRODUCT_GRADE[i]);
-			pg.setProductPercent(null);
 			Product_Grade saved = pgRepo.save(pg);
 			msg.add(saved.toString());
 		}
@@ -515,13 +515,14 @@ public class AdminSvcImpl implements AdminSvcInter{
 		Map<String, Object> res = new HashMap<String,Object>();
 		String name = new Object() {}.getClass().getEnclosingMethod().getName();
 		ArrayList<String> msg = new ArrayList<>();
-		
+		int cnt = 28;
 		List<Product> product = productRepo.findAll();
 		for(int i = 0; i <product.size();i++){
 			Product_Media pm = new Product_Media();
 			Product temp = product.get(i);
 			pm.setProduct(temp);
-			pm.setProductMediaAdres(PRODUCT_MEDIA_ADRES + temp.getProductNm());
+			pm.setProductMediaAdres(PRODUCT_MEDIA_ADRES + temp.getProductNm()+cnt);
+			cnt--;
 			Product_Media saved = pmRepo.save(pm);
 			msg.add(saved.getProduct().getProductNo()+" image_where" + saved.getProductMediaAdres());
 		}
@@ -599,7 +600,7 @@ public class AdminSvcImpl implements AdminSvcInter{
 		String [] temp1 = {"태연","티파니","서현","현아","아이유"};
 		msg.addAll(insertSPfactory(SALES1+" "+SALES_SUBFIX,temp1));
 		//남성
-		String [] temp2 = {"GD","이태희"};
+		String [] temp2 = {"GD","차은우"};
 		msg.addAll(insertSPfactory(SALES2+" "+SALES_SUBFIX,temp2));
 		//태티서
 		String [] temp3 = {"태연","티파니","서현"};
@@ -607,7 +608,7 @@ public class AdminSvcImpl implements AdminSvcInter{
 		//솔로
 		String[] temp4 = {"현아","GD","아이유"};
 		msg.addAll(insertSPfactory(SALES4+" "+SALES_SUBFIX,temp4));
-//		"태연","티파니","서현","현아","GD","아이유","이태희"
+//		"태연","티파니","서현","현아","GD","아이유","차은우"
 		String[] temp5 = {"태연","티파니","서현","현아","GD"};
 //		String[] temp5 = {"조영우","남근형","하지훈","김도형","신지현"};
 		msg.addAll(insertSPfactory(SALES5+" "+SALES_SUBFIX,temp5));
@@ -615,7 +616,7 @@ public class AdminSvcImpl implements AdminSvcInter{
 //		String[] temp6 = {"조영우","남근형","하지훈","김도형","신지현","나비"};
 		msg.addAll(insertSPfactory(SALES6+" "+SALES_SUBFIX,temp6));
 		
-		String[] celebs = {"태연","티파니","서현","현아","GD","아이유","이태희"};
+		String[] celebs = {"태연","티파니","서현","현아","GD","아이유","차은우"};
 		for (int i = 0; i< celebs.length; i++) {
 			Celeb celeb = celebRepo.getById(Long.valueOf(i));
 			Optional<List<Product>> products = productRepo.sltByCelebNo(celeb.getCelebNo());
