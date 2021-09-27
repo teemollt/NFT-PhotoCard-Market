@@ -26,10 +26,15 @@
   clear: both;
 }
 
-.galleryTable > tbody > tr > th {
+.galleryTable > tbody > tr > th,
+.galleryTable > tbody > tr > td {
   border-bottom: 1px solid lightgray;
   text-align: left;
   padding: 20px;
+}
+
+.galleryTable > tbody > tr > th {
+  background-color: rgb(245, 244, 244);
 }
 
 .boardNo {
