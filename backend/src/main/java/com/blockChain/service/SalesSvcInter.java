@@ -16,4 +16,6 @@ public interface SalesSvcInter {
 
 	Map<String, Object> gainCardList(Long cardpackPK);
 
+	Map<String, Object> buyCardPack(Long cardpackPK);
+
 }

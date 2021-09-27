@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 import com.blockChain.domain.Product;
 import com.blockChain.domain.QProduct;
 import com.blockChain.domain.QProduct_Media;
+import com.blockChain.domain.QProduct_Token;
+import com.blockChain.domain.Token;
 import com.blockChain.dto.CardGenerateDTO;
 import com.blockChain.repository.ProductRepoCustom;
 import com.querydsl.core.types.Projections;
@@ -59,6 +61,26 @@ public class ProductRepoImpl implements ProductRepoCustom{
 				.join(qpm).on(qp.productNo.eq(qpm.product.productNo))
 				.where(qp.celeb.celebNm.contains(NM))
 				.fetch());
+		
+	}
+	
+	@Override
+	public CardGenerateDTO sltByTokenNo(Token token){
+		QProduct qp = QProduct.product;
+		QProduct_Media qpm= QProduct_Media.product_Media;
+		QProduct_Token qpt = QProduct_Token.product_Token;
+		return queryFactory.select(Projections.constructor(
+				CardGenerateDTO.class
+				, qp.productNo
+				, qp.productNm
+				, qpm.productMediaAdres
+				, qp.productGrade.productGradeNo
+				, qp.productGrade.productGrade
+				)).from(qp)
+				.join(qpm).on(qp.productNo.eq(qpm.product.productNo))
+				.join(qpt).on(qp.eq(qpt.product))
+				.where(qpt.token.eq(token))
+				.fetchFirst();
 		
 	}
 }

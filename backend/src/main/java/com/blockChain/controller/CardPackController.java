@@ -46,4 +46,10 @@ public class CardPackController {
 	public Map<String,Object>gainCardList(@PathVariable(name="cardpackPK") Long cardpackPK){
 		return salesSvc.gainCardList(cardpackPK);
 	}
+	
+	@GetMapping("/buy/{cardpackPK}")
+	public Map<String,Object>buyCard(@PathVariable(name="cardpackPK") Long cardpackPK){
+		return salesSvc.buyCardPack(cardpackPK);
+		
+	}
 }
