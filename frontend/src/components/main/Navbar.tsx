@@ -6,7 +6,7 @@ import Button from "@material-ui/core/Button";
 import axios from "axios";
 
 function Navbar(): JSX.Element {
-  const [nick, setNick] = useState<string>();
+  const [pk, setPk] = useState<number>();
 
   let token: string | null = localStorage.getItem("token");
 
@@ -16,8 +16,7 @@ function Navbar(): JSX.Element {
         headers: { Authorization: localStorage.getItem("token") },
       })
       .then((res) => {
-        setNick(res.data.mypage.memberNick);
-        localStorage.setItem("pk", res.data.mypage.memberNo);
+        setPk(res.data.mypage.memberNo);
       });
   }, []);
 
@@ -44,7 +43,7 @@ function Navbar(): JSX.Element {
           <Button>Market</Button>
         </Link>
         {token ? (
-          <Link className="tablink" to={"/gallery/" + nick}>
+          <Link className="tablink" to={"/gallery/" + pk}>
             <Button>Gallery</Button>
           </Link>
         ) : null}

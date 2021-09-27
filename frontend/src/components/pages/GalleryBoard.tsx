@@ -22,13 +22,10 @@ function GalleryBoard() {
   const [page, setPage] = useState<Array<post>>([]);
 
   useEffect(() => {
-    axios
-      .get("/api/gallery/main")
-      .then((res) => {
-        setPage(res.data.res.reverse().slice(0, 10));
-        setPosts(res.data.res.reverse());
-      })
-      .catch((err) => console.log(err));
+    axios.get("/api/gallery/main").then((res) => {
+      setPage(res.data.res.slice(0, 10));
+      setPosts(res.data.res);
+    });
   }, []);
 
   const handleClickOpen = () => {

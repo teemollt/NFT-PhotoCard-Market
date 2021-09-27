@@ -3,6 +3,7 @@ import { Pagination } from "@mui/material";
 import GalleryBody from "../gallery/GalleryBody";
 import GalleryEmpty from "./GalleryEmpty";
 import axios from "axios";
+import { useParams } from "react-router";
 import "./GalleryTop.css";
 
 export type card = {
@@ -19,6 +20,8 @@ export type card = {
 };
 
 function GalleryTop() {
+  let { pk } = useParams<{ pk?: string | undefined }>();
+
   const [topMenu, setTopMenu] = useState<number>(0);
   const [view, setView] = useState<number>(1);
   const [sub, setSub] = useState<boolean>(false);
@@ -27,97 +30,76 @@ function GalleryTop() {
   const [galleryCard, setGalleryCard] = useState<Array<card>>([]);
   const [page, setPage] = useState<Array<card>>([]);
 
-
   useEffect(() => {
-    axios
-      .get("/api/gallery/" + localStorage.getItem("pk") + "/0/0/0")
-      .then((res) => {
-        setPage(res.data.res.slice(0, 12));
-        setGalleryCard(res.data.res);
-      });
+    axios.get("/api/gallery/" + pk + "/0/0/0").then((res) => {
+      setPage(res.data.res.slice(0, 12));
+      setGalleryCard(res.data.res);
+    });
   }, []);
 
   const handleTopMenuGroup = (id: number) => {
-    setTopMenu(id)
+    setTopMenu(id);
     if (id === 0) {
-      axios
-      .get("/api/gallery/" + localStorage.getItem("pk") + "/0/0/0")
-      .then((res) => {
+      axios.get("/api/gallery/" + pk + "/0/0/0").then((res) => {
         setPage(res.data.res.slice(0, 12));
         setGalleryCard(res.data.res);
         setSub(false);
-      })
+      });
     } else if (id === 1) {
-      axios
-      .get("/api/gallery/" + localStorage.getItem("pk") + "/2/3/0")
-      .then((res) => {
+      axios.get("/api/gallery/" + pk + "/2/3/0").then((res) => {
         setPage(res.data.res.slice(0, 12));
         setGalleryCard(res.data.res);
         setSub(false);
-      })
+      });
     } else if (id === 2) {
-      axios
-      .get("/api/gallery/" + localStorage.getItem("pk") + "/2/4/0")
-      .then((res) => {
+      axios.get("/api/gallery/" + pk + "/2/4/0").then((res) => {
         setPage(res.data.res.slice(0, 12));
         setGalleryCard(res.data.res);
         setSub(false);
-      })
+      });
     } else if (id === 3) {
-      axios
-      .get("/api/gallery/" + localStorage.getItem("pk") + "/2/5/0")
-      .then((res) => {
+      axios.get("/api/gallery/" + pk + "/2/5/0").then((res) => {
         setPage(res.data.res.slice(0, 12));
         setGalleryCard(res.data.res);
         setSub(false);
-      })
+      });
     } else if (id === 4) {
-      axios
-      .get("/api/gallery/" + localStorage.getItem("pk") + "/1/4/0")
-      .then((res) => {
+      axios.get("/api/gallery/" + pk + "/1/4/0").then((res) => {
         setPage(res.data.res.slice(0, 12));
         setGalleryCard(res.data.res);
         setSub(true);
-      })
+      });
     }
   };
 
   const handleSubMem = (id: number) => {
-    setSubMem(id)
+    setSubMem(id);
     if (id === 0) {
-      axios
-      .get("/api/gallery/" + localStorage.getItem("pk") + "/1/4/0")
-      .then((res) => {
+      axios.get("/api/gallery/" + pk + "/1/4/0").then((res) => {
         setPage(res.data.res.slice(0, 12));
         setGalleryCard(res.data.res);
         setSub(true);
-      })
-    } else if (id===1) {
-      axios
-      .get("/api/gallery/" + localStorage.getItem("pk") + "/2/0/0")
-      .then((res) => {
+      });
+    } else if (id === 1) {
+      axios.get("/api/gallery/" + pk + "/2/0/0").then((res) => {
         setPage(res.data.res.slice(0, 12));
         setGalleryCard(res.data.res);
         setSub(true);
-      })
-    } else if (id===2) {
-      axios
-      .get("/api/gallery/" + localStorage.getItem("pk") + "/2/1/0")
-      .then((res) => {
+      });
+    } else if (id === 2) {
+      axios.get("/api/gallery/" + pk + "/2/1/0").then((res) => {
         setPage(res.data.res.slice(0, 12));
         setGalleryCard(res.data.res);
         setSub(true);
-      })
-    } else if (id===3) {
-      axios
-      .get("/api/gallery/" + localStorage.getItem("pk") + "/2/2/0")
-      .then((res) => {
+      });
+    } else if (id === 3) {
+      axios.get("/api/gallery/" + pk + "/2/2/0").then((res) => {
         setPage(res.data.res.slice(0, 12));
         setGalleryCard(res.data.res);
         setSub(true);
-      })
+      });
     }
-  }
+  };
 
   const handlePage = (e: any) => {
     const page = Number(e.target.innerText);
@@ -239,13 +221,17 @@ function GalleryTop() {
         </div>
       </div>
       <div className="galleryBody">
-        {page.length ? page.map((card, index) => {
-          return <GalleryBody view={view} card={card} key={index} />;
-        }) : <GalleryEmpty /> }
+        {page.length ? (
+          page.map((card, index) => {
+            return <GalleryBody view={view} card={card} key={index} />;
+          })
+        ) : (
+          <GalleryEmpty />
+        )}
       </div>
       <Pagination
         className="GalleryBoardPage"
-        count={Math.ceil(galleryCard.length / 8)}
+        count={Math.ceil(galleryCard.length / 12)}
         shape="rounded"
         onChange={handlePage}
         hidePrevButton
