@@ -75,11 +75,11 @@ export interface State {
 }
 
 function MarketMy() {
-  const [cards, setCards] = useState<Array<tempCard>>(tempCard.slice(0, 10));
+  const [cards, setCards] = useState<Array<tempCard>>(tempCard.slice(0, 5));
 
   const handlePage = (e: any) => {
     const page = Number(e.target.innerText);
-    setCards(tempCard.slice(page * 10 - 10, page * 10));
+    setCards(tempCard.slice(page * 5 - 5, page * 5));
   };
 
   return (
@@ -91,7 +91,8 @@ function MarketMy() {
           <tbody>
             <tr>
               <th className="myMarketNo">장터 번호</th>
-              <th className="myMarketProduct">장터상품</th>
+              <th className="myMarketCard">등록 카드</th>
+              <th className="myMarketProduct">등록 상품</th>
               <th className="myMarketCurrent">판매가</th>
               <th className="myMarketEnd">구매자</th>
             </tr>
@@ -102,7 +103,7 @@ function MarketMy() {
         </table>
         <Pagination
           className="GalleryBoardPage"
-          count={Math.ceil(tempCard.length / 10)}
+          count={Math.ceil(tempCard.length / 5)}
           shape="rounded"
           onChange={handlePage}
           hidePrevButton

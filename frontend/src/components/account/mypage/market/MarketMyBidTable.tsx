@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./MarketMyBidTable.css";
 
 interface MarketMyBidTableProps {
@@ -13,17 +13,39 @@ interface MarketMyBidTableProps {
 }
 
 function MarketMyBidTable(props: MarketMyBidTableProps) {
-  const { marketNo, nick, imgUrl, title, myPrice,  end } = props.card;
+  const { marketNo, nick, imgUrl, title, myPrice, end } = props.card;
+
+  const [hover, setHover] = useState<boolean>(false);
+
   return (
-    <tr className="marketMyBidTable">
-      <th className="myBidNo">{marketNo}</th>
-      <th className="myBidNick">{nick}</th>
-      <th className="myBidCard">
-        <img src={imgUrl} alt="" />
-      </th>
-      <th className="myBidProduct">{title}</th>
-      <th className="myBidMyPrice">{myPrice}</th>
-      <th className="myBidEnd">{end}</th>
+    <tr
+      className="marketMyBidTable"
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+    >
+      <td className="myBidNo">{marketNo}</td>
+      <td className="myBidNick">{nick}</td>
+      <td className="myBidCard">
+        <img className="myBidImg" src={imgUrl} alt="" />
+        {hover ? (
+          <img
+            className="myBidImgHover"
+            src={imgUrl}
+            alt=""
+            style={{ zIndex: 100, position: "absolute", visibility: "visible" }}
+          />
+        ) : (
+          <img
+            className="myBidImgHover"
+            src={imgUrl}
+            alt=""
+            style={{ zIndex: 100, position: "absolute", visibility: "hidden" }}
+          />
+        )}
+      </td>
+      <td className="myBidProduct">{title}</td>
+      <td className="myBidMyPrice">{myPrice}</td>
+      <td className="myBidEnd">{end}</td>
     </tr>
   );
 }

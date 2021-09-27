@@ -2,7 +2,6 @@
   margin-top: 20px;
   width: 100%;
   text-align: center;
-
   border-top: 1px solid lightgray;
   border-collapse: collapse;
   background-color: #fff;
@@ -13,7 +12,7 @@
 .myMarketTable > tbody > tr > td {
   border-bottom: 1px solid lightgray;
   text-align: left;
-  padding: 20px 40px 20px 40px;
+  padding: 20px;
 }
 
 .myMarketTable > tbody > tr > th {
@@ -21,6 +20,7 @@
 }
 
 .myMarketNo,
+.myMarketCard,
 .myMarketEnd,
 .myMarketCurrent {
   width: 10%;
@@ -28,11 +28,6 @@
 
 .myMarketProduct {
   width: 40%;
-}
-
-.myMarketCard > img {
-  width: 50px;
-  height: 70px;
 }
 
 .marketMyTable:hover {
