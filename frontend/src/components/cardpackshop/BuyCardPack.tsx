@@ -14,6 +14,7 @@ import MuiDialogActions from "@material-ui/core/DialogActions";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
+import axios from "axios";
 
 export interface DialogTitleProps extends WithStyles<typeof styles> {
   id: string;
@@ -64,7 +65,7 @@ const DialogActions = withStyles((theme: Theme) => ({
   },
 }))(MuiDialogActions);
 
-function BuyCardPack(): JSX.Element {
+function BuyCardPack(props: any): JSX.Element {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -74,7 +75,10 @@ function BuyCardPack(): JSX.Element {
     setOpen(false);
   };
   const pay = () => {
+    console.log(props.cardpackprice);
     setOpen(false);
+    // 결재코드
+
     // 도형님의 결제코드
   };
   return (
@@ -86,7 +90,7 @@ function BuyCardPack(): JSX.Element {
           onClick={handleClickOpen}
           style={{ width: "300px", marginTop: "5px" }}
         >
-          구매하기
+          {props.cardpackprice} 구매하기
         </Button>
       </div>
       <Dialog
