@@ -7,11 +7,13 @@ import org.springframework.stereotype.Repository;
 
 import com.blockChain.domain.QProduct;
 import com.blockChain.domain.QProduct_Media;
+import com.blockChain.domain.QProduct_Token;
 import com.blockChain.domain.QSales;
 import com.blockChain.domain.QSales_Product;
 import com.blockChain.domain.Sales;
+import com.blockChain.dto.CardAddCountDTO;
 import com.blockChain.dto.CardDTO;
-import com.blockChain.dto.CardForSalesDTO;
+import com.blockChain.dto.CardGenerateDTO;
 import com.blockChain.dto.SalesDTO;
 import com.blockChain.repository.SalesRepoCustom;
 import com.querydsl.core.types.Projections;
@@ -47,13 +49,13 @@ public class SalesRepoImpl implements SalesRepoCustom{
 	}
 	
 	@Override
-	public Optional<List<CardForSalesDTO>>gainCardList(Long salesPK){
+	public Optional<List<CardGenerateDTO>>gainCardList(Long salesPK){
 		QSales qs = QSales.sales;
 		QProduct qp = QProduct.product;
 		QProduct_Media qpm= QProduct_Media.product_Media;
 		QSales_Product qsp = QSales_Product.sales_Product;
 		return Optional.ofNullable(queryFactory.select(Projections.constructor(
-				CardForSalesDTO.class
+				CardGenerateDTO.class
 				, qp.productNo
 				, qp.productNm
 				, qpm.productMediaAdres
@@ -75,8 +77,6 @@ public class SalesRepoImpl implements SalesRepoCustom{
 	@Override
 	public Optional<List<SalesDTO>> searchSales(String NM){
 		QSales qsl = QSales.sales;
-//		List<SalesDTO> res = queryFactory.selectFrom(qsl).where(qsl.salesNm.contains(NM)).fetch();
-//		return Optional.ofNullable(res);
 		return  Optional.ofNullable(queryFactory.select(Projections.constructor(SalesDTO.class
 				,qsl.salesNo
 				,qsl.salesNm
@@ -87,5 +87,30 @@ public class SalesRepoImpl implements SalesRepoCustom{
 				.from(qsl)
 				.where(qsl.salesNm.contains(NM))
 				.fetch());
+	}
+	
+	@Override
+	public Optional<List<CardAddCountDTO>>gainCardListAddNum(Long salesPK){
+		QSales qs = QSales.sales;
+		QProduct qp = QProduct.product;
+		QProduct_Media qpm= QProduct_Media.product_Media;
+		QSales_Product qsp = QSales_Product.sales_Product;
+		QProduct_Token qpt = QProduct_Token.product_Token;
+		return Optional.ofNullable(queryFactory.select(Projections.constructor(
+				CardAddCountDTO.class
+				, qp.productNo
+				, qp.productNm
+				, qpm.productMediaAdres
+				, qp.productGrade.productGradeNo
+				, qp.productGrade.productGrade
+				, qpt.product.productNo.count()
+				))
+				.from(qsp)
+				.join(qp).on(qsp.product.productNo.eq(qp.productNo))
+				.join(qpm).on(qp.productNo.eq(qpm.product.productNo))
+				.join(qpt).on(qp.productNo.eq(qpt.product.productNo))
+				.orderBy(qp.productGrade.productGradeNo.asc())
+				.groupBy(qpt.product.productNo)
+				.where(qsp.sales.salesNo.eq(salesPK)).fetch());
 	}
 }

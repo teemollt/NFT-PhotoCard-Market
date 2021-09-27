@@ -18,7 +18,8 @@ import com.blockChain.domain.Member;
 import com.blockChain.domain.Reply;
 import com.blockChain.domain.Sales;
 import com.blockChain.domain.Sales_Like;
-import com.blockChain.dto.CardForSalesDTO;
+import com.blockChain.dto.CardAddCountDTO;
+import com.blockChain.dto.CardGenerateDTO;
 import com.blockChain.dto.SalesDTO;
 import com.blockChain.repository.MemberRepo;
 import com.blockChain.repository.ReplyRepo;
@@ -150,7 +151,8 @@ public class SalesSvcImpl implements SalesSvcInter{
 	@Override
 	public Map<String,Object>gainCardList(Long cardpackPK){
 		Map<String, Object> res = new HashMap<String,Object>();
-		Optional<List<CardForSalesDTO>> cardList = salesRepo.gainCardList(cardpackPK);
+//		Optional<List<CardGenerateDTO>> cardList = salesRepo.gainCardList(cardpackPK);
+		Optional<List<CardAddCountDTO>> cardList = salesRepo.gainCardListAddNum(cardpackPK);
 		res.put("res", cardList);
 		return res;
 	}
