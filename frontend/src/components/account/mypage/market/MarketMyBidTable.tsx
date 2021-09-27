@@ -1,9 +1,9 @@
 import React from "react";
-import "./AuctionMyBidTable.css";
+import "./MarketMyBidTable.css";
 
-interface AuctionMyBidTableProps {
+interface MarketMyBidTableProps {
   card: {
-    auctionNo: number;
+    marketNo: number;
     nick: string;
     imgUrl: string;
     title: string;
@@ -12,11 +12,11 @@ interface AuctionMyBidTableProps {
   };
 }
 
-function AuctionMyBidTable(props: AuctionMyBidTableProps) {
-  const { auctionNo, nick, imgUrl, title, myPrice,  end } = props.card;
+function MarketMyBidTable(props: MarketMyBidTableProps) {
+  const { marketNo, nick, imgUrl, title, myPrice,  end } = props.card;
   return (
-    <tr className="auctionMyBidTable">
-      <th className="myBidNo">{auctionNo}</th>
+    <tr className="marketMyBidTable">
+      <th className="myBidNo">{marketNo}</th>
       <th className="myBidNick">{nick}</th>
       <th className="myBidCard">
         <img src={imgUrl} alt="" />
@@ -28,4 +28,4 @@ function AuctionMyBidTable(props: AuctionMyBidTableProps) {
   );
 }
 
-export default AuctionMyBidTable;
+export default MarketMyBidTable;
