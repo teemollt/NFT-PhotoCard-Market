@@ -359,7 +359,7 @@ function JoinTable() {
         </div>
       </div>
       <div className="joinBtns">
-        <Link to="/" style={{ textDecoration: "none" }}>
+        <Link to="/mypage" style={{ textDecoration: "none" }}>
           <Button className="joinCancelBtn" variant="contained">
             취소
           </Button>
