@@ -40,6 +40,7 @@ public class WalletSvcImpl implements WalletSvcInter {
 			wallet.setWalletRC(0L);
 			walletRepo.save(wallet);
 			
+			res.put("success", true);
 			res.put("msg", "지갑등록 성공");
 		}catch(Exception e) {
 			res.put("msg", e.getMessage());
