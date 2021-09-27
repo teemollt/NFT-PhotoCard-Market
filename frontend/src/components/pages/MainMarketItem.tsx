@@ -42,7 +42,7 @@ function MainMarketItem(): JSX.Element {
             <Grid item xs={12}>
               <Paper className={classes.paper}>
                 <img
-                  src={location.state.data.imgUrl}
+                  src={"/" + location.state.data.card.cardImgUrl + ".jpg"}
                   alt=""
                   width="100%"
                   height="100%"

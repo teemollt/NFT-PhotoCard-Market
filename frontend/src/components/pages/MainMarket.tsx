@@ -154,13 +154,12 @@ function MainMarket(): JSX.Element {
                 </div>
               </div>
             </div>
-            <div>
-              {searchresult.length > 0 ? (
-                <MarketBodySearch searchresult={searchresult} />
-              ) : (
-                <div>검색을 해주세요</div>
-              )}
-            </div>
+
+            {searchresult.length > 0 ? (
+              <MarketBodySearch searchresult={searchresult} />
+            ) : (
+              <div>검색을 해주세요</div>
+            )}
           </TabPanel>
         </div>
       </Container>
