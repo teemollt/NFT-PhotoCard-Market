@@ -20,8 +20,7 @@ function MarketBody(props: any): JSX.Element {
     <div className="main">
       {items.map((item, i) => (
         <MarketItem
-          // image={item.card.cardImgUrl}
-          image="/images/cardshop.png"
+          image={item.card.cardImgUrl}
           background="#52649e"
           item={item}
         />

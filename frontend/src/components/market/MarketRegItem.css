@@ -129,7 +129,8 @@
   margin-bottom: 20px;
   border-radius: 4px;
   padding-bottom: 20px;
-  background-color: #fff;
+  /* background-color: #fff; */
+  background-color: rgba(255, 255, 255, 0.5);
   -ms-flex-item-align: center;
   align-self: center;
   box-shadow: 0 12px 25px 0 rgba(199, 175, 189, 0.25);

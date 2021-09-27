@@ -4,6 +4,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Grid from "@material-ui/core/Grid";
 import axios from "axios";
+import { ResetTvTwoTone } from "@mui/icons-material";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -27,6 +28,7 @@ function CardPackInside(props: any): JSX.Element {
       })
       .catch();
   }, []);
+  // }
   return (
     <div className={classes.root}>
       <h1>Cards List</h1>
@@ -49,6 +51,9 @@ function CardPackInside(props: any): JSX.Element {
                 </Grid>
                 <Grid item xs={6}>
                   <div style={{ textAlign: "center" }}>{card.cardGradeNM}</div>
+                </Grid>
+                <Grid item xs={6}>
+                  <div style={{ textAlign: "center" }}>{card.cardNo}</div>
                 </Grid>
               </ListItem>
             </div>

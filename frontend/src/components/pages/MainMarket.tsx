@@ -8,7 +8,8 @@ import Container from "@material-ui/core/Container";
 import MarketBody from "../market/MarketBody";
 import MarketRegItem from "../market/MarketRegItem";
 import axios from "axios";
-import "./MainMarket.scss";
+import "./MainMarket.css";
+import MarketBodySearch from "../market/MarketBodySearch";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -63,16 +64,18 @@ function MainMarket(): JSX.Element {
   // 전체목록
   let [allceleb, setallceleb] = useState<any[]>([]);
   let [celeb, setceleb] = useState<any[]>([]);
+  let [searchnumber, setsearchnumber] = useState<number>(0);
   // 데이터저장하는곳
   useEffect(() => {
     axios.get("/api/main/celebgrouplist").then((res) => {
-      console.log(res.data.res);
+      setsearchnumber(res.data.res.length);
       setceleb(res.data.res);
     });
   }, []);
   // 검색
   const [clicksearch, setclicksearch] = useState(false);
   const [search, setsearch] = useState<string>("");
+  const [searchresult, setsearchresult] = useState<any[]>([]);
   function searchitem(data: string) {
     // 찾기해서 결과값 가져오기
     axios
@@ -80,6 +83,7 @@ function MainMarket(): JSX.Element {
         keyword: data,
       })
       .then((res) => {
+        setsearchresult(res.data.cardList);
         console.log(res.data.cardList);
         setclicksearch(true);
       });
@@ -89,29 +93,7 @@ function MainMarket(): JSX.Element {
       <div className={classes.registeritem}>
         <MarketRegItem />
       </div>
-      <div className="mainmaerketcontainer">
-        <div className="finder">
-          <div className="finder__outer">
-            <div className="finder__inner">
-              <input
-                className="finder__input"
-                type="text"
-                name="q"
-                placeholder="검색어를 입력해주세요"
-                onChange={(e) => {
-                  console.log(e.target.value);
-                  setsearch(e.target.value);
-                }}
-                onKeyPress={(e) => {
-                  if (e.key === "Enter") {
-                    searchitem(search);
-                  }
-                }}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
+
       <br />
       <Container>
         <Tabs
@@ -127,6 +109,11 @@ function MainMarket(): JSX.Element {
               <Tab label={group.groupNm} {...a11yProps(i + 1)} key={i + 1} />
             );
           })}
+          <Tab
+            label="검색"
+            {...a11yProps(searchnumber + 1)}
+            key={searchnumber + 1}
+          />
         </Tabs>
         <div>
           <TabPanel value={value} index={0}>
@@ -142,6 +129,40 @@ function MainMarket(): JSX.Element {
             </div>
           );
         })}
+        <div>
+          <TabPanel value={value} index={searchnumber + 1}>
+            <div className="mainmaerketcontainer">
+              <div className="finder">
+                <div className="finder__outer">
+                  <div className="finder__inner">
+                    <input
+                      className="finder__input"
+                      type="text"
+                      name="q"
+                      placeholder="검색어를 입력해주세요"
+                      onChange={(e) => {
+                        console.log(e.target.value);
+                        setsearch(e.target.value);
+                      }}
+                      onKeyPress={(e) => {
+                        if (e.key === "Enter") {
+                          searchitem(search);
+                        }
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              {searchresult.length > 0 ? (
+                <MarketBodySearch searchresult={searchresult} />
+              ) : (
+                <div>검색을 해주세요</div>
+              )}
+            </div>
+          </TabPanel>
+        </div>
       </Container>
     </div>
   );

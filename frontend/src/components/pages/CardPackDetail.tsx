@@ -124,7 +124,10 @@ function CardPackDetail(): JSX.Element {
             </Tooltip>
             <div>
               <div className={classes.footer}>
-                <BuyCardPack />
+                <BuyCardPack
+                  cardpackprice={location.state.data.salesPrice}
+                  cardpackNo={location.state.data.salesNo}
+                />
               </div>
               <div className={classes.paper2}>
                 <hr />

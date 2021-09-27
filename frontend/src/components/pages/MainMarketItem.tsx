@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
     iteminfo: {},
   })
 );
-function MarketItem(): JSX.Element {
+function MainMarketItem(): JSX.Element {
   const classes = useStyles();
 
   const location: any = useLocation();
@@ -69,4 +69,4 @@ function MarketItem(): JSX.Element {
   );
 }
 
-export default MarketItem;
+export default MainMarketItem;
