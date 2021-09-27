@@ -23,10 +23,10 @@ function GalleryBoardPost(props: GalleryBoardPostProps) {
 
   return (
     <tr className="postBody" onClick={(pk) => handleToGallery(memberNo)}>
-      <th className="postBodyNo">{galleryArticleNo}</th>
-      <th className="postBodyNick">{memberNick}</th>
-      <th className="postBodyContent">{galleryArticleContent}</th>
-      <th className="postBodyLike">{likes}</th>
+      <td className="postBodyNo">{galleryArticleNo}</td>
+      <td className="postBodyNick">{memberNick}</td>
+      <td className="postBodyContent">{galleryArticleContent}</td>
+      <td className="postBodyLike">{likes}</td>
     </tr>
   );
 }
