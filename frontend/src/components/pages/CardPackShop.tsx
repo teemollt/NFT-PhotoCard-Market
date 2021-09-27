@@ -73,7 +73,7 @@ function CardPackShop(): JSX.Element {
     <div className="main">
       {cardpack.map((pack, i) => (
         <Stack
-          image="/images/cardshop.png"
+          image="/image/cardshop.png"
           background="#52649e"
           cardpackinfo={pack}
         />

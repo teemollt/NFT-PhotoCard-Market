@@ -69,7 +69,7 @@ function MarketRegItem() {
                     <div
                       className="card"
                       style={{
-                        backgroundImage: "url(/images/iu1.jpg)",
+                        backgroundImage: "url(/image/iu1.jpg)",
                         backgroundSize: "100% 100%",
                       }}
                     >
