@@ -53,7 +53,7 @@ function CardPackInside(props: any): JSX.Element {
                   <div style={{ textAlign: "center" }}>{card.cardGradeNM}</div>
                 </Grid>
                 <Grid item xs={6}>
-                  <div style={{ textAlign: "center" }}>{card.cardNo}</div>
+                  <div style={{ textAlign: "center" }}>{card.cardCount}</div>
                 </Grid>
               </ListItem>
             </div>

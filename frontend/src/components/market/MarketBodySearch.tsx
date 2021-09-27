@@ -1,14 +1,12 @@
-import React, { useState } from "react";
-import "./MarketBody.css";
-import MarketItem from "./MarketItem";
+import React from "react";
+import MarketItemSearch from "./MarketItemSearch";
 
-function MarketBodySearch(props: any): JSX.Element {
+function MarketBodySearch(props: any) {
   return (
-    <div className="main">
-      {/* {props.searchresult[0].cardNo} */}
-      {/* {props.searchresult.map((card, i) => (
-        <MarketItem background="#52649e" card={card} />
-      ))} */}
+    <div>
+      {props.searchresult.map((card: any, i: number) => (
+        <MarketItemSearch item={card} />
+      ))}
     </div>
   );
 }
