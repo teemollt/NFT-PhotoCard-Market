@@ -1,267 +1,124 @@
 import React, { useState, useEffect } from "react";
+import jwt_decode from "jwt-decode";
+import axios from "axios";
+import Grid from "@mui/material/Grid";
 import "./MarketRegItem.css";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import CloseIcon from "@material-ui/icons/Close";
-import Slide from "@material-ui/core/Slide";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import TextField from "@material-ui/core/TextField";
-import { TransitionProps } from "@material-ui/core/transitions";
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      flexGrow: 1,
-    },
-    paper: {
-      padding: theme.spacing(2),
-      textAlign: "center",
-      color: theme.palette.text.secondary,
-      height: "370px",
-    },
-    appBar: {
-      position: "relative",
-    },
-    title: {
-      marginLeft: theme.spacing(2),
-      flex: 1,
-    },
-    container: {
-      width: "300px",
-      position:"fixed",
-      textAlign:"center"
-    },
-  })
-);
-const Transition = React.forwardRef(function Transition(
-  props: TransitionProps & { children?: React.ReactElement },
-  ref: React.Ref<unknown>
-) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
-
-const tempGallery: Array<temp> = [
-  {
-    id: 1,
-    imgUrl:
-      "https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/XG2MW2H3ZRW5FHDVSOMF6FDT3E.jpg",
-    title: "아이유꽃",
-    level: "S",
-    celeb: "1",
-    price: "1btc",
-  },
-  {
-    id: 2,
-    imgUrl:
-      "https://file.mk.co.kr/meet/neds/2021/04/image_readtop_2021_330747_16177500644599916.jpg",
-    title: "여신",
-    level: "A",
-    celeb: "1",
-    price: "1btc",
-  },
-  {
-    id: 3,
-    imgUrl:
-      "https://img4.yna.co.kr/photo/cms/2019/05/02/02/PCM20190502000402370_P2.jpg",
-    title: "연합뉴스",
-    level: "A",
-    celeb: "1",
-    price: "1btc",
-  },
-  {
-    id: 4,
-    imgUrl:
-      "http://image.kmib.co.kr/online_image/2020/1008/611811110015088768_1.jpg",
-    title: "똥머리",
-    level: "B",
-    celeb: "1",
-    price: "1btc",
-  },
-  {
-    id: 5,
-    imgUrl:
-      "https://cdn.dailyimpact.co.kr/news/photo/201901/50650_10024_2221.jpg",
-    title: "흑백",
-    level: "B",
-    celeb: "1",
-    price: "1btc",
-  },
-  {
-    id: 6,
-    imgUrl:
-      "http://www.polinews.co.kr/data/photos/20200834/art_15980031118376_e6a761.jpg",
-    title: "정장",
-    level: "B",
-    celeb: "1",
-    price: "1btc",
-  },
-  {
-    id: 7,
-    imgUrl: "https://newsimg.sedaily.com/2021/03/24/22JXKJ0JJZ_1.jpg",
-    title: "블랙야크",
-    level: "B",
-    celeb: "1",
-    price: "1btc",
-  },
-  {
-    id: 8,
-    imgUrl: "https://pbs.twimg.com/media/E9jOv0aUYAw6SIA.jpg",
-    title: "하얀색",
-    level: "C",
-    celeb: "1",
-    price: "1btc",
-  },
-  {
-    id: 9,
-    imgUrl: "https://cdn.baccro.com/news/photo/202103/25534_57525_3959.jpeg",
-    title: "라일락",
-    level: "C",
-    celeb: "1",
-    price: "1btc",
-  },
-  {
-    id: 10,
-    imgUrl:
-      "https://t1.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/user/7mo5/image/RhMj77_UZ1G9smD_INrbLKRVVoc.jpg",
-    title: "블루밍",
-    level: "C",
-    celeb: "1",
-    price: "1btc",
-  },
-];
-
-export type temp = {
-  id: number;
-  imgUrl: string;
-  title: string;
-  level: string;
-  celeb: string;
-  price: string;
-};
-
-function MarketRegItem(): JSX.Element {
-  const [mycards, setmycards] = useState<any[]>([]);
-  const [selectcard, setselectcard] = useState(0);
-  const [selectcardimage, setselectcardimage] = useState<string>("");
-  const [selectcardtitle, setselectcardtitle] = useState<string>("");
-  const [selectcardlevel, setselectcardlevel] = useState<string>("");
-  const [price, setprice] = useState<number>(0);
-
-  function createData() {
-    return {};
-  }
-
-  useEffect(() => {
-    //    내 카드목록 불러오기
-  });
-
+function MarketRegItem() {
+  // 선택하고 가격적어 올리는 창
   const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
   const handleClose = () => {
     setOpen(false);
   };
-
-  const registerMarket = () => {
-    console.log(selectcard);
-    console.log(price);
-  };
-  const classes = useStyles();
-
+  // 내 카드 리스트목록
+  const [mycardlist, setmycardlist] = useState<any[]>([]);
+  useEffect(() => {
+    var token: string | null = localStorage.getItem("token");
+    if (token) {
+      var decoded: any = jwt_decode(token);
+    }
+    axios.get(`/api/gallery/${decoded.sub}/0/0/0`).then((res) => {
+      console.log(res);
+      setmycardlist(res.data.res);
+    });
+  }, []);
+  //
+  const [inputprice, setinputprice] = useState<string>("");
+  const [selectedcardNo, setselectedcardNo] = useState<number>(0);
+  const [selectedcardNm, setselectedcardNm] = useState<string>("");
+  function register(data: any) {
+    setOpen(true);
+    setselectedcardNo(data.cardNo);
+    setselectedcardNm(data.cardNM);
+  }
+  function successregister() {
+    setOpen(false);
+    // 정말 카드등록하는 api
+    //
+  }
   return (
-    <div style={{ textAlign: "center" }}>
-      <Button variant="text" onClick={handleClickOpen}>
-        물품 등록
-      </Button>
-      <Dialog
-        fullScreen
-        open={open}
-        onClose={handleClose}
-        TransitionComponent={Transition}
-      >
-        <AppBar className={classes.appBar}>
-          <Toolbar>
-            <IconButton
-              edge="start"
-              color="inherit"
-              onClick={handleClose}
-              aria-label="close"
+    <div className="section full-height">
+      <input
+        className="modal-btn"
+        type="checkbox"
+        id="modal-btn"
+        name="modal-btn"
+      />
+      <label htmlFor="modal-btn">
+        물품 등록 <i className="uil uil-expand-arrows" />
+      </label>
+      <div className="modal">
+        <div className="modal-wrap">
+          <br />
+          <div style={{}}>
+            <Grid
+              container
+              rowSpacing={1}
+              columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             >
-              <CloseIcon />
-            </IconButton>
-            <Typography variant="h6" className={classes.title}>
-              판매 카드 등록
-            </Typography>
-            <Button autoFocus color="inherit" onClick={registerMarket}>
-              Register
-            </Button>
-          </Toolbar>
-        </AppBar>
-
-        <div style={{ margin: "20px" }}>
-          <Container className={classes.container}>
-            <Grid container spacing={3}>
-              <Grid item xs={12}>
-                <Paper className={classes.paper}>
-                  <img
-                    src={selectcardimage}
-                    alt=""
-                    width="100%"
-                    height="300px"
-                  />
-                  <div className="itemcardinfo">
-                    <span className="producttitle">{selectcardtitle}</span>
-                    <span className="productprice">{selectcardlevel}</span>
+              {mycardlist.map((card, i) => (
+                <Grid item xs={3}>
+                  <div className="page-content">
+                    <div
+                      className="card"
+                      style={{
+                        backgroundImage: `url("/${card.cardImgUrl}.jpg")`,
+                        backgroundSize: "100% 100%",
+                      }}
+                    >
+                      {/* <img src={"/" + card.cardImgUrl+'.jpg'} alt="" /> */}
+                      <div className="content">
+                        <h2 className="title">{card.cardNM}</h2>
+                        <button
+                          className="btn"
+                          onClick={() => {
+                            register(card);
+                          }}
+                        >
+                          등록
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                </Paper>
-                <br />
-                <TextField
-                  fullWidth
-                  placeholder="가격을 입력해주세요"
-                  type="number"
-                  onChange={(e: any) => {
-                    setprice(e.target.value);
-                  }}
-                ></TextField>
-              </Grid>
+                </Grid>
+              ))}
             </Grid>
-          </Container>
+          </div>
         </div>
-
-        <Container>
-          <Grid container spacing={3}>
-            {tempGallery.map((image, i) => (
-              <Grid item xs={3} sm={3} key={i}>
-                <Paper
-                  className={classes.paper}
-                  style={{ cursor: "pointer" }}
-                  onClick={() => {
-                    setselectcard(image.id);
-                    setselectcardimage(image.imgUrl);
-                    setselectcardtitle(image.title);
-                    setselectcardlevel(image.level);
-                  }}
-                >
-                  <img src={image.imgUrl} alt="" width="100%" height="300px" />
-                  <div className="itemcardinfo">
-                    <span className="producttitle">{image.title}</span>
-                    <span className="productprice">{image.price}</span>
-                  </div>
-                </Paper>
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
+      </div>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>나의 카드 판매 등록</DialogTitle>
+        <DialogContent>
+          <DialogContentText style={{ width: "500px", textAlign: "center" }}>
+            {selectedcardNo}번 {selectedcardNm} 카드를 판매하시겠습니까?
+            <br />
+            <br />
+            내가 설정한 금액 : <h1>{inputprice}</h1>
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="판매하고 싶은 가격을 입력해주세요"
+            type="number"
+            fullWidth
+            variant="standard"
+            onChange={(e) => {
+              setinputprice(e.target.value);
+            }}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>취소</Button>
+          <Button onClick={successregister}>판매등록</Button>
+        </DialogActions>
       </Dialog>
     </div>
   );

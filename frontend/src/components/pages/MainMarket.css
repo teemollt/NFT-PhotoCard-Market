@@ -1,0 +1,47 @@
+.mainmaerketcontainer {
+  text-align: center;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.finder {
+  border: 1px solid #fff;
+  background-color: #f6f5f0;
+  border-radius: 15px;
+  padding: 8px;
+  box-shadow: 9px 9px 16px rgba(189, 189, 189, 0.6), -9px -9px 16px rgba(255, 255, 255, 0.5);
+}
+
+.finder__outer {
+  display: flex;
+  width: 600px;
+  padding: 1.5rem 2rem;
+  border-radius: 10px;
+  box-shadow: inset 5px 5px 10px -5px #c3c3c3, inset -5px -5px 10px -5px #ffffff;
+}
+
+.finder__inner {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  flex: 1;
+}
+
+.finder__form {
+  flex: 1;
+  height: calc(100% + 3rem);
+}
+
+.finder__input {
+  height: calc(100% + 3rem);
+  border: none;
+  background-color: transparent;
+  outline: none;
+  font-size: 1rem;
+  letter-spacing: 0.75px;
+  width: 100%;
+}

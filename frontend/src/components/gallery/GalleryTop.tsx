@@ -1,149 +1,109 @@
 import React, { useState, useEffect } from "react";
 import { Pagination } from "@mui/material";
 import GalleryBody from "../gallery/GalleryBody";
+import GalleryEmpty from "./GalleryEmpty";
 import axios from "axios";
+import { useParams } from "react-router";
 import "./GalleryTop.css";
 
-const tempGallery: Array<temp> = [
-  {
-    imgUrl:
-      "https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/XG2MW2H3ZRW5FHDVSOMF6FDT3E.jpg",
-    title: "아이유꽃",
-    level: "S",
-    celeb: "1",
-  },
-  {
-    imgUrl:
-      "https://file.mk.co.kr/meet/neds/2021/04/image_readtop_2021_330747_16177500644599916.jpg",
-    title: "여신",
-    level: "A",
-    celeb: "1",
-  },
-  {
-    imgUrl:
-      "https://img4.yna.co.kr/photo/cms/2019/05/02/02/PCM20190502000402370_P2.jpg",
-    title: "연합뉴스",
-    level: "A",
-    celeb: "1",
-  },
-  {
-    imgUrl:
-      "http://image.kmib.co.kr/online_image/2020/1008/611811110015088768_1.jpg",
-    title: "똥머리",
-    level: "B",
-    celeb: "1",
-  },
-  {
-    imgUrl:
-      "https://cdn.dailyimpact.co.kr/news/photo/201901/50650_10024_2221.jpg",
-    title: "흑백",
-    level: "B",
-    celeb: "1",
-  },
-  {
-    imgUrl:
-      "http://www.polinews.co.kr/data/photos/20200834/art_15980031118376_e6a761.jpg",
-    title: "정장",
-    level: "B",
-    celeb: "1",
-  },
-  {
-    imgUrl: "https://newsimg.sedaily.com/2021/03/24/22JXKJ0JJZ_1.jpg",
-    title: "블랙야크",
-    level: "B",
-    celeb: "1",
-  },
-  {
-    imgUrl: "https://pbs.twimg.com/media/E9jOv0aUYAw6SIA.jpg",
-    title: "하얀색",
-    level: "C",
-    celeb: "1",
-  },
-  {
-    imgUrl: "https://cdn.baccro.com/news/photo/202103/25534_57525_3959.jpeg",
-    title: "라일락",
-    level: "C",
-    celeb: "1",
-  },
-  {
-    imgUrl:
-      "https://t1.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/user/7mo5/image/RhMj77_UZ1G9smD_INrbLKRVVoc.jpg",
-    title: "블루밍",
-    level: "C",
-    celeb: "1",
-  },
-  {
-    imgUrl:
-      "https://newsimg.hankookilbo.com/cms/articlerelease/2021/06/01/373cd776-11e3-4bc3-8e60-0963e82e938a.jpg",
-    title: "아이유",
-    level: "B",
-    celeb: "1",
-  },
-  {
-    imgUrl: "https://image.msscdn.net/data/curating/16948/16948_1_org.jpg",
-    title: "선글라스",
-    level: "C",
-    celeb: "1",
-  },
-  {
-    imgUrl: "https://image.msscdn.net/data/curating/16948/16948_1_org.jpg",
-    title: "선글라스",
-    level: "C",
-    celeb: "1",
-  },
-  {
-    imgUrl: "https://image.msscdn.net/data/curating/16948/16948_1_org.jpg",
-    title: "선글라스",
-    level: "C",
-    celeb: "1",
-  },
-  {
-    imgUrl: "https://image.msscdn.net/data/curating/16948/16948_1_org.jpg",
-    title: "선글라스",
-    level: "C",
-    celeb: "1",
-  },
-];
-
-export type temp = {
-  imgUrl: string;
-  title: string;
-  level: string;
-  celeb: string;
+export type card = {
+  cardGradeNM: string;
+  cardGradeNo: number;
+  cardImgUrl: string;
+  cardNM: string;
+  cardNo: number;
+  token: {
+    ownDate: string;
+    tokenNo: number;
+    tokenSeriarlizeNo: string;
+  };
 };
 
 function GalleryTop() {
+  let { pk } = useParams<{ pk?: string | undefined }>();
+
   const [topMenu, setTopMenu] = useState<number>(0);
   const [view, setView] = useState<number>(1);
   const [sub, setSub] = useState<boolean>(false);
-  const [subMem, setSubMem] = useState<number>(99);
+  const [subMem, setSubMem] = useState<number>(0);
   const [imgArray, setImgArray] = useState<number>(0);
-  const [galleryImg, setGalleryImg] = useState<Array<temp>>(
-    tempGallery.slice(0, 12)
-  );
+  const [galleryCard, setGalleryCard] = useState<Array<card>>([]);
+  const [page, setPage] = useState<Array<card>>([]);
+
+  useEffect(() => {
+    axios.get("/api/gallery/" + pk + "/0/0/0").then((res) => {
+      setPage(res.data.res.slice(0, 12));
+      setGalleryCard(res.data.res);
+    });
+  }, []);
 
   const handleTopMenuGroup = (id: number) => {
+    setTopMenu(id);
     if (id === 0) {
-      setTopMenu(0);
-      setSub(false);
+      axios.get("/api/gallery/" + pk + "/0/0/0").then((res) => {
+        setPage(res.data.res.slice(0, 12));
+        setGalleryCard(res.data.res);
+        setSub(false);
+      });
     } else if (id === 1) {
-      setTopMenu(1);
-      setSub(false);
+      axios.get("/api/gallery/" + pk + "/2/3/0").then((res) => {
+        setPage(res.data.res.slice(0, 12));
+        setGalleryCard(res.data.res);
+        setSub(false);
+      });
     } else if (id === 2) {
-      setTopMenu(2);
-      setSub(false);
+      axios.get("/api/gallery/" + pk + "/2/4/0").then((res) => {
+        setPage(res.data.res.slice(0, 12));
+        setGalleryCard(res.data.res);
+        setSub(false);
+      });
     } else if (id === 3) {
-      setTopMenu(3);
-      setSub(false);
+      axios.get("/api/gallery/" + pk + "/2/5/0").then((res) => {
+        setPage(res.data.res.slice(0, 12));
+        setGalleryCard(res.data.res);
+        setSub(false);
+      });
     } else if (id === 4) {
-      setTopMenu(4);
-      setSub(true);
+      axios.get("/api/gallery/" + pk + "/1/4/0").then((res) => {
+        setPage(res.data.res.slice(0, 12));
+        setGalleryCard(res.data.res);
+        setSub(true);
+      });
+    }
+  };
+
+  const handleSubMem = (id: number) => {
+    setSubMem(id);
+    if (id === 0) {
+      axios.get("/api/gallery/" + pk + "/1/4/0").then((res) => {
+        setPage(res.data.res.slice(0, 12));
+        setGalleryCard(res.data.res);
+        setSub(true);
+      });
+    } else if (id === 1) {
+      axios.get("/api/gallery/" + pk + "/2/0/0").then((res) => {
+        setPage(res.data.res.slice(0, 12));
+        setGalleryCard(res.data.res);
+        setSub(true);
+      });
+    } else if (id === 2) {
+      axios.get("/api/gallery/" + pk + "/2/1/0").then((res) => {
+        setPage(res.data.res.slice(0, 12));
+        setGalleryCard(res.data.res);
+        setSub(true);
+      });
+    } else if (id === 3) {
+      axios.get("/api/gallery/" + pk + "/2/2/0").then((res) => {
+        setPage(res.data.res.slice(0, 12));
+        setGalleryCard(res.data.res);
+        setSub(true);
+      });
     }
   };
 
   const handlePage = (e: any) => {
     const page = Number(e.target.innerText);
-    setGalleryImg(tempGallery.slice(page * 12 - 12, page * 12));
+    setPage(galleryCard.slice(page * 12 - 12, page * 12));
   };
 
   return (
@@ -218,26 +178,26 @@ function GalleryTop() {
           <div className="galleryTopSub">
             <div className={sub ? "galleryTopSubMem" : "hidden"}>
               <span
-                className={subMem === 99 ? "underline" : undefined}
-                onClick={() => setSubMem(99)}
+                className={subMem === 0 ? "underline" : undefined}
+                onClick={(id) => handleSubMem(0)}
               >
                 전체
               </span>
               <span
-                className={subMem === 0 ? "underline" : undefined}
-                onClick={() => setSubMem(0)}
+                className={subMem === 1 ? "underline" : undefined}
+                onClick={(id) => handleSubMem(1)}
               >
                 태연
               </span>
               <span
-                className={subMem === 1 ? "underline" : undefined}
-                onClick={() => setSubMem(1)}
+                className={subMem === 2 ? "underline" : undefined}
+                onClick={(id) => handleSubMem(2)}
               >
                 티파니
               </span>
               <span
-                className={subMem === 2 ? "underline" : undefined}
-                onClick={() => setSubMem(2)}
+                className={subMem === 3 ? "underline" : undefined}
+                onClick={(id) => handleSubMem(3)}
               >
                 서현
               </span>
@@ -261,16 +221,17 @@ function GalleryTop() {
         </div>
       </div>
       <div className="galleryBody">
-        {galleryImg.map((temp, index) => {
-          return <GalleryBody view={view} temp={temp} key={index} />;
-        })}
-        {/* {galleryImg.map((temp, index) => {
-          return <Test view={view} temp={temp} key={index} className="test"/>;
-        })} */}
+        {page.length ? (
+          page.map((card, index) => {
+            return <GalleryBody view={view} card={card} key={index} />;
+          })
+        ) : (
+          <GalleryEmpty />
+        )}
       </div>
       <Pagination
         className="GalleryBoardPage"
-        count={Math.ceil(tempGallery.length / 8)}
+        count={Math.ceil(galleryCard.length / 12)}
         shape="rounded"
         onChange={handlePage}
         hidePrevButton

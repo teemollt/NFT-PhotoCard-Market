@@ -1,10 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import Login from "../account/login/Login";
 import Button from "@material-ui/core/Button";
+import axios from "axios";
+
 function Navbar(): JSX.Element {
+  const [pk, setPk] = useState<number>();
+
   let token: string | null = localStorage.getItem("token");
+
+  useEffect(() => {
+    axios
+      .get("/api/member/mypage", {
+        headers: { Authorization: localStorage.getItem("token") },
+      })
+      .then((res) => {
+        setPk(res.data.mypage.memberNo);
+      });
+  }, []);
+
   return (
     <div>
       <div className="navbar">
@@ -23,12 +38,13 @@ function Navbar(): JSX.Element {
         <Link className="tablink" to="/cardpackshop">
           <Button>Shop</Button>
         </Link>
-
-        <Link className="tablink" to="/market">
-          <Button>Market</Button>
-        </Link>
         {token ? (
-          <Link className="tablink" to="/gallery/id">
+          <Link className="tablink" to="/market">
+            <Button>Market</Button>
+          </Link>
+        ) : null}
+        {token ? (
+          <Link className="tablink" to={"/gallery/" + pk}>
             <Button>Gallery</Button>
           </Link>
         ) : null}

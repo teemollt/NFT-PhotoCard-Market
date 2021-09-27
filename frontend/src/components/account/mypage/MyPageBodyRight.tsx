@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import ShopBuy from "./shop/ShopBuy";
 import ShopKeep from "./shop/ShopKeep";
 import "./MyPageBodyRight.css";
-import AuctionMy from "./auction/AuctionMy";
-import AuctionMyBid from "./auction/AuctionMyBid";
-import AuctionLike from "./auction/AuctionLike";
+import MarketMy from "./market/MarketMy";
+import MarketMyBid from "./market/MarketMyBid";
+import MarketLike from "./market/MarketLike";
 import { myPageMenu } from "../../../redux/actions";
 
 interface MyPageBodyRightProps {
@@ -21,11 +21,11 @@ function MyPageBodyRight(props: MyPageBodyRightProps): JSX.Element {
       ) : myPageMenu === 1 ? (
         <ShopKeep />
       ) : myPageMenu === 2 ? (
-        <AuctionMy />
+        <MarketMy />
       ) : myPageMenu === 3 ? (
-        <AuctionMyBid />
+        <MarketMyBid />
       ) : myPageMenu === 4 ? (
-        <AuctionLike />
+        <MarketLike />
       ) : null}
     </div>
   );

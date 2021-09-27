@@ -1,9 +1,0 @@
-.myBidCard > img {
-  width: 50px;
-  height: 70px;
-}
-
-.auctionMyBidTable:hover {
-  cursor: pointer;
-  background-color: rgba(57, 58, 58, 0.144);
-}
