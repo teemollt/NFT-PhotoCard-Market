@@ -12,11 +12,11 @@ export type card = {
   cardImgUrl: string;
   cardNM: string;
   cardNo: number;
-  token: {
+  token: [{
     ownDate: string;
     tokenNo: number;
     tokenSeriarlizeNo: string;
-  };
+  }];
 };
 
 function GalleryTop() {
@@ -32,7 +32,6 @@ function GalleryTop() {
 
   useEffect(() => {
     axios.get("/api/gallery/" + pk + "/0/0/0").then((res) => {
-      console.log(res)
       setPage(res.data.res.slice(0, 12));
       setGalleryCard(res.data.res);
     });

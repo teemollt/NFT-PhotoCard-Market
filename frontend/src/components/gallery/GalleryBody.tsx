@@ -9,17 +9,18 @@ interface GalleryBodyProps {
     cardImgUrl: string;
     cardNM: string;
     cardNo: number;
-    token: {
+    token: [{
       ownDate: string;
       tokenNo: number;
       tokenSeriarlizeNo: string;
-    };
+    }];
   };
 }
 
 function GalleryBody(props: GalleryBodyProps) {
   const { view } = props;
-  const { cardGradeNM, cardImgUrl, cardNM } = props.card;
+  const { cardGradeNM, cardImgUrl, cardNM, token } = props.card;
+
 
   return (
     <div className={"galleryCard " + ("view" + view)}>
@@ -85,6 +86,7 @@ function GalleryBody(props: GalleryBodyProps) {
           )}
 
           <figcaption>
+            <span className={"count" + view}>{token.length}장</span>
             <h3>{cardNM}</h3>
             <p>{cardGradeNM}</p>
           </figcaption>
