@@ -20,7 +20,6 @@ interface GalleryBodyProps {
 function GalleryBody(props: GalleryBodyProps) {
   const { view } = props;
   const { cardGradeNM, cardImgUrl, cardNM } = props.card;
-  console.log(cardImgUrl);
 
   return (
     <div className={"galleryCard " + ("view" + view)}>
