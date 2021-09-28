@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router";
 import "./MainMarketItem.css";
 import Grid from "@material-ui/core/Grid";
@@ -6,6 +6,10 @@ import Container from "@material-ui/core/Container";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import MarketBuyItem from "../market/MarketBuyItem";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import Tooltip from "@mui/material/Tooltip";
+import axios from "axios";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,8 +35,57 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 function MainMarketItem(): JSX.Element {
+  const [islike, setislike] = useState(false);
+  const [likepeople, setlikepeople] = useState(0);
+  // like, unlike
+  const changelike = () => {
+    console.log(islike);
+    if (islike) {
+      axios
+        .post(
+          "/api/cardPack/like",
+          {
+            auctionNo: location.state.data.auction.auctionNo,
+          },
+          {
+            headers: {
+              Authorization: localStorage.getItem("token"),
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res);
+          setislike(false);
+        });
+    } else {
+      axios
+        .post(
+          "/api/cardPack/like",
+          {
+            auctionNo: location.state.data.auction.auctionNo,
+          },
+          {
+            headers: {
+              Authorization: localStorage.getItem("token"),
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res);
+          setislike(true);
+        });
+    }
+  };
+  useEffect(() => {
+    axios.get(
+      `/api/marketcard/likecheck/${location.state.data.auction.auctionNo}`,
+      {
+        auctionNo: location.state.data.auction.auctionNo,
+        headers: { Authorization: localStorage.getItem("token") },
+      }
+    );
+  }, []);
   const classes = useStyles();
-
   const location: any = useLocation();
   return (
     <div style={{ textAlign: "center" }}>
@@ -50,6 +103,20 @@ function MainMarketItem(): JSX.Element {
               </Paper>
             </Grid>
             <Grid item xs={12}>
+              {/* 좋아요 */}
+              <Tooltip title={likepeople} placement="right-start">
+                {islike ? (
+                  <ShoppingCartIcon
+                    onClick={changelike}
+                    style={{ cursor: "pointer" }}
+                  />
+                ) : (
+                  <AddShoppingCartIcon
+                    onClick={changelike}
+                    style={{ cursor: "pointer" }}
+                  />
+                )}
+              </Tooltip>
               <div className={classes.iteminfo}>
                 <h1>{location.state.data.auction.auctionTitle}</h1>
               </div>

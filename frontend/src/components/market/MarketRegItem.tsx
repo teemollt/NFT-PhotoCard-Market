@@ -33,14 +33,24 @@ function MarketRegItem() {
   const [inputprice, setinputprice] = useState<string>("");
   const [selectedcardNo, setselectedcardNo] = useState<number>(0);
   const [selectedcardNm, setselectedcardNm] = useState<string>("");
+  const [selectedtoken, setselectedtoken] = useState<number>(0);
   function register(data: any) {
     setOpen(true);
     setselectedcardNo(data.cardNo);
     setselectedcardNm(data.cardNM);
+    setselectedtoken(data.token[0].tokenNo);
   }
   function successregister() {
     setOpen(false);
     // 정말 카드등록하는 api
+    axios.post(
+      "/api/market/insert",
+      {
+        tokenNo: selectedtoken,
+        price: inputprice,
+      },
+      { headers: { Authorization: localStorage.getItem("token") } }
+    );
     //
   }
   return (
@@ -97,7 +107,8 @@ function MarketRegItem() {
         <DialogTitle>나의 카드 판매 등록</DialogTitle>
         <DialogContent>
           <DialogContentText style={{ width: "500px", textAlign: "center" }}>
-            {selectedcardNo}번 {selectedcardNm} 카드를 판매하시겠습니까?
+            {selectedcardNm} 카드를 판매하시겠습니까?
+            {selectedtoken}
             <br />
             <br />
             내가 설정한 금액 : <h1>{inputprice}</h1>

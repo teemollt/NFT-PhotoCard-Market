@@ -66,7 +66,8 @@ function CardPackShop(): JSX.Element {
     axios.get("/api/saleCard").then((res) => {
       console.log(res.data.res);
       setcardpack(
-        res.data.res.sort((a: any, b: any) => (a.salesNM < b.salesNM ? -1 : 1))
+        res.data.res
+        // .sort((a: any, b: any) => (a.salesNM < b.salesNM ? -1 : 1))
       );
     });
   }, []);
