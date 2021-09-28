@@ -40,7 +40,7 @@ function MyPageBodyLeft(props: MyPageBodyLeftProps): JSX.Element {
         }}
         style={{ textDecoration: "none" }}
       >
-        <p className="menuService">1:1 문의</p>
+        <p className="menuService">고객센터</p>
       </Link>
     </div>
   );

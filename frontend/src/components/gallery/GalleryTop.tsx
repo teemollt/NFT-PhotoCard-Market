@@ -29,7 +29,6 @@ function GalleryTop() {
   const [view, setView] = useState<number>(1);
   const [sub, setSub] = useState<boolean>(false);
   const [subMem, setSubMem] = useState<number>(0);
-  const [imgArray, setImgArray] = useState<number>(0);
   const [galleryCard, setGalleryCard] = useState<Array<card>>([]);
   const [page, setPage] = useState<Array<card>>([]);
 
