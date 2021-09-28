@@ -201,8 +201,14 @@ public class SalesSvcImpl implements SalesSvcInter{
 			Sales sales = salesRepo.findById(cardpackPk).orElseThrow(() -> new IllegalStateException("존재하지 않는 카드팩입니다."));
 			
 			//잔고조회 필수!
-			List<Token>tokens = tokenRepo.sltMultiBySales(sales);
+			List<Token>tokens = tokenRepo.sltMultiBySales(sales).orElseThrow(() -> new IllegalStateException("카드 재고가 소진되었습니다."));
 			int sizes = tokens.size();
+			if(sizes>0) {}
+			
+			if(sizes == 0 ) {
+				res.put("success", false);
+				res.put("msg", "남은 카드가 없습니다.");
+			}
 			Collections.shuffle(tokens);
 			int CardpackSize = 5;
 			List<Token> chooseTokens = tokens.subList(0, CardpackSize); //랜덤 5개 고르기
@@ -215,7 +221,7 @@ public class SalesSvcImpl implements SalesSvcInter{
 			for (int i =0; i<chooseTokens.size();i++) {
 				Token tempToken = chooseTokens.get(i);
 				Sold_Bundle_Inside sbi = new Sold_Bundle_Inside();
-				sbi.setSales(savedOrder.getSales());
+				sbi.setSalesOrder(savedOrder);
 				sbi.setToken(tempToken);
 				sbiRepo.save(sbi); //카드 획득내역 저장
 				Token_Owner to = new Token_Owner();
