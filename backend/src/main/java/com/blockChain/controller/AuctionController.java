@@ -5,6 +5,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,4 +24,20 @@ public class AuctionController {
 		return auctionSvc.sltAuctionByGroup(groupNo);
 		
 	}
+	@PostMapping("/insert")
+	public Map<String, Object> insertAuction(
+			@RequestBody Map<String, Object> req
+			){
+		return auctionSvc.insertAuction(req);
+	}
+	@GetMapping("/likecheck/{auctionPk}")
+	public Map<String,Object> sltLikeCount(@PathVariable(name="auctionPk") Long auctionPk){
+		return auctionSvc.sltLikeCount(auctionPk);
+	}
+	@PostMapping("/like")
+	public Map<String,Object>insertLike(@RequestBody Map<String, Object> req){
+		return auctionSvc.insertLike(req);
+		
+	}
+	
 }
