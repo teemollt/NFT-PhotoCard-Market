@@ -153,7 +153,7 @@ function BuyCardPack(props: any): JSX.Element {
         >
           <DialogContent dividers className="newcards">
             <div style={{}}>
-              <div className="container">
+              <div className="container1">
                 {newcardlist.map((card, i) => (
                   <div
                     className="card card0"
@@ -164,7 +164,8 @@ function BuyCardPack(props: any): JSX.Element {
                     }}
                   >
                     <div className="border">
-                      <h2>{card.cardNM}</h2>
+                      <h2 className="buycardpacktit">{card.cardNM}</h2>
+                      <h2 className="buycardpacktit">{card.cardGradeNM}</h2>
                     </div>
                   </div>
                 ))}

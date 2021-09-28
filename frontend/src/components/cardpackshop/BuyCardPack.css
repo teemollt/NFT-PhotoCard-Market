@@ -2,10 +2,10 @@
   background-color: rgba(0, 0, 0, 0.8);
 }
 .newcards {
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0);
 }
 
-.container {
+.container1 {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -40,11 +40,11 @@
 }
 .card0 {
   background: center center no-repeat;
-  background-size: 100%;
+  background-size: 300px;
 }
 .card0:hover {
   background: center;
-  background-size: 100%;
+  background-size: 200px;
 }
 .card0:hover h2 {
   opacity: 1;
@@ -52,7 +52,7 @@
 .card0:hover .fa {
   opacity: 1;
 }
-h2 {
+.buycardpacktit {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #fff;
   margin: 20px;
