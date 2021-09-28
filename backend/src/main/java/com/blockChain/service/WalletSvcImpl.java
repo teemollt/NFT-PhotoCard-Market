@@ -52,7 +52,10 @@ public class WalletSvcImpl implements WalletSvcInter {
 			
 		try {
 			Member member = memberRepo.findById(SecurityUtil.getCurrentMemberId()).orElseThrow(() -> new IllegalStateException("로그인 유저정보가 없습니다"));
+			System.out.println((String)req.get("walletAdd"));
+			
 			String walletAdd = (String)req.get("walletAdd");
+			System.out.println(walletAdd);
 			
 			Wallets wallet = new Wallets();
 			wallet.setWalletAdd(walletAdd);
