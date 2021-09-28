@@ -14,6 +14,7 @@ import MyPageUpdate from "./components/pages/MyPageUpdate";
 import CardPackShop from "./components/pages/CardPackShop";
 import GalleryBoard from "./components/pages/GalleryBoard";
 import MainCeleb from "./components/pages/MainCeleb";
+import MainSearchAll from "./components/pages/MainSearchAll";
 
 declare module "axios" {
   interface AxiosRequestConfig {
@@ -22,7 +23,7 @@ declare module "axios" {
     salesNo?: number;
     cardpackId?: number;
     keyword?: string;
-    auctionNo?: string|number;
+    auctionNo?: string | number;
   }
 }
 
@@ -69,6 +70,9 @@ function App(): JSX.Element {
         </Route>
         <Route path="/gboard">
           <GalleryBoard />
+        </Route>
+        <Route path="/searchall/:keyword">
+          <MainSearchAll/>
         </Route>
       </Switch>
       <Footer />
