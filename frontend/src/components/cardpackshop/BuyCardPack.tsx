@@ -117,7 +117,7 @@ function BuyCardPack(props: any): JSX.Element {
     console.log(userBalance)
     // 결재코드
     // 잔액이 얼마 이상이면?
-    if (parseFloat(userBalance) > props.cardpackprice + 0.005) {
+    if (parseFloat(userBalance) > props.cardpackprice + 0.01) {
       console.log('통과했니')
       // 컨트랙트 buyCardPack 호출
       myContract.methods.buyCardPack().send({
@@ -134,6 +134,14 @@ function BuyCardPack(props: any): JSX.Element {
             console.log(res.data)
             handleClickcardOpen()
             setnewcardlist(res.data.cardList)
+            const tokenIds = res.data.cardList
+            for (let i = 0; i < tokenIds.length; i++) {
+              myContract.methods.changeOwner(tokenIds[i].tokenNo).send({
+                from: userAddress,
+              }).then(function (receipt: any) {
+                console.log(receipt)
+              })
+            }
           })
           .catch()
       })
