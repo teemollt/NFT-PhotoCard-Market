@@ -21,6 +21,8 @@ import com.blockChain.domain.Member;
 import com.blockChain.domain.Member_Grade;
 import com.blockChain.domain.RefreshToken;
 import com.blockChain.dto.MypageDTO;
+import com.blockChain.dto.SalesDTO;
+import com.blockChain.dto.SalesOrderDTO;
 import com.blockChain.dto.LoginTokenDTO;
 import com.blockChain.jwt.TokenProvider;
 import com.blockChain.repository.CelebRepo;
@@ -28,6 +30,8 @@ import com.blockChain.repository.Celeb_LikeRepo;
 import com.blockChain.repository.MemberRepo;
 import com.blockChain.repository.Member_GradeRepo;
 import com.blockChain.repository.RefreshTokenRepository;
+import com.blockChain.repository.Sales_LikeRepo;
+import com.blockChain.repository.Sales_OrderRepo;
 
 @Service
 @Transactional
@@ -49,6 +53,10 @@ public class MemberSvcImpl implements MemberSvcInter{
 	private RefreshTokenRepository refreshTokenRepository;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private Sales_OrderRepo soRepo;
+	@Autowired
+	private Sales_LikeRepo slRepo;
 	@Override
 	public Map<String,Object> signup(Map<String, Object> req){
 		 Map<String, Object> res = new HashMap<String,Object>();
@@ -239,5 +247,46 @@ public class MemberSvcImpl implements MemberSvcInter{
 			return res;
 		}
 		return res;
+	}
+	@Override
+	public Map<String,Object>orderList(){
+		Map<String, Object> res = new HashMap<String,Object>();
+	    Long nowLoginMemberNo=0L;
+		try {
+			nowLoginMemberNo=SecurityUtil.getCurrentMemberId();
+		}catch (RuntimeException e) {
+			nowLoginMemberNo=0L;
+		}
+		
+		try{
+			Member member = memberRepo.findById(nowLoginMemberNo).orElseThrow(() -> new IllegalStateException("로그인 유저정보가 없습니다"));
+			Optional<List<SalesOrderDTO>>orderListbyMem = soRepo.sltMultiByMember(member.getMemberNo());
+			res.put("res", orderListbyMem);
+		}catch(IllegalStateException e){
+			res.put("success", false);
+			res.put("msg", e.getMessage());
+			return res;
+		}
+			return res;
+	}
+	@Override
+	public Map<String,Object>likeList(){
+		Map<String, Object> res = new HashMap<String,Object>();
+	    Long nowLoginMemberNo=0L;
+		try {
+			nowLoginMemberNo=SecurityUtil.getCurrentMemberId();
+		}catch (RuntimeException e) {
+			nowLoginMemberNo=0L;
+		}
+		try{
+			Member member = memberRepo.findById(nowLoginMemberNo).orElseThrow(() -> new IllegalStateException("로그인 유저정보가 없습니다"));
+			Optional<List<SalesDTO>> sltList= slRepo.likeList(member.getMemberNo());
+			res.put("res", sltList);
+		}catch(IllegalStateException e){
+			res.put("success", false);
+			res.put("msg", e.getMessage());
+			return res;
+		}
+			return res;
 	}
 }

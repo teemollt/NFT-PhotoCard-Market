@@ -11,6 +11,7 @@ public class SalesDTO {
 	private Long salesNo;
 	private String salesNM;
 	private String salesDetail;
+	private String salesImg;
 	private Long salesPrice;
 	private String salesDiv;
 }
