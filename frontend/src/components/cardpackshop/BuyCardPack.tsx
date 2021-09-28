@@ -1,25 +1,26 @@
-import React, { useState } from "react";
-import "./BuyCardPack.css";
+import React, { useEffect, useState } from "react"
+import "./BuyCardPack.css"
 import {
   createStyles,
   Theme,
   withStyles,
   WithStyles,
-} from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import MuiDialogTitle from "@material-ui/core/DialogTitle";
-import MuiDialogContent from "@material-ui/core/DialogContent";
-import MuiDialogActions from "@material-ui/core/DialogActions";
-import IconButton from "@material-ui/core/IconButton";
-import CloseIcon from "@material-ui/icons/Close";
-import Typography from "@material-ui/core/Typography";
-import axios from "axios";
+} from "@material-ui/core/styles"
+import Button from "@material-ui/core/Button"
+import Dialog from "@material-ui/core/Dialog"
+import MuiDialogTitle from "@material-ui/core/DialogTitle"
+import MuiDialogContent from "@material-ui/core/DialogContent"
+import MuiDialogActions from "@material-ui/core/DialogActions"
+import IconButton from "@material-ui/core/IconButton"
+import CloseIcon from "@material-ui/icons/Close"
+import Typography from "@material-ui/core/Typography"
+import axios from "axios"
+import { contractAbi } from "../abi"
 
 export interface DialogTitleProps extends WithStyles<typeof styles> {
-  id: string;
-  children: React.ReactNode;
-  onClose: () => void;
+  id: string
+  children: React.ReactNode
+  onClose: () => void
 }
 const styles = (theme: Theme) =>
   createStyles({
@@ -33,9 +34,9 @@ const styles = (theme: Theme) =>
       top: theme.spacing(1),
       color: theme.palette.grey[500],
     },
-  });
+  })
 const DialogTitle = withStyles(styles)((props: DialogTitleProps) => {
-  const { children, classes, onClose, ...other } = props;
+  const { children, classes, onClose, ...other } = props
   return (
     <MuiDialogTitle disableTypography className={classes.root} {...other}>
       <Typography variant="h6">{children}</Typography>
@@ -49,65 +50,108 @@ const DialogTitle = withStyles(styles)((props: DialogTitleProps) => {
         </IconButton>
       ) : null}
     </MuiDialogTitle>
-  );
-});
+  )
+})
 
 const DialogContent = withStyles((theme: Theme) => ({
   root: {
     padding: theme.spacing(2),
   },
-}))(MuiDialogContent);
+}))(MuiDialogContent)
 
 const DialogActions = withStyles((theme: Theme) => ({
   root: {
     margin: 0,
     padding: theme.spacing(1),
   },
-}))(MuiDialogActions);
+}))(MuiDialogActions)
 
 function BuyCardPack(props: any): JSX.Element {
-  const [open, setOpen] = useState(false);
+  // web3 객체
+  const Web3 = require("web3")
+  const web3 = new Web3("http://13.125.37.55:8545")
+  // contract 객체
+  const myContractAddress = "0x05C0D32D866Be1AB23B62AF3ca5bc673E45Aff6d"
+  const myContract = new web3.eth.Contract(contractAbi, myContractAddress)
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    walletCheck()
+  }, [])
 
   const handleClickOpen = () => {
-    setOpen(true);
-  };
+    setOpen(true)
+  }
   const handleClose = () => {
-    setOpen(false);
-  };
+    setOpen(false)
+  }
   // 카드창;
-  const [cardopen, setcardopen] = useState(false);
+  const [cardopen, setcardopen] = useState(false)
 
   const handleClickcardOpen = () => {
-    setcardopen(true);
-  };
+    setcardopen(true)
+  }
 
   const handlecardClose = () => {
-    setcardopen(false);
-  };
-  const [newcardlist, setnewcardlist] = useState<any[]>([]);
+    setcardopen(false)
+  }
+  const [newcardlist, setnewcardlist] = useState<any[]>([])
+  const [userAddress, setAddress] = useState<string>("")
+  const [userBalance, setBalance] = useState<string>("0")
+  const walletCheck = async () => {
+    try {
+      const res = await axios.get("/api/wallet/", {
+        headers: { Authorization: localStorage.getItem("token") },
+      })
+      console.log(res.data)
+      if (res.data.success == true) {
+        setAddress(res.data.address)
+        setBalance(res.data.walletBal)
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
   // 결제함수
   const pay = () => {
-    console.log(props.cardpackprice);
-    console.log(props.cardpackNo);
-    setOpen(false);
+    // console.log(props.cardpackprice)
+    // console.log(props.cardpackNo)
+    setOpen(false)
+    console.log("pay함수 실행")
+    console.log(userBalance)
     // 결재코드
     // 잔액이 얼마 이상이면?
-    const mywallet = 100;
-    if (mywallet > props.cardpackprice) {
-      axios
-        .get(`/api/cardPack/buy/${props.cardpackNo}`, {
-          headers: { Authorization: localStorage.getItem("token") },
-          cardpackNo: props.cardpackNo,
-        })
-        .then((res) => {
-          console.log(res.data);
-          handleClickcardOpen();
-          setnewcardlist(res.data.cardList);
-        })
-        .catch();
+    if (parseFloat(userBalance) > props.cardpackprice + 0.01) {
+      console.log('통과했니')
+      // 컨트랙트 buyCardPack 호출
+      myContract.methods.buyCardPack().send({
+        from: userAddress,
+        value: props.cardpackprice * Math.pow(10, 18)
+      }).then(function (receipt: any) {
+        console.log(receipt)
+        axios
+          .get(`/api/cardPack/buy/${props.cardpackNo}`, {
+            headers: { Authorization: localStorage.getItem("token") },
+            cardpackNo: props.cardpackNo,
+          })
+          .then((res) => {
+            console.log(res.data)
+            handleClickcardOpen()
+            setnewcardlist(res.data.cardList)
+            const tokenIds = res.data.cardList
+            for (let i = 0; i < tokenIds.length; i++) {
+              myContract.methods.changeOwner(tokenIds[i].tokenNo).send({
+                from: userAddress,
+              }).then(function (receipt: any) {
+                console.log(receipt)
+              })
+            }
+          })
+          .catch()
+      })
     }
     // 도형님의 결제코드
-  };
+  }
   return (
     <div>
       <div style={{ textAlign: "center" }}>
@@ -175,7 +219,7 @@ function BuyCardPack(props: any): JSX.Element {
         </Dialog>
       </div>
     </div>
-  );
+  )
 }
 
-export default BuyCardPack;
+export default BuyCardPack

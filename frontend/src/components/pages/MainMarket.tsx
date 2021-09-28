@@ -83,8 +83,8 @@ function MainMarket(): JSX.Element {
         keyword: data,
       })
       .then((res) => {
-        setsearchresult(res.data.cardList);
-        console.log(res.data.cardList);
+        setsearchresult(res.data.auctionList);
+        console.log(res.data);
         setclicksearch(true);
       });
   }
@@ -164,9 +164,7 @@ function MainMarket(): JSX.Element {
 
             {searchresult.length > 0 ? (
               <MarketBodySearch searchresult={searchresult} />
-            ) : (
-              <div>검색을 해주세요</div>
-            )}
+            ) : null}
           </TabPanel>
         </div>
       </Container>
@@ -175,3 +173,7 @@ function MainMarket(): JSX.Element {
 }
 
 export default MainMarket;
+
+{
+  /* <div style={{ textAlign: "center" }}>검색결과가 없습니다</div> */
+}
