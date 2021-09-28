@@ -148,54 +148,26 @@ function BuyCardPack(props: any): JSX.Element {
           aria-labelledby="customized-dialog-title"
           open={cardopen}
           className="newcardsbackground"
+          fullWidth
+          maxWidth="lg"
         >
           <DialogContent dividers className="newcards">
-            <div style={{ width: "100%", height: "100%" }}>
-              <div className="wrapper">
-                <section>
-                  <h1>🎊congratulation🎊</h1>
-                  <ul className="card-list">
-                    {/*  */}
-                    {newcardlist.map((card) => (
-                      <li className="card" style={{}}>
-                        <div className="card__border" />
-                        <div className="card__border-line" />
-                        <div className="card__inner">
-                          <div className="card__img">
-                            <div className="img__team">
-                              <img
-                                src={'/'+card.cardImgUrl+'.jpg'}
-                                alt="Team: Mc Laren"
-                                width="130%"
-                              />
-                            </div>
-                            {/* <div className="img__athlete">
-                              <img
-                                src="https://www.formula1.com/content/dam/fom-website/drivers/L/LANNOR01_Lando_Norris/lannor01.png.transform/2col/image.png"
-                                role="presentation"
-                              />
-                            </div> */}
-                          </div>
-                          <div className="card__text">
-                            <div
-                              className="card__type"
-                              style={{
-                                backgroundColor: "hsl(1, 100%, 44%)",
-                                color: "hsl(0, 0%, 100%)",
-                              }}
-                            >
-                              TD
-                            </div>
-                            {/* <h2 className="name">{card.cardNM}</h2>
-                            <p className="points">98 PTS</p> */}
-                          </div>
-                        </div>
-                      </li>
-                    ))}
-
-                    {/*  */}
-                  </ul>
-                </section>
+            <div style={{}}>
+              <div className="container">
+                {newcardlist.map((card, i) => (
+                  <div
+                    className="card card0"
+                    style={{
+                      backgroundImage: `url("/${card.cardImgUrl}.jpg")`,
+                      width: "100%",
+                      height: "300px",
+                    }}
+                  >
+                    <div className="border">
+                      <h2>{card.cardNM}</h2>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </DialogContent>
