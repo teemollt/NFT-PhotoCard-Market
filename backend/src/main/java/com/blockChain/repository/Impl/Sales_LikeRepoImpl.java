@@ -43,6 +43,7 @@ public class Sales_LikeRepoImpl implements Sales_LikeRepoCustom{
 				, qs.salesNo
 				, qs.salesNm
 				, qs.salesDetail
+				, qs.imgUrl
 				, qs.salesPrice
 				, qs.salesDiv
 				))

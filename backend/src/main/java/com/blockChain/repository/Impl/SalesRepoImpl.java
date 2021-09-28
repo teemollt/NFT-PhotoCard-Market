@@ -45,6 +45,7 @@ public class SalesRepoImpl implements SalesRepoCustom{
 				,qsl.salesNo
 				,qsl.salesNm
 				,qsl.salesDetail
+				,qsl.imgUrl
 				,qsl.salesPrice
 				,qsl.salesDiv
 				))
@@ -86,6 +87,7 @@ public class SalesRepoImpl implements SalesRepoCustom{
 				,qsl.salesNo
 				,qsl.salesNm
 				,qsl.salesDetail
+				,qsl.imgUrl
 				,qsl.salesPrice
 				,qsl.salesDiv
 				))
