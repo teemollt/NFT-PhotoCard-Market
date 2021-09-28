@@ -4,7 +4,6 @@ import { Link } from "react-router-dom"
 import { Button } from "@material-ui/core"
 import "./MyPageTop.css"
 import Web3 from 'web3'
-import { contractAbi } from './abi'
 import { ConstructionRounded } from '@mui/icons-material'
 
 interface MyPageTopProps {
@@ -32,14 +31,10 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
         setBalance(res.data.walletBal)
       }
     } catch (err) { console.log(err) }
-    // 있으면 user에 할당
-    // user = res.data
   }
 
   useEffect(() => {
     // api로 지갑 유무 파악
-    // 있으면 user에 할당
-    // user = res.data
     walletCheck()
   })
   // 컨트랙트 abi
@@ -92,6 +87,8 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
       data: ""
     }
     try {
+      const adminUnlock = await web3.eth.personal.unlockAccount(admin, '1234', 6000)
+      console.log(adminUnlock)
       const unlock = await web3.eth.personal.unlockAccount(userAddress, '123', 6000)
       console.log(unlock)
       // console.log(tx)
