@@ -1,20 +1,29 @@
-import { Mouse } from "@material-ui/icons";
 import React from "react";
 import "./ShopCard.css";
 
-function ShopCard(props: any) {
+interface ShopCardProps {
+  card: {
+    buyDate: string;
+    price: number;
+    sales: string;
+    salesImg: string;
+  };
+}
+
+function ShopCard(props: ShopCardProps) {
+  const { buyDate, price, sales, salesImg } = props.card;
   return (
     <div className="shopCard">
       <div className="shopCardImg">
-        <img src={props.cards.imgUrl} alt="" />
+        <img src={salesImg} alt="" />
       </div>
       <div>
         <div className="shopCardInfo">
-          <span className="shopCardCeleb">상품 celeb</span>
-          <span className="shopCardPriceTitle">가격</span>
+          <span className="shopCardDate">{buyDate.slice(2, 10)}</span>
+          <span className="shopCardPriceTitle">상품 가격</span>
         </div>
-        <span className="shopCardTitle">{props.cards.title}</span>
-        <span className="shopCardPrice">{props.cards.price}BTC</span>
+        <span className="shopCardTitle">{sales}</span>
+        <span className="shopCardPrice">{price}BTC</span>
       </div>
     </div>
   );

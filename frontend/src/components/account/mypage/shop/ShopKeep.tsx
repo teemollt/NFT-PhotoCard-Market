@@ -1,111 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Pagination } from "@mui/material";
+import axios from "axios";
 import ShopCard from "./ShopCard";
 
-const tempCard: Array<tempCard> = [
-  {
-    imgUrl:
-      "http://m.tcgbox.co.kr/web/product/big/20191206/585b242c2158a94a993c5fb8a916e6e2.jpg",
-    title: "카드1",
-    price: 1,
-  },
-  {
-    imgUrl:
-      "http://m.tcgbox.co.kr/web/product/big/20191206/585b242c2158a94a993c5fb8a916e6e2.jpg",
-    title: "카드2",
-    price: 1,
-  },
-  {
-    imgUrl:
-      "http://m.tcgbox.co.kr/web/product/big/20191206/585b242c2158a94a993c5fb8a916e6e2.jpg",
-    title: "카드3",
-    price: 1,
-  },
-  {
-    imgUrl:
-      "http://m.tcgbox.co.kr/web/product/big/20191206/585b242c2158a94a993c5fb8a916e6e2.jpg",
-    title: "카드4",
-    price: 1,
-  },
-  {
-    imgUrl:
-      "http://m.tcgbox.co.kr/web/product/big/20191206/585b242c2158a94a993c5fb8a916e6e2.jpg",
-    title: "카드5",
-    price: 1,
-  },
-  {
-    imgUrl:
-      "http://m.tcgbox.co.kr/web/product/big/20191206/585b242c2158a94a993c5fb8a916e6e2.jpg",
-    title: "카드6",
-    price: 1,
-  },
-  {
-    imgUrl:
-      "http://m.tcgbox.co.kr/web/product/big/20191206/585b242c2158a94a993c5fb8a916e6e2.jpg",
-    title: "카드7",
-    price: 1,
-  },
-  {
-    imgUrl:
-      "http://m.tcgbox.co.kr/web/product/big/20191206/585b242c2158a94a993c5fb8a916e6e2.jpg",
-    title: "카드8",
-    price: 1,
-  },
-  {
-    imgUrl:
-      "http://m.tcgbox.co.kr/web/product/big/20191206/585b242c2158a94a993c5fb8a916e6e2.jpg",
-    title: "카드9",
-    price: 1,
-  },
-  {
-    imgUrl:
-      "http://m.tcgbox.co.kr/web/product/big/20191206/585b242c2158a94a993c5fb8a916e6e2.jpg",
-    title: "카드10",
-    price: 1,
-  },
-  {
-    imgUrl:
-      "http://m.tcgbox.co.kr/web/product/big/20191206/585b242c2158a94a993c5fb8a916e6e2.jpg",
-    title: "카드11",
-    price: 1,
-  },
-  {
-    imgUrl:
-      "http://m.tcgbox.co.kr/web/product/big/20191206/585b242c2158a94a993c5fb8a916e6e2.jpg",
-    title: "카드12",
-    price: 1,
-  },
-  {
-    imgUrl:
-      "http://m.tcgbox.co.kr/web/product/big/20191206/585b242c2158a94a993c5fb8a916e6e2.jpg",
-    title: "카드13",
-    price: 1,
-  },
-  {
-    imgUrl:
-      "http://m.tcgbox.co.kr/web/product/big/20191206/585b242c2158a94a993c5fb8a916e6e2.jpg",
-    title: "카드14",
-    price: 1,
-  },
-];
-
-export type tempCard = {
-  imgUrl: string;
-  title: string;
+interface Buy {
+  sales: string;
+  salesImg: string;
+  buyDate: string;
   price: number;
-};
-
-export interface State {
-  productTemp: Array<tempCard>;
 }
 
 function ShopKeep() {
-  const [productTemp, setProductTemp] = useState(tempCard);
-  const [cards, setCards] = useState<Array<tempCard>>(tempCard.slice(0, 8));
+  const [buy, setBuy] = useState<Array<Buy>>([]);
+  const [cards, setCards] = useState<Array<Buy>>([]);
+
+  useEffect(() => {
+    axios
+      .get("/api/member/order", {
+        headers: { Authorization: localStorage.getItem("token") },
+      })
+      .then((res) => {
+        setCards(res.data.res.slice(0, 8));
+        setBuy(res.data.res);
+      });
+  }, []);
 
   const handlePage = (e: any) => {
     const page = Number(e.target.innerText);
-    setCards(tempCard.slice(page * 8 - 8, page * 8));
+    setCards(buy.slice(page * 8 - 8, page * 8));
   };
 
   return (
@@ -113,11 +35,11 @@ function ShopKeep() {
       <h1>관심 상품</h1>
       <hr />
       {cards.map((card, index) => {
-        return <ShopCard cards={card} key={index} />;
+        return <ShopCard card={card} key={index} />;
       })}
       <Pagination
         className="GalleryBoardPage"
-        count={Math.ceil(productTemp.length / 8)}
+        count={Math.ceil(buy.length / 8)}
         shape="rounded"
         onChange={handlePage}
         hidePrevButton
