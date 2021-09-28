@@ -111,33 +111,55 @@ public class SalesRepoImpl implements SalesRepoCustom{
 				, qpm.productMediaAdres
 				, qpg.productGradeNo
 				, qpg.productGrade
-				, qpt.token.count()
+				, qpt.count()
 				))
 				.from(qsp)
 				.join(qp).on(qsp.product.productNo.eq(qp.productNo))
 				.join(qpm).on(qp.productNo.eq(qpm.product.productNo))
 				.join(qpt).on(qp.productNo.eq(qpt.product.productNo))
-//				.join(qt).on(qpt.token.eq(qt))
-//				.leftJoin(qto).on(qt.eq(qto.token))
+				.join(qt).on(qpt.token.eq(qt))
+				.leftJoin(qto).on(qt.eq(qto.token))
 //				.join(qto).on(qt.eq(qto.token))
 				.fetchJoin()
 				.join(qpg).on(qp.productGrade.eq(qpg))
 				.orderBy(qp.productGrade.productGradeNo.asc())
 				.groupBy(qp.productNo)
-				.where(qsp.sales.salesNo.eq(salesPK)).fetch());
+				.where(qsp.sales.salesNo.eq(salesPK).and(qto.member.isNull())).fetch());
 	}
 	@Override
 	public Long countLeftCard (Long cardPK){
+		QSales qs = QSales.sales;
+		QProduct qp = QProduct.product;
+		QProduct_Media qpm= QProduct_Media.product_Media;
+		QSales_Product qsp = QSales_Product.sales_Product;
 		QProduct_Token qpt = QProduct_Token.product_Token;
 		QToken_Owner qto = QToken_Owner.token_Owner;
-		Long res = queryFactory.select(qpt.count()).from(qpt)
+		QToken qt = QToken.token;
+		QProduct_Grade qpg = QProduct_Grade.product_Grade;
+		
+		Long res = queryFactory.select(qto.count())
+				.from(qto)
 				.where(qpt.product.productNo.eq(cardPK))
-				.leftJoin(qto).on(qpt.token.tokenNo.eq(qto.token.tokenNo))
+//				.join(qpt).on(qp)
+				.leftJoin(qpt).on(qpt.token.eq(qto.token))
+				.fetchJoin()
 				.fetchCount();
-		System.out.println(res);
 		return cardPK;
 		
 	}
+	
+//	@Override
+//	public Long countOwnedCard (Long cardPK){
+//		QProduct_Token qpt = QProduct_Token.product_Token;
+//		QToken_Owner qto = QToken_Owner.token_Owner;
+//		Long res = queryFactory.select(qpt.count()).from(qpt)
+//				.where(qpt.product.productNo.eq(cardPK))
+//				.leftJoin(qto).on(qpt.token.tokenNo.eq(qto.token.tokenNo))
+//				.fetchCount();
+//		System.out.println(res);
+//		return cardPK;
+//		
+//	}
 	@Override
 	public List<Product>cardListByPack(Long cardPackPk){
 		QSales_Product qsp = QSales_Product.sales_Product;
