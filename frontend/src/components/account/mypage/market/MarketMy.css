@@ -1,0 +1,36 @@
+.myMarketTable {
+  margin-top: 20px;
+  width: 100%;
+  text-align: center;
+  border-top: 1px solid lightgray;
+  border-collapse: collapse;
+  background-color: #fff;
+  clear: both;
+}
+
+.myMarketTable > tbody > tr > th,
+.myMarketTable > tbody > tr > td {
+  border-bottom: 1px solid lightgray;
+  text-align: left;
+  padding: 20px;
+}
+
+.myMarketTable > tbody > tr > th {
+  background-color: rgb(245, 244, 244);
+}
+
+.myMarketNo,
+.myMarketCard,
+.myMarketEnd,
+.myMarketCurrent {
+  width: 10%;
+}
+
+.myMarketProduct {
+  width: 40%;
+}
+
+.marketMyTable:hover {
+  cursor: pointer;
+  background-color: rgba(149, 214, 214, 0.144);
+}

@@ -1,58 +1,64 @@
-import React from "react";
-import "./MarketItem.css";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import { useSpring, useSprings, animated, to } from "react-spring";
+import "./MarketItem.css";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      flexGrow: 1,
-    },
-    paper: {
-      padding: theme.spacing(2),
-      textAlign: "center",
-      color: theme.palette.text.secondary,
-      height: 300,
-    },
-  })
-);
-
-function MarketItem(props: any): JSX.Element {
+function MarketItem(props: any) {
+  const [open, setOpen] = useState(false);
+  const { f, r } = useSpring({ f: open ? 0 : 1, r: open ? -3 : 3 });
+  const cards = useSprings(
+    5,
+    [0, 1, 2, 3, 4].map((i) => ({
+      opacity: 0.2 + i / 5,
+      z: open ? (i / 5) * 80 : 0,
+    }))
+  );
   let history = useHistory();
-  function getitem(data: any) {
+  function itemdetail(data: any) {
     console.log(data);
-
     history.push({
-      pathname: `/biditem/${data.auction.auctionNo}`,
+      pathname: `/marketitem/${data.card.cardNo}`,
       state: { data: data },
     });
   }
-  const classes = useStyles();
   return (
-    <Grid item xs={6} sm={4}>
-      <Paper
-        className={classes.paper}
-        onClick={() => {
-          getitem(props.item);
-        }}
-        style={{ cursor: "pointer" }}
-      >
-        <img
-          src={props.item.card.cardImageUrl}
-          alt=""
-          width="100%"
-          height="230px"
-        />
-        <div className="itemcardinfo">
-          <span className="producttitle">
-            {props.item.auction.auctionTitle}
-          </span>
-          <span className="productprice">{props.item.auction.price}</span>
-        </div>
-      </Paper>
-    </Grid>
+    <div
+      className="container"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+      onClick={() => {
+        console.log(props.item);
+        itemdetail(props.item);
+      }}
+    >
+      <div style={{ textAlign: "center" }}>
+        {props.item.auction.auctionTitle}
+      </div>
+      <div style={{ textAlign: "center" }}>
+        {cards.map(({ z, opacity }, index) => (
+          <animated.div
+            style={{
+              opacity,
+              transform: to(
+                [z, f.to([0, 0.2, 0.6, 1], [0, index, index, 0]), r],
+                (z, f, r) => `translate3d(0,0,0px) rotateX(0deg)`
+              ),
+            }}
+          >
+            {index === 4 && (
+              <animated.img
+                style={{
+                  transform: f.to([1, 0], ["scale(0.7)", "scale(0.9)"]),
+                  width: "100%",
+                  height: "300px",
+                }}
+                src={"/" + props.image + ".jpg"}
+              />
+            )}
+          </animated.div>
+        ))}
+      </div>
+    </div>
   );
 }
 

@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
 import Grid from "@material-ui/core/Grid";
+import axios from "axios";
+import { ResetTvTwoTone } from "@mui/icons-material";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -12,46 +14,51 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function CardPackInside(): JSX.Element {
+function CardPackInside(props: any): JSX.Element {
   const classes = useStyles();
-
+  const [cards, setcards] = useState<any[]>([]);
+  useEffect(() => {
+    axios
+      .get(`/api/cardPack/cardList/${props.cardpackNo}`, {
+        cardpackId: props.cardpackNo,
+      })
+      .then((res) => {
+        console.log(res.data.res);
+        setcards(res.data.res);
+      })
+      .catch();
+  }, []);
+  // }
   return (
     <div className={classes.root}>
-      <h1>획득 가능한 카드등급 개수</h1>
+      <h1>Cards List</h1>
       <br />
-      <List>
-        <ListItem button>
-          <Grid item xs={6}>
-            <div style={{ textAlign: "center" }}>S</div>
-          </Grid>
-          <Grid item xs={6}>
-            <div style={{ textAlign: "center" }}>???</div>
-          </Grid>
-        </ListItem>
-        <ListItem button>
-          <Grid item xs={6}>
-            <div style={{ textAlign: "center" }}>A</div>
-          </Grid>
-          <Grid item xs={6}>
-            <div style={{ textAlign: "center" }}>???</div>
-          </Grid>
-        </ListItem>
-        <ListItem button>
-          <Grid item xs={6}>
-            <div style={{ textAlign: "center" }}>B</div>
-          </Grid>
-          <Grid item xs={6}>
-            <div style={{ textAlign: "center" }}>10</div>
-          </Grid>
-        </ListItem>
-        <ListItem button>
-          <Grid item xs={6}>
-            <div style={{ textAlign: "center" }}>C</div>
-          </Grid>
-          <Grid item xs={6}>
-            <div style={{ textAlign: "center" }}>20</div>
-          </Grid>
-        </ListItem>
+      <List
+        sx={{
+          width: "100%",
+          position: "relative",
+          overflow: "auto",
+          maxHeight: 400,
+          "& ul": { padding: 0 },
+        }}
+      >
+        {cards.map((card, i) => {
+          return (
+            <div>
+              <ListItem button>
+                <Grid item xs={6}>
+                  <div style={{ textAlign: "center" }}>{card.cardNM}</div>
+                </Grid>
+                <Grid item xs={6}>
+                  <div style={{ textAlign: "center" }}>{card.cardGradeNM}</div>
+                </Grid>
+                <Grid item xs={6}>
+                  <div style={{ textAlign: "center" }}>{card.cardCount}</div>
+                </Grid>
+              </ListItem>
+            </div>
+          );
+        })}
       </List>
     </div>
   );

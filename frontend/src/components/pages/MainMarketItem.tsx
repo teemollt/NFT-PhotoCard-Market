@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router";
-import "./MarketItem.css";
+import "./MainMarketItem.css";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
     iteminfo: {},
   })
 );
-function MarketItem(): JSX.Element {
+function MainMarketItem(): JSX.Element {
   const classes = useStyles();
 
   const location: any = useLocation();
@@ -42,7 +42,7 @@ function MarketItem(): JSX.Element {
             <Grid item xs={12}>
               <Paper className={classes.paper}>
                 <img
-                  src={location.state.data.imgUrl}
+                  src={"/" + location.state.data.card.cardImgUrl + ".jpg"}
                   alt=""
                   width="100%"
                   height="100%"
@@ -54,7 +54,7 @@ function MarketItem(): JSX.Element {
                 <h1>{location.state.data.auction.auctionTitle}</h1>
               </div>
               <div className={classes.iteminfo}>
-                {location.state.data.auction.auctionDetil}
+                {location.state.data.auction.auctionDetail}
               </div>
               <div className={classes.paper2}>
                 <div className="buybtn">
@@ -69,4 +69,4 @@ function MarketItem(): JSX.Element {
   );
 }
 
-export default MarketItem;
+export default MainMarketItem;

@@ -1,4 +1,4 @@
-.auctionCard {
+.marketCard {
   display: inline-block;
   font-family: "Gowun Dodum" !important;
   margin: 15px;
@@ -10,36 +10,36 @@
   cursor: pointer;
 }
 
-.auctionCardImg {
+.marketCardImg {
   padding: 10px;
 }
 
-.auctionCardImg > img {
+.marketCardImg > img {
   width: 260px;
   height: 300px;
   border-radius: 4px;
 }
 
-.auctionCardInfo {
+.marketCardInfo {
   font-size: 12px;
   color: lightgray;
 }
 
-.auctionCardCeleb,
-.auctionCardTitle {
+.marketCardCeleb,
+.marketCardTitle {
   clear: both;
   float: left;
   margin-left: 10px;
 }
 
-.auctionCardPriceTitle,
-.auctionCardPrice {
+.marketCardPriceTitle,
+.marketCardPrice {
   float: right;
   margin-right: 10px;
 }
 
-.auctionCardTitle,
-.auctionCardPrice {
+.marketCardTitle,
+.marketCardPrice {
   margin-top: 5px;
   margin-bottom: 5px;
 }

@@ -15,6 +15,9 @@ function Main(): JSX.Element {
       <div className="mainitem">
         <MainCelebList />
       </div>
+      <div className="search">
+        <input type="text" />
+      </div>
       <div className="mainitem">
         <MainCarousel />
       </div>

@@ -8,10 +8,15 @@
   clear: both;
 }
 
-.myBidTable > tbody > tr > th {
+.myBidTable > tbody > tr > th,
+.myBidTable > tbody > tr > td {
   border-bottom: 1px solid lightgray;
   text-align: left;
   padding: 20px;
+}
+
+.myBidTable > tbody > tr > th {
+  background-color: rgb(245, 244, 244);
 }
 
 .myBidCard {

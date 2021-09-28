@@ -1,0 +1,16 @@
+.marketMyTable:hover {
+  cursor: pointer;
+  background-color: rgba(149, 214, 214, 0.144);
+}
+
+.myMarketImg {
+  width: 100px;
+  height: 130px;
+}
+
+.myMarketImgHover {
+  width: 350px;
+  height: 400px;
+  margin-left: -330px;
+  margin-top: -10%;
+}

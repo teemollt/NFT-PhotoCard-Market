@@ -3,21 +3,30 @@ import "./GalleryBoardPost.css";
 
 interface GalleryBoardPostProps {
   post: {
-    postNo: number;
-    nick: string;
-    content: string;
-    like: number;
+    galleryArticleContent: string;
+    galleryArticleNo: number;
+    likes: number;
+    member: {
+      memberNick: string;
+      memberNo: number;
+    };
   };
 }
 
 function GalleryBoardPost(props: GalleryBoardPostProps) {
-  const { postNo, nick, content, like } = props.post;
+  const { galleryArticleContent, galleryArticleNo, likes } = props.post;
+  const { memberNick, memberNo } = props.post.member;
+
+  const handleToGallery = (pk: number) => {
+    window.location.replace("/gallery/" + pk);
+  };
+
   return (
-    <tr className="postBody">
-      <th className="postBodyNo">{postNo}</th>
-      <th className="postBodyNick">{nick}</th>
-      <th className="postBodyContent">{content}</th>
-      <th className="postBodyLike">{like}</th>
+    <tr className="postBody" onClick={(pk) => handleToGallery(memberNo)}>
+      <td className="postBodyNo">{galleryArticleNo}</td>
+      <td className="postBodyNick">{memberNick}</td>
+      <td className="postBodyContent">{galleryArticleContent}</td>
+      <td className="postBodyLike">{likes}</td>
     </tr>
   );
 }

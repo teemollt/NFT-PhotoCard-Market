@@ -1,35 +1,9 @@
-body {
-  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir,
-    helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
-  background: transparent;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  cursor: default;
-  background: #27272e;
-  background-image: url(https://awv3node-homepage.surge.sh/build/assets/stars.svg);
-}
-
-#root {
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  perspective: 350px;
-  perspective-origin: 50% 50%;
-}
-
 .main {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr;
+  width: 70%;
+  margin: 0 auto;
 }
 
 .container {
@@ -42,7 +16,7 @@ body {
   /* position: absolute; */
   /* width: 300px;
   height: 200px; */
-  background: #FAFAFA;
+  background: #fafafa;
   display: flex;
   align-items: center;
   justify-content: center;

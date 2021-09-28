@@ -9,6 +9,8 @@ import Review from "../cardpackshop/CardpackReviewList";
 import BuyCardPack from "../cardpackshop/BuyCardPack";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import Tooltip from "@mui/material/Tooltip";
+import axios from "axios";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -34,33 +36,103 @@ function CardPackDetail(): JSX.Element {
   const classes = useStyles();
   const location: any = useLocation();
   console.log(location.state.data);
-  const [islike, setislike] = useState(false);
+  let [islike, setislike] = useState(false);
+  const [likepeople, setlikepeople] = useState(0);
   useEffect(() => {
     // follow check axios
     console.log(location.state.data.salesNo);
-    //
-  }, []);
+    axios
+      .get(`/api/cardPack/likecheck/${location.state.data.salesNo}`, {
+        salesNo: location.state.data.salesNo,
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setlikepeople(res.data.peoplelike);
+        // true면 true, false면 false
+        if (res.data.islike === true) {
+          setislike(true);
+        } else {
+          setislike(false);
+        }
+      })
+      .catch();
+  });
 
-  // like
-  // unlike
+  // like, unlike
+  const changelike = () => {
+    console.log(islike);
+    if (islike) {
+      axios
+        .post(
+          "/api/cardPack/like",
+          {
+            cardpackPK: location.state.data.salesNo,
+          },
+          {
+            headers: {
+              Authorization: localStorage.getItem("token"),
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res);
+          setislike(false);
+        });
+    } else {
+      axios
+        .post(
+          "/api/cardPack/like",
+          {
+            cardpackPK: location.state.data.salesNo,
+          },
+          {
+            headers: {
+              Authorization: localStorage.getItem("token"),
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res);
+          setislike(true);
+        });
+    }
+  };
   return (
     <div className={classes.root}>
       <Container className={classes.container}>
         <Grid container spacing={5}>
           <Grid item xs={12}>
-            <img src="/images/card.gif" alt="" width="20%" />
+            <img src="/image/card.gif" alt="" width="20%" />
           </Grid>
           <Grid item xs={12}>
             <h2>{location.state.data.salesNM}</h2>
-            {islike ? <ShoppingCartIcon /> : <AddShoppingCartIcon />}
+            <Tooltip title={likepeople} placement="right-start">
+              {islike ? (
+                <ShoppingCartIcon
+                  onClick={changelike}
+                  style={{ cursor: "pointer" }}
+                />
+              ) : (
+                <AddShoppingCartIcon
+                  onClick={changelike}
+                  style={{ cursor: "pointer" }}
+                />
+              )}
+            </Tooltip>
             <div>
               <div className={classes.footer}>
-                <BuyCardPack />
+                <BuyCardPack
+                  cardpackprice={location.state.data.salesPrice}
+                  cardpackNo={location.state.data.salesNo}
+                />
               </div>
               <div className={classes.paper2}>
                 <hr />
                 <div>
-                  <CardPackInside />
+                  <CardPackInside cardpackNo={location.state.data.salesNo} />
                 </div>
               </div>
             </div>

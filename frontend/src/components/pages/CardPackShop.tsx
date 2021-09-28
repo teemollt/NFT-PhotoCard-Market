@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { useSpring, useSprings, animated, interpolate } from "react-spring";
+import { useSpring, useSprings, animated, to } from "react-spring";
 import "./CardPackShop.css";
 import axios from "axios";
 
@@ -32,13 +32,15 @@ function Stack(props: any): JSX.Element {
         buycardpack(props.cardpackinfo);
       }}
     >
-      <div style={{ textAlign: "center" }}>{props.cardpackinfo.salesNM}</div>
+      <div style={{ textAlign: "center" }}>
+        <h3>{props.cardpackinfo.salesNM}</h3>
+      </div>
       {cards.map(({ z, opacity }, index) => (
         <animated.div
           style={{
             opacity,
-            transform: interpolate(
-              [z, f.interpolate([0, 0.2, 0.6, 1], [0, index, index, 0]), r],
+            transform: to(
+              [z, f.to([0, 0.2, 0.6, 1], [0, index, index, 0]), r],
               (z, f, r) => `translate3d(0,0,0px) rotateX(0deg)`
             ),
           }}
@@ -46,7 +48,7 @@ function Stack(props: any): JSX.Element {
           {index === 4 && (
             <animated.img
               style={{
-                transform: f.interpolate([1, 0], ["scale(0.5)", "scale(0.6)"]),
+                transform: f.to([1, 0], ["scale(0.7)", "scale(1.0)"]),
               }}
               src={props.image}
             />
@@ -71,7 +73,7 @@ function CardPackShop(): JSX.Element {
     <div className="main">
       {cardpack.map((pack, i) => (
         <Stack
-          image="/images/cardshop.png"
+          image="/image/cardshop.png"
           background="#52649e"
           cardpackinfo={pack}
         />
