@@ -125,6 +125,7 @@ public class SalesRepoImpl implements SalesRepoCustom{
 				.fetchJoin()
 				.join(qpg).on(qp.productGrade.eq(qpg))
 				.orderBy(qp.productGrade.productGradeNo.asc())
+				.orderBy(qp.productNo.asc())
 				.groupBy(qp.productNo)
 				.where(qsp.sales.salesNo.eq(salesPK).and(qto.member.isNull())).fetch());
 	}

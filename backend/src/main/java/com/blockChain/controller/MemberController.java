@@ -78,9 +78,15 @@ public class MemberController {
 		
 		return ms.orderList();
 	}
-	@GetMapping("/likelist")
+	@GetMapping("/salesLike")
 	public Map<String, Object>likeSaleList(){
 		
-		return ms.likeList();
+		return ms.salesLikeList();
+	}
+	
+	@GetMapping("/auctionLike")
+	public Map<String, Object>likeAuctionList(){
+		
+		return ms.AuctionLikeList();
 	}
 }	
