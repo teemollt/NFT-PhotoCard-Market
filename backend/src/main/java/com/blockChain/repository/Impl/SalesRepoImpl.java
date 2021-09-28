@@ -111,7 +111,7 @@ public class SalesRepoImpl implements SalesRepoCustom{
 				, qpm.productMediaAdres
 				, qpg.productGradeNo
 				, qpg.productGrade
-				, qpt.count()
+				, qpt.count().nullif(0L)
 				))
 				.from(qsp)
 				.join(qp).on(qsp.product.productNo.eq(qp.productNo))

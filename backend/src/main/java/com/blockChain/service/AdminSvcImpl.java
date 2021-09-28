@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,9 +35,12 @@ import com.blockChain.domain.Product_Token;
 import com.blockChain.domain.Reply;
 import com.blockChain.domain.Sales;
 import com.blockChain.domain.Sales_Like;
+import com.blockChain.domain.Sales_Order;
 import com.blockChain.domain.Sales_Product;
+import com.blockChain.domain.Sold_Bundle_Inside;
 import com.blockChain.domain.Token;
 import com.blockChain.domain.Token_Owner;
+import com.blockChain.dto.CardGenerateDTO;
 import com.blockChain.repository.AuctionRepo;
 import com.blockChain.repository.BidRepo;
 import com.blockChain.repository.CelebRepo;
@@ -53,7 +57,9 @@ import com.blockChain.repository.Product_TokenRepo;
 import com.blockChain.repository.ReplyRepo;
 import com.blockChain.repository.SalesRepo;
 import com.blockChain.repository.Sales_LikeRepo;
+import com.blockChain.repository.Sales_OrderRepo;
 import com.blockChain.repository.Sales_ProductRepo;
+import com.blockChain.repository.Sold_Bundle_InsideRepo;
 import com.blockChain.repository.TokenRepo;
 import com.blockChain.repository.Token_OwnerRepo;
 
@@ -221,9 +227,17 @@ public class AdminSvcImpl implements AdminSvcInter{
 	private AuctionRepo auctionRepo;
 	@Autowired
 	private BidRepo bidRepo;
-	
+	@Autowired
+	private Sales_OrderRepo soRepo;
 	@Autowired
 	private GalleryArticleRepo gaRepo;
+	@Autowired
+	private Sold_Bundle_InsideRepo sbiRepo;
+	@Autowired
+	private Token_OwnerRepo toRepo;
+	
+	@Autowired
+	SalesSvcInter salesSvc;
 	@Override
 	public Map<String,Object> totalData(){
 		Map<String, Object> res = new HashMap<String,Object>();
@@ -239,11 +253,12 @@ public class AdminSvcImpl implements AdminSvcInter{
 		res.put("insertProductToken", insertProductToken());
 		res.put("insertSales", insertSales());
 		res.put("insertSalesProduct",insertSalesProduct());
-		res.put("insertTokenOwner", insertTokenOwner());
+//		res.put("insertTokenOwner", insertTokenOwner());
+//		res.put("buyCardPack", buyCardPack());
 		res.put("insertSL", insertSL());
 		res.put("reply", reply());
-		res.put("insertAuction",insertAuction());
-		res.put("insertBid", insertBid());
+//		res.put("insertAuction",insertAuction());
+//		res.put("insertBid", insertBid());
 		res.put("insertGalleryArticle", insertGalleryArticle());
 		return res;
 	}
@@ -399,7 +414,59 @@ public class AdminSvcImpl implements AdminSvcInter{
 		res.put(name, msg);
 		return res;
 	}
-	
+	@Override
+	public Map<String,Object> buyCardPack(){
+		Map<String, Object> res = new HashMap<String,Object>();
+		String name = new Object() {}.getClass().getEnclosingMethod().getName();
+		ArrayList<String> msg = new ArrayList<>();
+		Random random = new Random();
+		//카드팩 고르기
+		List<Sales> aa = salesRepo.findAll();
+		List<Member> members = memberRepo.findAll();
+		for(int g = 0 ; g < members.size();g++) {
+			int randSale = random.nextInt(aa.size());
+			int randBuy = random.nextInt(5)+10;
+			Sales sales = aa.get(randSale); //무작위 카드팩
+			Member member = members.get(g); // 무작위 멤버
+			salesSvc.buyCardPack(aa.get(randSale).getSalesNo());
+//			List<Token>tokens = tokenRepo.sltMultiBySales(sales);
+			//유저의 카드 반복 구매
+			for (int gg = 0; gg<randBuy; gg++) {
+				List<Token>tokens = tokenRepo.sltMultiBySales(sales).orElseThrow(() -> new IllegalStateException("카드 재고가 소진되었습니다."));
+				
+				int sizes = tokens.size();
+				Collections.shuffle(tokens);
+				int CardpackSize = 5;
+				
+				if (sizes < CardpackSize) {
+					CardpackSize= sizes;
+				}
+				List<Token> chooseTokens = tokens.subList(0, CardpackSize); //랜덤 5개 고르기
+				Sales_Order salesOrder = new Sales_Order();
+				salesOrder.setMember(member);
+				salesOrder.setSales(sales);
+				
+				List<CardGenerateDTO> resCardList = new ArrayList<CardGenerateDTO>();
+				Sales_Order savedOrder = soRepo.save(salesOrder); // 구매내역 저장
+				for (int i =0; i<chooseTokens.size();i++) {
+					Token tempToken = chooseTokens.get(i);
+					Sold_Bundle_Inside sbi = new Sold_Bundle_Inside();
+//					sbi.setSales(savedOrder.get);
+					sbi.setToken(tempToken);
+					sbiRepo.save(sbi); //카드 획득내역 저장
+					Token_Owner to = new Token_Owner();
+					to.setMember(member);
+					to.setToken(tempToken);
+					to.setOwnDate(LocalDateTime.now());
+					Token_Owner savedTo = toRepo.save(to); // 토큰 소유주 입력
+					//토큰의 카드 넘겨주기
+					resCardList.add(productRepo.sltByTokenNo(savedTo.getToken()));
+//				resTokens.add(savedTo.getToken());
+				}
+			}
+		}
+		return res;
+	}
 	@Override
 	public Map<String,Object> insertTokenOwner(){//TODO
 		Map<String, Object> res = new HashMap<String,Object>();

@@ -1,6 +1,7 @@
 package com.blockChain.repository.Impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
@@ -21,18 +22,18 @@ import lombok.RequiredArgsConstructor;
 public class TokenRepoImpl implements TokenRepoCustom{
 	private final JPAQueryFactory queryFactory;
 	@Override
-	public List<Token> sltMultiBySales(Sales sales){
+	public Optional<List<Token>> sltMultiBySales(Sales sales){
 		QToken qt = QToken.token;
 		QProduct_Token qpt = QProduct_Token.product_Token;
 		QSales_Product qsp =QSales_Product.sales_Product;
 		QSales qs = QSales.sales;
 		QToken_Owner qto = QToken_Owner.token_Owner;
-		return queryFactory.select(qt)
+		return Optional.ofNullable(queryFactory.select(qt)
 				.from(qpt)
 				.where(qsp.sales.eq(sales))
 				.join(qt).on(qpt.token.eq(qt))
 				.join(qsp).on(qpt.product.eq(qsp.product))
 				.leftJoin(qto).on(qt.eq(qto.token))
-				.fetch();
+				.fetch());
 	}
 }
