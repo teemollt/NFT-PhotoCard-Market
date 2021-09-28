@@ -295,15 +295,16 @@ public class AdminSvcImpl implements AdminSvcInter{
 	    for (int i = 0; i < celebGroup.length;i++) {
 	    	Optional<Celeb_Group> existOrNot = celebGroupRepo.sltByCelebGroupNM(celebGroup[i]);
 	    	System.out.println(existOrNot);
-//	    	if (existOrNot.isEmpty()){
-//		    	Celeb_Group celebGroupOne = new Celeb_Group();
-//		    	celebGroupOne.setGroupNm(celebGroup[i]);
-//		    	celebGroupOne.setGroupNofp(peopleNum[i]);
-//		    	celebGroupRepo.save(celebGroupOne);
-//		    	msg.add(celebGroup[i] + peopleNum[i] + " 정상 입력");
-//	    	}else {
-//	    		msg.add(celebGroup[i] + peopleNum[i] + " 등록 안됨");
-//	    	}
+	    	if (existOrNot.isEmpty()){
+		    	Celeb_Group celebGroupOne = new Celeb_Group();
+		    	celebGroupOne.setGroupNo(Long.valueOf(i+1));
+		    	celebGroupOne.setGroupNm(celebGroup[i]);
+		    	celebGroupOne.setGroupNofp(peopleNum[i]);
+		    	celebGroupRepo.save(celebGroupOne);
+		    	msg.add(celebGroup[i] + peopleNum[i] + " 정상 입력");
+	    	}else {
+	    		msg.add(celebGroup[i] + peopleNum[i] + " 등록 안됨");
+	    	}
 	    }
 	    res.put("셀럽그룹 등록로그", msg);
 	    return res;
@@ -355,7 +356,7 @@ public class AdminSvcImpl implements AdminSvcInter{
 		List<Member> members = memberRepo.findAll();
 		List<Celeb> celebs = celebRepo.findAll();
 		int memberSize = members.size()-1;
-		int celebSize = celebs.size()-1;
+		int celebSize = celebs.size();
 		Random random = new Random();
 		for(int i = 0; i < memberSize; i++){
 			int check[] =new int[celebSize];
