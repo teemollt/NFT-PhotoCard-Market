@@ -26,6 +26,7 @@ import com.blockChain.domain.Sold_Bundle_Inside;
 import com.blockChain.domain.Token;
 import com.blockChain.domain.Token_Owner;
 import com.blockChain.dto.CardAddCountDTO;
+import com.blockChain.dto.CardDTO;
 import com.blockChain.dto.CardGenerateDTO;
 import com.blockChain.dto.MypageDTO;
 import com.blockChain.dto.SalesDTO;
@@ -216,7 +217,7 @@ public class SalesSvcImpl implements SalesSvcInter{
 			salesOrder.setMember(member);
 			salesOrder.setSales(sales);
 			
-			List<CardGenerateDTO> resCardList = new ArrayList<CardGenerateDTO>();
+			List<CardDTO> resCardList = new ArrayList<CardDTO>();
 			Sales_Order savedOrder = soRepo.save(salesOrder); // 구매내역 저장
 			for (int i =0; i<chooseTokens.size();i++) {
 				Token tempToken = chooseTokens.get(i);
@@ -230,7 +231,7 @@ public class SalesSvcImpl implements SalesSvcInter{
 				to.setOwnDate(LocalDateTime.now());
 				Token_Owner savedTo = toRepo.save(to); // 토큰 소유주 입력
 				//토큰의 카드 넘겨주기
-				resCardList.add(productRepo.sltByTokenNo(savedTo.getToken()));
+				resCardList.add(productRepo.sltByTokenNoAddToken(savedTo.getToken()));
 //				resTokens.add(savedTo.getToken());
 			}
 			res.put("cardList", resCardList);

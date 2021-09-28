@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
+import com.blockChain.domain.QMember;
 import com.blockChain.domain.QProduct_Token;
 import com.blockChain.domain.QSales;
 import com.blockChain.domain.QSales_Product;

@@ -39,4 +39,13 @@ public class GalleryController {
 			){
 		return gSvc.galleryInsert(req);
 	}
+	@GetMapping("/likecheck/{galleryPk}")
+	public Map<String,Object> sltLikeCount(@PathVariable(name="galleryPk") Long galleryPk){
+		return gSvc.sltLikeCount(galleryPk);
+	}
+	@PostMapping("/like")
+	public Map<String,Object>insertLike(@RequestBody Map<String, Object> req){
+		return gSvc.insertLike(req);
+		
+	}
 }

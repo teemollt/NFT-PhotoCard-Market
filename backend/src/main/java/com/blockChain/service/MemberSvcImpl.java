@@ -23,8 +23,10 @@ import com.blockChain.domain.RefreshToken;
 import com.blockChain.dto.MypageDTO;
 import com.blockChain.dto.SalesDTO;
 import com.blockChain.dto.SalesOrderDTO;
+import com.blockChain.dto.AuctionDTO;
 import com.blockChain.dto.LoginTokenDTO;
 import com.blockChain.jwt.TokenProvider;
+import com.blockChain.repository.Auction_LikeRepo;
 import com.blockChain.repository.CelebRepo;
 import com.blockChain.repository.Celeb_LikeRepo;
 import com.blockChain.repository.MemberRepo;
@@ -57,6 +59,8 @@ public class MemberSvcImpl implements MemberSvcInter{
 	private Sales_OrderRepo soRepo;
 	@Autowired
 	private Sales_LikeRepo slRepo;
+	@Autowired
+	private Auction_LikeRepo alRepo;
 	@Override
 	public Map<String,Object> signup(Map<String, Object> req){
 		 Map<String, Object> res = new HashMap<String,Object>();
@@ -270,7 +274,7 @@ public class MemberSvcImpl implements MemberSvcInter{
 			return res;
 	}
 	@Override
-	public Map<String,Object>likeList(){
+	public Map<String,Object>salesLikeList(){
 		Map<String, Object> res = new HashMap<String,Object>();
 	    Long nowLoginMemberNo=0L;
 		try {
@@ -288,5 +292,27 @@ public class MemberSvcImpl implements MemberSvcInter{
 			return res;
 		}
 			return res;
+	}
+	
+	@Override
+	public Map<String,Object>AuctionLikeList(){
+		Map<String, Object> res = new HashMap<String,Object>();
+	    Long nowLoginMemberNo=0L;
+		try {
+			nowLoginMemberNo=SecurityUtil.getCurrentMemberId();
+		}catch (RuntimeException e) {
+			nowLoginMemberNo=0L;
+		}
+		try{
+			Member member = memberRepo.findById(nowLoginMemberNo).orElseThrow(() -> new IllegalStateException("로그인 유저정보가 없습니다"));
+//			
+			Optional<List<AuctionDTO>> sltList= alRepo.sltByMember(member.getMemberNo());
+			res.put("res", sltList);
+		}catch(IllegalStateException e){
+			res.put("success", false);
+			res.put("msg", e.getMessage());
+			return res;
+		}
+		return res;
 	}
 }
