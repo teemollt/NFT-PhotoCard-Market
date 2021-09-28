@@ -83,6 +83,7 @@ public class WalletSvcImpl implements WalletSvcInter {
 			System.out.println(member.getMemberNo());
 			
 			Wallets wallet = walletRepo.findByWallet(member.getMemberNo()).orElseThrow(() -> new NoSuchElementException("지갑 정보가 없습니다"));
+			System.out.println("wallet address : " + wallet.getWalletAdd());
 //			Wallets wallet = new Wallets();
 //			wallet.setWalletAdd(MASTER_WALLET_ADD);
 //			wallet.setWalletBal(new BigDecimal(0));
