@@ -38,4 +38,7 @@ public class Sales {
 	@Column(name="SALES_DIV",length=3)
     private String salesDiv;
 	
+	@Column(name="SALES_IMG")
+	private String imgUrl;
+	
 }

@@ -73,4 +73,14 @@ public class MemberController {
 	public Map<String, Object>myPage(){
 		return ms.myPage();
 	}
-}
+	@GetMapping("/order")
+	public Map<String, Object>orderList(){
+		
+		return ms.orderList();
+	}
+	@GetMapping("/likelist")
+	public Map<String, Object>likeSaleList(){
+		
+		return ms.likeList();
+	}
+}	

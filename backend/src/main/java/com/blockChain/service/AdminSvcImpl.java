@@ -640,6 +640,7 @@ public class AdminSvcImpl implements AdminSvcInter{
 			sales.setSalesNm(products.get(i) +" "+ SALES_SUBFIX);
 			sales.setSalesPrice(3L);
 			sales.setSalesDiv(SALES_DIV.get(i));
+			sales.setImgUrl(PRODUCT_MEDIA_ADRES+products.get(i));
 			Sales saved = salesRepo.save(sales);
 			msg.add(saved.toString());
 		}
@@ -651,6 +652,7 @@ public class AdminSvcImpl implements AdminSvcInter{
 			sales.setSalesNm(products.get(i) +" "+ SALES_SUBFIX);
 			sales.setSalesPrice(3L);
 			sales.setSalesDiv(celeb);
+			sales.setImgUrl(PRODUCT_MEDIA_ADRES+products.get(i));
 			Sales saved = salesRepo.save(sales);
 			msg.add(saved.toString());
 		}

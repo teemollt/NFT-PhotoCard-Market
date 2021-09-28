@@ -15,5 +15,7 @@ public interface MemberSvcInter {
 	Map<String, Object> checkEmail(Map<String, Object> req);
 	Map<String, Object> updateMember(Map<String, Object> req);
 	Map<String, Object> myPage();
+	Map<String, Object> orderList();
+	Map<String, Object> likeList();
 
 }
