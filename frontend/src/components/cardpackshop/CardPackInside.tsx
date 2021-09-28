@@ -27,7 +27,7 @@ function CardPackInside(props: any): JSX.Element {
         setcards(res.data.res);
       })
       .catch();
-  });
+  },[]);
   // }
   return (
     <div className={classes.root}>

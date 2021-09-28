@@ -34,6 +34,8 @@ function MarketRegItem() {
   const [selectedcardNo, setselectedcardNo] = useState<number>(0);
   const [selectedcardNm, setselectedcardNm] = useState<string>("");
   const [selectedtoken, setselectedtoken] = useState<number>(0);
+  const [selectedcardtitle, setselectedcardtitle] = useState<string>("");
+  const [selectedcarddetail, setselectedcarddetail] = useState<string>("");
   function register(data: any) {
     setOpen(true);
     setselectedcardNo(data.cardNo);
@@ -44,10 +46,12 @@ function MarketRegItem() {
     setOpen(false);
     // 정말 카드등록하는 api
     axios.post(
-      "/api/market/insert",
+      "/api/auction/insert",
       {
         tokenNo: selectedtoken,
-        price: inputprice,
+        price: parseInt(inputprice),
+        auctionTitle: selectedcardtitle,
+        auctionDetail: selectedcarddetail,
       },
       { headers: { Authorization: localStorage.getItem("token") } }
     );
@@ -108,7 +112,6 @@ function MarketRegItem() {
         <DialogContent>
           <DialogContentText style={{ width: "500px", textAlign: "center" }}>
             {selectedcardNm} 카드를 판매하시겠습니까?
-            {selectedtoken}
             <br />
             <br />
             내가 설정한 금액 : <h1>{inputprice}</h1>
@@ -123,6 +126,31 @@ function MarketRegItem() {
             variant="standard"
             onChange={(e) => {
               setinputprice(e.target.value);
+            }}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="제목을 입력해주세요"
+            type="text"
+            fullWidth
+            variant="standard"
+            onChange={(e) => {
+              setselectedcardtitle(e.target.value);
+            }}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="카드에 대한 설명을 입력해주세요"
+            type="text"
+            fullWidth
+            variant="standard"
+            multiline
+            onChange={(e) => {
+              setselectedcarddetail(e.target.value);
             }}
           />
         </DialogContent>

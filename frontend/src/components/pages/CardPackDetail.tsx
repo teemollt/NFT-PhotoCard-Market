@@ -35,7 +35,6 @@ const useStyles = makeStyles((theme: Theme) =>
 function CardPackDetail(): JSX.Element {
   const classes = useStyles();
   const location: any = useLocation();
-  console.log(location.state.data);
   const [islike, setislike] = useState(false);
   const [likepeople, setlikepeople] = useState(0);
   useEffect(() => {

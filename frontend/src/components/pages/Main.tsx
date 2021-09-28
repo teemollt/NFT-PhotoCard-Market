@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import "./Main.css";
 import MainCarousel from "../main/MainCarousel";
 import MainCarousel1 from "../main/MainCarousel1";
@@ -10,6 +11,14 @@ import MainCarousel5 from "../main/MainCarousel5";
 import MainCarousel6 from "../main/MainCarousel6";
 
 function Main(): JSX.Element {
+  const [keyword, setkeyword] = useState("");
+  let history = useHistory();
+  function searchkeyword(paramskeyword: string) {
+    history.push({
+      pathname: `/searchall/${paramskeyword}`,
+      state: { paramskeyword: paramskeyword },
+    });
+  }
   return (
     <div>
       <div className="mainitem">
@@ -22,6 +31,15 @@ function Main(): JSX.Element {
               type="search"
               placeholder="Search"
               className="search-input"
+              onChange={(e) => {
+                console.log(e.target.value);
+                setkeyword(e.target.value);
+              }}
+              onKeyPress={(e) => {
+                if (e.key === "Enter") {
+                  searchkeyword(keyword);
+                }
+              }}
             />
             <button type="submit" className="search-button" disabled>
               <svg className="submit-button">
