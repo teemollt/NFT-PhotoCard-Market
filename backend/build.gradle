@@ -60,6 +60,10 @@ dependencies {
 	
 	//web3j
 	implementation ('org.web3j:core:4.8.7')
+	
+	// OkHttp
+	implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+	implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
 }
 
 test {

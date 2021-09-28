@@ -6,7 +6,7 @@ import com.blockChain.domain.Wallets;
 
 public interface WalletRepoCustom {
 
-//	Optional<Wallets> register(String id);
+	Optional<Wallets> findByWallet(Long memberNo);
 
 //	Optional<Member> checkEmail(String email);
 //
