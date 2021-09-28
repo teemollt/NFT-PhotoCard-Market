@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { useSpring, useSprings, animated, to } from "react-spring";
 import { useLocation } from "react-router";
 import "./MainSearchAll.css";
+import ResultCardsList from "../main/ResultCardsList";
 function Stack(props: any): JSX.Element {
   const [open, setOpen] = useState(false);
   const { f, r } = useSpring({ f: open ? 0 : 1, r: open ? -3 : 3 });
@@ -49,7 +50,7 @@ function Stack(props: any): JSX.Element {
             <animated.img
               style={{
                 transform: f.to([1, 0], ["scale(1)", "scale(1.3)"]),
-                width: "70%",
+                width: "10%",
               }}
               src={props.image}
             />
@@ -79,17 +80,41 @@ function MainSearchAll() {
   }, []);
   return (
     <div>
-      <div className="resultcardpack">
-        {resultcardpack.map((pack, i) => (
-          <Stack
-            image="/image/cardpack.png"
-            background="#52649e"
-            cardpackinfo={pack}
-          />
-        ))}
+      {/* 카드팩 */}
+      <div>
+        {resultcardpack.length > 0 ? (
+          <div className="result1">
+            {resultcardpack.map((pack, i) => (
+              <Stack
+                image="/image/cardpack.png"
+                background="#52649e"
+                cardpackinfo={pack}
+              />
+            ))}
+          </div>
+        ) : (
+          <h3 className="noresult">관련 카드팩 상품이 없습니다</h3>
+        )}
       </div>
+
       {/* <div>{resultauction.map(card,i)=>(card.cardImgUrl)}</div> */}
-      <div>{resultcards.map((card, i) => card.cardNM)}</div>
+      <div></div>
+
+      <div>
+        {resultcards.length > 0 ? (
+          <div className="result3">
+            {resultcards.map((card, i) => (
+              <ResultCardsList
+                image={card.cardImgUrl}
+                background="#52649e"
+                item={card}
+              />
+            ))}
+          </div>
+        ) : (
+          <h3 className="noresult">판매되고 있는 상품이 없습니다</h3>
+        )}
+      </div>
     </div>
   );
 }
