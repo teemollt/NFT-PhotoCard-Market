@@ -31,13 +31,22 @@
   padding-bottom: 1px;
 }
 
-.galleryTopMenuView {
+.galleryLike {
   float: right;
+  padding-left: 10px;
+  padding-right: 20px;
+  cursor: pointer;
 }
 
-.galleryTopMenuView > span {
-  margin-right: 20px;
-  cursor: pointer;
+.galleryLike svg {
+  color: pink;
+  margin-right: 10px;
+  transition: all .3s ease;
+}
+
+
+.galleryLike:hover svg {
+  color: rgb(255, 146, 164);
 }
 
 .underline {
@@ -59,12 +68,12 @@
   cursor: pointer;
 }
 
-.galleryTopSubImgArray {
+.galleryTopSubView {
   float: right;
   padding-right: 20px;
 }
 
-.galleryTopSubImgArray > span {
+.galleryTopSubView > span {
   margin-right: 20px;
   cursor: pointer;
 }

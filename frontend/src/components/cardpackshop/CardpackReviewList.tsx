@@ -64,19 +64,21 @@ function CardpackReviewList(props: any): JSX.Element {
   let [review, setreview] = useState<string>("");
   // 리뷰작성
   function createreview() {
-    axios
-      .post(
-        `/api/cardPack/${props.cardpackNo}/create/review`,
-        {
-          cardpackNo: props.cardpackNo,
-          reviewContent: review,
-        },
-        { headers: { Authorization: localStorage.getItem("token") } }
-      )
-      .then((res) => {
-        setreview("");
-      })
-      .catch();
+    if (review) {
+      axios
+        .post(
+          `/api/cardPack/${props.cardpackNo}/create/review`,
+          {
+            cardpackNo: props.cardpackNo,
+            reviewContent: review,
+          },
+          { headers: { Authorization: localStorage.getItem("token") } }
+        )
+        .then((res) => {
+          setreview("");
+        })
+        .catch();
+    }
   }
   return (
     <div>
@@ -102,13 +104,21 @@ function CardpackReviewList(props: any): JSX.Element {
         />
         <br />
         <br />
-        <CreateIcon
-          fontSize="large"
-          className={classes.createicon}
-          onClick={() => {
-            createreview();
-          }}
-        />
+        {review ? (
+          <CreateIcon
+            fontSize="large"
+            className={classes.createicon}
+            onClick={() => {
+              createreview();
+            }}
+          />
+        ) : (
+          <CreateIcon
+            fontSize="large"
+            className={classes.createicon}
+            color="disabled"
+          />
+        )}
       </div>
     </div>
   );

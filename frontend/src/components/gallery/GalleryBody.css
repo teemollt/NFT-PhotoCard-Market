@@ -39,6 +39,7 @@
   display: block;
   text-align: center;
 }
+
 .galleryCard figcaption h3 {
   min-width: 200px;
   font-weight: 600;
@@ -46,10 +47,38 @@
   font-size: 24px;
   font-family: "Work Sans", "Gowun Dodum";
 }
+
 .galleryCard figcaption p {
   font-weight: 200;
   padding-top: 5px;
   font-family: "Work Sans", "Gowun Dodum";
+}
+
+.count0, .count1, .count2, .count3 {
+  width: 50px;
+  float: right;
+  font-family: "Work Sans", "Gowun Dodum";
+  font-weight: 900;
+}
+
+.count0 {
+  margin-top: -50px;
+  margin-left: 190px;
+}
+
+.count1 {
+  margin-top: -100px;
+  margin-left: 280px;
+}
+
+.count2 {
+  margin-top: -180px;
+  margin-left: 440px;
+}
+
+.count3 {
+  margin-top: -350px;
+  margin-left: 780px;
 }
 
 .galleryCard:hover .front {
@@ -63,14 +92,17 @@
   width: 300px;
   height: 300px;
 }
+
 .view1 {
   width: 400px;
   height: 400px;
 }
+
 .view2 {
   width: 600px;
   height: 600px;
 }
+
 .view3 {
   width: 1000px;
   height: 1000px;

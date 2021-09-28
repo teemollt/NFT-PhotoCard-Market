@@ -125,7 +125,24 @@ function JoinTable() {
     if (memberEmail && memberNick) {
       if (memberPw === password2) {
         if (emailCheck === 1 && nickCheck === 1) {
-          if (memberPw.trim()) {
+          if (!memberPw.trim()) {
+            axios
+              .put(
+                "/api/member/update",
+                {
+                  memberPw: null,
+                  memberEmail: memberEmail,
+                  memberNick: memberNick,
+                  celebNo: likeCeleb,
+                },
+                {
+                  headers: { Authorization: localStorage.getItem("token") },
+                }
+              )
+              .then((res) => {
+                setMessage("정보를 수정했습니다");
+                setOpen(true);
+              });
             axios
               .put(
                 "/api/member/update",
@@ -144,23 +161,29 @@ function JoinTable() {
                 setOpen(true);
               });
           } else {
-            axios
-              .put(
-                "/api/member/update",
-                {
-                  memberPw: null,
-                  memberEmail: memberEmail,
-                  memberNick: memberNick,
-                  celebNo: likeCeleb,
-                },
-                {
-                  headers: { Authorization: localStorage.getItem("token") },
-                }
-              )
-              .then((res) => {
-                setMessage("정보를 수정했습니다");
-                setOpen(true);
-              });
+            if (memberPwCheck === 1) {
+              console.log(99);
+              axios
+                .put(
+                  "/api/member/update",
+                  {
+                    memberPw: memberPw,
+                    memberEmail: memberEmail,
+                    memberNick: memberNick,
+                    celebNo: likeCeleb,
+                  },
+                  {
+                    headers: { Authorization: localStorage.getItem("token") },
+                  }
+                )
+                .then((res) => {
+                  setMessage("정보를 수정했습니다");
+                  setOpen(true);
+                });
+            } else {
+              setMessage("비밀번호 양식을 확인해 주세요");
+              setOpen(true);
+            }
           }
         } else {
           setMessage("중복 확인을 해 주세요");
