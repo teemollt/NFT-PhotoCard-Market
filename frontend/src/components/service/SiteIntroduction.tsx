@@ -1,18 +1,18 @@
 import React from "react";
 import "./SiteIntroduction.css";
-import CardMedia from "@material-ui/core/CardMedia";
-import Card from "@material-ui/core/Card";
+
 function SiteIntroduction(): JSX.Element {
   return (
     <div className="cardvideo">
-      <Card>
-        <CardMedia
-          component="video"
-          image="/videos/example.mp4"
-          muted
-          controls
-        />
-      </Card>
+      <iframe
+        width="100%"
+        height="500"
+        src="https://www.youtube.com/embed/3iM_06QeZi8"
+        title="YouTube video player"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      ></iframe>
     </div>
   );
 }

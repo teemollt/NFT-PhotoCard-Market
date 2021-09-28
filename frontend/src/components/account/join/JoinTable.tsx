@@ -59,7 +59,7 @@ function JoinTable(props: JoinTableProps): JSX.Element {
       memberPw
         .trim()
         .match(
-          /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{1,50}).{8,16}$/
+          /(?=.*\d{1,50})(?=.*[-~`!@#$%&*()+=^]{1,50})(?=.*[a-zA-Z]{1,50}).{8,16}$/
         )
     ) {
       setMemberPwCheck(1);
@@ -143,6 +143,7 @@ function JoinTable(props: JoinTableProps): JSX.Element {
     if (
       memberId &&
       memberPw &&
+      memberPwCheck === 1 &&
       memberNick &&
       memberEmail &&
       checkEmail &&
@@ -171,7 +172,7 @@ function JoinTable(props: JoinTableProps): JSX.Element {
         setOpen(true);
       }
     } else {
-      setMessage("필수 입력 항목들을 입력해 주세요");
+      setMessage("필수 입력 항목들을 확인해 주세요");
       setOpen(true);
     }
   };
@@ -196,7 +197,7 @@ function JoinTable(props: JoinTableProps): JSX.Element {
                 helperText={
                   memberIdCheck === 2
                     ? "이미 존재하는 아이디입니다"
-                    : "영어소문자/숫자, 5~15자"
+                    : "영문/숫자, 5~15자"
                 }
                 error={
                   memberIdCheck === 2
@@ -226,7 +227,7 @@ function JoinTable(props: JoinTableProps): JSX.Element {
               <TextField
                 id="standard-basic"
                 type="password"
-                helperText="영문/숫자/특수문자, 8~16자"
+                helperText="영문, 숫자, -~`!@#$%&*()+=^, 8~16자"
                 error={memberPwCheck === 2 ? true : false}
                 onChange={handleMemberPw}
               />
@@ -258,8 +259,13 @@ function JoinTable(props: JoinTableProps): JSX.Element {
               <TextField
                 id="standard-basic"
                 onChange={handleMemberNick}
-                helperText={nickCheck === 2 ? "이미 존재하는 닉네임입니다" : ""}
+                helperText={
+                  nickCheck === 2 ? "이미 존재하는 닉네임입니다" : "8자 이하"
+                }
                 error={nickCheck === 2 ? true : false}
+                inputProps={{
+                  maxlength: 8,
+                }}
               />
               <Button
                 className="joinCheckBtn"

@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import SiteIntroduction from "../service/SiteIntroduction";
-import Inquiry from "../service/InquiryList";
+import Inquiry from "../service/Notice";
 import ServiceIntroduction from "../service/ServiceIntroduction";
 import ServiceContact from "../service/ServiceContact";
 
@@ -71,7 +71,7 @@ function Service(): JSX.Element {
         >
           <Tab label="Introduction" {...a11yProps(0)} />
           <Tab label="Service" {...a11yProps(1)} />
-          <Tab label="1:1 inquiry" {...a11yProps(2)} />
+          <Tab label="notice" {...a11yProps(2)} />
           <Tab label="Contact" {...a11yProps(3)} />
         </Tabs>
         <TabPanel value={value} index={0}>

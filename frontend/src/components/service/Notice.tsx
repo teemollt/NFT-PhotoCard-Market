@@ -127,12 +127,8 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   );
 }
 
-// function createData(name: string, calories: number, fat: number) {
-//   return { name, calories, fat };
-// }
-
 //
-function InquiryList(props: any) {
+function Notice(props: any) {
   const classes = useStyles();
 
   const [page, setPage] = React.useState(0);
@@ -155,6 +151,7 @@ function InquiryList(props: any) {
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+
   useEffect(() => {
     // 내 문의사항 가져오기
     axios.get("/api/saleCard").then((res) => {
@@ -163,46 +160,12 @@ function InquiryList(props: any) {
     });
   }, []);
 
-  let [inq, setinq] = useState<string>("");
-  // 문의남기기
-  function createinquiry() {
-    axios
-      .post(
-        `/api/`,
-        {
-          inquiryContent: inq,
-        },
-        { headers: { Authorization: localStorage.getItem("token") } }
-      )
-      .then((res) => {
-        setinq("");
-      })
-      .catch();
-  }
   return (
     <div>
       <div>
-        <h1>1:1 Service</h1>
+        <h1>NOTICE</h1>
       </div>
       <div className={classes.root1}>
-        <TextField
-          id="standard-basic"
-          label="문의사항을 남겨주세요"
-          variant="standard"
-          style={{ width: "700px" }}
-          value={inq}
-          multiline
-          onChange={(e) => {
-            setinq(e.target.value);
-          }}
-        />
-        <CreateIcon
-          fontSize="large"
-          className={classes.createicon}
-          onClick={() => {
-            createinquiry();
-          }}
-        />
         <Container className={classes.container}>
           <br />
           {/* 문의사항 리스트 */}
@@ -284,4 +247,4 @@ function InquiryList(props: any) {
   );
 }
 
-export default InquiryList;
+export default Notice;

@@ -15,7 +15,7 @@ function CardpackReview(props: any): JSX.Element {
             <div key={review.reviewPK} style={{ textAlign: "center" }}>
               <ListItem>
                 <ListItemAvatar>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                  <Avatar src="/broken-image.jpg" />
                 </ListItemAvatar>
                 <ListItemText
                   primary={

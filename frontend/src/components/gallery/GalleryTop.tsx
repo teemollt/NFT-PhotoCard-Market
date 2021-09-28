@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Pagination } from "@mui/material";
+import { Favorite } from '@mui/icons-material';
 import GalleryBody from "../gallery/GalleryBody";
 import GalleryEmpty from "./GalleryEmpty";
 import axios from "axios";
@@ -12,11 +13,13 @@ export type card = {
   cardImgUrl: string;
   cardNM: string;
   cardNo: number;
-  token: {
-    ownDate: string;
-    tokenNo: number;
-    tokenSeriarlizeNo: string;
-  };
+  token: [
+    {
+      ownDate: string;
+      tokenNo: number;
+      tokenSeriarlizeNo: string;
+    }
+  ];
 };
 
 function GalleryTop() {
@@ -26,7 +29,6 @@ function GalleryTop() {
   const [view, setView] = useState<number>(1);
   const [sub, setSub] = useState<boolean>(false);
   const [subMem, setSubMem] = useState<number>(0);
-  const [imgArray, setImgArray] = useState<number>(0);
   const [galleryCard, setGalleryCard] = useState<Array<card>>([]);
   const [page, setPage] = useState<Array<card>>([]);
 
@@ -143,32 +145,11 @@ function GalleryTop() {
             </span>
           </div>
 
-          <div className="galleryTopMenuView">
-            <span>VIEW</span>
-            <span
-              className={view === 0 ? "underline" : "undefined"}
-              onClick={() => setView(0)}
-            >
-              S
-            </span>
-            <span
-              className={view === 1 ? "underline" : "undefined"}
-              onClick={() => setView(1)}
-            >
-              M
-            </span>
-            <span
-              className={view === 2 ? "underline" : "undefined"}
-              onClick={() => setView(2)}
-            >
-              L
-            </span>
-            <span
-              className={view === 3 ? "underline" : "undefined"}
-              onClick={() => setView(3)}
-            >
-              XL
-            </span>
+          <div className="galleryLike">
+            <div>
+              <Favorite color="disabled" />
+              <span>345</span>
+            </div>
           </div>
         </div>
 
@@ -203,18 +184,31 @@ function GalleryTop() {
               </span>
             </div>
 
-            <div className="galleryTopSubImgArray">
+            <div className="galleryTopSubView">
+              <span>VIEW</span>
               <span
-                className={imgArray === 0 ? "underline" : undefined}
-                onClick={() => setImgArray(0)}
+                className={view === 0 ? "underline" : "undefined"}
+                onClick={() => setView(0)}
               >
-                최신순
+                S
               </span>
               <span
-                className={imgArray === 1 ? "underline" : undefined}
-                onClick={() => setImgArray(1)}
+                className={view === 1 ? "underline" : "undefined"}
+                onClick={() => setView(1)}
               >
-                등급순
+                M
+              </span>
+              <span
+                className={view === 2 ? "underline" : "undefined"}
+                onClick={() => setView(2)}
+              >
+                L
+              </span>
+              <span
+                className={view === 3 ? "underline" : "undefined"}
+                onClick={() => setView(3)}
+              >
+                XL
               </span>
             </div>
           </div>
