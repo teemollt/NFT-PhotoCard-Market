@@ -36,7 +36,7 @@ function CardPackDetail(): JSX.Element {
   const classes = useStyles();
   const location: any = useLocation();
   console.log(location.state.data);
-  let [islike, setislike] = useState(false);
+  const [islike, setislike] = useState(false);
   const [likepeople, setlikepeople] = useState(0);
   useEffect(() => {
     // follow check axios

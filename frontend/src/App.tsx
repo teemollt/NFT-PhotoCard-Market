@@ -22,6 +22,7 @@ declare module "axios" {
     salesNo?: number;
     cardpackId?: number;
     keyword?: string;
+    auctionNo?: string|number;
   }
 }
 
