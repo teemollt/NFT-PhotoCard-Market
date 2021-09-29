@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.blockChain.domain.Celeb_Group;
 import com.blockChain.domain.QAuction;
+import com.blockChain.domain.QAuction_Order;
 import com.blockChain.domain.QBid;
 import com.blockChain.domain.QCeleb_Group;
 import com.blockChain.domain.QMember;
@@ -15,9 +16,12 @@ import com.blockChain.domain.QProduct_Grade;
 import com.blockChain.domain.QProduct_Media;
 import com.blockChain.domain.QProduct_Token;
 import com.blockChain.domain.QSales;
+import com.blockChain.domain.QSales_Order;
+import com.blockChain.domain.QToken;
 import com.blockChain.domain.Sales;
 import com.blockChain.dto.AuctionDTO;
 import com.blockChain.dto.AuctionGroupListDTO;
+import com.blockChain.dto.AuctionRegistedByMemberDTO;
 import com.blockChain.dto.BidDTO;
 import com.blockChain.dto.CardDTO;
 import com.blockChain.dto.MemberDTO;
@@ -94,7 +98,7 @@ public class AuctionRepoImpl implements AuctionRepoCustom{
 		QProduct_Grade qpg = QProduct_Grade.product_Grade;
 		QBid qb = QBid.bid;
 		BooleanBuilder builder = new BooleanBuilder();
-		builder.and(qp.celeb.celebNm.contains(word));
+		builder.and(qa.auctionName.contains(word));
 		List<AuctionGroupListDTO> res = queryFactory.select(Projections.constructor(
 				AuctionGroupListDTO.class
 				, Projections.constructor(
@@ -170,5 +174,34 @@ public class AuctionRepoImpl implements AuctionRepoCustom{
 				.where(qa.auctionNo.eq(auctionNo))
 				.fetchOne();
 		return Optional.ofNullable(res);
+	}
+	@Override
+	public Optional<List<AuctionRegistedByMemberDTO>> auctionRegistedByMember(Long memberNo){
+		QAuction qa = QAuction.auction;
+		QProduct_Media qpm= QProduct_Media.product_Media;
+		QProduct qp = QProduct.product;
+		QMember qm = QMember.member;
+		QSales_Order qso = QSales_Order.sales_Order;
+		QAuction_Order qao = QAuction_Order.auction_Order;
+		QProduct_Token qpt = QProduct_Token.product_Token;
+		QToken qt = QToken.token;
+		return Optional.ofNullable(queryFactory.select(Projections.constructor(AuctionRegistedByMemberDTO.class
+				, qa.auctionNo
+				, qp.productNm
+				, qpm.productMediaAdres
+				, qa.auctionImmeprice
+				, qa.auctionState
+				, qm.memberNo
+				, qm.memberNick
+				, qao.auctionOrderDate
+				)).from(qa)
+				.where(qa.member.memberNo.eq(memberNo))
+				.join(qt).on(qa.token.eq(qt))
+				.join(qpt).on(qt.eq(qpt.token))
+				.join(qp).on(qpt.product.eq(qp))
+				.join(qpm).on(qp.eq(qpm.product))
+				.leftJoin(qao).on(qa.eq(qao.auction))
+				.leftJoin(qm).on(qao.member.eq(qm))
+				.fetch());
 	}
 }
