@@ -100,8 +100,9 @@ function MainSearchAll() {
 
       {/* <div>{resultauction.map(card,i)=>(card.cardImgUrl)}</div> */}
       <div></div>
-
-      <div>
+      <hr style={{ width: "50%" }} />
+      <div style={{ textAlign: "center" }}>
+        <h3>존재하는 카드</h3>
         {resultcards.length > 0 ? (
           <div className="result3">
             {resultcards.map((card, i) => (
@@ -112,9 +113,7 @@ function MainSearchAll() {
               />
             ))}
           </div>
-        ) : (
-          <h3 className="noresult">판매되고 있는 상품이 없습니다</h3>
-        )}
+        ) : null}
       </div>
     </div>
   );
