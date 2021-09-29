@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { TextField, Button } from "@material-ui/core";
 import axios from "axios";
@@ -11,6 +11,8 @@ interface JoinTableProps {
 
 function JoinTable(props: JoinTableProps): JSX.Element {
   const { handleJoinRes } = props;
+
+  
 
   const [memberId, setMemberId] = useState<string>("");
   const [memberIdCheck, setMemberIdCheck] = useState<number>(0);
@@ -25,6 +27,11 @@ function JoinTable(props: JoinTableProps): JSX.Element {
   const [likeCeleb, setLikeCeleb] = useState<number>(999);
   const [open, setOpen] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
+
+useEffect (()=> {
+  console.log("change", memberPw)
+    
+  }, [memberPw])
 
   const handleClose = () => {
     setOpen(false);
@@ -53,16 +60,16 @@ function JoinTable(props: JoinTableProps): JSX.Element {
     }
   };
 
-  const handleMemberPw = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMemberPw(e.target.value.trim());
+  const handleMemberPw = (e: string) => {
     if (
-      memberPw
-        .trim()
+      e
+
         .match(
           /(?=.*\d{1,50})(?=.*[-~`!@#$%&*()+=^]{1,50})(?=.*[a-zA-Z]{1,50}).{8,16}$/
         )
     ) {
       setMemberPwCheck(1);
+      setMemberPw(e)
     } else {
       setMemberPwCheck(2);
     }
@@ -103,7 +110,7 @@ function JoinTable(props: JoinTableProps): JSX.Element {
     if (
       memberEmail.match(
         /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/
-      )
+      ) 
     ) {
       setCheckEmail(true);
       if (memberEmail !== e.target.value) {
@@ -229,7 +236,7 @@ function JoinTable(props: JoinTableProps): JSX.Element {
                 type="password"
                 helperText="영문, 숫자, -~`!@#$%&*()+=^, 8~16자"
                 error={memberPwCheck === 2 ? true : false}
-                onChange={handleMemberPw}
+                onChange={(e) => handleMemberPw(e.target.value)}
               />
             </td>
           </tr>
