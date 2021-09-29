@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { TextField, Button } from "@material-ui/core";
 import axios from "axios";
@@ -28,10 +28,6 @@ function JoinTable(props: JoinTableProps): JSX.Element {
   const [open, setOpen] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
 
-useEffect (()=> {
-  console.log("change", memberPw)
-    
-  }, [memberPw])
 
   const handleClose = () => {
     setOpen(false);
