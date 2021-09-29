@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.blockChain.domain.Auction_Like;
 import com.blockChain.domain.QAuction;
 import com.blockChain.domain.QAuction_Like;
+import com.blockChain.domain.QMember;
 import com.blockChain.domain.QSales_Like;
 import com.blockChain.domain.Sales_Like;
 import com.blockChain.dto.AuctionDTO;
@@ -25,6 +26,7 @@ public class Auction_LikeRepoImpl implements Auction_LikeRepoCustom{
 	public Optional<List<AuctionDTO>> sltByMember(Long memberNo){
 		QAuction_Like qal = QAuction_Like.auction_Like;
 		QAuction qa = QAuction.auction;
+		QMember qm = QMember.member; 
 		return Optional.ofNullable(queryFactory.select(Projections.constructor(AuctionDTO.class
 				, qa.auctionNo
 				, qa.auctionName
@@ -34,7 +36,8 @@ public class Auction_LikeRepoImpl implements Auction_LikeRepoCustom{
 				, qa.auctionDeadline))
 				.from(qal)
 				.join(qa).on(qal.auction.eq(qa))
-				.where(qa.member.memberNo.eq(memberNo))
+				.join(qm).on(qal.member.eq(qm))
+				.where(qm.memberNo.eq(memberNo))
 				.fetch());
 	}
 	@Override
