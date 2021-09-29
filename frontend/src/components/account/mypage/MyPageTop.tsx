@@ -149,10 +149,10 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
         <div className="mypageUserInfos">
           <p className="mypageGrade">{memberGrade}</p>
           {userAddress !== "" ? (
-            <p>
-              {" "}
-              지갑주소: {userAddress} 잔액: {userBalance}{" "}
-            </p>
+            <div className="mypageAccount">
+              <p>지갑주소: {userAddress}</p>
+              <p>잔액: {userBalance} </p>
+            </div>
           ) : (
             <Button
               className="mypageUpdateBtn"
@@ -196,7 +196,6 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
               이더 충전
             </Button>
           </div>
-            
         </div>
       </div>
 

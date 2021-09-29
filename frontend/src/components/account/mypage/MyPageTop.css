@@ -22,9 +22,17 @@
   font-size: 60px;
 }
 
+.mypageGrade {
+  margin-bottom: 0;
+}
+
 .mypageUserInfos {
   float: left;
-  width: 500px;
+  width: 400px;
+}
+
+.mypageAccount > p {
+  margin: 0;
 }
 
 .mypageLevel {
