@@ -23,6 +23,7 @@ public class Sales_OrderRepoImpl implements Sales_OrderRepoCustom{
 		QSales_Order qso = QSales_Order.sales_Order;
 		QSales qs = QSales.sales;
 		return Optional.ofNullable(queryFactory.select(Projections.constructor(SalesOrderDTO.class
+				, qs.salesNo
 				, qs.salesNm
 				, qs.imgUrl
 				, qso.salesOrderDate
