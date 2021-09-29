@@ -31,7 +31,7 @@ function MarketItemSearch(props: any) {
         itemdetail(props.item);
       }}
     >
-      <div style={{ textAlign: "center" }}>{props.item.auction.ImgUrl}</div>
+      <div style={{ textAlign: "center" }}>{props.item.card.cardNM}</div>
       <div style={{ textAlign: "center" }}>
         {cards.map(({ z, opacity }, index) => (
           <animated.div
@@ -46,11 +46,12 @@ function MarketItemSearch(props: any) {
             {index === 4 && (
               <animated.img
                 style={{
-                  transform: f.to([1, 0], ["scale(0.7)", "scale(0.9)"]),
+                  transform: f.to([1, 0], ["scale(0.9)", "scale(1)"]),
                   width: "100%",
                   height: "300px",
+                  borderRadius: "20px",
                 }}
-                src={"/" + props.item.cardImgUrl + ".jpg"}
+                src={"/" + props.item.card.cardImgUrl + ".jpg"}
               />
             )}
           </animated.div>

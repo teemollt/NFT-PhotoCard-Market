@@ -37,6 +37,7 @@ function ResultCardsList(props: any) {
                   transform: f.to([1, 0], ["scale(0.7)", "scale(0.9)"]),
                   width: "100%",
                   height: "300px",
+                  borderRadius: "20px",
                 }}
                 src={"/" + props.image + ".jpg"}
               />

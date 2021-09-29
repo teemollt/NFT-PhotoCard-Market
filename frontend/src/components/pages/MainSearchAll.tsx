@@ -51,6 +51,7 @@ function Stack(props: any): JSX.Element {
               style={{
                 transform: f.to([1, 0], ["scale(1)", "scale(1.3)"]),
                 width: "10%",
+                borderRadius: "20px",
               }}
               src={props.image}
             />
