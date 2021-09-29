@@ -23,6 +23,7 @@ import com.blockChain.domain.RefreshToken;
 import com.blockChain.dto.MypageDTO;
 import com.blockChain.dto.SalesDTO;
 import com.blockChain.dto.SalesOrderDTO;
+import com.blockChain.dto.AuctionAddImgDTO;
 import com.blockChain.dto.AuctionDTO;
 import com.blockChain.dto.LoginTokenDTO;
 import com.blockChain.jwt.TokenProvider;
@@ -306,7 +307,7 @@ public class MemberSvcImpl implements MemberSvcInter{
 		try{
 			Member member = memberRepo.findById(nowLoginMemberNo).orElseThrow(() -> new IllegalStateException("로그인 유저정보가 없습니다"));
 //			
-			Optional<List<AuctionDTO>> sltList= alRepo.sltByMember(member.getMemberNo());
+			Optional<List<AuctionAddImgDTO>> sltList= alRepo.sltByMember(member.getMemberNo());
 			res.put("res", sltList);
 		}catch(IllegalStateException e){
 			res.put("success", false);

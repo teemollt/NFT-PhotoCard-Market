@@ -4,11 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import com.blockChain.domain.Auction_Like;
+import com.blockChain.dto.AuctionAddImgDTO;
 import com.blockChain.dto.AuctionDTO;
 
 public interface Auction_LikeRepoCustom {
 
-	Optional<List<AuctionDTO>> sltByMember(Long memberNo);
+	Optional<List<AuctionAddImgDTO>> sltByMember(Long memberNo);
 
 	Long likeCount(Long auctionPk);
 
