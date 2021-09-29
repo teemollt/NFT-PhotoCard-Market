@@ -16,9 +16,10 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import LoadingButton from "@mui/lab/LoadingButton";
-import SaveIcon from "@mui/icons-material/Save";
+
 import axios from "axios";
 import { contractAbi } from "../abi";
+import MyNewCards from "./MyNewCards";
 
 export interface DialogTitleProps extends WithStyles<typeof styles> {
   id: string;
@@ -266,29 +267,13 @@ function BuyCardPack(props: any): JSX.Element {
           aria-labelledby="customized-dialog-title"
           open={cardopen}
           className="newcardsbackground"
-          fullWidth
           maxWidth="lg"
         >
           <DialogContent dividers className="newcards">
-            <div style={{}}>
-              <div className="container1">
-                {newcardlist.map((card, i) => (
-                  <div
-                    className="card card0"
-                    style={{
-                      backgroundImage: `url("/${card.cardImgUrl}.jpg")`,
-                      width: "100%",
-                      height: "300px",
-                    }}
-                  >
-                    <div className="border">
-                      <h2 className="buycardpacktit">{card.cardNM}</h2>
-                      <h2 className="buycardpacktit">{card.cardGradeNM}</h2>
-                    </div>
-                  </div>
-                ))}
+            <div style={{ height: "600px", width: "330px" }}>
+              <div>
+                <MyNewCards newcardlist={newcardlist} />
               </div>
-              <div></div>
             </div>
           </DialogContent>
         </Dialog>
