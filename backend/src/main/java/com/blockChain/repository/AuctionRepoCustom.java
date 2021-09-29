@@ -12,4 +12,6 @@ public interface AuctionRepoCustom {
 
 	Optional<List<AuctionGroupListDTO>> searchAuction(String word);
 
+	Optional<AuctionGroupListDTO> sltOneByNo(Long auctionNo);
+
 }

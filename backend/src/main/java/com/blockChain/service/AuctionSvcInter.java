@@ -12,4 +12,8 @@ public interface AuctionSvcInter {
 
 	Map<String, Object> insertLike(Map<String, Object> req);
 
+	Map<String, Object> sltOneByNo(Long auctionNo);
+
+	Map<String, Object> beforeInsertAuction();
+
 }

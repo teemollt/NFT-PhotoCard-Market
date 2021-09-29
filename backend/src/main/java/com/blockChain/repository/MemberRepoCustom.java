@@ -20,4 +20,6 @@ public interface MemberRepoCustom {
 
 	List<GalleryCardDTO> galleryList(Long memberNo, Long arraydiv1, Long celebPk, Long arraydiv2);
 
+	List<GalleryCardDTO> getCanRegiAuction(Long memberNo);
+
 }

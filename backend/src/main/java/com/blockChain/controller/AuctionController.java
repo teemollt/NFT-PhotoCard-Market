@@ -39,5 +39,16 @@ public class AuctionController {
 		return auctionSvc.insertLike(req);
 		
 	}
+	@GetMapping("/{auctionNo}/detail")
+	public Map<String, Object> auctionDetail(
+			@PathVariable(name="auctionNo")
+			Long auctionNo){
+		return auctionSvc.sltOneByNo(auctionNo);
+		
+	}
+	@GetMapping("/beforeInsert")
+	public Map<String, Object> insertAuction(){
+		return auctionSvc.beforeInsertAuction();
+	}
 	
 }
