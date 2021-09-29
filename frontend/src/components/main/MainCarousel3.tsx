@@ -12,7 +12,7 @@ function MainCarousel3(): JSX.Element {
             <iframe
               width="100%"
               height="300"
-              src="https://www.youtube.com/embed/D1PvIWdJ8xo"
+              src="https://www.youtube.com/embed/_yXEnhyOTQo"
               title="YouTube video player"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -21,7 +21,7 @@ function MainCarousel3(): JSX.Element {
           </Grid>
           <Grid item xs={6}>
             <div className="namebox">
-              <h1 className="name">IU</h1>
+              <h1 className="name">HYUN_A</h1>
             </div>
           </Grid>
         </Grid>

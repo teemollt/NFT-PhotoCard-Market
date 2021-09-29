@@ -43,7 +43,7 @@ function MainMarketItem(): JSX.Element {
     if (islike) {
       axios
         .post(
-          "/api/cardPack/like",
+          "/api/auction/like",
           {
             auctionNo: location.state.data.auction.auctionNo,
           },
@@ -60,7 +60,7 @@ function MainMarketItem(): JSX.Element {
     } else {
       axios
         .post(
-          "/api/cardPack/like",
+          "/api/auction/like",
           {
             auctionNo: location.state.data.auction.auctionNo,
           },
@@ -77,15 +77,29 @@ function MainMarketItem(): JSX.Element {
     }
   };
   useEffect(() => {
+<<<<<<< HEAD
     console.log(location.state)
     axios.get(
       `/api/marketcard/likecheck/${location.state.data.auction.auctionNo}`,
       {
+=======
+    axios
+      .get(`/api/auction/likecheck/${location.state.data.auction.auctionNo}`, {
+>>>>>>> f18dea96a4d462dcddfdc5022246d3ec3fb7c7d5
         auctionNo: location.state.data.auction.auctionNo,
         headers: { Authorization: localStorage.getItem("token") },
-      }
-    );
-  }, []);
+      })
+      .then((res) => {
+        console.log(res);
+        setlikepeople(res.data.peoplelike);
+        if (res.data.islike === true) {
+          setislike(true);
+        } else {
+          setislike(false);
+        }
+      })
+      .catch();
+  });
   const classes = useStyles();
   const location: any = useLocation();
   return (

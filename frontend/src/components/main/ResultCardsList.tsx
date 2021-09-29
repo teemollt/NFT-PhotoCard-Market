@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState } from "react";
 import { useSpring, useSprings, animated, to } from "react-spring";
-import "./MarketItem.css";
+import "./ResultCardsList.css";
 
-function MarketItem(props: any) {
+function ResultCardsList(props: any) {
   const [open, setOpen] = useState(false);
   const { f, r } = useSpring({ f: open ? 0 : 1, r: open ? -3 : 3 });
   const cards = useSprings(
@@ -13,27 +12,14 @@ function MarketItem(props: any) {
       z: open ? (i / 5) * 80 : 0,
     }))
   );
-  let history = useHistory();
-  function itemdetail(data: any) {
-    console.log(data);
-    history.push({
-      pathname: `/marketitem/${data.auction.auctionNo}`,
-      state: { data: data },
-    });
-  }
+
   return (
     <div
       className="container"
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
-      onClick={() => {
-        console.log(props.item);
-        itemdetail(props.item);
-      }}
     >
-      <div style={{ textAlign: "center" }}>
-        {props.item.auction.auctionTitle}
-      </div>
+      <div style={{ textAlign: "center" }}>{props.item.cardNM}</div>
       <div style={{ textAlign: "center" }}>
         {cards.map(({ z, opacity }, index) => (
           <animated.div
@@ -48,10 +34,11 @@ function MarketItem(props: any) {
             {index === 4 && (
               <animated.img
                 style={{
-                  transform: f.to([1, 0], ["scale(0.9)", "scale(1)"]),
+                  transform: f.to([1, 0], ["scale(0.7)", "scale(0.9)"]),
                   width: "100%",
                   height: "300px",
                   borderRadius: "20px",
+                  filter: "blur(5px)",
                 }}
                 src={"/" + props.image + ".jpg"}
               />
@@ -63,4 +50,4 @@ function MarketItem(props: any) {
   );
 }
 
-export default MarketItem;
+export default ResultCardsList;
