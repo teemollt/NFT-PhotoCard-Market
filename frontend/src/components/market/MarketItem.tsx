@@ -18,7 +18,7 @@ function MarketItem(props: any) {
     console.log(data);
     history.push({
       pathname: `/marketitem/${data.auction.auctionNo}`,
-      state: { data: data },
+      state: { auctionNo: data.auction.auctionNo },
     });
   }
   return (
