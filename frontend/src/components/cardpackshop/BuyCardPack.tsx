@@ -113,6 +113,7 @@ function BuyCardPack(props: any): JSX.Element {
   };
   // 결제함수
   const pay = () => {
+    walletCheck();
     setOpen(false);
     console.log("pay함수 실행");
     console.log(userBalance);
@@ -147,6 +148,7 @@ function BuyCardPack(props: any): JSX.Element {
                   })
                   .then(function (receipt: any) {
                     console.log(receipt);
+                    walletCheck();
                   });
               }
             })
