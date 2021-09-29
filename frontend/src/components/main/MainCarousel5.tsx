@@ -21,7 +21,7 @@ function MainCarousel5(): JSX.Element {
           </Grid>
           <Grid item xs={6}>
             <div className="namebox">
-              <h1 className="name">IU</h1>
+              <h1 className="name">Tiffany</h1>
             </div>
           </Grid>
         </Grid>

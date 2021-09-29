@@ -10,7 +10,7 @@ function MainCarousel4(): JSX.Element {
         <Grid container spacing={3}>
           <Grid item xs={6}>
             <div className="namebox">
-              <h1 className="name">IU</h1>
+              <h1 className="name">Taeyeon</h1>
             </div>
           </Grid>
           <Grid item xs={6}>
