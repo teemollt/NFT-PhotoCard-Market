@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import "./MarketCard.css";
 
 interface MarketCardProps {
@@ -11,12 +12,19 @@ interface MarketCardProps {
 }
 
 function MarketCard(props: MarketCardProps) { 
-  const { auctionTitle, price, auctionImg } = props.card;
+  let history = useHistory();
 
+  const { auctionNo, auctionTitle, price, auctionImg } = props.card;
 
+const handleToMarket = (data: any) => {
+    history.push({
+      pathname: `/marketitem/${auctionNo}`,
+      state: { auctionNo: auctionNo },
+    });
+  };
 
   return (
-    <div className="marketCard">
+    <div className="marketCard" onClick={()=>handleToMarket(auctionNo)}>
       <div className="marketCardImg">
         <img src={'/' + auctionImg + '.jpg'} alt="" />
       </div>
