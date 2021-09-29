@@ -111,6 +111,7 @@ function BuyCardPack(props: any): JSX.Element {
       console.log(err);
     }
   };
+  const [loading, setloading] = useState(false);
   // 결제함수
   const pay = () => {
     walletCheck();
@@ -121,6 +122,8 @@ function BuyCardPack(props: any): JSX.Element {
     // 잔액이 얼마 이상이면?
     if (parseFloat(userBalance) > props.cardpackprice + 0.01) {
       console.log("통과했니");
+      // 로딩돌기시작
+      setloading(true);
       // 컨트랙트 buyCardPack 호출
       myContract.methods
         .buyCardPack()
@@ -151,6 +154,8 @@ function BuyCardPack(props: any): JSX.Element {
                     walletCheck();
                   });
               }
+              // 로딩종료
+              setloading(false);
             })
             .catch();
         });
@@ -161,6 +166,18 @@ function BuyCardPack(props: any): JSX.Element {
   };
   return (
     <div>
+      {/* GRADIENT CIRCLE PLANES */}
+      {loading ? (
+        <div className="spinner-box">
+          <div className="leo-border-1">
+            <div className="leo-core-1" />
+          </div>
+          <div className="leo-border-2">
+            <div className="leo-core-2" />
+          </div>
+        </div>
+      ) : null}
+
       <div style={{ textAlign: "center" }}>
         <Button
           variant="contained"
@@ -221,6 +238,7 @@ function BuyCardPack(props: any): JSX.Element {
                   </div>
                 ))}
               </div>
+              <div></div>
             </div>
           </DialogContent>
         </Dialog>
