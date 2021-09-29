@@ -75,17 +75,10 @@ function MainMarketItem(): JSX.Element {
           setislike(true);
         });
     }
-  };
+  }; 
   useEffect(() => {
-<<<<<<< HEAD
-    console.log(location.state)
-    axios.get(
-      `/api/marketcard/likecheck/${location.state.data.auction.auctionNo}`,
-      {
-=======
     axios
       .get(`/api/auction/likecheck/${location.state.data.auction.auctionNo}`, {
->>>>>>> f18dea96a4d462dcddfdc5022246d3ec3fb7c7d5
         auctionNo: location.state.data.auction.auctionNo,
         headers: { Authorization: localStorage.getItem("token") },
       })
