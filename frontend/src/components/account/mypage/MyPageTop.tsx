@@ -196,7 +196,6 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
               이더 충전
             </Button>
           </div>
-            
         </div>
       </div>
 
