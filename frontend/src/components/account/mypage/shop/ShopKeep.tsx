@@ -3,31 +3,32 @@ import { Pagination } from "@mui/material";
 import axios from "axios";
 import ShopCard from "./ShopCard";
 
-interface Buy {
-  sales: string;
-  salesImg: string;
+interface BuyLike {
   buyDate: string;
-  price: number;
+  salesPrice: number;
+  salesNM: string;
+  salesImg: string;
+  salseNo: number;
 }
 
 function ShopKeep() {
-  const [buy, setBuy] = useState<Array<Buy>>([]);
-  const [cards, setCards] = useState<Array<Buy>>([]);
+  const [buyLike, setBuyLike] = useState<Array<BuyLike>>([]);
+  const [cards, setCards] = useState<Array<BuyLike>>([]);
 
   useEffect(() => {
     axios
-      .get("/api/member/order", {
+      .get("/api/member/salesLike", {
         headers: { Authorization: localStorage.getItem("token") },
       })
       .then((res) => {
         setCards(res.data.res.slice(0, 8));
-        setBuy(res.data.res);
+        setBuyLike(res.data.res);
       });
   }, []);
 
   const handlePage = (e: any) => {
     const page = Number(e.target.innerText);
-    setCards(buy.slice(page * 8 - 8, page * 8));
+    setCards(buyLike.slice(page * 8 - 8, page * 8));
   };
 
   return (
@@ -39,7 +40,7 @@ function ShopKeep() {
       })}
       <Pagination
         className="GalleryBoardPage"
-        count={Math.ceil(buy.length / 8)}
+        count={Math.ceil(buyLike.length / 8)}
         shape="rounded"
         onChange={handlePage}
         hidePrevButton

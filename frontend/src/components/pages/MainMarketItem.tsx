@@ -77,6 +77,7 @@ function MainMarketItem(): JSX.Element {
     }
   };
   useEffect(() => {
+    console.log(location.state)
     axios.get(
       `/api/marketcard/likecheck/${location.state.data.auction.auctionNo}`,
       {

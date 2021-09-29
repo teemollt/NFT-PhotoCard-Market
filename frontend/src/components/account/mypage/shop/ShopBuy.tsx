@@ -4,10 +4,11 @@ import ShopCard from "./ShopCard";
 import axios from "axios";
 
 interface Buy {
-  sales: string;
-  salesImg: string;
   buyDate: string;
   price: number;
+  sales: string;
+  salesImg: string;
+  salseNo: number;
 }
 
 function ShopBuy() {
