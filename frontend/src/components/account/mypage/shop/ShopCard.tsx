@@ -1,20 +1,54 @@
-import { Mouse } from "@material-ui/icons";
 import React from "react";
+import { useHistory } from "react-router-dom";
 import "./ShopCard.css";
 
-function ShopCard(props: any) {
+interface ShopCardProps {
+  card: {
+    buyDate: string;
+    price?: number;
+    salesPrice?: number;
+    sales?: string;
+    salesNM?: string;
+    salesImg: string;
+    salseNo: number;
+  };
+}
+
+function ShopCard(props: ShopCardProps) {
+  let history = useHistory();
+  const { buyDate, price, sales, salesImg, salesNM, salesPrice } = props.card;
+
+  const handleToShop = (data: any) => {
+    history.push({
+      pathname: `/cardpackdetail/${data.salesNo}`,
+      state: { data: data },
+    });
+  };
+
   return (
-    <div className="shopCard">
+    <div className="shopCard" onClick={() => handleToShop(props.card)}>
       <div className="shopCardImg">
-        <img src={props.cards.imgUrl} alt="" />
+        <img src={salesImg} alt="" />
       </div>
       <div>
         <div className="shopCardInfo">
-          <span className="shopCardCeleb">상품 celeb</span>
-          <span className="shopCardPriceTitle">가격</span>
+          {buyDate ? (
+            <span className="shopCardDate">{buyDate.slice(2, 10)}</span>
+          ) : null}
+
+          <span className="shopCardPriceTitle">상품 가격</span>
         </div>
-        <span className="shopCardTitle">{props.cards.title}</span>
-        <span className="shopCardPrice">{props.cards.price}BTC</span>
+        {sales ? (
+          <span className="shopCardTitle">{sales}</span>
+        ) : (
+          <span className="shopCardTitle">{salesNM}</span>
+        )}
+
+        {price ? (
+          <span className="shopCardPrice">{price}BTC</span>
+        ) : (
+          <span className="shopCardPrice">{salesPrice}BTC</span>
+        )}
       </div>
     </div>
   );

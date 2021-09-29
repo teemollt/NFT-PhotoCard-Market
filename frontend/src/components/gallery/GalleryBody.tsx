@@ -9,18 +9,19 @@ interface GalleryBodyProps {
     cardImgUrl: string;
     cardNM: string;
     cardNo: number;
-    token: [{
-      ownDate: string;
-      tokenNo: number;
-      tokenSeriarlizeNo: string;
-    }];
+    token: [
+      {
+        ownDate: string;
+        tokenNo: number;
+        tokenSeriarlizeNo: string;
+      }
+    ];
   };
 }
 
 function GalleryBody(props: GalleryBodyProps) {
   const { view } = props;
   const { cardGradeNM, cardImgUrl, cardNM, token } = props.card;
-
 
   return (
     <div className={"galleryCard " + ("view" + view)}>
@@ -53,28 +54,34 @@ function GalleryBody(props: GalleryBodyProps) {
               src="https://thumbs.dreamstime.com/b/gradient-glitter-background-rough-texture-81753238.jpg"
               alt=""
             />
-          ) : cardGradeNM === "SS" ? (
+          ) : cardGradeNM === "S" ? (
             <img
               className={"view" + view}
               src="https://previews.123rf.com/images/macmackyky/macmackyky1606/macmackyky160600041/58041353-%EB%AC%B4%EC%A7%80%EA%B0%9C%EC%99%80-%ED%8C%8C%EC%8A%A4%ED%85%94-%EB%B0%98%EC%A7%9D%EC%9D%B4-%EC%A7%88%EA%B0%90-%EC%B6%94%EC%83%81%EC%A0%81-%EC%9D%B8-%EB%B0%B0%EA%B2%BD.jpg"
               alt=""
             />
-          ) : cardGradeNM === "ROYAL-C" ? (
+          ) : cardGradeNM === "SS" ? (
             <img
               className={"view" + view}
               src="https://previews.123rf.com/images/macmackyky/macmackyky1606/macmackyky160600043/58041356-%EB%AC%B4%EC%A7%80%EA%B0%9C%EC%99%80-%ED%8C%8C%EC%8A%A4%ED%85%94-%EB%B0%98%EC%A7%9D%EC%9D%B4-%EC%A7%88%EA%B0%90-%EC%B6%94%EC%83%81%EC%A0%81-%EC%9D%B8-%EB%B0%B0%EA%B2%BD.jpg"
               alt=""
             />
-          ) : cardGradeNM === "ROYAL-B" ? (
+          ) : cardGradeNM === "ROYAL-C" ? (
             <img
               className={"view" + view}
               src="https://previews.123rf.com/images/macmackyky/macmackyky1606/macmackyky160600039/58041352-%EB%AC%B4%EC%A7%80%EA%B0%9C%EC%99%80-%ED%8C%8C%EC%8A%A4%ED%85%94-%EB%B0%98%EC%A7%9D%EC%9D%B4-%EC%A7%88%EA%B0%90-%EC%B6%94%EC%83%81%EC%A0%81-%EC%9D%B8-%EB%B0%B0%EA%B2%BD.jpg"
               alt=""
             />
-          ) : cardGradeNM === "ROYAL-A" ? (
+          ) : cardGradeNM === "ROYAL-B" ? (
             <img
               className={"view" + view}
               src="https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/rm105-ning-20-glitter.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=9b53de49fbc8a029743259f645261145"
+              alt=""
+            />
+          ) : cardGradeNM === "ROYAL-A" ? (
+            <img
+              className={"view" + view}
+              src="https://cafe24img.poxo.com/candystone/web/product/tiny/201905/08bdc963e26ef133bf4596133a7e9518.jpg"
               alt=""
             />
           ) : (

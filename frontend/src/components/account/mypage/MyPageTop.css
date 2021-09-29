@@ -1,13 +1,13 @@
-.mypageTop{
+.mypageTop {
   height: 400px;
   padding-top: 130px;
   padding-left: 50px;
   padding-right: 50px;
   margin-top: 50px;
-  background-color: #1C214F;
+  background-color: #1c214f;
   color: white;
   text-align: left;
-  font-family: 'Gowun Dodum' !important;
+  font-family: "Gowun Dodum" !important;
   font-weight: 900 !important;
 }
 
@@ -36,13 +36,27 @@
 .mypageUserUpdate {
   float: right;
   text-align: right;
-  width: 170px;
+  /* width: 170px; */
 }
 
-.mypageUpdateBtn {
-  font-family: 'Gowun Dodum' !important;
+.tablinkMyPage {
+  margin: 0;
+  text-decoration: none;
+  text-decoration-color: black;
+  color: black;
+  font-family: "Work Sans";
+}
+
+.mypageUpdateBtn,
+.mypageAccountBtn {
+  font-family: "Gowun Dodum" !important;
   font-weight: 900 !important;
   background-color: white !important;
+}
+
+.mypageAccountBtn {
+  margin-top: 10px !important;
+  margin-left: 5px !important;
 }
 
 .mypageShop {

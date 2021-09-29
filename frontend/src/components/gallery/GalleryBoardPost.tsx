@@ -18,7 +18,7 @@ function GalleryBoardPost(props: GalleryBoardPostProps) {
   const { memberNick, memberNo } = props.post.member;
 
   const handleToGallery = (pk: number) => {
-    window.location.replace("/gallery/" + pk);
+    window.location.href="/gallery/" + pk;
   };
 
   return (

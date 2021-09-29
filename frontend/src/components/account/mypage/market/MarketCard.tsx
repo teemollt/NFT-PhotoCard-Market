@@ -1,15 +1,28 @@
 import React from "react";
 import "./MarketCard.css";
 
-function MarketCard(props: any) {
+interface MarketCardProps {
+  card: {
+    auctionNo: number;
+    auctionTitle: string;
+    price: number;
+    auctionImg: string
+  };
+}
+
+function MarketCard(props: MarketCardProps) { 
+  const { auctionTitle, price, auctionImg } = props.card;
+
+
+
   return (
     <div className="marketCard">
       <div className="marketCardImg">
-        <img src={props.card.imgUrl} alt="" />
+        <img src={'/' + auctionImg + '.jpg'} alt="" />
       </div>
       <div>
-        <span className="marketCardTitle">{props.card.title}</span>
-        <span className="marketCardPrice">{props.card.price}BTC</span>
+        <span className="marketCardTitle">{auctionTitle}</span>
+        <span className="marketCardPrice">{price}BTC</span>
       </div>
     </div>
   );
