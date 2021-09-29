@@ -12,8 +12,6 @@ interface JoinTableProps {
 function JoinTable(props: JoinTableProps): JSX.Element {
   const { handleJoinRes } = props;
 
-  
-
   const [memberId, setMemberId] = useState<string>("");
   const [memberIdCheck, setMemberIdCheck] = useState<number>(0);
   const [memberPw, setMemberPw] = useState<string>("");
@@ -27,7 +25,6 @@ function JoinTable(props: JoinTableProps): JSX.Element {
   const [likeCeleb, setLikeCeleb] = useState<number>(999);
   const [open, setOpen] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
-
 
   const handleClose = () => {
     setOpen(false);
@@ -59,13 +56,13 @@ function JoinTable(props: JoinTableProps): JSX.Element {
   const handleMemberPw = (e: string) => {
     if (
       e
-
+        .trim()
         .match(
           /(?=.*\d{1,50})(?=.*[-~`!@#$%&*()+=^]{1,50})(?=.*[a-zA-Z]{1,50}).{8,16}$/
         )
     ) {
       setMemberPwCheck(1);
-      setMemberPw(e)
+      setMemberPw(e);
     } else {
       setMemberPwCheck(2);
     }
@@ -106,7 +103,7 @@ function JoinTable(props: JoinTableProps): JSX.Element {
     if (
       memberEmail.match(
         /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/
-      ) 
+      )
     ) {
       setCheckEmail(true);
       if (memberEmail !== e.target.value) {
