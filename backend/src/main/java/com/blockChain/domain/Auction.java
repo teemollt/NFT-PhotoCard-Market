@@ -19,7 +19,7 @@ public class Auction {
     // 경매번호
 	@Id
 	@GeneratedValue
-	@Column(name="PRODUCT_GRADE_NO")
+	@Column(name="AUCTION_NO")
     private Long auctionNo;
 
     // 작성자
