@@ -3,7 +3,7 @@ import MarketItemSearch from "./MarketItemSearch";
 
 function MarketBodySearch(props: any) {
   return (
-    <div>
+    <div className="main">
       {props.searchresult.map((card: any, i: number) => (
         <MarketItemSearch item={card} />
       ))}

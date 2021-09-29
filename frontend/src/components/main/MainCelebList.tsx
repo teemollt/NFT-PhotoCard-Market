@@ -29,21 +29,20 @@ function MainCelebList(): JSX.Element {
     });
   }, []);
 
-  let history = useHistory();
+  // let history = useHistory();
   function gotocelebmain(data: any) {
     console.log(data);
-
-    history.push({
-      pathname: `/mainceleb/${data.groupNo}`,
-      state: { data: data },
-    });
+    // history.push({
+    //   pathname: `/searchall/${data.groupNm}`,
+    //   state: { data: data },
+    // });
   }
   return (
     <div className={classes.root}>
       {celeb.map((group, i) => (
         <Button
           onClick={() => {
-            gotocelebmain(group);
+            // gotocelebmain(group);
           }}
         >
           {group.groupNm}

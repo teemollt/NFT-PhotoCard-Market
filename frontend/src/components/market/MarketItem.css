@@ -1,12 +1,26 @@
-.producttitle {
-  float: left;
-  margin-left: 10px;
+.main {
+  display: grid;
+  margin: 0 auto;
+  width: 100%;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
-.productprice {
-  float: right;
-  margin-right: 10px;
+.container {
+  /* width: 300px;
+  height: 200px;
+  transform-style: flat; */
 }
-.itemcardinfo {
-  margin-top: 10px;
+
+.container > div {
+  /* position: absolute; */
+  /* width: 300px;
+  height: 200px; */
+  margin: 10px;
+  background: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  will-change: transform;
+  cursor: pointer;
 }

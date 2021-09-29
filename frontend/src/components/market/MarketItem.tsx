@@ -17,7 +17,7 @@ function MarketItem(props: any) {
   function itemdetail(data: any) {
     console.log(data);
     history.push({
-      pathname: `/marketitem/${data.card.cardNo}`,
+      pathname: `/marketitem/${data.auction.auctionNo}`,
       state: { data: data },
     });
   }
@@ -48,9 +48,10 @@ function MarketItem(props: any) {
             {index === 4 && (
               <animated.img
                 style={{
-                  transform: f.to([1, 0], ["scale(0.7)", "scale(0.9)"]),
+                  transform: f.to([1, 0], ["scale(0.9)", "scale(1)"]),
                   width: "100%",
                   height: "300px",
+                  borderRadius: "20px",
                 }}
                 src={"/" + props.image + ".jpg"}
               />
