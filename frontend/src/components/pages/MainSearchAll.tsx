@@ -98,7 +98,7 @@ function MainSearchAll() {
         )}
       </div>
 
-      {/* <div>{resultauction.map(card,i)=>(card.cardImgUrl)}</div> */}
+      {/* <div>{resultauction.map(card,i)=>(<div>{card.cardImgUrl}</div>)}</div> */}
       <div></div>
       <hr style={{ width: "50%" }} />
       <div style={{ textAlign: "center" }}>
