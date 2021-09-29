@@ -21,6 +21,7 @@ import com.blockChain.domain.Token;
 import com.blockChain.domain.Token_Owner;
 import com.blockChain.dto.AuctionDTO;
 import com.blockChain.dto.AuctionGroupListDTO;
+import com.blockChain.dto.GalleryCardDTO;
 import com.blockChain.repository.AuctionRepo;
 import com.blockChain.repository.Auction_LikeRepo;
 import com.blockChain.repository.MemberRepo;
@@ -147,4 +148,41 @@ public class AuctionSvcImpl implements AuctionSvcInter{
 		}
 		return res;
 	}
+	@Override
+	public Map<String,Object>sltOneByNo(Long auctionNo){
+		Map<String, Object> res = new HashMap<String,Object>();
+		try {
+		AuctionGroupListDTO auction = auctionRepo.sltOneByNo(auctionNo).orElseThrow(() -> new IllegalStateException("해당 판매글이 존재하지 않습니다"));
+		res.put("member", auction.getMember());
+		res.put("card", auction.getCard());
+		res.put("auction", auction.getAuction());
+		return res;
+		}catch(IllegalStateException e){
+			res.put("success", false);
+			res.put("msg", e.getMessage());
+			return res;
+		}
+		}
+	@Override
+	public Map<String,Object>beforeInsertAuction(){
+		Map<String, Object> res = new HashMap<String,Object>();
+		Long nowLoginMemberNo=0L;// 샘플 0 
+		try {
+			nowLoginMemberNo=SecurityUtil.getCurrentMemberId();
+		}catch (RuntimeException e) {
+			nowLoginMemberNo=0L;
+		}
+		try {
+			Member member = memberRepo.findById(nowLoginMemberNo).orElseThrow(() -> new IllegalStateException("로그인 유저정보가 없습니다"));
+			List<GalleryCardDTO> aa = memberRepo.getCanRegiAuction(member.getMemberNo());
+			
+			System.out.println(aa);
+			res.put("res",aa);
+		}catch(IllegalStateException e){
+				res.put("success", false);
+				res.put("msg", e.getMessage());
+		}
+		return res;
+	}
+
 }
