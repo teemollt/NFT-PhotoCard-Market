@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.blockChain.domain.Member;
 import com.blockChain.dto.LoginTokenDTO;
 import com.blockChain.dto.UpdateMemberDTO;
+import com.blockChain.service.AuctionSvcInter;
 import com.blockChain.service.MemberSvcInter;
 
 @RestController
@@ -23,6 +24,8 @@ import com.blockChain.service.MemberSvcInter;
 public class MemberController {
 	@Autowired
 	private MemberSvcInter ms;
+	@Autowired
+	private AuctionSvcInter auctionSvc;
 	@PostMapping("/signup")
 	public Map<String,Object> signup(@RequestBody Map<String, Object> req){
 		System.out.println(req);
@@ -89,4 +92,19 @@ public class MemberController {
 		
 		return ms.AuctionLikeList();
 	}
+	@GetMapping("/registedAuctionList")
+	public Map<String, Object>registedAuctionList(){
+		
+		return auctionSvc.auctionRegistedByMember();
+	}
+	
+	@GetMapping("/auctionOrderList")
+	public Map<String, Object>sltMultiAuctionOrderByMember(){
+		
+		return auctionSvc.sltMultiAuctionOrderByMember();
+	}
+	
+	
 }	
+
+

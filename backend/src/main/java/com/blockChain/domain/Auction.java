@@ -54,4 +54,7 @@ public class Auction {
     // 경매종료시간 
 	@Column(name="AUCTION_DEADLINE")
     private LocalDateTime auctionDeadline;
+	
+	@Column(name="AUCTION_STATE", length=5)
+	private String auctionState;
 }

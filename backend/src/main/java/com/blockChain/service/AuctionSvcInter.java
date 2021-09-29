@@ -16,4 +16,8 @@ public interface AuctionSvcInter {
 
 	Map<String, Object> beforeInsertAuction();
 
+	Map<String, Object> auctionRegistedByMember();
+
+	Map<String, Object> sltMultiAuctionOrderByMember();
+
 }
