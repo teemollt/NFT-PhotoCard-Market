@@ -20,14 +20,14 @@ function MarketRegItem() {
   // 내 카드 리스트목록
   const [mycardlist, setmycardlist] = useState<any[]>([]);
   useEffect(() => {
-    var token: string | null = localStorage.getItem("token");
-    if (token) {
-      var decoded: any = jwt_decode(token);
-    }
-    axios.get(`/api/gallery/${decoded.sub}/0/0/0`).then((res) => {
-      console.log(res);
-      setmycardlist(res.data.res);
-    });
+    axios
+      .get(`/api/auction/beforeInsert`, {
+        headers: { Authorization: localStorage.getItem("token") },
+      })
+      .then((res) => {
+        console.log(res);
+        setmycardlist(res.data.res);
+      });
   }, []);
   //
   const [inputprice, setinputprice] = useState<string>("");
