@@ -53,16 +53,16 @@ function JoinTable(props: JoinTableProps): JSX.Element {
     }
   };
 
-  const handleMemberPw = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMemberPw(e.target.value.trim());
+  const handleMemberPw = (e: string) => {
     if (
-      memberPw
+      e
         .trim()
         .match(
           /(?=.*\d{1,50})(?=.*[-~`!@#$%&*()+=^]{1,50})(?=.*[a-zA-Z]{1,50}).{8,16}$/
         )
     ) {
       setMemberPwCheck(1);
+      setMemberPw(e);
     } else {
       setMemberPwCheck(2);
     }
@@ -229,7 +229,7 @@ function JoinTable(props: JoinTableProps): JSX.Element {
                 type="password"
                 helperText="영문, 숫자, -~`!@#$%&*()+=^, 8~16자"
                 error={memberPwCheck === 2 ? true : false}
-                onChange={handleMemberPw}
+                onChange={(e) => handleMemberPw(e.target.value)}
               />
             </td>
           </tr>
