@@ -21,9 +21,12 @@ import com.blockChain.domain.Token;
 import com.blockChain.domain.Token_Owner;
 import com.blockChain.dto.AuctionDTO;
 import com.blockChain.dto.AuctionGroupListDTO;
+import com.blockChain.dto.AuctionOrderDTO;
+import com.blockChain.dto.AuctionRegistedByMemberDTO;
 import com.blockChain.dto.GalleryCardDTO;
 import com.blockChain.repository.AuctionRepo;
 import com.blockChain.repository.Auction_LikeRepo;
+import com.blockChain.repository.Auction_OrderRepo;
 import com.blockChain.repository.MemberRepo;
 import com.blockChain.repository.TokenRepo;
 import com.blockChain.repository.Token_OwnerRepo;
@@ -42,6 +45,8 @@ public class AuctionSvcImpl implements AuctionSvcInter{
 	private Token_OwnerRepo toRepo;
 	@Autowired
 	private Auction_LikeRepo alRepo;
+	@Autowired
+	private Auction_OrderRepo aoRepo;
 	@Override
 	public Map<String,Object> sltAuctionByGroup(Long groupNo){
 		Map<String, Object> res = new HashMap<String,Object>();
@@ -75,6 +80,7 @@ public class AuctionSvcImpl implements AuctionSvcInter{
 			auction.setAuctionDetail(auctionDetail);
 			auction.setAuctionStart(LocalDateTime.now());
 			auction.setAuctionDeadline(LocalDateTime.now().plusDays(3));
+			auction.setAuctionState("SELL");
 			auctionRepo.save(auction);
 			res.put("success", true);
 			res.put("msg", "입력성공");
@@ -184,5 +190,44 @@ public class AuctionSvcImpl implements AuctionSvcInter{
 		}
 		return res;
 	}
+	@Override
+	public Map<String,Object>auctionRegistedByMember(){
+		Map<String, Object> res = new HashMap<String,Object>();
+		Long nowLoginMemberNo=0L;// 샘플 0 
+		try {
+			nowLoginMemberNo=SecurityUtil.getCurrentMemberId();
+		}catch (RuntimeException e) {
+			nowLoginMemberNo=0L;
+		}
+		try {
+			Member member = memberRepo.findById(nowLoginMemberNo).orElseThrow(() -> new IllegalStateException("로그인 유저정보가 없습니다"));
+			Optional<List<AuctionRegistedByMemberDTO>> AuctionRegistedByMember = auctionRepo.auctionRegistedByMember(member.getMemberNo());
+			res.put("res", AuctionRegistedByMember);
+		}catch(IllegalStateException e){
+			res.put("success", false);
+			res.put("msg", e.getMessage());
+		}
+		return res;
 
+	}
+	@Override
+	public Map<String,Object>sltMultiAuctionOrderByMember(){
+		Map<String, Object> res = new HashMap<String,Object>();
+		Long nowLoginMemberNo=0L;// 샘플 0 
+		try {
+			nowLoginMemberNo=SecurityUtil.getCurrentMemberId();
+		}catch (RuntimeException e) {
+			nowLoginMemberNo=0L;
+		}
+		try {
+			Member member = memberRepo.findById(nowLoginMemberNo).orElseThrow(() -> new IllegalStateException("로그인 유저정보가 없습니다"));
+			Optional<List<AuctionOrderDTO>> AuctionOrderByMember = aoRepo.sltMultiAuctionOrderByMember(member.getMemberNo());
+			res.put("res", AuctionOrderByMember);
+		}catch(IllegalStateException e){
+			res.put("success", false);
+			res.put("msg", e.getMessage());
+		}
+		return res;
+
+	}
 }
