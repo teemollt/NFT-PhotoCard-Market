@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
 import com.blockChain.domain.Member;
+import com.blockChain.domain.QAuction;
 import com.blockChain.domain.QCeleb_Like;
 import com.blockChain.domain.QMember;
 import com.blockChain.domain.QMember_Gall_Like;
@@ -125,7 +126,45 @@ public class MemberRepoImpl implements MemberRepoCustom{
 		
 		return aa;
 	}
-	
+	@Override
+	public List<GalleryCardDTO> getCanRegiAuction(Long memberNo){
+		QMember qm = QMember.member;
+		QProduct_Token qpt = QProduct_Token.product_Token;
+		QProduct_Media qpm= QProduct_Media.product_Media;
+		QProduct qp = QProduct.product;
+		QToken qt = QToken.token;
+		QToken_Owner qto= QToken_Owner.token_Owner;
+		QAuction qa = QAuction.auction;
+		BooleanBuilder builder = new BooleanBuilder();
+		builder.and(qto.member.memberNo.eq(memberNo));
+		builder.and(qa.token.tokenNo.isNull());
+//		Path<Object> fieldPath = Expressions.path(Object.class, QPerson.person, fieldName);
+		
+		
+		List<GalleryCardDTO> aa = queryFactory.from(qto)
+		.join(qt).on(qt.tokenNo.eq(qto.token.tokenNo))
+		.leftJoin(qa).on(qt.eq(qa.token))
+		.join(qpt).on(qpt.token.tokenNo.eq(qt.tokenNo))
+		.join(qp).on(qpt.product.productNo.eq(qp.productNo))
+		.join(qpm).on(qp.productNo.eq(qpm.product.productNo))
+		.where(builder)
+		.transform(GroupBy.groupBy(qp.productNo)
+				.list(Projections.constructor(GalleryCardDTO.class
+				, qp.productNo
+				, qp.productNm
+				, qpm.productMediaAdres
+				, qp.productGrade.productGradeNo
+				, qp.productGrade.productGrade
+				, GroupBy.list(Projections.constructor(TokenDTO.class
+						, qt.tokenNo
+						, qt.tokenSeriarlizeNo
+						, qto.ownDate
+						)
+					)
+				)));
+		System.out.println(qto.member.memberNo.eq(memberNo) + " "+ qto.member.memberNo );
+		return aa;
+	}
 	
 	
 	

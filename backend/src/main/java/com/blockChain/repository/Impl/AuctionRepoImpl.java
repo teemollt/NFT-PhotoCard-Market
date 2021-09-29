@@ -128,4 +128,47 @@ public class AuctionRepoImpl implements AuctionRepoCustom{
 				.fetch();
 		return Optional.ofNullable(res);
 	}
+	@Override
+	public Optional<AuctionGroupListDTO> sltOneByNo(Long auctionNo){
+		QAuction qa = QAuction.auction;
+		QMember qm = QMember.member;
+		QProduct_Token qpt = QProduct_Token.product_Token;
+		QProduct qp = QProduct.product;
+		QSales qs = QSales.sales;
+		QProduct_Media qpm= QProduct_Media.product_Media;
+		QProduct_Grade qpg = QProduct_Grade.product_Grade;
+		QBid qb = QBid.bid;
+
+		AuctionGroupListDTO res = queryFactory.select(Projections.constructor(
+				AuctionGroupListDTO.class
+				, Projections.constructor(
+						MemberDTO.class
+						, qa.member.memberNo
+						, qa.member.memberNick
+						)
+				, Projections.constructor(CardDTO.class
+						, qpt.product.productNo
+						, qpt.product.productNm
+						, qpm.productMediaAdres
+						, qa.token.tokenNo
+						, qa.token.tokenSeriarlizeNo
+						, qp.productGrade.productGradeNo
+						, qp.productGrade.productGrade
+						)
+				, Projections.constructor(AuctionDTO.class
+						, qa.auctionNo
+						, qa.auctionName
+						, qa.auctionDetail
+						, qa.auctionImmeprice
+						, qa.auctionStart
+						, qa.auctionDeadline)
+
+				)).from(qa)
+				.join(qpt).on(qa.token.tokenNo.eq(qpt.token.tokenNo))
+				.join(qp).on(qpt.product.productNo.eq(qp.productNo))
+				.join(qpm).on(qp.productNo.eq(qpm.product.productNo))
+				.where(qa.auctionNo.eq(auctionNo))
+				.fetchOne();
+		return Optional.ofNullable(res);
+	}
 }
