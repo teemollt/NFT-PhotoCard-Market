@@ -223,9 +223,17 @@ function BuyCardPack(props: any): JSX.Element {
           </DialogTitle>
           <DialogContent dividers>
             <div style={{ width: "500px", height: "100%" }}>
-              <Button autoFocus onClick={makewallet} color="primary" fullWidth>
-                <h3 style={{ color: "black" }}>지갑 생성하러가기</h3>
-              </Button>
+              {userAddress ? null : (
+                <Button
+                  autoFocus
+                  onClick={makewallet}
+                  color="primary"
+                  fullWidth
+                >
+                  <h3 style={{ color: "black" }}>지갑 생성하러가기</h3>
+                </Button>
+              )}
+
               {loading ? (
                 <LoadingButton fullWidth>
                   <div id="floatingCirclesG">
