@@ -1,52 +1,25 @@
-.wrapper {
-  position: relative;
-  width: 250px;
-  height: 50px;
-  left: 50%;
-  transform: translate(-50%);
+.shopEmptyText h1 {
   margin: 50px 0 30px 0;
-  white-space: nowrap;
+  font-size: 2.5em;
+  padding: 0;
+  color: white;
+  text-shadow: 0 0.1em 20px rgba(0, 0, 0, 1), 0.05em -0.03em 0 rgba(0, 0, 0, 1), 0.05em 0.005em 0 rgba(0, 0, 0, 1), 0em 0.08em 0 rgba(0, 0, 0, 1), 0.05em 0.08em 0 rgba(0, 0, 0, 1), 0px -0.03em 0 rgba(0, 0, 0, 1), -0.03em -0.03em 0 rgba(0, 0, 0, 1), -0.03em 0.08em 0 rgba(0, 0, 0, 1), -0.03em 0 0 rgba(0, 0, 0, 1);
 }
-.focus {
-  letter-spacing: 2px;
-  filter: blur(3px);
-  font-size: 30px;
-  opacity: 0.6;
-  color: rgb(3, 3, 3);
+.shopEmptyText h1 span {
+  transform: scale(0.9);
+  display: inline-block;
 }
-.mask {
-  position: absolute;
-  top: -4px;
-  width: 70px;
-  letter-spacing: 2px;
-  font-size: 30px;
-  clip: rect(0px, 70px, 100px, 0px);
-  background: linear-gradient(rgb(0, 0, 0), rgb(0, 0, 0) 0) no-repeat,
-    linear-gradient(to right, rgb(0, 0, 0), rgb(0, 0, 0) 0) no-repeat,
-    linear-gradient(to right, rgb(0, 0, 0), rgb(0, 0, 0) 0) bottom left no-repeat,
-    linear-gradient(to right, rgb(0, 0, 0), rgb(0, 0, 0) 0) bottom left no-repeat,
-    linear-gradient(rgb(0, 0, 0), rgb(0, 0, 0) 0) bottom right no-repeat,
-    linear-gradient(rgb(0, 0, 0), rgb(0, 0, 0) 0) bottom right no-repeat,
-    linear-gradient(rgb(0, 0, 0), rgb(0, 0, 0) 0) top right no-repeat,
-    linear-gradient(rgb(0, 0, 0), rgb(0, 0, 0) 0) top right no-repeat;
-  background-size: 10px 2px, 2px 10px, 2px 10px, 10px 2px, 2px 10px, 10px 2px,
-    10px 2px, 2px 10px, 10px 2px;
-  color: rgb(8, 8, 8);
-  padding: 5px;
-  box-sizing: border-box;
-  animation: mask 2.5s ease infinite alternate;
+.shopEmptyText h1 span:first-child {
+  animation: bop 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards infinite alternate;
 }
-.text {
-  transform: translateX(0);
-  animation: text 2.5s ease infinite alternate;
+.shopEmptyText h1 span:last-child {
+  animation: bopB 1s 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards infinite alternate;
 }
-@keyframes mask {
-  to {
-    transform: translateX(190px);
-  }
-}
-@keyframes text {
-  to {
-    transform: translateX(-190px);
-  }
+@keyframes bop {
+  0% {
+    transform: scale(0.7);
+ }
+  50%, 100% {
+    transform: scale(1);
+ }
 }

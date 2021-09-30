@@ -33,7 +33,7 @@ function MarketLike() {
   return (
     <div>
       <div className="mypageBodyRightHeader">
-        <h1>관심 장터</h1>
+        <h1>관심 마켓</h1>
         <hr />
         {page.map((card, index) => {
           return <MarketCard card={card} key={index} />;

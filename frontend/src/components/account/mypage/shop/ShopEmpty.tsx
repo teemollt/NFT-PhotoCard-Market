@@ -15,7 +15,7 @@ function ShopEmpty() {
   let history = useHistory();
 
   const [recommend, setRecommend] = useState<Array<Recommend>>([]);
-  const [celeb, setCeleb] = useState<string>("")
+  const [celeb, setCeleb] = useState<string>("");
 
   useEffect(() => {
     axios
@@ -30,19 +30,19 @@ function ShopEmpty() {
         headers: { Authorization: localStorage.getItem("token") },
       })
       .then((res) => {
-        let celebNo = res.data.mypage.celebNo
+        let celebNo = res.data.mypage.celebNo;
         if (celebNo === 0) {
-          setCeleb("태연")
+          setCeleb("태 연");
         } else if (celebNo === 1) {
-          setCeleb("티파니")
+          setCeleb("티파니");
         } else if (celebNo === 2) {
-          setCeleb("서현")
+          setCeleb("서 현");
         } else if (celebNo === 3) {
-          setCeleb("현아")
+          setCeleb("현 아");
         } else if (celebNo === 4) {
-          setCeleb("GD")
+          setCeleb("G-DRAGON");
         } else if (celebNo === 5) {
-          setCeleb("아이유")
+          setCeleb("아이유");
         }
       });
   }, []);
@@ -56,12 +56,13 @@ function ShopEmpty() {
 
   return (
     <div className="ShopEmpty">
-      <div className="wrapper">
-        <div className="focus">{celeb} 찾으러 가기</div>
-        <div className="mask">
-          <div className="text">{celeb} 찾으러 가기</div>
-        </div>
+      <div className="shopEmptyText">
+        <h1>
+          <span>" <span style={{ color: "#356CFB" }}>{celeb}</span> "</span>
+          <span> 데리러 가기</span>
+        </h1>
       </div>
+
       {recommend.map((card, index) => {
         return (
           <div className="shopCard" onClick={() => handleToShop(card)}>

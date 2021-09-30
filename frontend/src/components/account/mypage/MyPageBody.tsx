@@ -15,11 +15,11 @@ function MyPageBody() {
 
         <br />
 
-        <h1>장터 정보</h1>
+        <h1>마켓 정보</h1>
         <hr />
-        <p onClick={() => setMenu(2)}>내가 등록한 장터</p>
-        <p onClick={() => setMenu(3)}>장터 구매 내역</p>
-        <p onClick={() => setMenu(4)}>관심 장터</p>
+        <p onClick={() => setMenu(2)}>내가 등록한 마켓</p>
+        <p onClick={() => setMenu(3)}>마켓 구매 내역</p>
+        <p onClick={() => setMenu(4)}>관심 마켓</p>
 
         <br />
 

@@ -1,59 +1,72 @@
-import React, { useEffect, useState } from "react"
-import axios from "axios"
-import { Link } from "react-router-dom"
-import { Button } from "@material-ui/core"
-import "./MyPageTop.css"
-import Web3 from "web3"
-import { ConstructionRounded } from "@mui/icons-material"
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import { Button } from "@material-ui/core";
+import "./MyPageTop.css";
+import Web3 from "web3";
+import { ConstructionRounded } from "@mui/icons-material";
 
 interface MyPageTopProps {
-  memberNick: string
-  memberGrade: string
+  memberNick: string;
+  memberGrade: string;
+  countAuctionRegist: number;
+  countSalesLike: number;
+  countSalesOrder: number;
 }
 
 function MyPageTop(props: MyPageTopProps): JSX.Element {
-  const { memberNick, memberGrade } = props
-  const Web3 = require("web3")
-  const web3 = new Web3("http://13.125.37.55:8545")
+  const {
+    memberNick,
+    memberGrade,
+    countAuctionRegist,
+    countSalesLike,
+    countSalesOrder,
+  } = props;
+  const Web3 = require("web3");
+  const web3 = new Web3("http://13.125.37.55:8545");
   // 관리자 계정(이더 많은거)
-  const admin = "0x39dce082172253d8d816b0e9aa48345a72a2179a"
+  const admin = "0x39dce082172253d8d816b0e9aa48345a72a2179a";
   // api 통해 불러온 유저 계정
-  const [userAddress, setAddress] = useState<string>("")
+  const [userAddress, setAddress] = useState<string>("");
   // 잔액
-  const [userBalance, setBalance] = useState<string>("0")
+  const [userBalance, setBalance] = useState<string>("0");
 
   const walletCheck = async () => {
     try {
       const res = await axios.get("/api/wallet/", {
         headers: { Authorization: localStorage.getItem("token") },
-      })
-      console.log(res.data)
+      });
+      console.log(res.data);
       if (res.data.success == true) {
-        setAddress(res.data.address)
-        setBalance(res.data.walletBal)
+        setAddress(res.data.address);
+        setBalance(res.data.walletBal);
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
 
   useEffect(() => {
     // api로 지갑 유무 파악
-    walletCheck()
-  })
+    walletCheck();
+  });
   // getAccount는 지갑 주소가 없는 경우에만 버튼 활성화
   const getAccount = async () => {
     // 계정 생성 - 추후에 비밀번호 직접 입력 가능하게
-    const newAccount = await web3.eth.personal.newAccount('123')
-    console.log(newAccount)
-    setAddress(newAccount)
+    const newAccount = await web3.eth.personal.newAccount("123");
+    console.log(newAccount);
+    setAddress(newAccount);
     // 생성된 주소 서버로 넘겨서 저장하기
-    const res = await axios.post('/api/wallet/', { walletAdd: newAccount }, { headers: { Authorization: localStorage.getItem("token") } })
-    console.log(res.data)
-  }
+    const res = await axios.post(
+      "/api/wallet/",
+      { walletAdd: newAccount },
+      { headers: { Authorization: localStorage.getItem("token") } }
+    );
+    console.log(res.data);
+  };
   // 이더 충전 횟수 제한 혹은 일정 잔액 이하일때만 충전 가능하게 api로 변경
   const chargeEth = async () => {
-    console.log(userAddress)
+    console.log(userAddress);
     const tx = {
       from: admin,
       gasPrice: "20000000000",
@@ -61,19 +74,31 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
       to: userAddress,
       value: "10000000000000000000",
       data: "",
+    };
+    try {
+      const adminUnlock = await web3.eth.personal.unlockAccount(
+        admin,
+        "1234",
+        6000
+      );
+      console.log(adminUnlock);
+      const unlock = await web3.eth.personal.unlockAccount(
+        userAddress,
+        "123",
+        6000
+      );
+      console.log(unlock);
+    } catch (err) {
+      console.log(err);
     }
     try {
-      const adminUnlock = await web3.eth.personal.unlockAccount(admin, '1234', 6000)
-      console.log(adminUnlock)
-      const unlock = await web3.eth.personal.unlockAccount(userAddress, '123', 6000)
-      console.log(unlock)
-    } catch (err) { console.log(err) }
-    try {
-      const charge = await web3.eth.sendTransaction(tx, '1234')
-      console.log(charge)
-    } catch (err) { console.log(err) }
-    walletCheck()
-  }
+      const charge = await web3.eth.sendTransaction(tx, "1234");
+      console.log(charge);
+    } catch (err) {
+      console.log(err);
+    }
+    walletCheck();
+  };
   return (
     <div className="mypageTop">
       <div className="mypageUserInfo">
@@ -110,7 +135,6 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
               className="mypageAccountBtn"
               variant="outlined"
               size="medium"
-              
             >
               잔액 조회
             </Button>
@@ -129,19 +153,19 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
       <div className="mypageShop">
         <div className="mypageOrder">
           <p>구매 내역</p>
-          <span>0</span>
+          <span>{countAuctionRegist}</span>
         </div>
         <div className="mypageOrder">
           <p>관심 상품</p>
-          <span>0</span>
+          <span>{countSalesLike}</span>
         </div>
         <div className="mypageOrder">
           <p>경매 등록</p>
-          <span>0</span>
+          <span>{countSalesOrder}</span>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default MyPageTop
+export default MyPageTop;
