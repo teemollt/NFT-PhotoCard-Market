@@ -19,6 +19,10 @@ function Main(): JSX.Element {
       state: { paramskeyword: paramskeyword },
     });
   }
+  const [checked, setchecked] = useState(false);
+  function handleChange() {
+    setchecked(true);
+  }
   return (
     <div>
       <div className="mainitem">
@@ -54,10 +58,28 @@ function Main(): JSX.Element {
           </svg>
         </div>
       </div>
-
       <div className="mainitem">
         <MainCarousel />
       </div>
+      {/* 여기 */}
+      <div className="wrapper">
+        <input type="checkbox" />
+        <div className="video">
+          <iframe
+            width="100%"
+            height="500"
+            src="https://www.youtube.com/embed/v7bnOxV4jAc"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        </div>
+        <div className="text">
+          <span data-text="Watch the video" />
+        </div>
+      </div>
+      {/*  */}
       <div className="mainitem">
         <MainCarousel1 />
       </div>

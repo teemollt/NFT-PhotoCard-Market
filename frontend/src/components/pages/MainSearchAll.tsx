@@ -5,6 +5,8 @@ import { useSpring, useSprings, animated, to } from "react-spring";
 import { useLocation } from "react-router";
 import "./MainSearchAll.css";
 import ResultCardsList from "../main/ResultCardsList";
+import ResultMarketList from "../main/ResultMarketList";
+
 function Stack(props: any): JSX.Element {
   const [open, setOpen] = useState(false);
   const { f, r } = useSpring({ f: open ? 0 : 1, r: open ? -3 : 3 });
@@ -97,8 +99,21 @@ function MainSearchAll() {
           <h3 className="noresult">관련 카드팩 상품이 없습니다</h3>
         )}
       </div>
-
-      {/* <div>{resultauction.map(card,i)=>(<div>{card.cardImgUrl}</div>)}</div> */}
+      <hr style={{ width: "50%" }} />
+      <div style={{ textAlign: "center" }}>
+        <h3>구매가능한 카드</h3>
+        {resultauction.length > 0 ? (
+          <div className="result3">
+            {resultauction.map((card, i) => (
+              <ResultCardsList
+                image={card.cardImgUrl}
+                background="#52649e"
+                item={card}
+              />
+            ))}
+          </div>
+        ) : null}
+      </div>
       <div></div>
       <hr style={{ width: "50%" }} />
       <div style={{ textAlign: "center" }}>
