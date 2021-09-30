@@ -1,11 +1,10 @@
-.newcardsbackground {
-  background-color: rgba(0, 0, 0, 0.8);
+.newcardsbackground > div > .MuiPaper-root {
+  background-color: rgba(255, 255, 255, 0);
+  overflow: hidden;
 }
+
 .newcards {
   background-color: rgba(0, 0, 0, 0);
-}
-::-webkit-scrollbar {
-  display: none;
 }
 
 .container1 {
@@ -235,4 +234,28 @@
   100% {
     background-color: rgb(255, 255, 255);
   }
+}
+
+
+
+.newCard > .MuiDialog-container > .MuiDialog-paperWidthSm {
+  max-width: 1000px;
+}
+
+.newCardDia {
+  display: flex;
+  flex-wrap: wrap;
+  width: 1000px;
+  height: 1000px;
+  justify-content: center;
+  overflow: hidden !important;
+}
+
+.newCardContent {
+  display: flex;
+}
+
+.skip {
+  margin-top: 60%;
+  margin-left: 40%;
 }

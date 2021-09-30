@@ -98,7 +98,7 @@ function BuyCardPack(props: any): JSX.Element {
     setOpen(false);
   };
   // 카드창;
-  const [cardopen, setcardopen] = useState(false);
+  const [cardopen, setcardopen] = useState(true);
 
   const handleClickcardOpen = () => {
     setcardopen(true);
@@ -269,13 +269,11 @@ function BuyCardPack(props: any): JSX.Element {
           className="newcardsbackground"
           maxWidth="lg"
         >
-          <DialogContent dividers className="newcards">
-            <div style={{ height: "555px", width: "310px" }} className="noscroll">
-              <div>
-                <MyNewCards newcardlist={newcardlist} />
-              </div>
+          <div style={{ height: "555px", width: "310px" }} className="noscroll">
+            <div>
+              <MyNewCards newcardlist={newcardlist} />
             </div>
-          </DialogContent>
+          </div>
         </Dialog>
       </div>
     </div>
