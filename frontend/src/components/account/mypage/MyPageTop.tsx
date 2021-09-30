@@ -37,43 +37,15 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
     // api로 지갑 유무 파악
     walletCheck()
   })
-  // 컨트랙트 abi
-  // const tokenAbi = contractAbi
-  // // 컨트랙트 주소
-  // const myContractAddress = '0xBbD536eA98bDE36E345A89b47032AdC2bF1d217c'
-  // 컨트랙트 객체 생성(주체는 유저로)
-  // const tokenContract = new web3.eth.Contract(tokenAbi, myContractAddress, {
-  //   from: user,
-  //   gasPrice: '20000000000',
-  // })
   // getAccount는 지갑 주소가 없는 경우에만 버튼 활성화
   const getAccount = async () => {
-    // 지갑생성
-    // const newAccount = await web3.eth.accounts.create()
-    // const newAccount = web3.eth.getAccounts()
     // 계정 생성 - 추후에 비밀번호 직접 입력 가능하게
     const newAccount = await web3.eth.personal.newAccount('123')
     console.log(newAccount)
     setAddress(newAccount)
-    // 계정 언락
-    // await web3.eth.personal.unlockAccount(userAddress, "123", 60000)
     // 생성된 주소 서버로 넘겨서 저장하기
     const res = await axios.post('/api/wallet/', { walletAdd: newAccount }, { headers: { Authorization: localStorage.getItem("token") } })
     console.log(res.data)
-  }
-  // 내 잔액 조회 => api로 바꿀듯
-  const getBalance = async () => {
-    // 이더 잔액
-    const ethBalance = await web3.eth.getBalance(userAddress)
-    // console.log(typeof (ethBalance))
-    // setBalance(ethBalance)
-    // 토큰 잔액
-    // const getTokenBalance = await tokenContract.methods.balanceOf(user).call()
-    // console.log(getTokenBalance)
-    // const adminBalance = await tokenContract.methods.balanceOf(admin).call()
-    // console.log(`admin balance : ${adminBalance}`)
-    // const adminEth = await web3.eth.getBalance(admin)
-    // console.log(`admin eth: ${adminEth}`)
   }
   // 이더 충전 횟수 제한 혹은 일정 잔액 이하일때만 충전 가능하게 api로 변경
   const chargeEth = async () => {
@@ -91,7 +63,6 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
       console.log(adminUnlock)
       const unlock = await web3.eth.personal.unlockAccount(userAddress, '123', 6000)
       console.log(unlock)
-      // console.log(tx)
     } catch (err) { console.log(err) }
     try {
       const charge = await web3.eth.sendTransaction(tx, '1234')
@@ -99,27 +70,6 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
     } catch (err) { console.log(err) }
     walletCheck()
   }
-  // .send({ from: admin, gas: 3000000 })
-  // 토큰 전송
-  // const sendToken = async () => {
-  //   // const tx = { from: user, to: admin, tokens: 100000 }
-  //   try {
-  //     const sendT = await tokenContract.methods.transfer(admin, 100).send()
-  //     console.log(sendT)
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // }
-  // sender 확인
-  // const senderCheck = async () => {
-  //   try {
-  //     const check = await tokenContract.methods.check().call()
-  //     console.log(check)
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // }
-
   return (
     <div className="mypageTop">
       <div className="mypageUserInfo">
@@ -131,10 +81,7 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
           {(userAddress !== '') ? (<p> 지갑주소: {userAddress}  잔액: {userBalance} </p>) : (
             <Button className="mypageUpdateBtn" variant="outlined" size="medium" onClick={getAccount}>지갑 생성</Button>)}
           <br />
-          <Button className="mypageUpdateBtn" variant="outlined" size="medium" onClick={getBalance}>잔액 조회</Button>
           <Button className="mypageUpdateBtn" variant="outlined" size="medium" onClick={chargeEth}>이더 충전</Button>
-          {/* <Button className="mypageUpdateBtn" variant="outlined" size="medium" onClick={sendToken}>토큰 전송</Button> */}
-          {/* <Button className="mypageUpdateBtn" variant="outlined" size="medium" onClick={senderCheck}>센더체크</Button> */}
         </div>
         <div className="mypageUserUpdate">
           <Link className="tablink" to="/update">

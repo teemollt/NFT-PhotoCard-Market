@@ -110,15 +110,10 @@ function BuyCardPack(props: any): JSX.Element {
   }
   // 결제함수
   const pay = () => {
-    // console.log(props.cardpackprice)
-    // console.log(props.cardpackNo)
+    walletCheck()
     setOpen(false)
-    console.log('pay함수 실행')
-    console.log(userBalance)
-    // 결재코드
     // 잔액이 얼마 이상이면?
-    if (parseFloat(userBalance) > props.cardpackprice + 0.01) {
-      console.log('통과했니')
+    if (parseFloat(userBalance) > props.cardpackprice + 0.01)
       // 컨트랙트 buyCardPack 호출
       myContract.methods.buyCardPack().send({
         from: userAddress,
@@ -142,80 +137,81 @@ function BuyCardPack(props: any): JSX.Element {
                 console.log(receipt)
               })
             }
+            walletCheck()
           })
           .catch()
       })
-    }
-    // 도형님의 결제코드
   }
-  return (
-    <div>
-      <div style={{ textAlign: "center" }}>
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={handleClickOpen}
-          style={{ width: "300px", marginTop: "5px" }}
-        >
-          {props.cardpackprice} 구매하기
-        </Button>
-      </div>
-      <div>
-        <Dialog
-          onClose={handleClose}
-          aria-labelledby="customized-dialog-title"
-          open={open}
-        >
-          <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-            결제하기
-          </DialogTitle>
-          <DialogContent dividers>
-            <div style={{ width: "550px", height: "300px" }}></div>
-          </DialogContent>
-          <DialogActions>
-            <Button autoFocus onClick={handleClose} color="primary">
-              cancel
-            </Button>
-            <Button autoFocus onClick={pay} color="primary">
-              pay
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </div>
-      <div>
-        <Dialog
-          onClose={handlecardClose}
-          aria-labelledby="customized-dialog-title"
-          open={cardopen}
-          className="newcardsbackground"
-          fullWidth
-          maxWidth="lg"
-        >
-          <DialogContent dividers className="newcards">
-            <div style={{}}>
-              <div className="container1">
-                {newcardlist.map((card, i) => (
-                  <div
-                    className="card card0"
-                    style={{
-                      backgroundImage: `url("/${card.cardImgUrl}.jpg")`,
-                      width: "100%",
-                      height: "300px",
-                    }}
-                  >
-                    <div className="border">
-                      <h2 className="buycardpacktit">{card.cardNM}</h2>
-                      <h2 className="buycardpacktit">{card.cardGradeNM}</h2>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </DialogContent>
-        </Dialog>
-      </div>
+
+}
+return (
+  <div>
+    <div style={{ textAlign: "center" }}>
+      <Button
+        variant="contained"
+        color="secondary"
+        onClick={handleClickOpen}
+        style={{ width: "300px", marginTop: "5px" }}
+      >
+        {props.cardpackprice} 구매하기
+      </Button>
     </div>
-  )
+    <div>
+      <Dialog
+        onClose={handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={open}
+      >
+        <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+          결제하기
+        </DialogTitle>
+        <DialogContent dividers>
+          <div style={{ width: "550px", height: "300px" }}></div>
+        </DialogContent>
+        <DialogActions>
+          <Button autoFocus onClick={handleClose} color="primary">
+            cancel
+          </Button>
+          <Button autoFocus onClick={pay} color="primary">
+            pay
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+    <div>
+      <Dialog
+        onClose={handlecardClose}
+        aria-labelledby="customized-dialog-title"
+        open={cardopen}
+        className="newcardsbackground"
+        fullWidth
+        maxWidth="lg"
+      >
+        <DialogContent dividers className="newcards">
+          <div style={{}}>
+            <div className="container1">
+              {newcardlist.map((card, i) => (
+                <div
+                  className="card card0"
+                  style={{
+                    backgroundImage: `url("/${card.cardImgUrl}.jpg")`,
+                    width: "100%",
+                    height: "300px",
+                  }}
+                >
+                  <div className="border">
+                    <h2 className="buycardpacktit">{card.cardNM}</h2>
+                    <h2 className="buycardpacktit">{card.cardGradeNM}</h2>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </div>
+  </div>
+)
 }
 
 export default BuyCardPack
