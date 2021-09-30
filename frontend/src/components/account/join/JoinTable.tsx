@@ -102,7 +102,7 @@ function JoinTable(props: JoinTableProps): JSX.Element {
     setMemberEmail(e.target.value.trim());
     if (
       memberEmail.match(
-        /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/
+        /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[com]{2,3}$/
       )
     ) {
       setCheckEmail(true);
