@@ -197,3 +197,27 @@ body {
   background-color: #1d2630aa;
   border-radius: 50%;
 }
+
+
+
+.newCard > .MuiDialog-container > .MuiDialog-paperWidthSm {
+  max-width: 1000px;
+}
+
+.newCardDia {
+  display: flex;
+  flex-wrap: wrap;
+  width: 1000px;
+  height: 1000px;
+  justify-content: center;
+  overflow: hidden !important;
+}
+
+.newCardContent {
+  display: flex;
+}
+
+.skip {
+  margin-top: 60%;
+  margin-left: 40%;
+}
