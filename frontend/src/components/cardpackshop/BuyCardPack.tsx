@@ -270,7 +270,7 @@ function BuyCardPack(props: any): JSX.Element {
           maxWidth="lg"
         >
           <DialogContent dividers className="newcards">
-            <div style={{ height: "600px", width: "330px" }}>
+            <div style={{ height: "555px", width: "310px" }} className="noscroll">
               <div>
                 <MyNewCards newcardlist={newcardlist} />
               </div>

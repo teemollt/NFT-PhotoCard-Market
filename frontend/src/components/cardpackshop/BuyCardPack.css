@@ -4,6 +4,9 @@
 .newcards {
   background-color: rgba(0, 0, 0, 0);
 }
+::-webkit-scrollbar {
+  display: none;
+}
 
 .container1 {
   display: flex;
