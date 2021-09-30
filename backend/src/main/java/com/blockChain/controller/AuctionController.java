@@ -50,5 +50,8 @@ public class AuctionController {
 	public Map<String, Object> insertAuction(){
 		return auctionSvc.beforeInsertAuction();
 	}
-	
+	@PostMapping("/buy")
+	public Map<String, Object> buyAuction(@RequestBody Map<String, Object> req){
+		return auctionSvc.buyAuction(req);
+	}
 }

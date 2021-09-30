@@ -15,4 +15,6 @@ public interface Token_OwnerRepoCustom {
 
 	Optional<Token_Owner> sltByTokenMember(Long memberNo, Long tokenNo);
 
+	Optional<Token_Owner> sltToken(Long tokenNo);
+
 }

@@ -20,4 +20,6 @@ public interface AuctionSvcInter {
 
 	Map<String, Object> sltMultiAuctionOrderByMember();
 
+	Map<String, Object> buyAuction(Map<String, Object> req);
+
 }

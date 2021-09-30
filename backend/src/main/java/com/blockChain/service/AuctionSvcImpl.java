@@ -1,5 +1,6 @@
 package com.blockChain.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.blockChain.config.SecurityUtil;
 import com.blockChain.domain.Auction;
 import com.blockChain.domain.Auction_Like;
+import com.blockChain.domain.Auction_Order;
 import com.blockChain.domain.Member;
 import com.blockChain.domain.Sales;
 import com.blockChain.domain.Sales_Like;
@@ -229,5 +231,49 @@ public class AuctionSvcImpl implements AuctionSvcInter{
 		}
 		return res;
 
+	}
+	
+	@Override
+	public Map<String,Object>buyAuction(Map<String,Object> req){
+		Map<String, Object> res = new HashMap<String,Object>();
+		Long nowLoginMemberNo=0L;// 샘플 0 
+		try {
+			nowLoginMemberNo=SecurityUtil.getCurrentMemberId();
+		}catch (RuntimeException e) {
+			nowLoginMemberNo=0L;
+		}
+		try {
+			Member member = memberRepo.findById(nowLoginMemberNo).orElseThrow(() -> new IllegalStateException("로그인 유저정보가 없습니다"));
+			//옥션조회
+			//옥션 상태가 SELL이고 옥션order에 없는거
+			//토큰조회
+			Long reqNo = Long.valueOf((Integer) req.get("auctionNo"));
+			Auction auction =auctionRepo.findById(reqNo).orElseThrow(() -> new IllegalStateException("해당 판매글이 존재하지 않습니다"));
+			Token token = tokenRepo.findById(auction.getToken().getTokenNo()).orElseThrow(() -> new IllegalStateException("해당 토큰이 존재하지 않습니다"));
+			if (!auction.getAuctionState().equals("SELL")) {IllegalStateException e = new IllegalStateException("이미 판매된 상품입니다.");throw e;};
+			
+			aoRepo.sltByAuctionNo(auction.getAuctionNo()).ifPresent(m->{throw new IllegalStateException("이미 판매된 상품입니다.");});
+			auction.setAuctionState("SOLD");
+			auctionRepo.save(auction);
+			//판매처리
+			Auction_Order ao = new Auction_Order();
+			ao.setAuction(auction);
+			ao.setMember(member);
+			aoRepo.save(ao);
+			System.out.println(auction);
+			System.out.println(token);
+			Token_Owner to = toRepo.sltToken(token.getTokenNo()).orElseThrow(() -> new IllegalStateException("해당 토큰은 소유자가 없습니다."));
+			to.setMember(member);
+			toRepo.save(to); // 이게 수정처리가 되는건가
+			res.put("success", true);
+			res.put("msg", "구매가 완료되었습니다.");
+			//옥션 sold처리
+			//옥션order에 insert
+			//토큰 오너 변경
+		}catch(IllegalStateException e){
+			res.put("success", false);
+			res.put("msg", e.getMessage());
+		}
+		return res;
 	}
 }

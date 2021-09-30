@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
+import com.blockChain.domain.Auction_Order;
 import com.blockChain.domain.QAuction;
 import com.blockChain.domain.QAuction_Order;
 import com.blockChain.domain.QMember;
@@ -49,5 +50,11 @@ public class Auction_OrderRepoImpl implements Auction_OrderRepoCustom{
 				.join(qp).on(qpt.product.eq(qp))
 				.join(qpm).on(qp.eq(qpm.product))
 				.fetch());
+	}
+	@Override
+	public Optional<Auction_Order> sltByAuctionNo(Long auctionNo) {
+		QAuction_Order qao = QAuction_Order.auction_Order;
+
+		return Optional.ofNullable(queryFactory.selectFrom(qao).where(qao.auction.auctionNo.eq(auctionNo)).fetchOne());
 	}
 }

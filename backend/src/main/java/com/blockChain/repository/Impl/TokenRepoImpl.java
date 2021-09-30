@@ -31,10 +31,10 @@ public class TokenRepoImpl implements TokenRepoCustom{
 		QToken_Owner qto = QToken_Owner.token_Owner;
 		return Optional.ofNullable(queryFactory.select(qt)
 				.from(qpt)
-				.where(qsp.sales.eq(sales))
 				.join(qt).on(qpt.token.eq(qt))
 				.join(qsp).on(qpt.product.eq(qsp.product))
 				.leftJoin(qto).on(qt.eq(qto.token))
+				.where(qsp.sales.eq(sales).and(qto.token.isNull()))
 				.fetch());
 	}
 }

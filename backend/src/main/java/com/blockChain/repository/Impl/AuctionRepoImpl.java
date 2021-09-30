@@ -50,6 +50,7 @@ public class AuctionRepoImpl implements AuctionRepoCustom{
 		QProduct_Grade qpg = QProduct_Grade.product_Grade;
 		QBid qb = QBid.bid;
 		BooleanBuilder builder = new BooleanBuilder();
+		builder.and(qa.auctionState.eq("SELL"));
 		if(groupNo != 0L){
 			builder.and(qp.celeb.group.groupNo.eq(groupNo));
 		}
