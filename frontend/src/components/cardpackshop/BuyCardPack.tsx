@@ -83,7 +83,7 @@ function BuyCardPack(props: any): JSX.Element {
   const Web3 = require("web3")
   const web3 = new Web3("http://13.125.37.55:8545")
   // contract 객체
-  const myContractAddress = "0x05C0D32D866Be1AB23B62AF3ca5bc673E45Aff6d"
+  const myContractAddress = "0x55e333149CE4558612055f453Bf1c7f7D81A3CAa"
   const myContract = new web3.eth.Contract(contractAbi, myContractAddress)
   const [open, setOpen] = useState(false)
 
