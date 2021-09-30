@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import "./MarketBuyItem.css";
 import {
   createStyles,
   Theme,
@@ -14,6 +16,8 @@ import MuiDialogActions from "@material-ui/core/DialogActions";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
+import LoadingButton from "@mui/lab/LoadingButton";
+import axios from "axios";
 
 export interface DialogTitleProps extends WithStyles<typeof styles> {
   id: string;
@@ -73,14 +77,42 @@ function MarketBuyItem(props: any): JSX.Element {
   const handleClose = () => {
     setOpen(false);
   };
-  const pay = (buyprice: number) => {
-    // 결제함수
-    console.log(buyprice);
+  const [loading, setloading] = useState(false);
+  // 결제함수
+  const pay = () => {
+    setloading(true);
+    // 가격
+    console.log(props.price);
+    // 아이템토큰번호
+    console.log(props.itemtoken);
     // 옥션번호
-    console.log(props.itemtokenNo);
-    setOpen(false);
-    // 잔액비교
+    console.log(props.auctionNo);
+    // 지갑있는지 체크
+    // 잔액체크
+    // 구매통신보내기
+    axios
+      .post(
+        "/api/auction/buy",
+        {
+          auctionNo: parseInt(props.auctionNo),
+        },
+        { headers: { Authorization: localStorage.getItem("token") } }
+      )
+      .then((res) => {
+        console.log(res);
+        setOpen(false);
+        setloading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
+  let history = useHistory();
+  function makewallet() {
+    history.push({
+      pathname: "/mypage",
+    });
+  }
   return (
     <div>
       <Fab variant="extended" color="primary" onClick={handleClickOpen}>
@@ -95,19 +127,42 @@ function MarketBuyItem(props: any): JSX.Element {
           결제하기
         </DialogTitle>
         <DialogContent dividers>
-          <div style={{ width: "550px", height: "300px" }}></div>
+          <div style={{ width: "500px", height: "100%" }}>
+            <Button autoFocus onClick={makewallet} color="primary" fullWidth>
+              <h3 style={{ color: "black" }}>지갑 생성하러가기</h3>
+            </Button>
+            {loading ? (
+              <LoadingButton fullWidth>
+                <div id="floatingCirclesG">
+                  <div className="f_circleG" id="frotateG_01" />
+                  <div className="f_circleG" id="frotateG_02" />
+                  <div className="f_circleG" id="frotateG_03" />
+                  <div className="f_circleG" id="frotateG_04" />
+                  <div className="f_circleG" id="frotateG_05" />
+                  <div className="f_circleG" id="frotateG_06" />
+                  <div className="f_circleG" id="frotateG_07" />
+                  <div className="f_circleG" id="frotateG_08" />
+                </div>
+              </LoadingButton>
+            ) : (
+              <Button autoFocus onClick={pay} color="primary" fullWidth>
+                <h1 style={{ color: "black" }}>pay</h1>
+              </Button>
+            )}
+
+            <Button
+              autoFocus
+              onClick={() => {
+                setOpen(false);
+                setloading(false);
+              }}
+              color="primary"
+              fullWidth
+            >
+              <h4 style={{ color: "black" }}>cancel</h4>
+            </Button>
+          </div>
         </DialogContent>
-        <DialogActions>
-          <Button
-            autoFocus
-            onClick={() => {
-              pay(props.price);
-            }}
-            color="primary"
-          >
-            Save changes
-          </Button>
-        </DialogActions>
       </Dialog>
     </div>
   );

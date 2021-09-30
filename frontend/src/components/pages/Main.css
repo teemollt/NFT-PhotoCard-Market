@@ -1,8 +1,15 @@
-.mainitem {
+.mainitem1 {
+  text-align: center;
+  margin: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+.mainitem2 {
   margin: 30px;
 }
 .search {
   text-align: center;
+  z-index: -99999;
 }
 
 .search-form {
