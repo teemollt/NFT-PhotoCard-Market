@@ -182,11 +182,11 @@
 .wrapper input:checked ~ .text > span::after {
   clip-path: var(--clip-path-clicked);
 }
-body {
+/* body {
   background: #e8ebf3;
   font: 400 16px "Poppins", sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
+} */

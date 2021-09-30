@@ -110,7 +110,7 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
               className="mypageAccountBtn"
               variant="outlined"
               size="medium"
-              onClick={getBalance}
+              
             >
               잔액 조회
             </Button>
