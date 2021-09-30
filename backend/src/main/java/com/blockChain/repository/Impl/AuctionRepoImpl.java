@@ -100,6 +100,7 @@ public class AuctionRepoImpl implements AuctionRepoCustom{
 		QBid qb = QBid.bid;
 		BooleanBuilder builder = new BooleanBuilder();
 		builder.and(qa.auctionName.contains(word));
+		builder.and(qa.auctionState.eq("SELL"));
 		List<AuctionGroupListDTO> res = queryFactory.select(Projections.constructor(
 				AuctionGroupListDTO.class
 				, Projections.constructor(
@@ -143,7 +144,6 @@ public class AuctionRepoImpl implements AuctionRepoCustom{
 		QProduct_Media qpm= QProduct_Media.product_Media;
 		QProduct_Grade qpg = QProduct_Grade.product_Grade;
 		QBid qb = QBid.bid;
-
 		AuctionGroupListDTO res = queryFactory.select(Projections.constructor(
 				AuctionGroupListDTO.class
 				, Projections.constructor(
@@ -172,7 +172,7 @@ public class AuctionRepoImpl implements AuctionRepoCustom{
 				.join(qpt).on(qa.token.tokenNo.eq(qpt.token.tokenNo))
 				.join(qp).on(qpt.product.productNo.eq(qp.productNo))
 				.join(qpm).on(qp.productNo.eq(qpm.product.productNo))
-				.where(qa.auctionNo.eq(auctionNo))
+				.where(qa.auctionNo.eq(auctionNo).and(qa.auctionState.eq("SELL")))
 				.fetchOne();
 		return Optional.ofNullable(res);
 	}
@@ -204,5 +204,11 @@ public class AuctionRepoImpl implements AuctionRepoCustom{
 				.leftJoin(qao).on(qa.eq(qao.auction))
 				.leftJoin(qm).on(qao.member.eq(qm))
 				.fetch());
+	}
+	
+	@Override
+	public Long countAuctionRegistedByMember(Long memberNo){
+		QAuction qa = QAuction.auction;
+		return queryFactory.selectFrom(qa).where(qa.member.memberNo.eq(memberNo)).fetchCount();
 	}
 }
