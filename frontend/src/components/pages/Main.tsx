@@ -68,7 +68,7 @@ function Main(): JSX.Element {
           <iframe
             width="100%"
             height="500"
-            src="https://www.youtube.com/embed/v7bnOxV4jAc"
+            src="https://www.youtube.com/embed/v7bnOxV4jAc?autoplay=1"
             title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
