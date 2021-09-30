@@ -7,8 +7,6 @@
   background-color: #1c214f;
   color: white;
   text-align: left;
-  font-family: "Gowun Dodum" !important;
-  font-weight: 900 !important;
 }
 
 .mypageUserNick {
@@ -57,8 +55,6 @@
 
 .mypageUpdateBtn,
 .mypageAccountBtn {
-  font-family: "Gowun Dodum" !important;
-  font-weight: 900 !important;
   background-color: white !important;
 }
 

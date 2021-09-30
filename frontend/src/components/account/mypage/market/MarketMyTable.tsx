@@ -3,16 +3,19 @@ import "./MarketMyTable.css";
 
 interface MarketMyTableProps {
   card: {
-    marketNo: number;
-    imgUrl: string;
-    title: string;
-    current: number;
-    end: string;
+    auctionNo: number;
+    cardNm: string;
+    cardImg: string;
+    price: number;
+    state: string;
+    memberNo: number;
+    memberNick: string;
+    soldDate: string;
   };
 }
 
 function MarketMyTable(props: MarketMyTableProps) {
-  const { marketNo, imgUrl, title, current, end } = props.card;
+  const { auctionNo, cardImg, cardNm, price, state, memberNick } = props.card;
   const [hover, setHover] = useState<boolean>(false);
 
   return (
@@ -21,29 +24,28 @@ function MarketMyTable(props: MarketMyTableProps) {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <td className="myMarketNo">{marketNo}</td>
-      <td ><img className="myMarketImg" src={imgUrl} alt=""/>
-      {hover ? (
+      <td className="myMarketNo">{auctionNo}</td>
+      <td>
+        <img className="myMarketImg" src={"/" + cardImg + ".jpg"} alt="" />
+        {hover ? (
           <img
             className="myMarketImgHover"
-            src={imgUrl}
+            src={"/" + cardImg + ".jpg"}
             alt=""
             style={{ zIndex: 100, position: "absolute", visibility: "visible" }}
           />
         ) : (
           <img
             className="myMarketImgHover"
-            src={imgUrl}
+            src={"/" + cardImg + ".jpg"}
             alt=""
             style={{ zIndex: 100, position: "absolute", visibility: "hidden" }}
           />
-        )}</td>
-      <td className="myMarketProduct">
-        {title}
-        
+        )}
       </td>
-      <td className="myMarketCurrent">{current}</td>
-      <td className="myMarketEnd">{end}</td>
+      <td className="myMarketProduct">{cardNm}</td>
+      <td className="myMarketCurrent">{price}</td>
+      {state === "SOLD" ? <td className="myMarketEnd">{memberNick}</td> : <td className="myMarketEnd">판매중</td>}
     </tr>
   );
 }

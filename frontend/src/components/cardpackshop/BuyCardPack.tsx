@@ -98,7 +98,7 @@ function BuyCardPack(props: any): JSX.Element {
     setOpen(false);
   };
   // 카드창;
-  const [cardopen, setcardopen] = useState(true);
+  const [cardopen, setcardopen] = useState(false);
 
   const handleClickcardOpen = () => {
     setcardopen(true);

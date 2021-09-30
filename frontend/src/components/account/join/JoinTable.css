@@ -1,6 +1,4 @@
 .joinCheckBtn {
-  font-family: "Gowun Dodum" !important;
-  font-weight: 900 !important;
   margin-left: 10px !important;
 }
 
@@ -17,7 +15,6 @@
 
 .joinTable,
 .joinSelectCeleb {
-  font-family: "Work Sans", "Gowun Dodum";
   margin: 0 auto;
   width: 450px;
   text-align: left;
@@ -27,10 +24,6 @@
   margin-top: 50px;
 }
 
-.joinSelectCeleb {
-  font-family: "Gowun Dodum";
-  font-weight: 900;
-}
 
 .joinCelebInfo {
   text-align: left;
@@ -101,14 +94,10 @@
 
 .joinCancelBtn {
   margin-right: 30px !important;
-  font-family: "Gowun Dodum" !important;
-  font-weight: 900 !important;
 }
 
 .joinCancelBtn,
 .joinBtn {
   width: 200px;
   display: inline-block;
-  font-family: "Gowun Dodum" !important;
-  font-weight: 900 !important;
 }

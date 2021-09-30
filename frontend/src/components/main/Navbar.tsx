@@ -25,7 +25,7 @@ function Navbar(): JSX.Element {
 
   const handleToGallery = (pk: number | undefined) => {
     history.push({
-      pathname: `gallery/${pk}`,
+      pathname: `/gallery/${pk}`,
       state: { pk: pk },
     });
   };

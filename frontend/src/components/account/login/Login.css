@@ -1,6 +1,5 @@
 .loginTable {
   text-align: left;
-  font-family: 'Work Sans', 'Gowun Dodum';
 }
 
 .loginTable > h1 {
@@ -14,8 +13,6 @@
 }
 
 .loginBtns > div > Button {
-  font-family: 'Gowun Dodum' !important;
-  font-weight: 900 !important;
   margin-top: 20px;
 }
 

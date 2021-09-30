@@ -7,6 +7,9 @@ import "./MyPage.css";
 function MyPage(): JSX.Element {
   const [memberNick, setMemberNick] = useState<string>("");
   const [memberGrade, setMemberGrade] = useState<string>("");
+  const [countAuctionRegist, setCountAuctionRegist] = useState<number>(0);
+  const [countSalesLike, setCountSalesLike] = useState<number>(0);
+  const [countSalesOrder, setCountSalesOrder] = useState<number>(0);
 
   useEffect(() => {
     axios
@@ -16,11 +19,20 @@ function MyPage(): JSX.Element {
       .then((res) => {
         setMemberNick(res.data.mypage.memberNick);
         setMemberGrade(res.data.mypage.gradeNm);
+        setCountAuctionRegist(res.data.countAuctionRegist);
+        setCountSalesLike(res.data.countSalesLike);
+        setCountSalesOrder(res.data.countSalesLike);
       });
   }, []);
   return (
     <div className="myPage">
-      <MyPageTop memberNick={memberNick} memberGrade={memberGrade} />
+      <MyPageTop
+        memberNick={memberNick}
+        memberGrade={memberGrade}
+        countAuctionRegist={countAuctionRegist}
+        countSalesLike={countSalesLike}
+        countSalesOrder={countSalesOrder}
+      />
       <MyPageBody />
     </div>
   );

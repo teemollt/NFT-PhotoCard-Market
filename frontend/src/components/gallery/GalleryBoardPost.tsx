@@ -22,7 +22,7 @@ function GalleryBoardPost(props: GalleryBoardPostProps) {
 
   const handleToGallery = (pk: number) => {
     history.push({
-      pathname: `gallery/${pk}`,
+      pathname: `/gallery/${pk}`,
       state: { pk: pk },
     });
   };
