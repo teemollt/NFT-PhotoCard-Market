@@ -35,6 +35,20 @@ const useStyles = makeStyles((theme: Theme) =>
 function CardPackDetail(): JSX.Element {
   const classes = useStyles();
   const location: any = useLocation();
+
+  const [soldout, setsoldout] = useState<boolean>(false);
+  useEffect(() => {
+    axios
+      .get(`/api/cardPack/cardList/${location.state.data.salesNo}`, {
+        cardpackId: location.state.data.salesNo,
+      })
+      .then((res) => {
+        if ((res.data.res.length) <= 0) {
+          setsoldout(true);
+        }
+      })
+      .catch();
+  }, []);
   const [islike, setislike] = useState(false);
   const [likepeople, setlikepeople] = useState(0);
   useEffect(() => {
@@ -126,6 +140,7 @@ function CardPackDetail(): JSX.Element {
                 <BuyCardPack
                   cardpackprice={location.state.data.salesPrice}
                   cardpackNo={location.state.data.salesNo}
+                  soldout={soldout}
                 />
               </div>
               <div className={classes.paper2}>

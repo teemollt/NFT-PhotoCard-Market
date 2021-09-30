@@ -54,6 +54,7 @@ function Main(): JSX.Element {
           </svg>
         </div>
       </div>
+
       <div className="mainitem">
         <MainCarousel />
       </div>
