@@ -23,6 +23,7 @@
   transform: translate(-50%, -50%);
   background: #fff;
   transition: all 0.3s ease;
+
 }
 .search-form.focus {
   box-shadow: 0 3px 4px rgba(0, 0, 0, 0.15);
