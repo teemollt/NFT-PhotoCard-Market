@@ -5,27 +5,22 @@ import "./MainCarousel.css";
 
 function MainCarousel2(): JSX.Element {
   return (
-    <div>
-      <Container>
-        <Grid container spacing={3}>
-          <Grid item xs={6}>
-            <div className="namebox">
-              <h1 className="name">GD</h1>
-            </div>
-          </Grid>
-          <Grid item xs={6}>
-            <iframe
-              width="100%"
-              height="300"
-              src="https://www.youtube.com/embed/RKhsHGfrFmY"
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
-          </Grid>
-        </Grid>
-      </Container>
+    <div className="wrapper">
+      <input type="checkbox" />
+      <div className="video">
+        <iframe
+          width="100%"
+          height="500"
+          src="https://www.youtube.com/embed/v7bnOxV4jAc?autoplay=1"
+          title="YouTube video player"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
+      </div>
+      <div className="text">
+        <span data-text="Watch the video" />
+      </div>
     </div>
   );
 }

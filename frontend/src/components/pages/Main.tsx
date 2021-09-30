@@ -25,8 +25,22 @@ function Main(): JSX.Element {
   }
   return (
     <div>
-      <div className="mainitem">
-        <MainCelebList />
+      <div className="mainitem1">
+        <div className="mainitem">
+          <MainCarousel1 />
+        </div>
+        <div className="mainitem">
+          <MainCarousel2 />
+        </div>
+        <div className="mainitem">
+          <MainCarousel3 />
+        </div>
+        <div className="mainitem">
+          <MainCarousel4 />
+        </div>
+        <div className="mainitem">
+          <MainCarousel5 />
+        </div>
       </div>
       <div className="search">
         <div>
@@ -58,45 +72,8 @@ function Main(): JSX.Element {
           </svg>
         </div>
       </div>
-      <div className="mainitem">
+      <div className="mainitem2">
         <MainCarousel />
-      </div>
-      {/* 여기 */}
-      <div className="wrapper">
-        <input type="checkbox" />
-        <div className="video">
-          <iframe
-            width="100%"
-            height="500"
-            src="https://www.youtube.com/embed/v7bnOxV4jAc"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
-        </div>
-        <div className="text">
-          <span data-text="Watch the video" />
-        </div>
-      </div>
-      {/*  */}
-      <div className="mainitem">
-        <MainCarousel1 />
-      </div>
-      <div className="mainitem">
-        <MainCarousel2 />
-      </div>
-      <div className="mainitem">
-        <MainCarousel3 />
-      </div>
-      <div className="mainitem">
-        <MainCarousel4 />
-      </div>
-      <div className="mainitem">
-        <MainCarousel5 />
-      </div>
-      <div className="mainitem">
-        <MainCarousel6 />
       </div>
     </div>
   );
