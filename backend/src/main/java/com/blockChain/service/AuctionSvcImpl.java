@@ -263,8 +263,13 @@ public class AuctionSvcImpl implements AuctionSvcInter{
 			System.out.println(auction);
 			System.out.println(token);
 			Token_Owner to = toRepo.sltToken(token.getTokenNo()).orElseThrow(() -> new IllegalStateException("해당 토큰은 소유자가 없습니다."));
-			to.setMember(member);
-			toRepo.save(to); // 이게 수정처리가 되는건가
+			toRepo.delete(to);
+			Token_Owner newTo = new Token_Owner();
+			
+			newTo.setMember(member);
+			newTo.setToken(token);
+			newTo.setOwnDate(LocalDateTime.now());
+			toRepo.save(newTo); // 이게 수정처리가 되는건가
 			res.put("success", true);
 			res.put("msg", "구매가 완료되었습니다.");
 			//옥션 sold처리

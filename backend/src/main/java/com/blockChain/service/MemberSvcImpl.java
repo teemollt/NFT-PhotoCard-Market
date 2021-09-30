@@ -27,6 +27,7 @@ import com.blockChain.dto.AuctionAddImgDTO;
 import com.blockChain.dto.AuctionDTO;
 import com.blockChain.dto.LoginTokenDTO;
 import com.blockChain.jwt.TokenProvider;
+import com.blockChain.repository.AuctionRepo;
 import com.blockChain.repository.Auction_LikeRepo;
 import com.blockChain.repository.CelebRepo;
 import com.blockChain.repository.Celeb_LikeRepo;
@@ -62,6 +63,8 @@ public class MemberSvcImpl implements MemberSvcInter{
 	private Sales_LikeRepo slRepo;
 	@Autowired
 	private Auction_LikeRepo alRepo;
+	@Autowired
+	private AuctionRepo auctionRepo;
 	@Override
 	public Map<String,Object> signup(Map<String, Object> req){
 		 Map<String, Object> res = new HashMap<String,Object>();
@@ -245,6 +248,12 @@ public class MemberSvcImpl implements MemberSvcInter{
 		try{
 			Member member = memberRepo.findById(SecurityUtil.getCurrentMemberId()).orElseThrow(() -> new IllegalStateException("로그인 유저정보가 없습니다"));
 			MypageDTO mypage = memberRepo.myPage(member.getMemberNo());
+			//내 구매내역
+			res.put("countSalesOrder", soRepo.countSalesOrderByMember(member.getMemberNo()));
+			res.put("countSalesLike", slRepo.CountLikeByMember(member.getMemberNo()));
+			res.put("countAuctionRegist", auctionRepo.countAuctionRegistedByMember(member.getMemberNo()));
+			//내 관심상품
+			//내가 등록한 경매제품
 			res.put("mypage", mypage);
 		}catch(IllegalStateException e){
 			res.put("success", false);

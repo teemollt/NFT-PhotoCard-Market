@@ -37,8 +37,9 @@ public class Auction_Order {
 //    private Long auctionOrderPrice;
 
     // 주문일 
-	@Column(name="AUCTION_ORDER_DATE",updatable = false,
-			  columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+//	@Column(name="AUCTION_ORDER_DATE",updatable = false,
+//			  columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@Column(name="AUCTION_ORDER_DATE",updatable = false)
     private LocalDateTime auctionOrderDate;
 
     // 토큰번호
