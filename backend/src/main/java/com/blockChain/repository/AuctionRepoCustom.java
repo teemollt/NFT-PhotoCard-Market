@@ -17,4 +17,6 @@ public interface AuctionRepoCustom {
 
 	Optional<List<AuctionRegistedByMemberDTO>> auctionRegistedByMember(Long memberNo);
 
+	Long countAuctionRegistedByMember(Long memberNo);
+
 }

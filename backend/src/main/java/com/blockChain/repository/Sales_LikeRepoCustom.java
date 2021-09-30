@@ -15,4 +15,6 @@ public interface Sales_LikeRepoCustom {
 
 	Optional<List<SalesDTO>> likeList(Long memberPk);
 
+	Long CountLikeByMember(Long memberNo);
+
 }

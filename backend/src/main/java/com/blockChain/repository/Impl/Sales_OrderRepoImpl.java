@@ -34,4 +34,11 @@ public class Sales_OrderRepoImpl implements Sales_OrderRepoCustom{
 				.orderBy(qso.salesOrderDate.desc())
 				.fetch());
 	}
+	@Override
+	public Long countSalesOrderByMember(Long memberNo){
+		QSales_Order qso = QSales_Order.sales_Order;
+		return queryFactory.selectFrom(qso)
+				.where(qso.member.memberNo.eq(memberNo))
+				.fetchCount();
+	}
 }

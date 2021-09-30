@@ -52,4 +52,11 @@ public class Sales_LikeRepoImpl implements Sales_LikeRepoCustom{
 				.where(qsl.member.memberNo.eq(memberPk))
 				.fetch());
 	}
+	
+	@Override
+	public Long CountLikeByMember(Long memberNo) {
+		QSales_Like qsl = QSales_Like.sales_Like;
+		
+		return queryFactory.selectFrom(qsl).where(qsl.member.memberNo.eq(memberNo)).fetchCount();
+	}
 }
