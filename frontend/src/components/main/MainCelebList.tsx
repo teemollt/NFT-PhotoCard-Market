@@ -39,7 +39,7 @@ function MainCelebList(): JSX.Element {
   }
   return (
     <div className={classes.root}>
-      {celeb.map((group, i) => (
+      {/* {celeb.map((group, i) => (
         <Button
           onClick={() => {
             // gotocelebmain(group);
@@ -47,7 +47,26 @@ function MainCelebList(): JSX.Element {
         >
           {group.groupNm}
         </Button>
-      ))}
+      ))} */}
+      <div className="wrapper">
+        <input type="checkbox" />
+        <div className="video">
+          <iframe
+            width="100%"
+            height="500"
+            src="https://www.youtube.com/embed/v7bnOxV4jAc?autoplay=1"
+            title="YouTube video player"
+            frameBorder="0"
+            
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        </div>
+        <div className="text">
+          <span data-text="Watch the video" />
+        </div>
+      </div>
+      
     </div>
   );
 }

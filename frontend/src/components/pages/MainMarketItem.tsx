@@ -155,7 +155,11 @@ function MainMarketItem(): JSX.Element {
               <div className={classes.iteminfo}>{itemdetail}</div>
               <div className={classes.paper2}>
                 <div className="buybtn">
-                  <MarketBuyItem price={itemprice} itemtoken={itemtokenNo} />
+                  <MarketBuyItem
+                    price={itemprice}
+                    itemtoken={itemtokenNo}
+                    auctionNo={itemauctionNo}
+                  />
                 </div>
               </div>
             </Grid>
