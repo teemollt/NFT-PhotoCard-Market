@@ -1,30 +1,30 @@
-import React, { useEffect, useState } from "react"
-import { useHistory } from "react-router-dom"
-import "./BuyCardPack.css"
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import "./BuyCardPack.css";
 import {
   createStyles,
   Theme,
   withStyles,
   WithStyles,
-} from "@material-ui/core/styles"
-import Button from "@material-ui/core/Button"
-import Dialog from "@material-ui/core/Dialog"
-import MuiDialogTitle from "@material-ui/core/DialogTitle"
-import MuiDialogContent from "@material-ui/core/DialogContent"
-import MuiDialogActions from "@material-ui/core/DialogActions"
-import IconButton from "@material-ui/core/IconButton"
-import CloseIcon from "@material-ui/icons/Close"
-import Typography from "@material-ui/core/Typography"
-import LoadingButton from "@mui/lab/LoadingButton"
+} from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import MuiDialogTitle from "@material-ui/core/DialogTitle";
+import MuiDialogContent from "@material-ui/core/DialogContent";
+import MuiDialogActions from "@material-ui/core/DialogActions";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
+import Typography from "@material-ui/core/Typography";
+import LoadingButton from "@mui/lab/LoadingButton";
 
-import axios from "axios"
-import { contractAbi } from "../abi"
-import MyNewCards from "./MyNewCards"
+import axios from "axios";
+import { contractAbi } from "../abi";
+import MyNewCards from "./MyNewCards";
 
 export interface DialogTitleProps extends WithStyles<typeof styles> {
-  id: string
-  children: React.ReactNode
-  onClose: () => void
+  id: string;
+  children: React.ReactNode;
+  onClose: () => void;
 }
 const styles = (theme: Theme) =>
   createStyles({
@@ -46,9 +46,9 @@ const styles = (theme: Theme) =>
         fontSize: "inherit",
       },
     },
-  })
+  });
 const DialogTitle = withStyles(styles)((props: DialogTitleProps) => {
-  const { children, classes, onClose, ...other } = props
+  const { children, classes, onClose, ...other } = props;
   return (
     <MuiDialogTitle disableTypography className={classes.root} {...other}>
       <Typography variant="h6">{children}</Typography>
@@ -62,81 +62,81 @@ const DialogTitle = withStyles(styles)((props: DialogTitleProps) => {
         </IconButton>
       ) : null}
     </MuiDialogTitle>
-  )
-})
+  );
+});
 
 const DialogContent = withStyles((theme: Theme) => ({
   root: {
     padding: theme.spacing(2),
   },
-}))(MuiDialogContent)
+}))(MuiDialogContent);
 
 const DialogActions = withStyles((theme: Theme) => ({
   root: {
     margin: 0,
     padding: theme.spacing(1),
   },
-}))(MuiDialogActions)
+}))(MuiDialogActions);
 
 function BuyCardPack(props: any): JSX.Element {
   // web3 객체
-  const Web3 = require("web3")
-  const web3 = new Web3("http://13.125.37.55:8545")
+  const Web3 = require("web3");
+  const web3 = new Web3("http://13.125.37.55:8545");
   // contract 객체
-  const myContractAddress = "0x55e333149CE4558612055f453Bf1c7f7D81A3CAa"
-  const myContract = new web3.eth.Contract(contractAbi, myContractAddress)
-  const [open, setOpen] = useState(false)
+  const myContractAddress = "0x55e333149CE4558612055f453Bf1c7f7D81A3CAa";
+  const myContract = new web3.eth.Contract(contractAbi, myContractAddress);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    walletCheck()
-  }, [])
+    walletCheck();
+  }, []);
 
   const handleClickOpen = () => {
-    setOpen(true)
-  }
+    setOpen(true);
+  };
   const handleClose = () => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
   // 카드창;
-  const [cardopen, setcardopen] = useState(true)
+  const [cardopen, setcardopen] = useState(true);
 
   const handleClickcardOpen = () => {
-    setcardopen(true)
-  }
+    setcardopen(true);
+  };
 
   const handlecardClose = () => {
-    setcardopen(false)
-  }
-  const [newcardlist, setnewcardlist] = useState<any[]>([])
-  const [userAddress, setAddress] = useState<string>("")
-  const [userBalance, setBalance] = useState<string>("0")
+    setcardopen(false);
+  };
+  const [newcardlist, setnewcardlist] = useState<any[]>([]);
+  const [userAddress, setAddress] = useState<string>("");
+  const [userBalance, setBalance] = useState<string>("0");
   const walletCheck = async () => {
     try {
       const res = await axios.get("/api/wallet/", {
         headers: { Authorization: localStorage.getItem("token") },
-      })
+      });
       if (res.data.success == true) {
-        setAddress(res.data.address)
-        setBalance(res.data.walletBal)
+        setAddress(res.data.address);
+        setBalance(res.data.walletBal);
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
-  const [loading, setloading] = useState(false)
+  };
+  const [loading, setloading] = useState(false);
   // 결제함수
   const pay = () => {
     if (userAddress) {
-      walletCheck()
+      walletCheck();
 
-      console.log("pay함수 실행")
-      console.log(userBalance)
+      console.log("pay함수 실행");
+      console.log(userBalance);
       // 결재코드
       // 잔액이 얼마 이상이면?
       if (parseFloat(userBalance) > props.cardpackprice + 0.01) {
-        console.log("통과했니")
+        console.log("통과했니");
         // 로딩돌기시작
-        setloading(true)
+        setloading(true);
         // 컨트랙트 buyCardPack 호출
         myContract.methods
           .buyCardPack()
@@ -145,17 +145,17 @@ function BuyCardPack(props: any): JSX.Element {
             value: props.cardpackprice * Math.pow(10, 18),
           })
           .then(function (receipt: any) {
-            console.log(receipt)
+            console.log(receipt);
             axios
               .get(`/api/cardPack/buy/${props.cardpackNo}`, {
                 headers: { Authorization: localStorage.getItem("token") },
                 cardpackNo: props.cardpackNo,
               })
               .then((res) => {
-                console.log(res.data)
-                handleClickcardOpen()
-                setnewcardlist(res.data.cardList)
-                const tokenIds = res.data.cardList
+                console.log(res.data);
+                handleClickcardOpen();
+                setnewcardlist(res.data.cardList);
+                const tokenIds = res.data.cardList;
                 for (let i = 0; i < tokenIds.length; i++) {
                   myContract.methods
                     .changeOwner(tokenIds[i].tokenNo)
@@ -163,43 +163,30 @@ function BuyCardPack(props: any): JSX.Element {
                       from: userAddress,
                     })
                     .then(function (receipt: any) {
-                      console.log(receipt)
-                      walletCheck()
-                    })
+                      console.log(receipt);
+                      walletCheck();
+                    });
                 }
                 // 로딩종료
-                setloading(false)
-                setOpen(false)
+                setloading(false);
+                setOpen(false);
               })
-              .catch()
-          })
+              .catch();
+          });
       } else {
-        alert("잔액이 부족합니다. 캐시를 충전해주세요")
+        alert("잔액이 부족합니다. 캐시를 충전해주세요");
       }
     } else {
-      alert("지갑을 생성해주세요")
+      alert("지갑을 생성해주세요");
     }
-  }
-  let history = useHistory()
+  };
+  let history = useHistory();
   function makewallet() {
     history.push({
       pathname: "/mypage",
-    })
+    });
   }
-
-}
-return (
-  <div>
-    <div style={{ textAlign: "center" }}>
-      <Button
-        variant="contained"
-        color="secondary"
-        onClick={handleClickOpen}
-        style={{ width: "300px", marginTop: "5px" }}
-      >
-        {props.cardpackprice} 구매하기
-      </Button>
-    </div>
+  return (
     <div>
       {/* GRADIENT CIRCLE PLANES */}
       <div style={{ textAlign: "center" }}>
@@ -261,8 +248,8 @@ return (
               <Button
                 autoFocus
                 onClick={() => {
-                  setOpen(false)
-                  setloading(false)
+                  setOpen(false);
+                  setloading(false);
                 }}
                 color="primary"
                 fullWidth
@@ -290,7 +277,7 @@ return (
         </Dialog>
       </div>
     </div>
-    );
+  );
 }
 
-    export default BuyCardPack;
+export default BuyCardPack;
