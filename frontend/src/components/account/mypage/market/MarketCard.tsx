@@ -1,15 +1,36 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import "./MarketCard.css";
 
-function MarketCard(props: any) {
+interface MarketCardProps {
+  card: {
+    auctionNo: number;
+    auctionTitle: string;
+    price: number;
+    auctionImg: string
+  };
+}
+
+function MarketCard(props: MarketCardProps) { 
+  let history = useHistory();
+
+  const { auctionNo, auctionTitle, price, auctionImg } = props.card;
+
+const handleToMarket = (data: any) => {
+    history.push({
+      pathname: `/marketitem/${auctionNo}`,
+      state: { auctionNo: auctionNo },
+    });
+  };
+
   return (
-    <div className="marketCard">
+    <div className="marketCard" onClick={()=>handleToMarket(auctionNo)}>
       <div className="marketCardImg">
-        <img src={props.card.imgUrl} alt="" />
+        <img src={'/' + auctionImg + '.jpg'} alt="" />
       </div>
       <div>
-        <span className="marketCardTitle">{props.card.title}</span>
-        <span className="marketCardPrice">{props.card.price}BTC</span>
+        <span className="marketCardTitle">{auctionTitle}</span>
+        <span className="marketCardPrice">{price}BTC</span>
       </div>
     </div>
   );

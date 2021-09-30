@@ -10,14 +10,14 @@ function MainCarousel4(): JSX.Element {
         <Grid container spacing={3}>
           <Grid item xs={6}>
             <div className="namebox">
-              <h1 className="name">IU</h1>
+              <h1 className="name">Taeyeon</h1>
             </div>
           </Grid>
           <Grid item xs={6}>
             <iframe
               width="100%"
               height="300"
-              src="https://www.youtube.com/embed/86BST8NIpNM"
+              src="https://www.youtube.com/embed/RmuL-BPFi2Q"
               title="YouTube video player"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

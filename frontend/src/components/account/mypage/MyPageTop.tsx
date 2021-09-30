@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react"
-import axios from 'axios'
+import axios from "axios"
 import { Link } from "react-router-dom"
 import { Button } from "@material-ui/core"
 import "./MyPageTop.css"
-import Web3 from 'web3'
-import { ConstructionRounded } from '@mui/icons-material'
+import Web3 from "web3"
+import { ConstructionRounded } from "@mui/icons-material"
 
 interface MyPageTopProps {
   memberNick: string
@@ -13,24 +13,28 @@ interface MyPageTopProps {
 
 function MyPageTop(props: MyPageTopProps): JSX.Element {
   const { memberNick, memberGrade } = props
-  const Web3 = require('web3')
-  const web3 = new Web3('http://13.125.37.55:8545')
+  const Web3 = require("web3")
+  const web3 = new Web3("http://13.125.37.55:8545")
   // 관리자 계정(이더 많은거)
   const admin = "0x39dce082172253d8d816b0e9aa48345a72a2179a"
   // api 통해 불러온 유저 계정
-  const [userAddress, setAddress] = useState<string>('')
+  const [userAddress, setAddress] = useState<string>("")
   // 잔액
-  const [userBalance, setBalance] = useState<string>('0')
+  const [userBalance, setBalance] = useState<string>("0")
 
   const walletCheck = async () => {
     try {
-      const res = await axios.get('/api/wallet/', { headers: { Authorization: localStorage.getItem("token") } })
+      const res = await axios.get("/api/wallet/", {
+        headers: { Authorization: localStorage.getItem("token") },
+      })
       console.log(res.data)
       if (res.data.success == true) {
         setAddress(res.data.address)
         setBalance(res.data.walletBal)
       }
-    } catch (err) { console.log(err) }
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   useEffect(() => {
@@ -55,8 +59,8 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
       gasPrice: "20000000000",
       gas: "21000",
       to: userAddress,
-      value: '10000000000000000000',
-      data: ""
+      value: "10000000000000000000",
+      data: "",
     }
     try {
       const adminUnlock = await web3.eth.personal.unlockAccount(admin, '1234', 6000)
@@ -78,17 +82,47 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
         </div>
         <div className="mypageUserInfos">
           <p className="mypageGrade">{memberGrade}</p>
-          {(userAddress !== '') ? (<p> 지갑주소: {userAddress}  잔액: {userBalance} </p>) : (
-            <Button className="mypageUpdateBtn" variant="outlined" size="medium" onClick={getAccount}>지갑 생성</Button>)}
+          {userAddress !== "" ? (
+            <div className="mypageAccount">
+              <p>지갑주소: {userAddress}</p>
+              <p>잔액: {userBalance} </p>
+            </div>
+          ) : (
+            <Button
+              className="mypageUpdateBtn"
+              variant="outlined"
+              size="medium"
+              onClick={getAccount}
+            >
+              지갑 생성
+            </Button>
+          )}
           <br />
-          <Button className="mypageUpdateBtn" variant="outlined" size="medium" onClick={chargeEth}>이더 충전</Button>
         </div>
         <div className="mypageUserUpdate">
-          <Link className="tablink" to="/update">
+          <Link className="tablinkMyPage" to="/update">
             <Button className="mypageUpdateBtn" variant="outlined" size="large">
               정보 수정
             </Button>
           </Link>
+          <div>
+            <Button
+              className="mypageAccountBtn"
+              variant="outlined"
+              size="medium"
+              onClick={getBalance}
+            >
+              잔액 조회
+            </Button>
+            <Button
+              className="mypageAccountBtn"
+              variant="outlined"
+              size="medium"
+              onClick={chargeEth}
+            >
+              이더 충전
+            </Button>
+          </div>
         </div>
       </div>
 

@@ -43,9 +43,9 @@ function MainMarketItem(): JSX.Element {
     if (islike) {
       axios
         .post(
-          "/api/cardPack/like",
+          "/api/auction/like",
           {
-            auctionNo: location.state.data.auction.auctionNo,
+            auctionNo: location.state.auctionNo,
           },
           {
             headers: {
@@ -60,9 +60,9 @@ function MainMarketItem(): JSX.Element {
     } else {
       axios
         .post(
-          "/api/cardPack/like",
+          "/api/auction/like",
           {
-            auctionNo: location.state.data.auction.auctionNo,
+            auctionNo: location.state.auctionNo,
           },
           {
             headers: {
@@ -76,15 +76,47 @@ function MainMarketItem(): JSX.Element {
         });
     }
   };
+  const [itemtitle, setitemtitle] = useState<string>("");
+  const [itemdetail, setitemdetail] = useState<string>("");
+  const [itemimageurl, setitemimageurl] = useState<string>("");
+  const [itemprice, setitemprice] = useState<number>(0);
+  const [itemauctionNo, setitemauctionNo] = useState<number>(0);
+  const [itemtokenNo, setitemtokenNo] = useState<number>(0);
+  // 옥션번호로 데이터받기
   useEffect(() => {
-    axios.get(
-      `/api/marketcard/likecheck/${location.state.data.auction.auctionNo}`,
-      {
-        auctionNo: location.state.data.auction.auctionNo,
+    axios
+      .get(`/api/auction/${location.state.auctionNo}/detail`, {
+        auctionNo: location.state.auctionNo,
         headers: { Authorization: localStorage.getItem("token") },
-      }
-    );
-  }, []);
+      })
+      .then((res) => {
+        console.log(res.data);
+        setitemtitle(res.data.auction.auctionTitle);
+        setitemdetail(res.data.auction.auctionDetail);
+        setitemimageurl(res.data.card.cardImgUrl);
+        setitemprice(res.data.auction.price);
+        setitemauctionNo(res.data.auction.auctionNo);
+        setitemtokenNo(res.data.card.tokenNo);
+      })
+      .catch();
+  });
+  useEffect(() => {
+    axios
+      .get(`/api/auction/likecheck/${location.state.auctionNo}`, {
+        auctionNo: location.state.auctionNo,
+        headers: { Authorization: localStorage.getItem("token") },
+      })
+      .then((res) => {
+        console.log(res);
+        setlikepeople(res.data.peoplelike);
+        if (res.data.islike === true) {
+          setislike(true);
+        } else {
+          setislike(false);
+        }
+      })
+      .catch();
+  });
   const classes = useStyles();
   const location: any = useLocation();
   return (
@@ -95,7 +127,7 @@ function MainMarketItem(): JSX.Element {
             <Grid item xs={12}>
               <Paper className={classes.paper}>
                 <img
-                  src={"/" + location.state.data.card.cardImgUrl + ".jpg"}
+                  src={"/" + itemimageurl + ".jpg"}
                   alt=""
                   width="100%"
                   height="100%"
@@ -118,14 +150,12 @@ function MainMarketItem(): JSX.Element {
                 )}
               </Tooltip>
               <div className={classes.iteminfo}>
-                <h1>{location.state.data.auction.auctionTitle}</h1>
+                <h1>{itemtitle}</h1>
               </div>
-              <div className={classes.iteminfo}>
-                {location.state.data.auction.auctionDetail}
-              </div>
+              <div className={classes.iteminfo}>{itemdetail}</div>
               <div className={classes.paper2}>
                 <div className="buybtn">
-                  <MarketBuyItem price={location.state.data.auction.price} />
+                  <MarketBuyItem price={itemprice} itemtoken={itemtokenNo} />
                 </div>
               </div>
             </Grid>

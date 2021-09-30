@@ -73,6 +73,14 @@ function MarketBuyItem(props: any): JSX.Element {
   const handleClose = () => {
     setOpen(false);
   };
+  const pay = (buyprice: number) => {
+    // 결제함수
+    console.log(buyprice);
+    // 옥션번호
+    console.log(props.itemtokenNo);
+    setOpen(false);
+    // 잔액비교
+  };
   return (
     <div>
       <Fab variant="extended" color="primary" onClick={handleClickOpen}>
@@ -90,7 +98,13 @@ function MarketBuyItem(props: any): JSX.Element {
           <div style={{ width: "550px", height: "300px" }}></div>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose} color="primary">
+          <Button
+            autoFocus
+            onClick={() => {
+              pay(props.price);
+            }}
+            color="primary"
+          >
             Save changes
           </Button>
         </DialogActions>

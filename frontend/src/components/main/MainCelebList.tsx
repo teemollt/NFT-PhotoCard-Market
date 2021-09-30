@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -29,21 +29,20 @@ function MainCelebList(): JSX.Element {
     });
   }, []);
 
-  let history = useHistory();
+  // let history = useHistory();
   function gotocelebmain(data: any) {
     console.log(data);
-
-    history.push({
-      pathname: `/mainceleb/${data.groupNo}`,
-      state: { data: data },
-    });
+    // history.push({
+    //   pathname: `/searchall/${data.groupNm}`,
+    //   state: { data: data },
+    // });
   }
   return (
     <div className={classes.root}>
       {celeb.map((group, i) => (
         <Button
           onClick={() => {
-            gotocelebmain(group);
+            // gotocelebmain(group);
           }}
         >
           {group.groupNm}

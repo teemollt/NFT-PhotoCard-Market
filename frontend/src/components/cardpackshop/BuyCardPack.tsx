@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import { useHistory } from "react-router-dom"
 import "./BuyCardPack.css"
 import {
   createStyles,
@@ -14,8 +15,11 @@ import MuiDialogActions from "@material-ui/core/DialogActions"
 import IconButton from "@material-ui/core/IconButton"
 import CloseIcon from "@material-ui/icons/Close"
 import Typography from "@material-ui/core/Typography"
+import LoadingButton from "@mui/lab/LoadingButton"
+
 import axios from "axios"
-import { contractAbi } from '../abi'
+import { contractAbi } from "../abi"
+import MyNewCards from "./MyNewCards"
 
 export interface DialogTitleProps extends WithStyles<typeof styles> {
   id: string
@@ -33,6 +37,14 @@ const styles = (theme: Theme) =>
       right: theme.spacing(1),
       top: theme.spacing(1),
       color: theme.palette.grey[500],
+    },
+    buttonRoot: {
+      fontSize: "inherit" /* inherit from Typography */,
+    },
+    myIconSizeMedium: {
+      "& > *:first-child": {
+        fontSize: "inherit",
+      },
     },
   })
 const DialogTitle = withStyles(styles)((props: DialogTitleProps) => {
@@ -68,10 +80,10 @@ const DialogActions = withStyles((theme: Theme) => ({
 
 function BuyCardPack(props: any): JSX.Element {
   // web3 객체
-  const Web3 = require('web3')
-  const web3 = new Web3('http://13.125.37.55:8545')
+  const Web3 = require("web3")
+  const web3 = new Web3("http://13.125.37.55:8545")
   // contract 객체
-  const myContractAddress = '0x05C0D32D866Be1AB23B62AF3ca5bc673E45Aff6d'
+  const myContractAddress = "0x05C0D32D866Be1AB23B62AF3ca5bc673E45Aff6d"
   const myContract = new web3.eth.Contract(contractAbi, myContractAddress)
   const [open, setOpen] = useState(false)
 
@@ -86,7 +98,7 @@ function BuyCardPack(props: any): JSX.Element {
     setOpen(false)
   }
   // 카드창;
-  const [cardopen, setcardopen] = useState(false)
+  const [cardopen, setcardopen] = useState(true)
 
   const handleClickcardOpen = () => {
     setcardopen(true)
@@ -96,51 +108,83 @@ function BuyCardPack(props: any): JSX.Element {
     setcardopen(false)
   }
   const [newcardlist, setnewcardlist] = useState<any[]>([])
-  const [userAddress, setAddress] = useState<string>('')
-  const [userBalance, setBalance] = useState<string>('0')
+  const [userAddress, setAddress] = useState<string>("")
+  const [userBalance, setBalance] = useState<string>("0")
   const walletCheck = async () => {
     try {
-      const res = await axios.get('/api/wallet/', { headers: { Authorization: localStorage.getItem("token") } })
-      console.log(res.data)
+      const res = await axios.get("/api/wallet/", {
+        headers: { Authorization: localStorage.getItem("token") },
+      })
       if (res.data.success == true) {
         setAddress(res.data.address)
         setBalance(res.data.walletBal)
       }
-    } catch (err) { console.log(err) }
+    } catch (err) {
+      console.log(err)
+    }
   }
+  const [loading, setloading] = useState(false)
   // 결제함수
   const pay = () => {
-    walletCheck()
-    setOpen(false)
-    // 잔액이 얼마 이상이면?
-    if (parseFloat(userBalance) > props.cardpackprice + 0.01)
-      // 컨트랙트 buyCardPack 호출
-      myContract.methods.buyCardPack().send({
-        from: userAddress,
-        value: props.cardpackprice * Math.pow(10, 18)
-      }).then(function (receipt: any) {
-        console.log(receipt)
-        axios
-          .get(`/api/cardPack/buy/${props.cardpackNo}`, {
-            headers: { Authorization: localStorage.getItem("token") },
-            cardpackNo: props.cardpackNo,
+    if (userAddress) {
+      walletCheck()
+
+      console.log("pay함수 실행")
+      console.log(userBalance)
+      // 결재코드
+      // 잔액이 얼마 이상이면?
+      if (parseFloat(userBalance) > props.cardpackprice + 0.01) {
+        console.log("통과했니")
+        // 로딩돌기시작
+        setloading(true)
+        // 컨트랙트 buyCardPack 호출
+        myContract.methods
+          .buyCardPack()
+          .send({
+            from: userAddress,
+            value: props.cardpackprice * Math.pow(10, 18),
           })
-          .then((res) => {
-            console.log(res.data)
-            handleClickcardOpen()
-            setnewcardlist(res.data.cardList)
-            const tokenIds = res.data.cardList
-            for (let i = 0; i < tokenIds.length; i++) {
-              myContract.methods.changeOwner(tokenIds[i].tokenNo).send({
-                from: userAddress,
-              }).then(function (receipt: any) {
-                console.log(receipt)
+          .then(function (receipt: any) {
+            console.log(receipt)
+            axios
+              .get(`/api/cardPack/buy/${props.cardpackNo}`, {
+                headers: { Authorization: localStorage.getItem("token") },
+                cardpackNo: props.cardpackNo,
               })
-            }
-            walletCheck()
+              .then((res) => {
+                console.log(res.data)
+                handleClickcardOpen()
+                setnewcardlist(res.data.cardList)
+                const tokenIds = res.data.cardList
+                for (let i = 0; i < tokenIds.length; i++) {
+                  myContract.methods
+                    .changeOwner(tokenIds[i].tokenNo)
+                    .send({
+                      from: userAddress,
+                    })
+                    .then(function (receipt: any) {
+                      console.log(receipt)
+                      walletCheck()
+                    })
+                }
+                // 로딩종료
+                setloading(false)
+                setOpen(false)
+              })
+              .catch()
           })
-          .catch()
-      })
+      } else {
+        alert("잔액이 부족합니다. 캐시를 충전해주세요")
+      }
+    } else {
+      alert("지갑을 생성해주세요")
+    }
+  }
+  let history = useHistory()
+  function makewallet() {
+    history.push({
+      pathname: "/mypage",
+    })
   }
 
 }
@@ -157,61 +201,96 @@ return (
       </Button>
     </div>
     <div>
-      <Dialog
-        onClose={handleClose}
-        aria-labelledby="customized-dialog-title"
-        open={open}
-      >
-        <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-          결제하기
-        </DialogTitle>
-        <DialogContent dividers>
-          <div style={{ width: "550px", height: "300px" }}></div>
-        </DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={handleClose} color="primary">
-            cancel
+      {/* GRADIENT CIRCLE PLANES */}
+      <div style={{ textAlign: "center" }}>
+        {props.soldout ? (
+          <Button
+            variant="contained"
+            color="secondary"
+            disabled
+            onClick={handleClickOpen}
+            style={{ width: "300px", marginTop: "5px" }}
+          >
+            Sold out
           </Button>
-          <Button autoFocus onClick={pay} color="primary">
-            pay
+        ) : (
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={handleClickOpen}
+            style={{ width: "300px", marginTop: "5px" }}
+          >
+            {props.cardpackprice} 구매하기
           </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
-    <div>
-      <Dialog
-        onClose={handlecardClose}
-        aria-labelledby="customized-dialog-title"
-        open={cardopen}
-        className="newcardsbackground"
-        fullWidth
-        maxWidth="lg"
-      >
-        <DialogContent dividers className="newcards">
-          <div style={{}}>
-            <div className="container1">
-              {newcardlist.map((card, i) => (
-                <div
-                  className="card card0"
-                  style={{
-                    backgroundImage: `url("/${card.cardImgUrl}.jpg")`,
-                    width: "100%",
-                    height: "300px",
-                  }}
-                >
-                  <div className="border">
-                    <h2 className="buycardpacktit">{card.cardNM}</h2>
-                    <h2 className="buycardpacktit">{card.cardGradeNM}</h2>
+        )}
+      </div>
+      <div>
+        <Dialog
+          onClose={handleClose}
+          aria-labelledby="customized-dialog-title"
+          open={open}
+          style={{}}
+        >
+          <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+            결제하기
+          </DialogTitle>
+          <DialogContent dividers>
+            <div style={{ width: "500px", height: "100%" }}>
+              <Button autoFocus onClick={makewallet} color="primary" fullWidth>
+                <h3 style={{ color: "black" }}>지갑 생성하러가기</h3>
+              </Button>
+              {loading ? (
+                <LoadingButton fullWidth>
+                  <div id="floatingCirclesG">
+                    <div className="f_circleG" id="frotateG_01" />
+                    <div className="f_circleG" id="frotateG_02" />
+                    <div className="f_circleG" id="frotateG_03" />
+                    <div className="f_circleG" id="frotateG_04" />
+                    <div className="f_circleG" id="frotateG_05" />
+                    <div className="f_circleG" id="frotateG_06" />
+                    <div className="f_circleG" id="frotateG_07" />
+                    <div className="f_circleG" id="frotateG_08" />
                   </div>
-                </div>
-              ))}
+                </LoadingButton>
+              ) : (
+                <Button autoFocus onClick={pay} color="primary" fullWidth>
+                  <h1 style={{ color: "black" }}>pay</h1>
+                </Button>
+              )}
+
+              <Button
+                autoFocus
+                onClick={() => {
+                  setOpen(false)
+                  setloading(false)
+                }}
+                color="primary"
+                fullWidth
+              >
+                <h4 style={{ color: "black" }}>cancel</h4>
+              </Button>
+            </div>
+          </DialogContent>
+          <DialogActions></DialogActions>
+        </Dialog>
+      </div>
+      <div>
+        <Dialog
+          onClose={handlecardClose}
+          aria-labelledby="customized-dialog-title"
+          open={cardopen}
+          className="newcardsbackground"
+          maxWidth="lg"
+        >
+          <div style={{ height: "555px", width: "310px" }} className="noscroll">
+            <div>
+              <MyNewCards newcardlist={newcardlist} />
             </div>
           </div>
-        </DialogContent>
-      </Dialog>
+        </Dialog>
+      </div>
     </div>
-  </div>
-)
+    );
 }
 
-export default BuyCardPack
+    export default BuyCardPack;
