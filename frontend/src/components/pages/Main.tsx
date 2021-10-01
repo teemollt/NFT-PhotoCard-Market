@@ -51,7 +51,7 @@ function Main(): JSX.Element {
           <form className="search-form">
             <input
               type="search"
-              placeholder="Search"
+              placeholder="찾고싶은 셀럽의 이름을 입력해주세요"
               className="search-input"
               onChange={(e) => {
                 console.log(e.target.value);
