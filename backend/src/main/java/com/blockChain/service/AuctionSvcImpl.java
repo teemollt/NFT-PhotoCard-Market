@@ -338,7 +338,8 @@ public class AuctionSvcImpl implements AuctionSvcInter{
 			Auction auction= auctionRepo.findById(auctionNo).orElseThrow(() -> new IllegalStateException("해당 게시글이 존재하지 않습니다."));
 			if(member.getMemberNo()!=auction.getMember().getMemberNo()) {throw new IllegalStateException("자신이 작성한 글만 삭제할 수 있습니다.");};
 			if(!auction.getAuctionState().equals("SELL")){throw new IllegalStateException("현재 판매중인 게시글만 삭제할 수 있습니다.");};
-			auctionRepo.delete(auction);
+			auction.setAuctionState("DEL");
+			auctionRepo.save(auction);
 			res.put("success", true);
 			res.put("msg", "성공적으로 삭제되었습니다.");
 		}catch(IllegalStateException e){
