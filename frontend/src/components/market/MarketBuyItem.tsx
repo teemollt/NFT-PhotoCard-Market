@@ -15,8 +15,12 @@ import MuiDialogTitle from "@material-ui/core/DialogTitle";
 import MuiDialogContent from "@material-ui/core/DialogContent";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
-import Typography from "@material-ui/core/Typography";
 import LoadingButton from "@mui/lab/LoadingButton";
+import TextField from "@mui/material/TextField";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContentText from "@mui/material/DialogContentText";
+import Popover from "@mui/material/Popover";
+import Typography from "@mui/material/Typography";
 import axios from "axios";
 import { contractAbi } from "../abi";
 
@@ -65,8 +69,6 @@ const DialogContent = withStyles((theme: Theme) => ({
 function MarketBuyItem(props: any): JSX.Element {
   // 판매자와 구매자 비교
   const [Iam, setIam] = useState(0);
-  const [can, setcan] = useState(false);
-  console.log(props.memberNo);
   // web3 객체
   const Web3 = require("web3");
   const web3 = new Web3("http://13.125.37.55:8545");
@@ -93,14 +95,7 @@ function MarketBuyItem(props: any): JSX.Element {
     var token = localStorage.getItem("token");
     if (token) {
       var decoded: any | unknown = jwt_decode(token);
-      console.log(decoded.sub);
       setIam(decoded.sub);
-    }
-    if (Iam === props.memberNo) {
-      setcan(false);
-      console.log("살수없음");
-    } else {
-      setcan(true);
     }
     walletCheck();
   });
@@ -109,6 +104,9 @@ function MarketBuyItem(props: any): JSX.Element {
   };
   const handleClose = () => {
     setOpen(false);
+  };
+  const handleCloseedit = () => {
+    setopenedit(false);
   };
   const [loading, setloading] = useState(false);
   // 결제함수
@@ -218,15 +216,157 @@ function MarketBuyItem(props: any): JSX.Element {
       pathname: "/mypage",
     });
   }
-  function edit() {}
-  console.log(props.Iam);
-  console.log(props.memberNo);
+  const [openedit, setopenedit] = useState<boolean>(false);
+  const [newtitle, setnewtitle] = useState<string>(props.title);
+  const [newdetail, setnewdetail] = useState<string>(props.detail);
+  const [newprice, setnewprice] = useState<number>(props.price);
+  function edit() {
+    console.log(props.price);
+    console.log(newprice);
+    console.log(newtitle);
+    console.log(newdetail);
+    setopenedit(true);
+    if (newtitle === "") {
+      setnewtitle(props.title);
+    }
+    if (newdetail === "") {
+      setnewdetail(props.detail);
+    }
+    if (newprice === 0) {
+      setnewprice(props.price);
+    }
+    axios
+      .put(
+        "/api/auction/edit",
+        {
+          auctionNo: props.auctionNo,
+          auctionDetail: newdetail,
+          auctionTitle: newtitle,
+          price: newprice,
+        },
+        {
+          headers: { Authorization: localStorage.getItem("token") },
+        }
+      )
+      .then((res) => {
+        setopenedit(false);
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  const [opendelete, setopendelete] = useState(false);
+
+  const handleClickOpendelete = () => {
+    setopendelete(true);
+  };
+
+  const handleClosedelete = () => {
+    setopendelete(false);
+  };
+
+  function deleteitem() {
+    axios
+      .delete("/api/auction/delete", {
+        auctionNo: parseInt(props.auctionNo),
+        headers: { Authorization: localStorage.getItem("token") },
+      })
+      .then((res) => {
+        console.log(res);
+        setopendelete(false);
+      })
+      .catch();
+  }
+
   return (
     <div>
       {parseInt(props.memberNo) === parseInt(props.Iam) ? (
-        <Button fullWidth onClick={edit}>
-          수정하기
-        </Button>
+        <div>
+          <Button
+            fullWidth
+            onClick={() => {
+              setopenedit(true);
+            }}
+          >
+            수정
+          </Button>
+          {/* 수정 */}
+          <Dialog open={openedit} onClose={handleCloseedit}>
+            <DialogContent>
+              <DialogContentText>
+                수정항목을 입력해주세요. 미입력시 기존값으로 저장됩니다.
+              </DialogContentText>
+              <TextField
+                autoFocus
+                margin="dense"
+                id="name"
+                label="Title"
+                type="text"
+                fullWidth
+                variant="standard"
+                placeholder={props.title}
+                onChange={(e) => {
+                  setnewtitle(e.target.value);
+                }}
+              />
+              <TextField
+                autoFocus
+                margin="dense"
+                id="name"
+                label="Detail"
+                type="text"
+                fullWidth
+                variant="standard"
+                placeholder={props.detail}
+                multiline
+                onChange={(e) => {
+                  setnewdetail(e.target.value);
+                }}
+              />
+              <TextField
+                autoFocus
+                margin="dense"
+                id="name"
+                label="Price"
+                type="number"
+                fullWidth
+                variant="standard"
+                placeholder={props.price}
+                onChange={(e) => {
+                  setnewprice(parseInt(e.target.value));
+                }}
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleCloseedit}>Cancel</Button>
+              <Button onClick={edit}>save</Button>
+            </DialogActions>
+          </Dialog>
+          {/* 삭제 */}
+          <Button fullWidth onClick={handleClickOpendelete}>
+            삭제
+          </Button>
+          <Dialog
+            open={opendelete}
+            onClose={handleClosedelete}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                정말 판매글을 삭제하시겠습니까?
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClosedelete}>cancel</Button>
+              <Button onClick={deleteitem} autoFocus>
+                delete
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </div>
       ) : (
         <Button fullWidth onClick={handleClickOpen}>
           {props.price} eth 구매
@@ -242,9 +382,12 @@ function MarketBuyItem(props: any): JSX.Element {
         </DialogTitle>
         <DialogContent dividers>
           <div style={{ width: "500px", height: "100%" }}>
-            <Button autoFocus onClick={makewallet} color="primary" fullWidth>
-              <h3 style={{ color: "black" }}>지갑 생성하러가기</h3>
-            </Button>
+            {userAddress ? null : (
+              <Button autoFocus onClick={makewallet} color="primary" fullWidth>
+                <h3 style={{ color: "black" }}>지갑 생성하러가기</h3>
+              </Button>
+            )}
+
             {loading ? (
               <LoadingButton fullWidth>
                 <div id="floatingCirclesG">

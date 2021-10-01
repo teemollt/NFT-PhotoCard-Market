@@ -1,11 +1,13 @@
 import React from "react";
-
+import Tooltip from "@mui/material/Tooltip";
 import "./MainCarousel.css";
 
 function MainCarousel2(): JSX.Element {
   return (
     <div className="wrapper">
-      <input type="checkbox" />
+      <Tooltip title="G-Dragon click">
+        <input type="checkbox" className="maincirclevideo" />
+      </Tooltip>
       <div className="video">
         <video src="/videos/main_gd.mp4" loop muted autoPlay playsInline />
       </div>
