@@ -289,4 +289,62 @@ public class AuctionSvcImpl implements AuctionSvcInter{
 		}
 		return res;
 	}
+	@Override
+	public Map<String,Object>editAuction(Map<String,Object> req){
+		Map<String, Object> res = new HashMap<String,Object>();
+		Long nowLoginMemberNo=0L;// 샘플 0 
+		try {
+			nowLoginMemberNo=SecurityUtil.getCurrentMemberId();
+		}catch (RuntimeException e) {
+			nowLoginMemberNo=0L;
+		}
+		
+		
+		try {
+			Member member = memberRepo.findById(nowLoginMemberNo).orElseThrow(() -> new IllegalStateException("로그인 유저정보가 없습니다"));
+			Long auctionNo = Long.valueOf((Integer)req.get("auctionNo"));
+			String auctionDetail = (String)req.get("auctionDetail");
+			String auctionTitle = (String)req.get("auctionTitle");
+			Long price = Long.valueOf((Integer)req.get("price"));
+			Auction auction= auctionRepo.findById(auctionNo).orElseThrow(() -> new IllegalStateException("해당 게시글이 존재하지 않습니다."));
+			if(member.getMemberNo()!=auction.getMember().getMemberNo()) {throw new IllegalStateException("자신이 작성한 글만 수정할 수 있습니다.");};
+			if(!auction.getAuctionState().equals("SELL")){throw new IllegalStateException("현재 판매중인 게시글만 수정 가능합니다.");};
+			auction.setAuctionName(auctionTitle);
+			auction.setAuctionDetail(auctionDetail);
+			auction.setAuctionImmeprice(price);
+			auctionRepo.save(auction);
+			res.put("success", true);
+			res.put("msg", "성공적으로 수정되었습니다.");
+		}catch(IllegalStateException e){
+			res.put("success", false);
+			res.put("msg", e.getMessage());
+		}
+		return res;
+	}
+	@Override
+	public Map<String,Object>deleteAuction(Map<String,Object> req){
+		Map<String, Object> res = new HashMap<String,Object>();
+		Long nowLoginMemberNo=0L;// 샘플 0 
+		try {
+			nowLoginMemberNo=SecurityUtil.getCurrentMemberId();
+		}catch (RuntimeException e) {
+			nowLoginMemberNo=0L;
+		}
+		
+		
+		try {
+			Member member = memberRepo.findById(nowLoginMemberNo).orElseThrow(() -> new IllegalStateException("로그인 유저정보가 없습니다"));
+			Long auctionNo = Long.valueOf((Integer)req.get("auctionNo"));
+			Auction auction= auctionRepo.findById(auctionNo).orElseThrow(() -> new IllegalStateException("해당 게시글이 존재하지 않습니다."));
+			if(member.getMemberNo()!=auction.getMember().getMemberNo()) {throw new IllegalStateException("자신이 작성한 글만 삭제할 수 있습니다.");};
+			if(!auction.getAuctionState().equals("SELL")){throw new IllegalStateException("현재 판매중인 게시글만 삭제할 수 있습니다.");};
+			auctionRepo.delete(auction);
+			res.put("success", true);
+			res.put("msg", "성공적으로 삭제되었습니다.");
+		}catch(IllegalStateException e){
+			res.put("success", false);
+			res.put("msg", e.getMessage());
+		}
+		return res;
+	}
 }

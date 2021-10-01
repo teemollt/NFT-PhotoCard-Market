@@ -137,7 +137,8 @@ public class MemberRepoImpl implements MemberRepoCustom{
 		QAuction qa = QAuction.auction;
 		BooleanBuilder builder = new BooleanBuilder();
 		builder.and(qto.member.memberNo.eq(memberNo));
-		builder.and(qa.token.tokenNo.isNull());
+//		builder.and(qa.token.tokenNo.isNull());
+		builder.and(qa.auctionState.notEqualsIgnoreCase("SELL"));
 //		Path<Object> fieldPath = Expressions.path(Object.class, QPerson.person, fieldName);
 		
 		
