@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
 import com.blockChain.domain.Product;
+import com.blockChain.domain.QCeleb;
 import com.blockChain.domain.QProduct;
 import com.blockChain.domain.QProduct_Grade;
 import com.blockChain.domain.QProduct_Media;
@@ -82,17 +83,26 @@ public class SalesRepoImpl implements SalesRepoCustom{
 	}
 	@Override
 	public Optional<List<SalesDTO>> searchSales(String NM){
-		QSales qsl = QSales.sales;
+		QSales qs = QSales.sales;
+		QProduct qp = QProduct.product;
+//		QProduct_Token qpt = QProduct_Token.product_Token;
+		QSales_Product qsp = QSales_Product.sales_Product;
+		QCeleb qc = QCeleb.celeb;
 		return  Optional.ofNullable(queryFactory.select(Projections.constructor(SalesDTO.class
-				,qsl.salesNo
-				,qsl.salesNm
-				,qsl.salesDetail
-				,qsl.imgUrl
-				,qsl.salesPrice
-				,qsl.salesDiv
+				,qs.salesNo
+				,qs.salesNm
+				,qs.salesDetail
+				,qs.imgUrl
+				,qs.salesPrice
+				,qs.salesDiv
 				))
-				.from(qsl)
-				.where(qsl.salesNm.contains(NM))
+				.from(qs)
+				.join(qsp).on(qs.eq(qsp.sales))
+				.join(qp).on(qsp.product.eq(qp))
+				.join(qc).on(qp.celeb.eq(qc))
+//				.where(qs.salesNm.contains(NM))
+				.where(qc.celebNm.contains(NM))
+				.groupBy(qs)
 				.fetch());
 	}
 	

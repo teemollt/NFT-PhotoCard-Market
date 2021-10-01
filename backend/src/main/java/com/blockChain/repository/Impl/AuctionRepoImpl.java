@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
+import com.blockChain.domain.Auction;
 import com.blockChain.domain.Celeb_Group;
 import com.blockChain.domain.QAuction;
 import com.blockChain.domain.QAuction_Order;
@@ -29,6 +30,7 @@ import com.blockChain.repository.AuctionRepoCustom;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
@@ -210,5 +212,10 @@ public class AuctionRepoImpl implements AuctionRepoCustom{
 	public Long countAuctionRegistedByMember(Long memberNo){
 		QAuction qa = QAuction.auction;
 		return queryFactory.selectFrom(qa).where(qa.member.memberNo.eq(memberNo)).fetchCount();
+	}
+	@Override
+	public  Optional<Auction> checkAuctionToken(Long tokenNo){
+		QAuction qa = QAuction.auction;
+		return Optional.ofNullable(queryFactory.selectFrom(qa).where(qa.token.tokenNo.eq(tokenNo)).fetchFirst());
 	}
 }
