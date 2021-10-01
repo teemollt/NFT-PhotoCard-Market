@@ -30,6 +30,16 @@ function MarketRegItem() {
       });
   }, []);
   //
+  function reloadbeforeinsert() {
+    axios
+      .get(`/api/auction/beforeInsert`, {
+        headers: { Authorization: localStorage.getItem("token") },
+      })
+      .then((res) => {
+        console.log(res);
+        setmycardlist(res.data.res);
+      });
+  }
   const [inputprice, setinputprice] = useState<string>("");
   const [selectedcardNo, setselectedcardNo] = useState<number>(0);
   const [selectedcardNm, setselectedcardNm] = useState<string>("");
@@ -45,16 +55,20 @@ function MarketRegItem() {
   function successregister() {
     setOpen(false);
     // 정말 카드등록하는 api
-    axios.post(
-      "/api/auction/insert",
-      {
-        tokenNo: selectedtoken,
-        price: parseInt(inputprice),
-        auctionTitle: selectedcardtitle,
-        auctionDetail: selectedcarddetail,
-      },
-      { headers: { Authorization: localStorage.getItem("token") } }
-    );
+    axios
+      .post(
+        "/api/auction/insert",
+        {
+          tokenNo: selectedtoken,
+          price: parseInt(inputprice),
+          auctionTitle: selectedcardtitle,
+          auctionDetail: selectedcarddetail,
+        },
+        { headers: { Authorization: localStorage.getItem("token") } }
+      )
+      .then(() => {
+        reloadbeforeinsert();
+      });
     //
   }
   return (

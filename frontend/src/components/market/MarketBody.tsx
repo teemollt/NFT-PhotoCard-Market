@@ -15,7 +15,7 @@ function MarketBody(props: any): JSX.Element {
         setitems(res.data.res);
       })
       .catch();
-  }, []);
+  });
   return (
     <div className="main">
       {items.map((item, i) => (
