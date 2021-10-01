@@ -1,21 +1,15 @@
 import React from "react";
-
+import Tooltip from "@mui/material/Tooltip";
 import "./MainCarousel.css";
 
 function MainCarousel1(): JSX.Element {
   return (
     <div className="wrapper">
-      <input type="checkbox" />
+      <Tooltip title="IU click">
+        <input type="checkbox" className="maincirclevideo" />
+      </Tooltip>
       <div className="video">
-        <iframe
-          width="100%"
-          height="500"
-          src="https://www.youtube.com/embed/v7bnOxV4jAc?autoplay=1&mute=1"
-          title="YouTube video player"
-          frameBorder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
+        <video src="/videos/main_iu.mp4" loop muted autoPlay playsInline />
       </div>
       <div className="text">
         <span data-text="IU" />

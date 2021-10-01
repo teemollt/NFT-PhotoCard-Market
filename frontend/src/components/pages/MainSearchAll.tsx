@@ -35,7 +35,7 @@ function Stack(props: any): JSX.Element {
         buycardpack(props.cardpackinfo);
       }}
     >
-      <div style={{ textAlign: "center" }}>
+      <div style={{ textAlign: "center", marginBottom: "0" }}>
         <h3>{props.cardpackinfo.salesNM}</h3>
       </div>
       {cards.map(({ z, opacity }, index) => (
@@ -51,9 +51,8 @@ function Stack(props: any): JSX.Element {
           {index === 4 && (
             <animated.img
               style={{
-                transform: f.to([1, 0], ["scale(1)", "scale(1.3)"]),
-                width: "10%",
-                borderRadius: "20px",
+                transform: f.to([1, 0], ["scale(1.3)", "scale(1.5)"]),
+                width: "150px",
               }}
               src={props.image}
             />
@@ -101,18 +100,22 @@ function MainSearchAll() {
       </div>
       <hr style={{ width: "50%" }} />
       <div style={{ textAlign: "center" }}>
-        <h3>구매가능한 카드</h3>
+        <h3>마켓에 등록된 제목 검색 결과</h3>
         {resultauction.length > 0 ? (
           <div className="result3">
             {resultauction.map((card, i) => (
-              <ResultCardsList
-                image={card.cardImgUrl}
+              <ResultMarketList
+                image={card.card.cardImgUrl}
                 background="#52649e"
                 item={card}
               />
             ))}
           </div>
-        ) : null}
+        ) : (
+          <h5 className="noresult">
+            현재 마켓에 해당 키워드로 등록된 물품이 없습니다
+          </h5>
+        )}
       </div>
       <div></div>
       <hr style={{ width: "50%" }} />
@@ -128,7 +131,9 @@ function MainSearchAll() {
               />
             ))}
           </div>
-        ) : null}
+        ) : (
+          <h5 className="noresult">해당 키워드로 조회된 카드가 없습니다</h5>
+        )}
       </div>
     </div>
   );

@@ -159,7 +159,7 @@ function JoinTable() {
               .then((res) => {
                 setMessage("정보를 수정했습니다");
                 setOpen(true);
-                  window.location.replace('/mypage')
+                window.location.replace("/mypage");
               });
           } else {
             if (memberPwCheck === 1) {

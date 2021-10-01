@@ -10,6 +10,7 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Tooltip from "@mui/material/Tooltip";
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,6 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(2),
       textAlign: "center",
       height: "400px",
+      borderRadius: "20px",
     },
     container: {
       width: "400px",
@@ -82,6 +84,8 @@ function MainMarketItem(): JSX.Element {
   const [itemprice, setitemprice] = useState<number>(0);
   const [itemauctionNo, setitemauctionNo] = useState<number>(0);
   const [itemtokenNo, setitemtokenNo] = useState<number>(0);
+  const [memberNo, setmemberNo] = useState<number>(0);
+  const [sellerwallet, setsellerwallet] = useState<string>("");
   // 옥션번호로 데이터받기
   useEffect(() => {
     axios
@@ -97,6 +101,8 @@ function MainMarketItem(): JSX.Element {
         setitemprice(res.data.auction.price);
         setitemauctionNo(res.data.auction.auctionNo);
         setitemtokenNo(res.data.card.tokenNo);
+        setmemberNo(res.data.member.memberNo);
+        setsellerwallet(res.data.sellerwallet);
       })
       .catch();
   });
@@ -117,6 +123,14 @@ function MainMarketItem(): JSX.Element {
       })
       .catch();
   });
+  const [Iam, setIam] = useState<number>(0);
+  useEffect(() => {
+    var token = localStorage.getItem("token");
+    if (token) {
+      var decoded: any | unknown = jwt_decode(token);
+      setIam(decoded.sub);
+    }
+  });
   const classes = useStyles();
   const location: any = useLocation();
   return (
@@ -127,10 +141,11 @@ function MainMarketItem(): JSX.Element {
             <Grid item xs={12}>
               <Paper className={classes.paper}>
                 <img
-                  src={"/" + itemimageurl + ".jpg"}
+                  src={itemimageurl}
                   alt=""
                   width="100%"
                   height="100%"
+                  style={{ filter: "blur(10px)" }}
                 />
               </Paper>
             </Grid>
@@ -157,8 +172,13 @@ function MainMarketItem(): JSX.Element {
                 <div className="buybtn">
                   <MarketBuyItem
                     price={itemprice}
+                    title={itemtitle}
+                    detail={itemdetail}
                     itemtoken={itemtokenNo}
                     auctionNo={itemauctionNo}
+                    memberNo={memberNo}
+                    sellerwallet={sellerwallet}
+                    Iam={Iam}
                   />
                 </div>
               </div>

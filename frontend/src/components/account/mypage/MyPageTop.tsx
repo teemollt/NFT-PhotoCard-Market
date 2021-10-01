@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
+import LoadingButton from "@mui/lab/LoadingButton";
+import SaveIcon from "@mui/icons-material/Save";
 import "./MyPageTop.css";
 import Web3 from "web3";
 import { ConstructionRounded } from "@mui/icons-material";
@@ -64,9 +66,11 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
     );
     console.log(res.data);
   };
+  const [charging, setcharging] = useState(false);
   // 이더 충전 횟수 제한 혹은 일정 잔액 이하일때만 충전 가능하게 api로 변경
   const chargeEth = async () => {
     console.log(userAddress);
+    setcharging(true);
     const tx = {
       from: admin,
       gasPrice: "20000000000",
@@ -94,6 +98,7 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
     try {
       const charge = await web3.eth.sendTransaction(tx, "1234");
       console.log(charge);
+      setcharging(false);
     } catch (err) {
       console.log(err);
     }
@@ -138,14 +143,32 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
             >
               잔액 조회
             </Button>
-            <Button
-              className="mypageAccountBtn"
-              variant="outlined"
-              size="medium"
-              onClick={chargeEth}
-            >
-              이더 충전
-            </Button>
+            {charging ? (
+              <LoadingButton
+                loading
+                loadingPosition="start"
+                startIcon={<SaveIcon />}
+                variant="outlined"
+                size="medium"
+                style={{
+                  color: "black",
+                  backgroundColor: "white",
+                  marginLeft: "5px",
+                  marginTop: "10px",
+                }}
+              >
+                충전중
+              </LoadingButton>
+            ) : (
+              <Button
+                className="mypageAccountBtn"
+                variant="outlined"
+                size="medium"
+                onClick={chargeEth}
+              >
+                이더 충전
+              </Button>
+            )}
           </div>
         </div>
       </div>

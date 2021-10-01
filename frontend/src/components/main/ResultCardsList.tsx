@@ -20,6 +20,7 @@ function ResultCardsList(props: any) {
       onMouseLeave={() => setOpen(false)}
     >
       <div style={{ textAlign: "center" }}>{props.item.cardNM}</div>
+      <div style={{ textAlign: "center" }}>{props.item.cardGradeNM}</div>
       <div style={{ textAlign: "center" }}>
         {cards.map(({ z, opacity }, index) => (
           <animated.div
@@ -38,9 +39,9 @@ function ResultCardsList(props: any) {
                   width: "100%",
                   height: "300px",
                   borderRadius: "20px",
-                  filter: "blur(5px)",
+                  filter: "blur(10px)",
                 }}
-                src={"/" + props.image + ".jpg"}
+                src={props.image}
               />
             )}
           </animated.div>

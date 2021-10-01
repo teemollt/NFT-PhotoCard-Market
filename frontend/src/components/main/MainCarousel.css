@@ -17,9 +17,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
   height: 100px;
 }
 .wrapper .video {
+  height: 100vh;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -28,7 +30,7 @@
   clip-path: var(--clip-path);
   transition: clip-path var(--duration) var(--timing-function);
 }
-.wrapper .video iframe {
+.wrapper .video video {
   position: fixed;
   background: #c4cbde;
   top: 50%;
@@ -115,9 +117,11 @@
   width: 100%;
   height: 100%;
   border-radius: 0;
+  z-index: 5;
 }
 .wrapper input:checked ~ .video {
   clip-path: var(--clip-path-clicked);
+  z-index: 4;
 }
 .wrapper input:checked ~ .text {
   --opacity: 0;
@@ -129,11 +133,3 @@
 .wrapper input:checked ~ .text > span::after {
   clip-path: var(--clip-path-clicked);
 }
-/* body {
-  background: #e8ebf3;
-  font: 400 16px "Poppins", sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-} */

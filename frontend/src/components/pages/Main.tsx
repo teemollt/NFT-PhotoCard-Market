@@ -4,11 +4,9 @@ import "./Main.css";
 import MainCarousel from "../main/MainCarousel";
 import MainCarousel1 from "../main/MainCarousel1";
 import MainCarousel2 from "../main/MainCarousel2";
-import MainCelebList from "../main/MainCelebList";
 import MainCarousel3 from "../main/MainCarousel3";
 import MainCarousel4 from "../main/MainCarousel4";
 import MainCarousel5 from "../main/MainCarousel5";
-import MainCarousel6 from "../main/MainCarousel6";
 
 function Main(): JSX.Element {
   const [keyword, setkeyword] = useState("");
@@ -19,12 +17,19 @@ function Main(): JSX.Element {
       state: { paramskeyword: paramskeyword },
     });
   }
-  const [checked, setchecked] = useState(false);
-  function handleChange() {
-    setchecked(true);
+  const [testinput, settestinput] = useState("");
+  function test() {
+    console.log(testinput);
   }
   return (
     <div>
+      {/* <input
+        type="text"
+        onChange={(e) => {
+          settestinput(e.target.value);
+        }}
+      />
+      <button onClick={test}>test</button> */}
       <div className="mainitem1">
         <div className="mainitem">
           <MainCarousel1 />
@@ -42,12 +47,16 @@ function Main(): JSX.Element {
           <MainCarousel5 />
         </div>
       </div>
+      <div className="mainitem2">
+        <MainCarousel />
+      </div>
+      <br />
       <div className="search">
         <div>
           <form className="search-form">
             <input
               type="search"
-              placeholder="Search"
+              placeholder="찾고싶은 셀럽의 이름을 입력해주세요"
               className="search-input"
               onChange={(e) => {
                 console.log(e.target.value);
@@ -71,9 +80,6 @@ function Main(): JSX.Element {
             </symbol>
           </svg>
         </div>
-      </div>
-      <div className="mainitem2">
-        <MainCarousel />
       </div>
     </div>
   );
