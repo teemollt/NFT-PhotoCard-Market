@@ -172,6 +172,8 @@ function MainMarketItem(): JSX.Element {
                 <div className="buybtn">
                   <MarketBuyItem
                     price={itemprice}
+                    title={itemtitle}
+                    detail={itemdetail}
                     itemtoken={itemtokenNo}
                     auctionNo={itemauctionNo}
                     memberNo={memberNo}

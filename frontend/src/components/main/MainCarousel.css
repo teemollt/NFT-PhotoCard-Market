@@ -117,9 +117,11 @@
   width: 100%;
   height: 100%;
   border-radius: 0;
+  z-index: 5;
 }
 .wrapper input:checked ~ .video {
   clip-path: var(--clip-path-clicked);
+  z-index: 4;
 }
 .wrapper input:checked ~ .text {
   --opacity: 0;
