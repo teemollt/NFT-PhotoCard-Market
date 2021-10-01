@@ -35,7 +35,6 @@ function ShopCard(props: ShopCardProps) {
           {buyDate ? (
             <span className="shopCardDate">{buyDate.slice(2, 10)}</span>
           ) : null}
-
           <span className="shopCardPriceTitle">상품 가격</span>
         </div>
         {sales ? (

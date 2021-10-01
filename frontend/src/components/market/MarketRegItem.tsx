@@ -30,6 +30,16 @@ function MarketRegItem() {
       });
   }, []);
   //
+  function reloadbeforeinsert() {
+    axios
+      .get(`/api/auction/beforeInsert`, {
+        headers: { Authorization: localStorage.getItem("token") },
+      })
+      .then((res) => {
+        console.log(res);
+        setmycardlist(res.data.res);
+      });
+  }
   const [inputprice, setinputprice] = useState<string>("");
   const [selectedcardNo, setselectedcardNo] = useState<number>(0);
   const [selectedcardNm, setselectedcardNm] = useState<string>("");
@@ -45,16 +55,20 @@ function MarketRegItem() {
   function successregister() {
     setOpen(false);
     // 정말 카드등록하는 api
-    axios.post(
-      "/api/auction/insert",
-      {
-        tokenNo: selectedtoken,
-        price: parseInt(inputprice),
-        auctionTitle: selectedcardtitle,
-        auctionDetail: selectedcarddetail,
-      },
-      { headers: { Authorization: localStorage.getItem("token") } }
-    );
+    axios
+      .post(
+        "/api/auction/insert",
+        {
+          tokenNo: selectedtoken,
+          price: parseInt(inputprice),
+          auctionTitle: selectedcardtitle,
+          auctionDetail: selectedcarddetail,
+        },
+        { headers: { Authorization: localStorage.getItem("token") } }
+      )
+      .then(() => {
+        reloadbeforeinsert();
+      });
     //
   }
   return (
@@ -78,7 +92,7 @@ function MarketRegItem() {
               columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             >
               {mycardlist.map((card, i) => (
-                <Grid item xs={3}>
+                <Grid item xs={6} md={4}>
                   <div className="page-content">
                     <div
                       className="card"
@@ -90,6 +104,7 @@ function MarketRegItem() {
                       {/* <img src={"/" + card.cardImgUrl+'.jpg'} alt="" /> */}
                       <div className="content">
                         <h2 className="title">{card.cardNM}</h2>
+                        <h2 className="title">{card.cardGradeNM}</h2>
                         <button
                           className="btn"
                           onClick={() => {

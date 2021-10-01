@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useHistory } from "react-router-dom"
 import "./MarketBuyItem.css"
+import jwt_decode from "jwt-decode"
 import {
   createStyles,
   Theme,
@@ -8,11 +9,9 @@ import {
   WithStyles,
 } from "@material-ui/core/styles"
 import Button from "@material-ui/core/Button"
-import Fab from "@material-ui/core/Fab"
 import Dialog from "@material-ui/core/Dialog"
 import MuiDialogTitle from "@material-ui/core/DialogTitle"
 import MuiDialogContent from "@material-ui/core/DialogContent"
-import MuiDialogActions from "@material-ui/core/DialogActions"
 import IconButton from "@material-ui/core/IconButton"
 import CloseIcon from "@material-ui/icons/Close"
 import Typography from "@material-ui/core/Typography"
@@ -62,14 +61,11 @@ const DialogContent = withStyles((theme: Theme) => ({
   },
 }))(MuiDialogContent)
 
-const DialogActions = withStyles((theme: Theme) => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(1),
-  },
-}))(MuiDialogActions)
-
 function MarketBuyItem(props: any): JSX.Element {
+  // 판매자와 구매자 비교
+  const [Iam, setIam] = useState(0)
+  const [can, setcan] = useState(false)
+  console.log(props.memberNo)
   // web3 객체
   const Web3 = require("web3")
   const web3 = new Web3("http://13.125.37.55:8545")
@@ -79,9 +75,6 @@ function MarketBuyItem(props: any): JSX.Element {
   const [open, setOpen] = React.useState(false)
   const [userAddress, setAddress] = useState<string>("")
   const [userBalance, setBalance] = useState<string>("0")
-  useEffect(() => {
-    walletCheck()
-  }, [])
   const walletCheck = async () => {
     try {
       const res = await axios.get("/api/wallet/", {
@@ -95,7 +88,21 @@ function MarketBuyItem(props: any): JSX.Element {
       console.log(err)
     }
   }
-
+  useEffect(() => {
+    var token = localStorage.getItem("token")
+    if (token) {
+      var decoded: any | unknown = jwt_decode(token)
+      console.log(decoded.sub)
+      setIam(decoded.sub)
+    }
+    if (Iam === props.memberNo) {
+      setcan(false)
+      console.log("살수없음")
+    } else {
+      setcan(true)
+    }
+    walletCheck()
+  })
   const handleClickOpen = () => {
     setOpen(true)
   }
@@ -157,7 +164,8 @@ function MarketBuyItem(props: any): JSX.Element {
       console.log(props.itemtoken)
       // 옥션번호
       console.log(props.auctionNo)
-      // 지갑있는지 체크
+      // 판매자 주소
+      console.log(props.sellerwallet)
       // 잔액체크
       walletCheck()
       // 구매통신보내기
@@ -171,12 +179,18 @@ function MarketBuyItem(props: any): JSX.Element {
       pathname: "/mypage",
     })
   }
-
+  function edit() { }
   return (
     <div>
-      <Fab variant="extended" color="primary" onClick={handleClickOpen}>
-        {props.price} eth 구매
-      </Fab>
+      {can ? (
+        <Button fullWidth onClick={handleClickOpen}>
+          {props.price} eth 구매
+        </Button>
+      ) : (
+        <Button fullWidth onClick={edit}>
+          수정하기
+        </Button>
+      )}
       <Dialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Pagination } from "@mui/material";
-import axios from "axios";
 import ShopCard from "./ShopCard";
+import ShopEmpty from "./ShopEmpty"
+import axios from "axios";
 
 interface BuyLike {
   buyDate: string;
@@ -35,9 +36,10 @@ function ShopKeep() {
     <div className="mypageBodyRightHeader">
       <h1>관심 상품</h1>
       <hr />
-      {cards.map((card, index) => {
+      { cards.length !== 0 ? cards.map((card, index) => {
         return <ShopCard card={card} key={index} />;
-      })}
+      })
+      : <ShopEmpty />}
       <Pagination
         className="GalleryBoardPage"
         count={Math.ceil(buyLike.length / 8)}

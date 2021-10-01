@@ -303,7 +303,7 @@
   background-color: #0d0d0d;
 }
 .btn:focus {
-  outline: 1px dashed yellow;
+  outline: 1px dashed rgb(255, 255, 255);
   outline-offset: 3px;
 }
 

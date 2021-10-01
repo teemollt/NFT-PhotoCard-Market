@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Pagination } from "@mui/material";
 import ShopCard from "./ShopCard";
+import ShopEmpty from "./ShopEmpty"
 import axios from "axios";
 
 interface Buy {
@@ -35,9 +36,10 @@ function ShopBuy() {
     <div className="mypageBodyRightHeader">
       <h1>구매 내역</h1>
       <hr />
-      {cards.map((card, index) => {
-        return <ShopCard card={card} key={index} />;
-      })}
+      { cards.length !== 0 ? cards.map((card, index)=> {
+        return <ShopCard card={card} key={index}/>
+      })
+      : <ShopEmpty />}
       <Pagination
         className="GalleryBoardPage"
         count={Math.ceil(buy.length / 8)}
