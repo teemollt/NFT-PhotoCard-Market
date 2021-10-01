@@ -100,6 +100,7 @@ function MainMarketItem(): JSX.Element {
         setitemauctionNo(res.data.auction.auctionNo);
         setitemtokenNo(res.data.card.tokenNo);
         setmemberNo(res.data.member.memberNo);
+        setsellerwallet(res.data.sellerwallet)
       })
       .catch();
   });
