@@ -66,19 +66,17 @@ function MarketBuyItem(props: any): JSX.Element {
   const [Iam, setIam] = useState(0);
   const [can, setcan] = useState(false);
   var token = localStorage.getItem("token");
-  useEffect(() => {
+  function checkuser() {
     if (token) {
       var decoded: any | unknown = jwt_decode(token);
       console.log(decoded.sub);
       setIam(decoded.sub);
     }
-    if (Iam === props.memberNo) {
-      setcan(false);
-      console.log("살수없음");
-    } else {
-      setcan(true);
-    }
-  }, [token, Iam, props.memberNo]);
+  }
+  useEffect(() => {
+    checkuser();
+  });
+
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -128,7 +126,7 @@ function MarketBuyItem(props: any): JSX.Element {
   function edit() {}
   return (
     <div>
-      {can ? (
+      {props.memberNo !== Iam ? (
         <Button fullWidth onClick={handleClickOpen}>
           {props.price} eth 구매
         </Button>

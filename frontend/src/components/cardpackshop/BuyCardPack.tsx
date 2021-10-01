@@ -280,7 +280,10 @@ function BuyCardPack(props: any): JSX.Element {
           className="newcardsbackground"
           maxWidth="lg"
         >
-          <div style={{ height: "555px", width: "310px" }} className="resultcards">
+          <div
+            style={{ height: "555px", width: "310px" }}
+            className="resultcards"
+          >
             <MyNewCards newcardlist={newcardlist} />
           </div>
         </Dialog>

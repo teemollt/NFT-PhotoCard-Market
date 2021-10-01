@@ -66,7 +66,8 @@ function MarketRegItem() {
         },
         { headers: { Authorization: localStorage.getItem("token") } }
       )
-      .then(() => {
+      .then((res) => {
+        console.log(res);
         reloadbeforeinsert();
       });
     //
