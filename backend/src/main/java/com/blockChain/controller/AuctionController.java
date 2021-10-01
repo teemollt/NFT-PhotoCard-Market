@@ -3,9 +3,11 @@ package com.blockChain.controller;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,5 +55,13 @@ public class AuctionController {
 	@PostMapping("/buy")
 	public Map<String, Object> buyAuction(@RequestBody Map<String, Object> req){
 		return auctionSvc.buyAuction(req);
+	}
+	@PutMapping("/edit")
+	public Map<String, Object> editAuction(@RequestBody Map<String, Object> req){
+		return auctionSvc.editAuction(req);
+	}
+	@DeleteMapping("/delete")
+	public Map<String, Object> deleteAuction(@RequestBody Map<String, Object> req){
+		return auctionSvc.deleteAuction(req);
 	}
 }

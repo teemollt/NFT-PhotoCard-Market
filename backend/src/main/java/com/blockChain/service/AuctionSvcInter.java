@@ -22,4 +22,8 @@ public interface AuctionSvcInter {
 
 	Map<String, Object> buyAuction(Map<String, Object> req);
 
+	Map<String, Object> editAuction(Map<String, Object> req);
+
+	Map<String, Object> deleteAuction(Map<String, Object> req);
+
 }

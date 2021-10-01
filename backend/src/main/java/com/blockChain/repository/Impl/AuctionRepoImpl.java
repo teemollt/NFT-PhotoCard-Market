@@ -216,6 +216,10 @@ public class AuctionRepoImpl implements AuctionRepoCustom{
 	@Override
 	public  Optional<Auction> checkAuctionToken(Long tokenNo){
 		QAuction qa = QAuction.auction;
-		return Optional.ofNullable(queryFactory.selectFrom(qa).where(qa.token.tokenNo.eq(tokenNo)).fetchFirst());
+		return Optional.ofNullable(queryFactory
+				.selectFrom(qa)
+				.where(qa.token.tokenNo.eq(tokenNo)
+						.and(qa.auctionState.eq("SELL")))
+				.fetchFirst());
 	}
 }
