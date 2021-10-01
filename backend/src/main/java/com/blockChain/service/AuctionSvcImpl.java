@@ -32,6 +32,7 @@ import com.blockChain.repository.Auction_OrderRepo;
 import com.blockChain.repository.MemberRepo;
 import com.blockChain.repository.TokenRepo;
 import com.blockChain.repository.Token_OwnerRepo;
+import com.blockChain.repository.WalletRepo;
 
 @Service
 @Transactional
@@ -49,6 +50,8 @@ public class AuctionSvcImpl implements AuctionSvcInter{
 	private Auction_LikeRepo alRepo;
 	@Autowired
 	private Auction_OrderRepo aoRepo;
+	@Autowired
+	private WalletRepo walletRepo;
 	@Override
 	public Map<String,Object> sltAuctionByGroup(Long groupNo){
 		Map<String, Object> res = new HashMap<String,Object>();
@@ -71,6 +74,10 @@ public class AuctionSvcImpl implements AuctionSvcInter{
 			
 			Token token = tokenRepo.findById(tokenNo).orElseThrow(() -> new IllegalStateException("토큰이 존재하지 않습니다."));
 			Token_Owner tokenOwner = toRepo.sltByTokenMember(member.getMemberNo(), token.getTokenNo()).orElseThrow(() -> new IllegalStateException("해당토큰을 가지고 있지 않습니다."));
+			auctionRepo.checkAuctionToken(token.getTokenNo()).ifPresent(m->{throw new IllegalStateException("해당토큰은 이미 등록되어있습니다.");});
+			walletRepo.findByWallet(member.getMemberNo()).orElseThrow(()->new IllegalStateException("지갑을 먼저 등록해주세요"));
+			
+			System.out.println(auctionRepo.checkAuctionToken(token.getTokenNo()));
 			Auction auction = new Auction();
 			String auctionTitle = (String)req.get("auctionTitle");
 			String auctionDetail = (String)req.get("auctionDetail");
@@ -164,6 +171,7 @@ public class AuctionSvcImpl implements AuctionSvcInter{
 		res.put("member", auction.getMember());
 		res.put("card", auction.getCard());
 		res.put("auction", auction.getAuction());
+		res.put("sellerWallet", walletRepo.findByWallet(auction.getMember().getMemberNo()));
 		return res;
 		}catch(IllegalStateException e){
 			res.put("success", false);
