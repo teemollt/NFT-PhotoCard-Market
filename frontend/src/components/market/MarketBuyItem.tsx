@@ -74,10 +74,11 @@ function MarketBuyItem(props: any): JSX.Element {
     }
     if (Iam === props.memberNo) {
       setcan(false);
+      console.log("살수없음");
     } else {
       setcan(true);
     }
-  }, []);
+  });
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
