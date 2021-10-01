@@ -53,7 +53,7 @@ function MarketItem(props: any) {
                   height: "300px",
                   borderRadius: "20px",
                 }}
-                src={"/" + props.image + ".jpg"}
+                src={props.image}
               />
             )}
           </animated.div>

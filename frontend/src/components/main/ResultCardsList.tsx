@@ -41,7 +41,7 @@ function ResultCardsList(props: any) {
                   borderRadius: "20px",
                   filter: "blur(5px)",
                 }}
-                src={"/" + props.image + ".jpg"}
+                src={props.image}
               />
             )}
           </animated.div>

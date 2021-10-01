@@ -131,7 +131,7 @@ function MainMarketItem(): JSX.Element {
             <Grid item xs={12}>
               <Paper className={classes.paper}>
                 <img
-                  src={"/" + itemimageurl + ".jpg"}
+                  src={itemimageurl}
                   alt=""
                   width="100%"
                   height="100%"

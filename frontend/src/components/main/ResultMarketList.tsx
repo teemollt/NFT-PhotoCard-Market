@@ -17,8 +17,8 @@ function ResultMarketList(props: any) {
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
-      <div style={{ textAlign: "center" }}>{props.item.cardNM}</div>
-      <div style={{ textAlign: "center" }}>{props.item.cardGradeNM}</div>
+      <div style={{ textAlign: "center" }}>{props.item.card.cardNM}</div>
+      <div style={{ textAlign: "center" }}>{props.item.card.cardGradeNM}</div>
       <div style={{ textAlign: "center" }}>
         {cards.map(({ z, opacity }, index) => (
           <animated.div
@@ -39,7 +39,7 @@ function ResultMarketList(props: any) {
                   borderRadius: "20px",
                   filter: "blur(5px)",
                 }}
-                src={"/" + props.image + ".jpg"}
+                src={props.image}
               />
             )}
           </animated.div>

@@ -28,7 +28,7 @@ function GalleryBody(props: GalleryBodyProps) {
       <div className={"front " + ("view" + view)}>
         <figure>
           <img
-            src={"/" + cardImgUrl + ".jpg"}
+            src={cardImgUrl}
             className={"view" + view}
             alt=""
           />

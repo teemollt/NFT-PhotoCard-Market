@@ -97,11 +97,10 @@ function MarketRegItem() {
                     <div
                       className="card"
                       style={{
-                        backgroundImage: `url("/${card.cardImgUrl}.jpg")`,
+                        backgroundImage: `url("${card.cardImgUrl}")`,
                         backgroundSize: "100% 100%",
                       }}
                     >
-                      {/* <img src={"/" + card.cardImgUrl+'.jpg'} alt="" /> */}
                       <div className="content">
                         <h2 className="title">{card.cardNM}</h2>
                         <h2 className="title">{card.cardGradeNM}</h2>
