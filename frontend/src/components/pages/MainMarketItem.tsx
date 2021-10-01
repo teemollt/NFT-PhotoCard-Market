@@ -10,6 +10,7 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Tooltip from "@mui/material/Tooltip";
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -121,6 +122,14 @@ function MainMarketItem(): JSX.Element {
       })
       .catch();
   });
+  const [Iam, setIam] = useState<number>(0);
+  useEffect(() => {
+    var token = localStorage.getItem("token");
+    if (token) {
+      var decoded: any | unknown = jwt_decode(token);
+      setIam(decoded.sub);
+    }
+  });
   const classes = useStyles();
   const location: any = useLocation();
   return (
@@ -160,6 +169,7 @@ function MainMarketItem(): JSX.Element {
                     auctionNo={itemauctionNo}
                     memberNo={memberNo}
                     sellerwallet={sellerwallet}
+                    Iam={Iam}
                   />
                 </div>
               </div>

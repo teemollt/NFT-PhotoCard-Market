@@ -62,21 +62,6 @@ const DialogContent = withStyles((theme: Theme) => ({
 }))(MuiDialogContent);
 
 function MarketBuyItem(props: any): JSX.Element {
-  // 판매자와 구매자 비교
-  const [Iam, setIam] = useState(0);
-  const [can, setcan] = useState(false);
-  var token = localStorage.getItem("token");
-  function checkuser() {
-    if (token) {
-      var decoded: any | unknown = jwt_decode(token);
-      console.log(decoded.sub);
-      setIam(decoded.sub);
-    }
-  }
-  useEffect(() => {
-    checkuser();
-  });
-
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -124,15 +109,17 @@ function MarketBuyItem(props: any): JSX.Element {
     });
   }
   function edit() {}
+  console.log(props.Iam);
+  console.log(props.memberNo);
   return (
     <div>
-      {props.memberNo !== Iam ? (
-        <Button fullWidth onClick={handleClickOpen}>
-          {props.price} eth 구매
-        </Button>
-      ) : (
+      {parseInt(props.memberNo) === parseInt(props.Iam) ? (
         <Button fullWidth onClick={edit}>
           수정하기
+        </Button>
+      ) : (
+        <Button fullWidth onClick={handleClickOpen}>
+          {props.price} eth 구매
         </Button>
       )}
       <Dialog
@@ -166,7 +153,6 @@ function MarketBuyItem(props: any): JSX.Element {
                 <h1 style={{ color: "black" }}>pay</h1>
               </Button>
             )}
-
             <Button
               autoFocus
               onClick={() => {
