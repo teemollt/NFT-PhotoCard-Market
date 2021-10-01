@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import "./MarketBuyItem.css";
 import jwt_decode from "jwt-decode";
-import Alert from "@mui/material/Alert";
+
 import {
   createStyles,
   Theme,
@@ -65,9 +65,8 @@ function MarketBuyItem(props: any): JSX.Element {
   // 판매자와 구매자 비교
   const [Iam, setIam] = useState(0);
   const [can, setcan] = useState(false);
-  console.log(props.memberNo);
+  var token = localStorage.getItem("token");
   useEffect(() => {
-    var token = localStorage.getItem("token");
     if (token) {
       var decoded: any | unknown = jwt_decode(token);
       console.log(decoded.sub);
@@ -79,7 +78,7 @@ function MarketBuyItem(props: any): JSX.Element {
     } else {
       setcan(true);
     }
-  });
+  }, [token, Iam, props.memberNo]);
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -129,7 +128,6 @@ function MarketBuyItem(props: any): JSX.Element {
   function edit() {}
   return (
     <div>
-      
       {can ? (
         <Button fullWidth onClick={handleClickOpen}>
           {props.price} eth 구매

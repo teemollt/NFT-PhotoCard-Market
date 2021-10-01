@@ -100,7 +100,7 @@ function MainMarketItem(): JSX.Element {
         setitemauctionNo(res.data.auction.auctionNo);
         setitemtokenNo(res.data.card.tokenNo);
         setmemberNo(res.data.member.memberNo);
-        setsellerwallet(res.data.sellerwallet)
+        setsellerwallet(res.data.sellerwallet);
       })
       .catch();
   });
@@ -130,12 +130,7 @@ function MainMarketItem(): JSX.Element {
           <Grid container spacing={5}>
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <img
-                  src={itemimageurl}
-                  alt=""
-                  width="100%"
-                  height="100%"
-                />
+                <img src={itemimageurl} alt="" width="100%" height="100%" />
               </Paper>
             </Grid>
             <Grid item xs={12}>

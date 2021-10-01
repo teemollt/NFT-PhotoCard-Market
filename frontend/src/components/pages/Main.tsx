@@ -19,8 +19,16 @@ function Main(): JSX.Element {
       state: { paramskeyword: paramskeyword },
     });
   }
+  const [testinput, settestinput] = useState('')
+  function test() {
+    console.log(testinput);
+  }
   return (
     <div>
+      <input type="text" onChange={(e)=>{
+        settestinput(e.target.value)
+      }}/>
+      <button onClick={test}>test</button>
       <div className="mainitem1">
         <div className="mainitem">
           <MainCarousel1 />
