@@ -1,10 +1,17 @@
 .newcardsbackground > div > .MuiPaper-root {
-  background-color: rgba(255, 255, 255, 0);
+  /* background-color: rgba(255, 255, 255, 0); */
   overflow: hidden;
+  width: 1000px;
+  height: 600px;
+  border-radius: 30px;
+  background-image: url("https://ak.picdn.net/shutterstock/videos/19317289/thumb/1.jpg");
 }
 
 .newcards {
   background-color: rgba(0, 0, 0, 0);
+}
+.resultcards {
+  text-align: center;
 }
 
 .container1 {
@@ -235,8 +242,6 @@
     background-color: rgb(255, 255, 255);
   }
 }
-
-
 
 .newCard > .MuiDialog-container > .MuiDialog-paperWidthSm {
   max-width: 1000px;
