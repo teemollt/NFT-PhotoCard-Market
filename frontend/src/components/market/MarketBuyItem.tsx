@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import "./MarketBuyItem.css";
 import jwt_decode from "jwt-decode";
+import Alert from "@mui/material/Alert";
 import {
   createStyles,
   Theme,
@@ -77,7 +78,7 @@ function MarketBuyItem(props: any): JSX.Element {
     } else {
       setcan(true);
     }
-  }, []);
+  });
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -127,6 +128,7 @@ function MarketBuyItem(props: any): JSX.Element {
   function edit() {}
   return (
     <div>
+      
       {can ? (
         <Button fullWidth onClick={handleClickOpen}>
           {props.price} eth 구매

@@ -16,6 +16,7 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import LoadingButton from "@mui/lab/LoadingButton";
+import Alert from "@mui/material/Alert";
 
 import axios from "axios";
 import { contractAbi } from "../abi";
@@ -186,8 +187,11 @@ function BuyCardPack(props: any): JSX.Element {
       pathname: "/mypage",
     });
   }
+  const [alert1, setalert1] = useState(false);
   return (
     <div>
+      {alert1 ? <Alert severity="error">alert1</Alert> : null}
+
       {/* GRADIENT CIRCLE PLANES */}
       <div style={{ textAlign: "center" }}>
         {props.soldout ? (
@@ -233,7 +237,6 @@ function BuyCardPack(props: any): JSX.Element {
                   <h3 style={{ color: "black" }}>지갑 생성하러가기</h3>
                 </Button>
               )}
-
               {loading ? (
                 <LoadingButton fullWidth>
                   <div id="floatingCirclesG">
