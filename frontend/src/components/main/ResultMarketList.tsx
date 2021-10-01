@@ -18,6 +18,7 @@ function ResultMarketList(props: any) {
       onMouseLeave={() => setOpen(false)}
     >
       <div style={{ textAlign: "center" }}>{props.item.cardNM}</div>
+      <div style={{ textAlign: "center" }}>{props.item.cardGradeNM}</div>
       <div style={{ textAlign: "center" }}>
         {cards.map(({ z, opacity }, index) => (
           <animated.div

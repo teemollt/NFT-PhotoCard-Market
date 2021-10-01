@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import "./MarketBuyItem.css";
+import jwt_decode from "jwt-decode";
 import {
   createStyles,
   Theme,
@@ -8,11 +9,9 @@ import {
   WithStyles,
 } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-import Fab from "@material-ui/core/Fab";
 import Dialog from "@material-ui/core/Dialog";
 import MuiDialogTitle from "@material-ui/core/DialogTitle";
 import MuiDialogContent from "@material-ui/core/DialogContent";
-import MuiDialogActions from "@material-ui/core/DialogActions";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
@@ -61,14 +60,24 @@ const DialogContent = withStyles((theme: Theme) => ({
   },
 }))(MuiDialogContent);
 
-const DialogActions = withStyles((theme: Theme) => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(1),
-  },
-}))(MuiDialogActions);
-
 function MarketBuyItem(props: any): JSX.Element {
+  // 판매자와 구매자 비교
+  const [Iam, setIam] = useState(0);
+  const [can, setcan] = useState(false);
+  console.log(props.memberNo);
+  useEffect(() => {
+    var token = localStorage.getItem("token");
+    if (token) {
+      var decoded: any | unknown = jwt_decode(token);
+      console.log(decoded.sub);
+      setIam(decoded.sub);
+    }
+    if (Iam === props.memberNo) {
+      setcan(false);
+    } else {
+      setcan(true);
+    }
+  }, []);
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -87,6 +96,8 @@ function MarketBuyItem(props: any): JSX.Element {
     console.log(props.itemtoken);
     // 옥션번호
     console.log(props.auctionNo);
+    // 판매자 주소
+    console.log(props.sellerwallet);
     // 지갑있는지 체크
     // 잔액체크
     // 구매통신보내기
@@ -113,11 +124,18 @@ function MarketBuyItem(props: any): JSX.Element {
       pathname: "/mypage",
     });
   }
+  function edit() {}
   return (
     <div>
-      <Fab variant="extended" color="primary" onClick={handleClickOpen}>
-        {props.price} eth 구매
-      </Fab>
+      {can ? (
+        <Button fullWidth onClick={handleClickOpen}>
+          {props.price} eth 구매
+        </Button>
+      ) : (
+        <Button fullWidth onClick={edit}>
+          수정하기
+        </Button>
+      )}
       <Dialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"

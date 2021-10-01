@@ -92,7 +92,7 @@ function MarketRegItem() {
               columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             >
               {mycardlist.map((card, i) => (
-                <Grid item xs={3}>
+                <Grid item xs={6} md={4}>
                   <div className="page-content">
                     <div
                       className="card"
@@ -104,6 +104,7 @@ function MarketRegItem() {
                       {/* <img src={"/" + card.cardImgUrl+'.jpg'} alt="" /> */}
                       <div className="content">
                         <h2 className="title">{card.cardNM}</h2>
+                        <h2 className="title">{card.cardGradeNM}</h2>
                         <button
                           className="btn"
                           onClick={() => {

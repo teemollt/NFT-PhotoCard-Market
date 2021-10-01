@@ -42,6 +42,10 @@ function Main(): JSX.Element {
           <MainCarousel5 />
         </div>
       </div>
+      <div className="mainitem2">
+        <MainCarousel />
+      </div>
+      <br />
       <div className="search">
         <div>
           <form className="search-form">
@@ -71,9 +75,6 @@ function Main(): JSX.Element {
             </symbol>
           </svg>
         </div>
-      </div>
-      <div className="mainitem2">
-        <MainCarousel />
       </div>
     </div>
   );

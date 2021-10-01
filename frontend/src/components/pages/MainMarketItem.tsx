@@ -82,6 +82,8 @@ function MainMarketItem(): JSX.Element {
   const [itemprice, setitemprice] = useState<number>(0);
   const [itemauctionNo, setitemauctionNo] = useState<number>(0);
   const [itemtokenNo, setitemtokenNo] = useState<number>(0);
+  const [memberNo, setmemberNo] = useState<number>(0);
+  const [sellerwallet, setsellerwallet] = useState<string>("");
   // 옥션번호로 데이터받기
   useEffect(() => {
     axios
@@ -97,6 +99,8 @@ function MainMarketItem(): JSX.Element {
         setitemprice(res.data.auction.price);
         setitemauctionNo(res.data.auction.auctionNo);
         setitemtokenNo(res.data.card.tokenNo);
+        setmemberNo(res.data.member.memberNo);
+        setsellerwallet(res.data.sellerwallet)
       })
       .catch();
   });
@@ -159,6 +163,8 @@ function MainMarketItem(): JSX.Element {
                     price={itemprice}
                     itemtoken={itemtokenNo}
                     auctionNo={itemauctionNo}
+                    memberNo={memberNo}
+                    sellerwallet={sellerwallet}
                   />
                 </div>
               </div>
