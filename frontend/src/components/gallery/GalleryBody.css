@@ -1,3 +1,7 @@
+.galleryCard > * {
+  backface-visibility: hidden;
+}
+
 .galleryCard {
   position: relative;
   perspective: 1000px;
@@ -17,7 +21,6 @@
   left: 0;
   cursor: pointer;
   transition: transform 1s;
-  backface-visibility: hidden;
   transform-style: preserve-3d;
 }
 .galleryCard img {
@@ -32,8 +35,7 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  backface-visibility: hidden;
-  transform: translate(-50%, -50%) translateZ(100px);
+  transform: translate(-50%, -50%);
   color: black;
   font-size: 20px;
   display: block;
@@ -52,7 +54,10 @@
   padding-top: 5px;
 }
 
-.count0, .count1, .count2, .count3 {
+.count0,
+.count1,
+.count2,
+.count3 {
   width: 50px;
   float: right;
   font-weight: 900;
