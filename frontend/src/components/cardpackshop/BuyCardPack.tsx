@@ -280,10 +280,8 @@ function BuyCardPack(props: any): JSX.Element {
           className="newcardsbackground"
           maxWidth="lg"
         >
-          <div style={{ height: "555px", width: "310px" }} className="noscroll">
-            <div>
-              <MyNewCards newcardlist={newcardlist} />
-            </div>
+          <div style={{ height: "555px", width: "310px" }} className="resultcards">
+            <MyNewCards newcardlist={newcardlist} />
           </div>
         </Dialog>
       </div>
