@@ -83,6 +83,7 @@ function MainMarketItem(): JSX.Element {
   const [itemauctionNo, setitemauctionNo] = useState<number>(0);
   const [itemtokenNo, setitemtokenNo] = useState<number>(0);
   const [memberNo, setmemberNo] = useState<number>(0);
+  const [sellerwallet, setsellerwallet] = useState<string>("");
   // 옥션번호로 데이터받기
   useEffect(() => {
     axios
@@ -162,6 +163,7 @@ function MainMarketItem(): JSX.Element {
                     itemtoken={itemtokenNo}
                     auctionNo={itemauctionNo}
                     memberNo={memberNo}
+                    sellerwallet={sellerwallet}
                   />
                 </div>
               </div>

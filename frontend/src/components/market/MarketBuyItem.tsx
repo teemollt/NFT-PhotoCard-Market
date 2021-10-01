@@ -96,6 +96,8 @@ function MarketBuyItem(props: any): JSX.Element {
     console.log(props.itemtoken);
     // 옥션번호
     console.log(props.auctionNo);
+    // 판매자 주소
+    console.log(props.sellerwallet);
     // 지갑있는지 체크
     // 잔액체크
     // 구매통신보내기
