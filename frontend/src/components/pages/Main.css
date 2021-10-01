@@ -1,8 +1,9 @@
 .mainitem1 {
-  text-align: center;
-  margin: 30px;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  width: 60%;
+  z-index: 99;
 }
 .mainitem2 {
   margin: 30px;
