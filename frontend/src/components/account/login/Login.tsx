@@ -73,6 +73,11 @@ function Login() {
                       onChange={(e) => {
                         setLoginId(e.target.value);
                       }}
+                      onKeyPress={(e) => {
+                        if (e.key === "Enter") {
+                          login();
+                        }
+                      }}
                     />
                   </td>
                 </tr>

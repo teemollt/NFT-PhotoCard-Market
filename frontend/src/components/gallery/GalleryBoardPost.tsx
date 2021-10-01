@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import "./GalleryBoardPost.css";
 
 interface GalleryBoardPostProps {
@@ -14,11 +15,16 @@ interface GalleryBoardPostProps {
 }
 
 function GalleryBoardPost(props: GalleryBoardPostProps) {
+  let history = useHistory();
+
   const { galleryArticleContent, galleryArticleNo, likes } = props.post;
   const { memberNick, memberNo } = props.post.member;
 
   const handleToGallery = (pk: number) => {
-    window.location.href="/gallery/" + pk;
+    history.push({
+      pathname: `/gallery/${pk}`,
+      state: { pk: pk },
+    });
   };
 
   return (

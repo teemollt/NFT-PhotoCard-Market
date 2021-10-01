@@ -1,8 +1,6 @@
 .galleryBoard {
   width: 1100px;
   margin: auto;
-  font-family: "Work Sans", "Gowun Dodum" !important;
-  font-weight: 900 !important;
 }
 
 .galleryBoardBtnDiv {
@@ -11,8 +9,6 @@
 }
 
 .galleryBoardBtn {
-  font-family: "Work Sans", "Gowun Dodum" !important;
-  font-weight: 900 !important;
   background: #1c214f !important;
 }
 

@@ -45,19 +45,16 @@
   font-weight: 600;
   text-transform: uppercase;
   font-size: 24px;
-  font-family: "Work Sans", "Gowun Dodum";
 }
 
 .galleryCard figcaption p {
   font-weight: 200;
   padding-top: 5px;
-  font-family: "Work Sans", "Gowun Dodum";
 }
 
 .count0, .count1, .count2, .count3 {
   width: 50px;
   float: right;
-  font-family: "Work Sans", "Gowun Dodum";
   font-weight: 900;
 }
 

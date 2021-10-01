@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "./Navbar.css";
 import Login from "../account/login/Login";
 import Button from "@material-ui/core/Button";
@@ -8,17 +8,27 @@ import axios from "axios";
 function Navbar(): JSX.Element {
   const [pk, setPk] = useState<number>();
 
+  let history = useHistory();
   let token: string | null = localStorage.getItem("token");
 
   useEffect(() => {
-    axios
-      .get("/api/member/mypage", {
-        headers: { Authorization: localStorage.getItem("token") },
-      })
-      .then((res) => {
-        setPk(res.data.mypage.memberNo);
-      });
+    if (token) {
+      axios
+        .get("/api/member/mypage", {
+          headers: { Authorization: localStorage.getItem("token") },
+        })
+        .then((res) => {
+          setPk(res.data.mypage.memberNo);
+        });
+    }
   }, []);
+
+  const handleToGallery = (pk: number | undefined) => {
+    history.push({
+      pathname: `/gallery/${pk}`,
+      state: { pk: pk },
+    });
+  };
 
   return (
     <div>
@@ -44,9 +54,9 @@ function Navbar(): JSX.Element {
           </Link>
         ) : null}
         {token ? (
-          <Link className="tablink" to={"/gallery/" + pk}>
-            <Button>Gallery</Button>
-          </Link>
+          <Button className="navGallery" onClick={() => handleToGallery(pk)}>
+            Gallery
+          </Button>
         ) : null}
         {token ? (
           <Link className="tablink" to="/gboard">

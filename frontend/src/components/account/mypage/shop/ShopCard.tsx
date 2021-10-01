@@ -28,14 +28,13 @@ function ShopCard(props: ShopCardProps) {
   return (
     <div className="shopCard" onClick={() => handleToShop(props.card)}>
       <div className="shopCardImg">
-        <img src={salesImg} alt="" />
+        <img src="/image/cardpack.png" alt="" />
       </div>
       <div>
         <div className="shopCardInfo">
           {buyDate ? (
             <span className="shopCardDate">{buyDate.slice(2, 10)}</span>
           ) : null}
-
           <span className="shopCardPriceTitle">상품 가격</span>
         </div>
         {sales ? (

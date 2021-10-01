@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react"
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
-import List from "@mui/material/List"
-import ListItem from "@mui/material/ListItem"
-import Grid from "@material-ui/core/Grid"
-import axios from "axios"
-import { ResetTvTwoTone } from "@mui/icons-material"
+import React, { useState, useEffect } from "react";
+import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import Grid from "@material-ui/core/Grid";
+import axios from "axios";
+import { ResetTvTwoTone } from "@mui/icons-material";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -12,27 +12,40 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: "auto",
     },
   })
-)
+);
 
 function CardPackInside(props: any): JSX.Element {
-  const classes = useStyles()
-  const [cards, setcards] = useState<any[]>([])
+  const classes = useStyles();
+  const [cards, setcards] = useState<any[]>([]);
   useEffect(() => {
     axios
       .get(`/api/cardPack/cardList/${props.cardpackNo}`, {
         cardpackId: props.cardpackNo,
       })
       .then((res) => {
-        console.log(res.data.res)
-        setcards(res.data.res)
+        console.log(res.data.res);
+        setcards(res.data.res);
       })
-      .catch()
-  }, [])
+      .catch();
+  }, []);
   // }
   return (
     <div className={classes.root}>
       <h1>Cards List</h1>
       <br />
+
+      <ListItem button>
+        <Grid item xs={6}>
+          <div style={{ textAlign: "center" }}>Card</div>
+        </Grid>
+        <Grid item xs={6}>
+          <div style={{ textAlign: "center" }}>Card Grade</div>
+        </Grid>
+        <Grid item xs={6}>
+          <div style={{ textAlign: "center" }}>Rest</div>
+        </Grid>
+      </ListItem>
+
       <List
         sx={{
           width: "100%",
@@ -57,11 +70,12 @@ function CardPackInside(props: any): JSX.Element {
                 </Grid>
               </ListItem>
             </div>
-          )
+          );
         })}
       </List>
+      <h6>* 이미 뽑힌 카드는 목록에 표시되지 않을 수 있습니다.</h6>
     </div>
-  )
+  );
 }
 
-export default CardPackInside
+export default CardPackInside;

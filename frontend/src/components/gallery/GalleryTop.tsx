@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Pagination } from "@mui/material";
-import { Favorite } from '@mui/icons-material';
+import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import GalleryBody from "../gallery/GalleryBody";
 import GalleryEmpty from "./GalleryEmpty";
 import axios from "axios";
-import { useParams } from "react-router";
+import { useLocation, useParams } from "react-router";
 import "./GalleryTop.css";
 
 export type card = {
@@ -23,7 +23,8 @@ export type card = {
 };
 
 function GalleryTop() {
-  let { pk } = useParams<{ pk?: string | undefined }>();
+  let location: any = useLocation();
+  const pk = location.state.pk;
 
   const [topMenu, setTopMenu] = useState<number>(0);
   const [view, setView] = useState<number>(1);
@@ -31,12 +32,27 @@ function GalleryTop() {
   const [subMem, setSubMem] = useState<number>(0);
   const [galleryCard, setGalleryCard] = useState<Array<card>>([]);
   const [page, setPage] = useState<Array<card>>([]);
+  const [likeCount, setLikeCount] = useState<number>(0);
+  const [like, setLike] = useState<boolean>(false);
 
   useEffect(() => {
     axios.get("/api/gallery/" + pk + "/0/0/0").then((res) => {
       setPage(res.data.res.slice(0, 12));
       setGalleryCard(res.data.res);
     });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get("/api/gallery/likecheck/" + pk, {
+        headers: { Authorization: localStorage.getItem("token") },
+      })
+      .then((res) => {
+        setLikeCount(res.data.peoplelike);
+        if (res.data.islike) {
+          setLike(true);
+        }
+      });
   }, []);
 
   const handleTopMenuGroup = (id: number) => {
@@ -71,6 +87,31 @@ function GalleryTop() {
         setGalleryCard(res.data.res);
         setSub(true);
       });
+    }
+  };
+
+  const handleLike = () => {
+    if (localStorage.getItem("token")) {
+      axios
+        .post(
+          "/api/gallery/like",
+          {
+            galleryNo: Number(pk),
+          },
+          {
+            headers: { Authorization: localStorage.getItem("token") },
+          }
+        )
+        .then(() => {
+          setLike(!like);
+          axios
+            .get("/api/gallery/likecheck/" + pk, {
+              headers: { Authorization: localStorage.getItem("token") },
+            })
+            .then((res) => {
+              setLikeCount(res.data.peoplelike);
+            });
+        });
     }
   };
 
@@ -147,8 +188,13 @@ function GalleryTop() {
 
           <div className="galleryLike">
             <div>
-              <Favorite color="disabled" />
-              <span>345</span>
+              {like ? (
+                <Favorite onClick={handleLike} />
+              ) : (
+                <FavoriteBorder onClick={handleLike} />
+              )}
+
+              <span>{likeCount}</span>
             </div>
           </div>
         </div>

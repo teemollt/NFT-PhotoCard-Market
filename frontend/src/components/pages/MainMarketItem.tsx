@@ -10,6 +10,7 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Tooltip from "@mui/material/Tooltip";
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -45,7 +46,7 @@ function MainMarketItem(): JSX.Element {
         .post(
           "/api/auction/like",
           {
-            auctionNo: location.state.data.auction.auctionNo,
+            auctionNo: location.state.auctionNo,
           },
           {
             headers: {
@@ -62,7 +63,7 @@ function MainMarketItem(): JSX.Element {
         .post(
           "/api/auction/like",
           {
-            auctionNo: location.state.data.auction.auctionNo,
+            auctionNo: location.state.auctionNo,
           },
           {
             headers: {
@@ -75,11 +76,39 @@ function MainMarketItem(): JSX.Element {
           setislike(true);
         });
     }
-  }; 
+  };
+  const [itemtitle, setitemtitle] = useState<string>("");
+  const [itemdetail, setitemdetail] = useState<string>("");
+  const [itemimageurl, setitemimageurl] = useState<string>("");
+  const [itemprice, setitemprice] = useState<number>(0);
+  const [itemauctionNo, setitemauctionNo] = useState<number>(0);
+  const [itemtokenNo, setitemtokenNo] = useState<number>(0);
+  const [memberNo, setmemberNo] = useState<number>(0);
+  const [sellerwallet, setsellerwallet] = useState<string>("");
+  // 옥션번호로 데이터받기
   useEffect(() => {
     axios
-      .get(`/api/auction/likecheck/${location.state.data.auction.auctionNo}`, {
-        auctionNo: location.state.data.auction.auctionNo,
+      .get(`/api/auction/${location.state.auctionNo}/detail`, {
+        auctionNo: location.state.auctionNo,
+        headers: { Authorization: localStorage.getItem("token") },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setitemtitle(res.data.auction.auctionTitle);
+        setitemdetail(res.data.auction.auctionDetail);
+        setitemimageurl(res.data.card.cardImgUrl);
+        setitemprice(res.data.auction.price);
+        setitemauctionNo(res.data.auction.auctionNo);
+        setitemtokenNo(res.data.card.tokenNo);
+        setmemberNo(res.data.member.memberNo);
+        setsellerwallet(res.data.sellerwallet);
+      })
+      .catch();
+  });
+  useEffect(() => {
+    axios
+      .get(`/api/auction/likecheck/${location.state.auctionNo}`, {
+        auctionNo: location.state.auctionNo,
         headers: { Authorization: localStorage.getItem("token") },
       })
       .then((res) => {
@@ -93,6 +122,14 @@ function MainMarketItem(): JSX.Element {
       })
       .catch();
   });
+  const [Iam, setIam] = useState<number>(0);
+  useEffect(() => {
+    var token = localStorage.getItem("token");
+    if (token) {
+      var decoded: any | unknown = jwt_decode(token);
+      setIam(decoded.sub);
+    }
+  });
   const classes = useStyles();
   const location: any = useLocation();
   return (
@@ -102,12 +139,7 @@ function MainMarketItem(): JSX.Element {
           <Grid container spacing={5}>
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <img
-                  src={"/" + location.state.data.card.cardImgUrl + ".jpg"}
-                  alt=""
-                  width="100%"
-                  height="100%"
-                />
+                <img src={itemimageurl} alt="" width="100%" height="100%" />
               </Paper>
             </Grid>
             <Grid item xs={12}>
@@ -126,14 +158,19 @@ function MainMarketItem(): JSX.Element {
                 )}
               </Tooltip>
               <div className={classes.iteminfo}>
-                <h1>{location.state.data.auction.auctionTitle}</h1>
+                <h1>{itemtitle}</h1>
               </div>
-              <div className={classes.iteminfo}>
-                {location.state.data.auction.auctionDetail}
-              </div>
+              <div className={classes.iteminfo}>{itemdetail}</div>
               <div className={classes.paper2}>
                 <div className="buybtn">
-                  <MarketBuyItem price={location.state.data.auction.price} />
+                  <MarketBuyItem
+                    price={itemprice}
+                    itemtoken={itemtokenNo}
+                    auctionNo={itemauctionNo}
+                    memberNo={memberNo}
+                    sellerwallet={sellerwallet}
+                    Iam={Iam}
+                  />
                 </div>
               </div>
             </Grid>

@@ -28,7 +28,7 @@ function GalleryBody(props: GalleryBodyProps) {
       <div className={"front " + ("view" + view)}>
         <figure>
           <img
-            src={"/" + cardImgUrl + ".jpg"}
+            src={cardImgUrl}
             className={"view" + view}
             alt=""
           />
@@ -57,19 +57,19 @@ function GalleryBody(props: GalleryBodyProps) {
           ) : cardGradeNM === "S" ? (
             <img
               className={"view" + view}
-              src="https://previews.123rf.com/images/macmackyky/macmackyky1606/macmackyky160600041/58041353-%EB%AC%B4%EC%A7%80%EA%B0%9C%EC%99%80-%ED%8C%8C%EC%8A%A4%ED%85%94-%EB%B0%98%EC%A7%9D%EC%9D%B4-%EC%A7%88%EA%B0%90-%EC%B6%94%EC%83%81%EC%A0%81-%EC%9D%B8-%EB%B0%B0%EA%B2%BD.jpg"
+              src="https://previews.123rf.com/images/lavaber/lavaber1802/lavaber180200002/94908442-%EB%9D%BC%EC%9D%BC%EB%9D%BD-%EB%B0%B0%EA%B2%BD-%EB%B0%98%EC%A7%9D%EC%9D%B4-%EB%B0%98%EC%A7%9D%EC%9D%B4-%EC%A7%88%EA%B0%90.jpg"
               alt=""
             />
           ) : cardGradeNM === "SS" ? (
             <img
               className={"view" + view}
-              src="https://previews.123rf.com/images/macmackyky/macmackyky1606/macmackyky160600043/58041356-%EB%AC%B4%EC%A7%80%EA%B0%9C%EC%99%80-%ED%8C%8C%EC%8A%A4%ED%85%94-%EB%B0%98%EC%A7%9D%EC%9D%B4-%EC%A7%88%EA%B0%90-%EC%B6%94%EC%83%81%EC%A0%81-%EC%9D%B8-%EB%B0%B0%EA%B2%BD.jpg"
+              src="https://previews.123rf.com/images/phonlamaiphoto/phonlamaiphoto1610/phonlamaiphoto161000030/63521116-gradient-glitter-background-with-rough-texture.jpg"
               alt=""
             />
           ) : cardGradeNM === "ROYAL-C" ? (
             <img
               className={"view" + view}
-              src="https://previews.123rf.com/images/macmackyky/macmackyky1606/macmackyky160600039/58041352-%EB%AC%B4%EC%A7%80%EA%B0%9C%EC%99%80-%ED%8C%8C%EC%8A%A4%ED%85%94-%EB%B0%98%EC%A7%9D%EC%9D%B4-%EC%A7%88%EA%B0%90-%EC%B6%94%EC%83%81%EC%A0%81-%EC%9D%B8-%EB%B0%B0%EA%B2%BD.jpg"
+              src="https://png.pngtree.com/thumb_back/fw800/back_pic/02/64/70/495785a8ea530de.jpg"
               alt=""
             />
           ) : cardGradeNM === "ROYAL-B" ? (

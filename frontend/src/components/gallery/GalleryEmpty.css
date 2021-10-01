@@ -11,7 +11,8 @@
   height: 700px;
   line-height: 700px;
   transition: all 0.5s;
-  font-family: "East Sea Dokdo", cursive;
+  font-family: "East Sea Dokdo", cursive !important;
+  font-weight: 500 !important;
   font-size: 100px;
 }
 
