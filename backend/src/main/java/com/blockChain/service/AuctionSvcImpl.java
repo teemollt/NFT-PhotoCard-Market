@@ -267,6 +267,7 @@ public class AuctionSvcImpl implements AuctionSvcInter{
 			Auction_Order ao = new Auction_Order();
 			ao.setAuction(auction);
 			ao.setMember(member);
+			ao.setAuctionOrderDate(LocalDateTime.now());
 			aoRepo.save(ao);
 			System.out.println(auction);
 			System.out.println(token);
