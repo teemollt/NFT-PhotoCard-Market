@@ -4,11 +4,9 @@ import "./Main.css";
 import MainCarousel from "../main/MainCarousel";
 import MainCarousel1 from "../main/MainCarousel1";
 import MainCarousel2 from "../main/MainCarousel2";
-import MainCelebList from "../main/MainCelebList";
 import MainCarousel3 from "../main/MainCarousel3";
 import MainCarousel4 from "../main/MainCarousel4";
 import MainCarousel5 from "../main/MainCarousel5";
-import MainCarousel6 from "../main/MainCarousel6";
 
 function Main(): JSX.Element {
   const [keyword, setkeyword] = useState("");
@@ -19,8 +17,19 @@ function Main(): JSX.Element {
       state: { paramskeyword: paramskeyword },
     });
   }
+  const [testinput, settestinput] = useState("");
+  function test() {
+    console.log(testinput);
+  }
   return (
     <div>
+      <input
+        type="text"
+        onChange={(e) => {
+          settestinput(e.target.value);
+        }}
+      />
+      <button onClick={test}>test</button>
       <div className="mainitem1">
         <div className="mainitem">
           <MainCarousel1 />
