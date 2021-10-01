@@ -152,7 +152,43 @@ function MarketBuyItem(props: any): JSX.Element {
               })
               .catch((err) => { // api요청 실패
                 console.log(err)
+                // 구매 실패 alert 띄우기
                 // 여기서 환불 함수 호출
+                const refund = async () => {
+                  const tx = {
+                    from: props.sellerwallet,
+                    gasPrice: "20000000000",
+                    gas: "21000",
+                    to: userAddress,
+                    value: props.price,
+                    data: "",
+                  }
+                  try {
+                    const adminUnlock = await web3.eth.personal.unlockAccount(
+                      props.sellerwallet,
+                      "123",
+                      6000
+                    )
+                    console.log(adminUnlock)
+                    const unlock = await web3.eth.personal.unlockAccount(
+                      userAddress,
+                      "123",
+                      6000
+                    )
+                    console.log(unlock)
+                  } catch (err) {
+                    console.log(err)
+                  }
+                  try {
+                    const charge = await web3.eth.sendTransaction(tx, "123")
+                    console.log(charge)
+                    // 환불 완료 alert 띄우기
+                  } catch (err) {
+                    console.log(err)
+                    // 환불실패 돈먹튀당함 ㅅㄱ
+                  }
+                }
+                refund()
               })
           })
       } else {
