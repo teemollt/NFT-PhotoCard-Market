@@ -26,7 +26,7 @@ const handleToMarket = (data: any) => {
   return (
     <div className="marketCard" onClick={()=>handleToMarket(auctionNo)}>
       <div className="marketCardImg">
-        <img src={'/' + auctionImg + '.jpg'} alt="" />
+        <img src={auctionImg} alt="" />
       </div>
       <div>
         <span className="marketCardTitle">{auctionTitle}</span>

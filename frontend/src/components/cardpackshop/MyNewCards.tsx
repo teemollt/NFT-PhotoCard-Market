@@ -58,19 +58,19 @@ function Deck(props: any) {
     }
   );
   return (
-    <>
+    <div>
       {prop.map(({ x, y, rot, scale }, i) => (
         <animated.div className="deck" key={i} style={{ x, y }}>
           <animated.div
             {...bind(i)}
             style={{
               transform: interpolate([rot, scale], trans),
-              backgroundImage: `url("/${cards[i]}.jpg")`,
+              backgroundImage: `url("${cards[i]}")`,
             }}
           />
         </animated.div>
       ))}
-    </>
+    </div>
   );
 }
 
@@ -80,7 +80,7 @@ function MyNewCards(props: any) {
     cards.push(card.cardImgUrl);
   });
   return (
-    <div>
+    <div className={`flex fill center`}>
       <Deck cards={cards} />
     </div>
   );

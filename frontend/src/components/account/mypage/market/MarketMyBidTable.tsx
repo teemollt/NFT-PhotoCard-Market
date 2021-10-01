@@ -27,18 +27,18 @@ function MarketMyBidTable(props: MarketMyBidTableProps) {
       <td className="myBidNo">{auctionNo}</td>
       <td className="myBidNick">{memberNick}</td>
       <td className="myBidCard">
-        <img className="myBidImg" src={"/" + cardImg + '.jpg'} alt="" />
+        <img className="myBidImg" src={cardImg} alt="" />
         {hover ? (
           <img
             className="myBidImgHover"
-            src={"/" + cardImg + '.jpg'}
+            src={cardImg}
             alt=""
             style={{ zIndex: 100, position: "absolute", visibility: "visible" }}
           />
         ) : (
           <img
             className="myBidImgHover"
-            src={"/" + cardImg + '.jpg'}
+            src={cardImg}
             alt=""
             style={{ zIndex: 100, position: "absolute", visibility: "hidden" }}
           />
