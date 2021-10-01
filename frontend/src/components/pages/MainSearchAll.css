@@ -1,23 +1,17 @@
 .result1 {
   display: grid;
-  width: 100%;
+  width: 60%;
   margin: 0 auto;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 .noresult {
   text-align: center;
 }
 .result3 {
   display: grid;
-  width: 70%;
+  width: 60%;
   margin: 0 auto;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-}
-
-.container {
-  /* width: 300px;
-  height: 200px;
-  transform-style: flat; */
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 .container > div {

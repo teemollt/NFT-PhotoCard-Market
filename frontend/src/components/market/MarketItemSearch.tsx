@@ -51,7 +51,7 @@ function MarketItemSearch(props: any) {
                   height: "300px",
                   borderRadius: "20px",
                 }}
-                src={"/" + props.item.card.cardImgUrl + ".jpg"}
+                src={props.item.card.cardImgUrl}
               />
             )}
           </animated.div>
