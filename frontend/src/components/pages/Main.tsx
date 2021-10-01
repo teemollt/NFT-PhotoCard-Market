@@ -19,10 +19,6 @@ function Main(): JSX.Element {
       state: { paramskeyword: paramskeyword },
     });
   }
-  const [checked, setchecked] = useState(false);
-  function handleChange() {
-    setchecked(true);
-  }
   return (
     <div>
       <div className="mainitem1">
