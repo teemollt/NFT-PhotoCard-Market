@@ -1,15 +1,16 @@
 .mainitem1 {
-  text-align: center;
-  margin: 30px;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  width: 60%;
+  z-index: 99;
 }
 .mainitem2 {
   margin: 30px;
+
 }
 .search {
   text-align: center;
-  z-index: -99999;
 }
 
 .search-form {
@@ -23,7 +24,6 @@
   transform: translate(-50%, -50%);
   background: #fff;
   transition: all 0.3s ease;
-
 }
 .search-form.focus {
   box-shadow: 0 3px 4px rgba(0, 0, 0, 0.15);

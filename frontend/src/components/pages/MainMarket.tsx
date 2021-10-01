@@ -137,7 +137,7 @@ function MainMarket(): JSX.Element {
                   <input
                     type="search"
                     className="search-input"
-                    placeholder="검색어를 입력해주세요"
+                    placeholder="찾고자하는 카드의 타이틀을 입력하세요"
                     onChange={(e) => {
                       console.log(e.target.value);
                       setsearch(e.target.value);

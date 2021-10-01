@@ -52,6 +52,7 @@ function MarketItem(props: any) {
                   width: "100%",
                   height: "300px",
                   borderRadius: "20px",
+                  filter: "blur(5px)",
                 }}
                 src={props.image}
               />

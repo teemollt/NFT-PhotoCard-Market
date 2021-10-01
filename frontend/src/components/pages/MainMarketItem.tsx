@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(2),
       textAlign: "center",
       height: "400px",
+      borderRadius: "20px",
     },
     container: {
       width: "400px",
@@ -139,7 +140,13 @@ function MainMarketItem(): JSX.Element {
           <Grid container spacing={5}>
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <img src={itemimageurl} alt="" width="100%" height="100%" />
+                <img
+                  src={itemimageurl}
+                  alt=""
+                  width="100%"
+                  height="100%"
+                  style={{ filter: "blur(10px)" }}
+                />
               </Paper>
             </Grid>
             <Grid item xs={12}>
@@ -165,6 +172,8 @@ function MainMarketItem(): JSX.Element {
                 <div className="buybtn">
                   <MarketBuyItem
                     price={itemprice}
+                    title={itemtitle}
+                    detail={itemdetail}
                     itemtoken={itemtokenNo}
                     auctionNo={itemauctionNo}
                     memberNo={memberNo}

@@ -23,13 +23,13 @@ function Main(): JSX.Element {
   }
   return (
     <div>
-      <input
+      {/* <input
         type="text"
         onChange={(e) => {
           settestinput(e.target.value);
         }}
       />
-      <button onClick={test}>test</button>
+      <button onClick={test}>test</button> */}
       <div className="mainitem1">
         <div className="mainitem">
           <MainCarousel1 />
