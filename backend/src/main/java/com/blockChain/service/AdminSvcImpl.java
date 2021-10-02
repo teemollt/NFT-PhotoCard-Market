@@ -124,7 +124,7 @@ public class AdminSvcImpl implements AdminSvcInter{
     private final String[][] COMMON_CARDLIST = {JO,NAM,HA,KIM,SHIN};
     private final String[][] SPECIAL_CARDLIST = {LEE,NABI,SPKIM};
     //제품 이미지 경로
-    private final String PRODUCT_MEDIA_ADRES = "image/";
+    private final String PRODUCT_MEDIA_ADRES = "/image/";
     //판매
     private final String SALES1 = "여성샐럽";
     private final String SALES2 = "남성샐럽";
@@ -545,7 +545,7 @@ public class AdminSvcImpl implements AdminSvcInter{
 			for(int i = 0; i<grades.length;i++){
 				Optional<Product_Grade> sltGrade = pgRepo.sltbyGrade(PRODUCT_GRADE[i]);
 				Product tempProduct = new Product();
-				tempProduct.setCeleb(sltCeleb.get());//TODO
+				tempProduct.setCeleb(sltCeleb.get());
 				tempProduct.setProductDetail("");
 				tempProduct.setProductGrade(sltGrade.get());
 				tempProduct.setProductNm(grades[i]+celeb);
@@ -589,7 +589,7 @@ public class AdminSvcImpl implements AdminSvcInter{
 			Product_Media pm = new Product_Media();
 			Product temp = product.get(i);
 			pm.setProduct(temp);
-			pm.setProductMediaAdres(PRODUCT_MEDIA_ADRES + temp.getProductNm()+cnt);
+			pm.setProductMediaAdres(PRODUCT_MEDIA_ADRES + temp.getProductNm()+cnt+".jpg");
 			cnt--;
 			Product_Media saved = pmRepo.save(pm);
 			msg.add(saved.getProduct().getProductNo()+" image_where" + saved.getProductMediaAdres());
@@ -652,7 +652,7 @@ public class AdminSvcImpl implements AdminSvcInter{
 			sales.setSalesNm(products.get(i) +" "+ SALES_SUBFIX);
 			sales.setSalesPrice(3L);
 			sales.setSalesDiv(celeb);
-			sales.setImgUrl(PRODUCT_MEDIA_ADRES+products.get(i));
+			sales.setImgUrl(PRODUCT_MEDIA_ADRES+products.get(i)+".jpg");
 			Sales saved = salesRepo.save(sales);
 			msg.add(saved.toString());
 		}
