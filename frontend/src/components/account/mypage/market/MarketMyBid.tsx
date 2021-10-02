@@ -1,41 +1,44 @@
-import React, { useEffect, useState } from "react";
-import { Pagination } from "@mui/material";
-import MarketMyBidTable from "./MarketMyBidTable";
-import "./MarketMyBid.css";
-import axios from "axios";
+import React, { useEffect, useState } from "react"
+import { Pagination } from "@mui/material"
+import MarketMyBidTable from "./MarketMyBidTable"
+import "./MarketMyBid.css"
+import axios from "axios"
 
 export type market = {
-  auctionNo: number;
-  cardNm: string;
-  cardImg: string;
-  price: number;
-  memberNo: number;
-  memberNick: string;
-  buyDate: string;
-};
+  auctionNo: number
+  cardNm: string
+  cardImg: string
+  price: number
+  memberNo: number
+  memberNick: string
+  buyDate: string
+}
 
 function MarketMyBid() {
-  const [market, setMarket] = useState<Array<market>>([]);
-  const [page, setPage] = useState<Array<market>>([]);
+  const [market, setMarket] = useState<Array<market>>([])
+  const [page, setPage] = useState<Array<market>>([])
 
-  useEffect (() => {
-    axios.get("/api/member/auctionOrderList", {
-      headers: {Authorization: localStorage.getItem('token')}
-    })
-    .then((res) => {
-      setPage(res.data.res.slice(0, 5))
-      setMarket(res.data.res)
-    })
-  })
+  useEffect(() => {
+    axios
+      .get("/api/member/auctionOrderList", {
+        headers: { Authorization: localStorage.getItem("token") },
+      })
+      .then((res) => {
+        console.log(res)
+        setPage(res.data.res.slice(0, 5))
+        setMarket(res.data.res)
+      })
+  }, [])
 
   const handlePage = (e: any) => {
-    const page = Number(e.target.innerText);
-    setPage(market.slice(page * 5 - 5, page * 5));
-  };
+    const page = Number(e.target.innerText)
+    console.log(page)
+    setPage(market.slice(page * 5 - 5, page * 5))
+  }
 
   return (
     <div className="mypageBodyRightHeader">
-      <h1>마켓 내역</h1>
+      <h1>마켓 구매 내역</h1>
       <hr />
       <table className="myBidTable">
         <tbody>
@@ -48,7 +51,7 @@ function MarketMyBid() {
             <th className="myBidEnd">구매일</th>
           </tr>
           {page.map((card, index) => {
-            return <MarketMyBidTable card={card} key={index} />;
+            return <MarketMyBidTable card={card} key={index} />
           })}
         </tbody>
       </table>
@@ -61,7 +64,7 @@ function MarketMyBid() {
         hideNextButton
       />
     </div>
-  );
+  )
 }
 
-export default MarketMyBid;
+export default MarketMyBid
