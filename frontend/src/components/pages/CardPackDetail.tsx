@@ -43,7 +43,7 @@ function CardPackDetail(): JSX.Element {
         cardpackId: location.state.data.salesNo,
       })
       .then((res) => {
-        if ((res.data.res.length) <= 0) {
+        if (res.data.res.length <= 0) {
           setsoldout(true);
         }
       })
@@ -53,7 +53,6 @@ function CardPackDetail(): JSX.Element {
   const [likepeople, setlikepeople] = useState(0);
   useEffect(() => {
     // follow check axios
-    console.log(location.state.data.salesNo);
     axios
       .get(`/api/cardPack/likecheck/${location.state.data.salesNo}`, {
         salesNo: location.state.data.salesNo,
@@ -62,7 +61,6 @@ function CardPackDetail(): JSX.Element {
         },
       })
       .then((res) => {
-        console.log(res.data);
         setlikepeople(res.data.peoplelike);
         // true면 true, false면 false
         if (res.data.islike === true) {
@@ -76,7 +74,6 @@ function CardPackDetail(): JSX.Element {
 
   // like, unlike
   const changelike = () => {
-    console.log(islike);
     if (islike) {
       axios
         .post(
@@ -90,8 +87,7 @@ function CardPackDetail(): JSX.Element {
             },
           }
         )
-        .then((res) => {
-          console.log(res);
+        .then(() => {
           setislike(false);
         });
     } else {
@@ -107,8 +103,7 @@ function CardPackDetail(): JSX.Element {
             },
           }
         )
-        .then((res) => {
-          console.log(res);
+        .then(() => {
           setislike(true);
         });
     }

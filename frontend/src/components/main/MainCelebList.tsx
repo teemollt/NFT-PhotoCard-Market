@@ -24,14 +24,12 @@ function MainCelebList(): JSX.Element {
   // 데이터저장하는곳
   useEffect(() => {
     axios.get("/api/main/celebgrouplist").then((res) => {
-      console.log(res.data.res);
       setceleb(res.data.res);
     });
   }, []);
 
   // let history = useHistory();
   function gotocelebmain(data: any) {
-    console.log(data);
     // history.push({
     //   pathname: `/searchall/${data.groupNm}`,
     //   state: { data: data },

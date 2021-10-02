@@ -41,7 +41,6 @@ function MainMarketItem(): JSX.Element {
   const [likepeople, setlikepeople] = useState(0);
   // like, unlike
   const changelike = () => {
-    console.log(islike);
     if (islike) {
       axios
         .post(
@@ -56,7 +55,6 @@ function MainMarketItem(): JSX.Element {
           }
         )
         .then((res) => {
-          console.log(res);
           setislike(false);
         });
     } else {
@@ -73,7 +71,6 @@ function MainMarketItem(): JSX.Element {
           }
         )
         .then((res) => {
-          console.log(res);
           setislike(true);
         });
     }
@@ -102,7 +99,7 @@ function MainMarketItem(): JSX.Element {
         setitemauctionNo(res.data.auction.auctionNo);
         setitemtokenNo(res.data.card.tokenNo);
         setmemberNo(res.data.member.memberNo);
-        setsellerwallet(res.data.sellerwallet);
+        setsellerwallet(res.data.sellerWallet.walletAdd);
       })
       .catch();
   });
@@ -113,7 +110,6 @@ function MainMarketItem(): JSX.Element {
         headers: { Authorization: localStorage.getItem("token") },
       })
       .then((res) => {
-        console.log(res);
         setlikepeople(res.data.peoplelike);
         if (res.data.islike === true) {
           setislike(true);

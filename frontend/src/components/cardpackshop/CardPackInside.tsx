@@ -23,7 +23,6 @@ function CardPackInside(props: any): JSX.Element {
         cardpackId: props.cardpackNo,
       })
       .then((res) => {
-        console.log(res.data.res);
         setcards(res.data.res);
       })
       .catch();
@@ -57,7 +56,7 @@ function CardPackInside(props: any): JSX.Element {
       >
         {cards.map((card, i) => {
           return (
-            <div>
+            <div key={i}>
               <ListItem button>
                 <Grid item xs={6}>
                   <div style={{ textAlign: "center" }}>{card.cardNM}</div>
@@ -74,6 +73,9 @@ function CardPackInside(props: any): JSX.Element {
         })}
       </List>
       <h6>* 이미 뽑힌 카드는 목록에 표시되지 않을 수 있습니다.</h6>
+      <h6>
+        * 남은 카드개수가 5장 미만일 경우, 5장 미만의 카드를 획득할 수 있습니다.
+      </h6>
     </div>
   );
 }

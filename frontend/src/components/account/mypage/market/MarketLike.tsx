@@ -10,7 +10,7 @@ interface MarketLike {
   auctionImg: string;
 }
 
-function MarketLike() {
+function MarketLike(): JSX.Element {
   const [cards, setCards] = useState<Array<MarketLike>>([]);
   const [page, setPage] = useState<Array<MarketLike>>([]);
 
