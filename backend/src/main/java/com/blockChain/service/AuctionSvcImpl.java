@@ -90,6 +90,8 @@ public class AuctionSvcImpl implements AuctionSvcInter{
 			auction.setAuctionStart(LocalDateTime.now());
 			auction.setAuctionDeadline(LocalDateTime.now().plusDays(3));
 			auction.setAuctionState("SELL");
+			tokenOwner.setOnAuction(1L);
+			toRepo.save(tokenOwner);
 			auctionRepo.save(auction);
 			res.put("success", true);
 			res.put("msg", "입력성공");
@@ -260,7 +262,7 @@ public class AuctionSvcImpl implements AuctionSvcInter{
 			Token token = tokenRepo.findById(auction.getToken().getTokenNo()).orElseThrow(() -> new IllegalStateException("해당 토큰이 존재하지 않습니다"));
 			if (!auction.getAuctionState().equals("SELL")) {IllegalStateException e = new IllegalStateException("이미 판매된 상품입니다.");throw e;};
 			
-			aoRepo.sltByAuctionNo(auction.getAuctionNo()).ifPresent(m->{throw new IllegalStateException("이미 판매된 상품입니다.");});
+//			aoRepo.sltByAuctionNo(auction.getAuctionNo()).ifPresent(m->{throw new IllegalStateException("이미 판매된 상품입니다.");});
 			auction.setAuctionState("SOLD");
 			auctionRepo.save(auction);
 			//판매처리
@@ -277,6 +279,7 @@ public class AuctionSvcImpl implements AuctionSvcInter{
 			
 			newTo.setMember(member);
 			newTo.setToken(token);
+			newTo.setOnAuction(0L);
 			newTo.setOwnDate(LocalDateTime.now());
 			toRepo.save(newTo); // 이게 수정처리가 되는건가
 			res.put("success", true);
@@ -340,6 +343,9 @@ public class AuctionSvcImpl implements AuctionSvcInter{
 			if(member.getMemberNo()!=auction.getMember().getMemberNo()) {throw new IllegalStateException("자신이 작성한 글만 삭제할 수 있습니다.");};
 			if(!auction.getAuctionState().equals("SELL")){throw new IllegalStateException("현재 판매중인 게시글만 삭제할 수 있습니다.");};
 			auction.setAuctionState("DEL");
+			Token_Owner to = toRepo.sltByTokenMember(member.getMemberNo(), auction.getToken().getTokenNo()).orElseThrow(() -> new IllegalStateException("해당 토큰을 소유하고 있지 않습니다."));;
+			to.setOnAuction(0L);
+			toRepo.save(to);
 			auctionRepo.save(auction);
 			res.put("success", true);
 			res.put("msg", "성공적으로 삭제되었습니다.");
