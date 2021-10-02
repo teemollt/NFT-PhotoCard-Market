@@ -5,7 +5,7 @@ function MarketBodySearch(props: any) {
   return (
     <div className="main">
       {props.searchresult.map((card: any, i: number) => (
-        <MarketItemSearch item={card} />
+        <MarketItemSearch item={card} key={i} />
       ))}
     </div>
   );

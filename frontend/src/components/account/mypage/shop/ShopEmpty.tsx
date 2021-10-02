@@ -65,7 +65,11 @@ function ShopEmpty() {
 
       {recommend.map((card, index) => {
         return (
-          <div className="shopCard" onClick={() => handleToShop(card)}>
+          <div
+            className="shopCard"
+            onClick={() => handleToShop(card)}
+            key={index}
+          >
             <div className="shopCardImg">
               <img src="/image/cardpack.png" alt="" />
             </div>

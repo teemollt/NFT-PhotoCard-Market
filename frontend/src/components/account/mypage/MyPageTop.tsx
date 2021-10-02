@@ -38,8 +38,7 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
       const res = await axios.get("/api/wallet/", {
         headers: { Authorization: localStorage.getItem("token") },
       });
-      console.log(res.data);
-      if (res.data.success == true) {
+      if (res.data.success === true) {
         setAddress(res.data.address);
         setBalance(res.data.walletBal);
       }
@@ -67,7 +66,6 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
       { walletAdd: newAccount },
       { headers: { Authorization: localStorage.getItem("token") } }
     );
-    console.log(res.data);
   };
   const [charging, setcharging] = useState(false);
   // 이더 충전 횟수 제한 혹은 일정 잔액 이하일때만 충전 가능하게 api로 변경

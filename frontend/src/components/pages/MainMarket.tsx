@@ -83,8 +83,8 @@ function MainMarket(): JSX.Element {
         keyword: data,
       })
       .then((res) => {
-        setsearchresult(res.data.auctionList);
         console.log(res.data);
+        setsearchresult(res.data.auctionList);
         setclicksearch(true);
       });
   }
@@ -122,7 +122,7 @@ function MainMarket(): JSX.Element {
         </div>
         {celeb.map((group, i) => {
           return (
-            <div>
+            <div key={i}>
               <TabPanel value={value} index={i + 1}>
                 <MarketBody celebNo={group.groupNo} />
               </TabPanel>
@@ -139,7 +139,6 @@ function MainMarket(): JSX.Element {
                     className="search-input"
                     placeholder="찾고자하는 카드의 타이틀을 입력하세요"
                     onChange={(e) => {
-                      console.log(e.target.value);
                       setsearch(e.target.value);
                     }}
                     onKeyPress={(e) => {
@@ -173,7 +172,3 @@ function MainMarket(): JSX.Element {
 }
 
 export default MainMarket;
-
-{
-  /* <div style={{ textAlign: "center" }}>검색결과가 없습니다</div> */
-}

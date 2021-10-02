@@ -14,11 +14,10 @@ function MarketItemSearch(props: any) {
     }))
   );
   let history = useHistory();
-  function itemdetail(data: any) {
-    console.log(data);
+  function itemdetail(auctionNo: any) {
     history.push({
-      pathname: `/marketitem/${data.auction.auctionNo}`,
-      state: { data: data },
+      pathname: `/marketitem/${auctionNo}`,
+      state: { auctionNo: auctionNo },
     });
   }
   return (
@@ -27,14 +26,17 @@ function MarketItemSearch(props: any) {
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
       onClick={() => {
-        console.log(props.item);
-        itemdetail(props.item);
+        itemdetail(props.item.auction.auctionNo);
       }}
     >
       <div style={{ textAlign: "center" }}>{props.item.card.cardNM}</div>
       <div style={{ textAlign: "center" }}>
+        "{props.item.auction.auctionTitle}"
+      </div>
+      <div style={{ textAlign: "center" }}>
         {cards.map(({ z, opacity }, index) => (
           <animated.div
+            key={index}
             style={{
               opacity,
               transform: to(
