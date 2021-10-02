@@ -17,6 +17,7 @@ function Pagination(props: any): JSX.Element {
         {pageNumbers.map((number: number) => {
           return (
             <Button
+              key={number}
               onClick={() => {
                 props.paginate(number);
               }}

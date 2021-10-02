@@ -163,7 +163,6 @@ function JoinTable() {
               });
           } else {
             if (memberPwCheck === 1) {
-              console.log(99);
               axios
                 .put(
                   "/api/member/update",

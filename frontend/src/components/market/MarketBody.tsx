@@ -11,7 +11,6 @@ function MarketBody(props: any): JSX.Element {
         headers: { Authorization: localStorage.getItem("token") },
       })
       .then((res) => {
-        console.log(res.data.res);
         setitems(res.data.res);
       })
       .catch();
@@ -23,6 +22,7 @@ function MarketBody(props: any): JSX.Element {
           image={item.card.cardImgUrl}
           background="#52649e"
           item={item}
+          key={i}
         />
       ))}
     </div>

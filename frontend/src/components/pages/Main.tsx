@@ -19,7 +19,6 @@ function Main(): JSX.Element {
   }
   const [testinput, settestinput] = useState("");
   function test() {
-    console.log(testinput);
   }
   return (
     <div>
@@ -59,7 +58,6 @@ function Main(): JSX.Element {
               placeholder="찾고싶은 셀럽의 이름을 입력해주세요"
               className="search-input"
               onChange={(e) => {
-                console.log(e.target.value);
                 setkeyword(e.target.value);
               }}
               onKeyPress={(e) => {
