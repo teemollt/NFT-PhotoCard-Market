@@ -52,12 +52,15 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
     // api로 지갑 유무 파악
     walletCheck();
   });
+  const [makingwallet, setmakingwallet] = useState(false);
   // getAccount는 지갑 주소가 없는 경우에만 버튼 활성화
   const getAccount = async () => {
+    setmakingwallet(true);
     // 계정 생성 - 추후에 비밀번호 직접 입력 가능하게
     const newAccount = await web3.eth.personal.newAccount("123");
     console.log(newAccount);
     setAddress(newAccount);
+    setmakingwallet(false);
     // 생성된 주소 서버로 넘겨서 저장하기
     const res = await axios.post(
       "/api/wallet/",
@@ -127,6 +130,23 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
               지갑 생성
             </Button>
           )}
+          {makingwallet ? (
+            <LoadingButton
+              loading
+              loadingPosition="start"
+              startIcon={<SaveIcon />}
+              variant="outlined"
+              size="medium"
+              style={{
+                color: "black",
+                backgroundColor: "white",
+                marginLeft: "5px",
+              }}
+            >
+              지갑생성중
+            </LoadingButton>
+          ) : null}
+
           <br />
         </div>
         <div className="mypageUserUpdate">
