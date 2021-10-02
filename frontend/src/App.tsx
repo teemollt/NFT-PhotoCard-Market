@@ -1,7 +1,7 @@
 import React from "react";
-import './App.css'
+import "./App.css";
 import Navbar from "./components/main/Navbar";
-import { Route, Switch } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import Main from "./components/pages/Main";
 import MyPage from "./components/pages/MyPage";
 import MainMarket from "./components/pages/MainMarket";
@@ -29,6 +29,10 @@ declare module "axios" {
 }
 
 function App(): JSX.Element {
+  if (localStorage.getItem("token")) {
+  }
+  let token = localStorage.getItem("token");
+
   return (
     <div>
       <Navbar />
@@ -36,45 +40,51 @@ function App(): JSX.Element {
         <Route path="/" exact>
           <Main />
         </Route>
-        <Route path="/mypage">
-          <MyPage />
-        </Route>
-        <Route path="/market">
-          <MainMarket />
-        </Route>
-        <Route path="/mainceleb/:no?">
-          <MainCeleb />
-        </Route>
-        <Route path="/cardpackshop/">
-          <CardPackShop />
-        </Route>
-        <Route path="/gallery/:pk">
-          <Gallery />
-        </Route>
-        <Route path="/cardpackdetail/:cardpackid">
-          <CardPackDetail />
-        </Route>
-        <Route path="/service/:id">
-          <Service />
-        </Route>
-        <Route path="/join">
-          <Join />
-        </Route>
-        <Route path="/marketitem/:id">
-          <MainMarketItem />
-        </Route>
-        <Route path="/update">
-          <MyPageUpdate />
-        </Route>
-        <Route path="/gboard">
-          <GalleryBoard />
-        </Route>
-        <Route path="/gboard">
-          <GalleryBoard />
-        </Route>
-        <Route path="/searchall/:keyword">
-          <MainSearchAll/>
-        </Route>
+        {token ? (
+          <div>
+            <Route path="/mypage">
+              <MyPage />
+            </Route>
+            <Route path="/market">
+              <MainMarket />
+            </Route>
+            <Route path="/mainceleb/:no?">
+              <MainCeleb />
+            </Route>
+            <Route path="/cardpackshop/">
+              <CardPackShop />
+            </Route>
+            <Route path="/gallery/:pk">
+              <Gallery />
+            </Route>
+            <Route path="/cardpackdetail/:cardpackid">
+              <CardPackDetail />
+            </Route>
+            <Route path="/service">
+              <Service />
+            </Route>
+            <Route path="/join">
+              <Join />
+            </Route>
+            <Route path="/marketitem/:id">
+              <MainMarketItem />
+            </Route>
+            <Route path="/update">
+              <MyPageUpdate />
+            </Route>
+            <Route path="/gboard">
+              <GalleryBoard />
+            </Route>
+            <Route path="/gboard">
+              <GalleryBoard />
+            </Route>
+            <Route path="/searchall/:keyword">
+              <MainSearchAll />
+            </Route>
+          </div>
+        ) : (
+          <Redirect to="/" />
+        )}
       </Switch>
       <Footer />
     </div>
