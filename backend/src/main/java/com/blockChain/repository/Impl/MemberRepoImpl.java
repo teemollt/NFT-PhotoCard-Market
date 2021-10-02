@@ -137,9 +137,10 @@ public class MemberRepoImpl implements MemberRepoCustom{
 		QAuction qa = QAuction.auction;
 		BooleanBuilder builder = new BooleanBuilder();
 		builder.and(qto.member.memberNo.eq(memberNo));
+		builder.and(qto.onAuction.eq(0L)); //내가 가진 토큰들 중에서
 //		builder.and(qa.auctionState.notEqualsIgnoreCase("SELL"));
-		builder.and(qa.auctionState.notEqualsIgnoreCase("SELL").or(qa.token.tokenNo.isNull()));
-		builder.and(qa.member.memberNo.eq(memberNo).and(qa.auctionState.notEqualsIgnoreCase("SELL")));
+//		builder.and(qa.auctionState.notEqualsIgnoreCase("SELL").or(qa.token.tokenNo.isNull())); // 옥션에 sell아니거나 아예 null이거나
+//		builder.and(qa.member.memberNo.eq(memberNo).and(qa.auctionState.notEqualsIgnoreCase("SELL")));
 		
 		
 		List<GalleryCardDTO> aa = queryFactory.from(qto)
