@@ -212,6 +212,10 @@ public class SalesSvcImpl implements SalesSvcInter{
 			}
 			Collections.shuffle(tokens);
 			int CardpackSize = 5;
+			//3이더인데 4장만 있다면 3 - 3/5*1  
+			if (sizes < CardpackSize) {
+				CardpackSize= sizes;
+			}
 			List<Token> chooseTokens = tokens.subList(0, CardpackSize); //랜덤 5개 고르기
 			Sales_Order salesOrder = new Sales_Order();
 			salesOrder.setMember(member);
