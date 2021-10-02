@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import "./MarketBuyItem.css";
 import jwt_decode from "jwt-decode";
-
 import {
   createStyles,
   Theme,
@@ -19,7 +18,6 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import TextField from "@mui/material/TextField";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContentText from "@mui/material/DialogContentText";
-import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
 import { contractAbi } from "../abi";
@@ -139,6 +137,11 @@ function MarketBuyItem(props: any): JSX.Element {
                 console.log(res);
                 setOpen(false);
                 setloading(false);
+                alert("물건을 성공적으로 구매하였습니다");
+                history.push({
+                  pathname: "/market",
+                });
+
                 // 성공했으면 소유권 이전 함수 호출
                 myContract.methods
                   .changeOwner(props.itemtoken)
@@ -216,15 +219,23 @@ function MarketBuyItem(props: any): JSX.Element {
       pathname: "/mypage",
     });
   }
+  // 수정
+  const changetitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setnewtitle(e.target.value.trim());
+  };
   const [openedit, setopenedit] = useState<boolean>(false);
-  const [newtitle, setnewtitle] = useState<string>(props.title);
-  const [newdetail, setnewdetail] = useState<string>(props.detail);
-  const [newprice, setnewprice] = useState<number>(props.price);
+  const [newtitle, setnewtitle] = useState<string>("");
+  const [newdetail, setnewdetail] = useState<string>("");
+  const [newprice, setnewprice] = useState<number>(0);
+  useEffect(() => {
+    return () => {
+      setnewtitle(props.title);
+      setnewdetail(props.detail);
+      setnewprice(props.price);
+    };
+  });
+
   function edit() {
-    console.log(props.price);
-    console.log(newprice);
-    console.log(newtitle);
-    console.log(newdetail);
     setopenedit(true);
     if (newtitle === "") {
       setnewtitle(props.title);
@@ -268,16 +279,20 @@ function MarketBuyItem(props: any): JSX.Element {
   };
 
   function deleteitem() {
+    console.log(1);
+    console.log(props.auctionNo);
     axios
       .delete("/api/auction/delete", {
-        auctionNo: parseInt(props.auctionNo),
+        data: {
+          auctionNo: props.auctionNo,
+        },
         headers: { Authorization: localStorage.getItem("token") },
       })
       .then((res) => {
         console.log(res);
         setopendelete(false);
       })
-      .catch();
+      .catch(() => {});
   }
 
   return (
@@ -299,44 +314,35 @@ function MarketBuyItem(props: any): JSX.Element {
                 수정항목을 입력해주세요. 미입력시 기존값으로 저장됩니다.
               </DialogContentText>
               <TextField
-                autoFocus
+                value={newtitle}
                 margin="dense"
                 id="name"
                 label="Title"
                 type="text"
                 fullWidth
                 variant="standard"
-                placeholder={props.title}
-                onChange={(e) => {
-                  setnewtitle(e.target.value);
-                }}
+                onChange={changetitle}
               />
               <TextField
                 autoFocus
                 margin="dense"
+                value={newdetail}
                 id="name"
                 label="Detail"
                 type="text"
                 fullWidth
                 variant="standard"
-                placeholder={props.detail}
                 multiline
-                onChange={(e) => {
-                  setnewdetail(e.target.value);
-                }}
               />
               <TextField
                 autoFocus
                 margin="dense"
                 id="name"
+                value={newprice}
                 label="Price"
                 type="number"
                 fullWidth
                 variant="standard"
-                placeholder={props.price}
-                onChange={(e) => {
-                  setnewprice(parseInt(e.target.value));
-                }}
               />
             </DialogContent>
             <DialogActions>

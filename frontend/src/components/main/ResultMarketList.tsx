@@ -22,6 +22,7 @@ function ResultMarketList(props: any) {
       <div style={{ textAlign: "center" }}>
         {cards.map(({ z, opacity }, index) => (
           <animated.div
+            key={index}
             style={{
               opacity,
               transform: to(

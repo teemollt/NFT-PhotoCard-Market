@@ -25,8 +25,8 @@ function MarketRegItem() {
         headers: { Authorization: localStorage.getItem("token") },
       })
       .then((res) => {
-        console.log(res);
         setmycardlist(res.data.res);
+        console.log(res.data.res);
       });
   }, []);
   //
@@ -36,7 +36,6 @@ function MarketRegItem() {
         headers: { Authorization: localStorage.getItem("token") },
       })
       .then((res) => {
-        console.log(res);
         setmycardlist(res.data.res);
       });
   }
@@ -66,8 +65,7 @@ function MarketRegItem() {
         },
         { headers: { Authorization: localStorage.getItem("token") } }
       )
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         reloadbeforeinsert();
       });
     //
@@ -93,7 +91,7 @@ function MarketRegItem() {
               columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             >
               {mycardlist.map((card, i) => (
-                <Grid item xs={6} md={4}>
+                <Grid item xs={6} md={4} key={i}>
                   <div className="page-content">
                     <div
                       className="card"

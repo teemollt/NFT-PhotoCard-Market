@@ -16,7 +16,6 @@ function Stack(props: any): JSX.Element {
   );
   let history = useHistory();
   function buycardpack(data: any) {
-    console.log(data);
     history.push({
       pathname: `/cardpackdetail/${data.salesNo}`,
       state: { data: data },
@@ -28,7 +27,6 @@ function Stack(props: any): JSX.Element {
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
       onClick={() => {
-        console.log(props.cardpackinfo);
         buycardpack(props.cardpackinfo);
       }}
     >
@@ -37,6 +35,7 @@ function Stack(props: any): JSX.Element {
       </div>
       {cards.map(({ z, opacity }, index) => (
         <animated.div
+          key={index}
           style={{
             opacity,
             transform: to(
@@ -64,7 +63,6 @@ function CardPackShop(): JSX.Element {
   const [cardpack, setcardpack] = useState<any[]>([]);
   useEffect(() => {
     axios.get("/api/saleCard").then((res) => {
-      console.log(res.data.res);
       setcardpack(
         res.data.res
         // .sort((a: any, b: any) => (a.salesNM < b.salesNM ? -1 : 1))
@@ -78,6 +76,7 @@ function CardPackShop(): JSX.Element {
           image="/image/cardpack.png"
           background="#52649e"
           cardpackinfo={pack}
+          key={i}
         />
       ))}
     </div>

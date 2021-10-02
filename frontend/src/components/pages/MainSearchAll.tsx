@@ -19,7 +19,6 @@ function Stack(props: any): JSX.Element {
   );
   let history = useHistory();
   function buycardpack(data: any) {
-    console.log(data);
     history.push({
       pathname: `/cardpackdetail/${data.salesNo}`,
       state: { data: data },
@@ -31,7 +30,6 @@ function Stack(props: any): JSX.Element {
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
       onClick={() => {
-        console.log(props.cardpackinfo);
         buycardpack(props.cardpackinfo);
       }}
     >
@@ -40,6 +38,7 @@ function Stack(props: any): JSX.Element {
       </div>
       {cards.map(({ z, opacity }, index) => (
         <animated.div
+          key={index}
           style={{
             opacity,
             transform: to(
@@ -77,7 +76,6 @@ function MainSearchAll() {
         setresultauction(res.data.auctionList);
         setresultcards(res.data.cardList);
         setresultcardpack(res.data.cardPackList);
-        console.log(res.data);
       });
   }, []);
   return (
@@ -91,6 +89,7 @@ function MainSearchAll() {
                 image="/image/cardpack.png"
                 background="#52649e"
                 cardpackinfo={pack}
+                key={i}
               />
             ))}
           </div>
@@ -108,6 +107,7 @@ function MainSearchAll() {
                 image={card.card.cardImgUrl}
                 background="#52649e"
                 item={card}
+                key={i}
               />
             ))}
           </div>
@@ -128,6 +128,7 @@ function MainSearchAll() {
                 image={card.cardImgUrl}
                 background="#52649e"
                 item={card}
+                key={i}
               />
             ))}
           </div>

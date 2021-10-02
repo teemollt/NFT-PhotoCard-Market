@@ -15,7 +15,6 @@ function MarketItem(props: any) {
   );
   let history = useHistory();
   function itemdetail(data: any) {
-    console.log(data);
     history.push({
       pathname: `/marketitem/${data.auction.auctionNo}`,
       state: { auctionNo: data.auction.auctionNo },
@@ -27,7 +26,6 @@ function MarketItem(props: any) {
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
       onClick={() => {
-        console.log(props.item);
         itemdetail(props.item);
       }}
     >
@@ -37,6 +35,7 @@ function MarketItem(props: any) {
       <div style={{ textAlign: "center" }}>
         {cards.map(({ z, opacity }, index) => (
           <animated.div
+            key={index}
             style={{
               opacity,
               transform: to(
