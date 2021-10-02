@@ -1,33 +1,35 @@
-import React, { useState } from "react";
-import TextField from "@mui/material/TextField";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import { Button } from "@mui/material";
-import "./GalleryBoardNew.css";
-import axios from "axios";
+import React, { useState } from "react"
+import TextField from "@mui/material/TextField"
+import Dialog from "@mui/material/Dialog"
+import DialogActions from "@mui/material/DialogActions"
+import DialogContent from "@mui/material/DialogContent"
+import DialogContentText from "@mui/material/DialogContentText"
+import DialogTitle from "@mui/material/DialogTitle"
+import { Button } from "@mui/material"
+import "./GalleryBoardNew.css"
+import axios from "axios"
 
 interface GalleryBoardNewProps {
-  open: boolean;
-  handleClose: any;
+  open: boolean
+  handleClose: any
 }
 
 function GalleryBoardNew(props: GalleryBoardNewProps) {
-  const { open, handleClose } = props;
-  const [content, setContent] = useState<string>("");
+  const { open, handleClose } = props
+  const [content, setContent] = useState<string>("")
   const handleSubmit = () => {
-    axios
-      .post(
-        "/api/gallery/insert",
-        { galleryArticleContent: content },
-        {
-          headers: { Authorization: localStorage.getItem("token") },
-        }
-      )
-      .then(() => window.location.reload());
-  };
+    if (content) {
+      axios
+        .post(
+          "/api/gallery/insert",
+          { galleryArticleContent: content },
+          {
+            headers: { Authorization: localStorage.getItem("token") },
+          }
+        )
+        .then(() => window.location.reload())
+    }
+  }
   return (
     <div className="galleryBoardNew">
       <Dialog open={open} onClose={handleClose}>
@@ -63,7 +65,7 @@ function GalleryBoardNew(props: GalleryBoardNewProps) {
         </DialogActions>
       </Dialog>
     </div>
-  );
+  )
 }
 
-export default GalleryBoardNew;
+export default GalleryBoardNew
