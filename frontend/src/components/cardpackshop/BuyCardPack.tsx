@@ -116,7 +116,7 @@ function BuyCardPack(props: any): JSX.Element {
       const res = await axios.get("/api/wallet/", {
         headers: { Authorization: localStorage.getItem("token") },
       });
-      if (res.data.success == true) {
+      if (res.data.success === true) {
         setAddress(res.data.address);
         setBalance(res.data.walletBal);
       }

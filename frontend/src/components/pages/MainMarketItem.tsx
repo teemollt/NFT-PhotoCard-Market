@@ -102,7 +102,7 @@ function MainMarketItem(): JSX.Element {
         setsellerwallet(res.data.sellerWallet.walletAdd);
       })
       .catch();
-  });
+  }, []);
   useEffect(() => {
     axios
       .get(`/api/auction/likecheck/${location.state.auctionNo}`, {
@@ -126,7 +126,7 @@ function MainMarketItem(): JSX.Element {
       var decoded: any | unknown = jwt_decode(token);
       setIam(decoded.sub);
     }
-  });
+  }, []);
   const classes = useStyles();
   const location: any = useLocation();
   return (

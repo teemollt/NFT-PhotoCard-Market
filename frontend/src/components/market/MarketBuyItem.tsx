@@ -19,6 +19,8 @@ import TextField from "@mui/material/TextField";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContentText from "@mui/material/DialogContentText";
 import Typography from "@mui/material/Typography";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
 import axios from "axios";
 import { contractAbi } from "../abi";
 
@@ -103,9 +105,7 @@ function MarketBuyItem(props: any): JSX.Element {
   const handleClose = () => {
     setOpen(false);
   };
-  const handleCloseedit = () => {
-    setopenedit(false);
-  };
+
   const [loading, setloading] = useState(false);
   // 결제함수
   const pay = () => {
@@ -220,32 +220,38 @@ function MarketBuyItem(props: any): JSX.Element {
     });
   }
   // 수정
-  const changetitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setnewtitle(e.target.value.trim());
+  function setinfo() {
+    setnewtitle(props.title);
+    setnewdetail(props.detail);
+    setnewprice(props.price);
+  }
+  const handleOpenedit = () => {
+    setinfo();
+    setopenedit(true);
+  };
+  const handleCloseedit = () => {
+    setopenedit(false);
   };
   const [openedit, setopenedit] = useState<boolean>(false);
   const [newtitle, setnewtitle] = useState<string>("");
+  const [errortitle, seterrortitle] = useState(false);
   const [newdetail, setnewdetail] = useState<string>("");
+  const [errordetail, seterrordetail] = useState(false);
   const [newprice, setnewprice] = useState<number>(0);
+  const [errorprice, seterrorprice] = useState(false);
   useEffect(() => {
-    return () => {
-      setnewtitle(props.title);
-      setnewdetail(props.detail);
-      setnewprice(props.price);
-    };
-  });
-
-  function edit() {
-    setopenedit(true);
-    if (newtitle === "") {
-      setnewtitle(props.title);
-    }
-    if (newdetail === "") {
-      setnewdetail(props.detail);
-    }
-    if (newprice === 0) {
-      setnewprice(props.price);
-    }
+    setinfo();
+  }, []);
+  const changetitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setnewtitle(e.target.value.trim());
+  };
+  const changedetail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setnewdetail(e.target.value.trim());
+  };
+  const changeprice = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setnewprice(parseInt(e.target.value.trim()));
+  };
+  function editfunction() {
     axios
       .put(
         "/api/auction/edit",
@@ -267,6 +273,34 @@ function MarketBuyItem(props: any): JSX.Element {
         console.log(err);
       });
   }
+  function edit() {
+    setopenedit(true);
+    if (newtitle) {
+      if (newdetail) {
+        if (newprice > 0) {
+          editfunction();
+        } else {
+          seterrorprice(true);
+          setTimeout(() => {
+            setnewprice(props.price);
+            seterrorprice(false);
+          }, 2000);
+        }
+      } else {
+        seterrordetail(true);
+        setTimeout(() => {
+          setnewdetail(props.detail);
+          seterrordetail(false);
+        }, 2000);
+      }
+    } else {
+      seterrortitle(true);
+      setTimeout(() => {
+        setnewtitle(props.title);
+        seterrortitle(false);
+      }, 2000);
+    }
+  }
 
   const [opendelete, setopendelete] = useState(false);
 
@@ -279,8 +313,6 @@ function MarketBuyItem(props: any): JSX.Element {
   };
 
   function deleteitem() {
-    console.log(1);
-    console.log(props.auctionNo);
     axios
       .delete("/api/auction/delete", {
         data: {
@@ -291,6 +323,9 @@ function MarketBuyItem(props: any): JSX.Element {
       .then((res) => {
         console.log(res);
         setopendelete(false);
+        history.push({
+          pathname: "/market",
+        });
       })
       .catch(() => {});
   }
@@ -299,12 +334,7 @@ function MarketBuyItem(props: any): JSX.Element {
     <div>
       {parseInt(props.memberNo) === parseInt(props.Iam) ? (
         <div>
-          <Button
-            fullWidth
-            onClick={() => {
-              setopenedit(true);
-            }}
-          >
+          <Button fullWidth onClick={handleOpenedit}>
             수정
           </Button>
           {/* 수정 */}
@@ -333,6 +363,7 @@ function MarketBuyItem(props: any): JSX.Element {
                 fullWidth
                 variant="standard"
                 multiline
+                onChange={changedetail}
               />
               <TextField
                 autoFocus
@@ -343,12 +374,31 @@ function MarketBuyItem(props: any): JSX.Element {
                 type="number"
                 fullWidth
                 variant="standard"
+                onChange={changeprice}
               />
             </DialogContent>
             <DialogActions>
               <Button onClick={handleCloseedit}>Cancel</Button>
               <Button onClick={edit}>save</Button>
             </DialogActions>
+            {errortitle ? (
+              <Alert severity="error">
+                <AlertTitle>Error</AlertTitle>
+                <strong>빠진 항목이 없는지 다시한번 체크해주세요</strong>
+              </Alert>
+            ) : null}
+            {errordetail ? (
+              <Alert severity="error">
+                <AlertTitle>Error</AlertTitle>
+                <strong>빠진 항목이 없는지 다시한번 체크해주세요</strong>
+              </Alert>
+            ) : null}
+            {errorprice ? (
+              <Alert severity="error">
+                <AlertTitle>Error</AlertTitle>
+                <strong>상품 가격을 0이상의 값으로 입력해주세요</strong>
+              </Alert>
+            ) : null}
           </Dialog>
           {/* 삭제 */}
           <Button fullWidth onClick={handleClickOpendelete}>
