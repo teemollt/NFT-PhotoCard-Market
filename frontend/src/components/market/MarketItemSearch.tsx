@@ -29,9 +29,11 @@ function MarketItemSearch(props: any) {
         itemdetail(props.item.auction.auctionNo);
       }}
     >
-      <div style={{ textAlign: "center" }}>{props.item.card.cardNM}</div>
       <div style={{ textAlign: "center" }}>
-        "{props.item.auction.auctionTitle}"
+        {props.item.auction.auctionTitle}
+      </div>
+      <div style={{ textAlign: "center" }}>
+        [{props.item.card.cardNM}({props.item.card.cardGradeNM})]
       </div>
       <div style={{ textAlign: "center" }}>
         {cards.map(({ z, opacity }, index) => (

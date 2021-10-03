@@ -33,6 +33,9 @@ function MarketItem(props: any) {
         {props.item.auction.auctionTitle}
       </div>
       <div style={{ textAlign: "center" }}>
+        [{props.item.card.cardNM}({props.item.card.cardGradeNM})]
+      </div>
+      <div style={{ textAlign: "center" }}>
         {cards.map(({ z, opacity }, index) => (
           <animated.div
             key={index}

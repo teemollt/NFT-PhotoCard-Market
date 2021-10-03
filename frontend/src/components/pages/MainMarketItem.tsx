@@ -83,6 +83,8 @@ function MainMarketItem(): JSX.Element {
   const [itemtokenNo, setitemtokenNo] = useState<number>(0);
   const [memberNo, setmemberNo] = useState<number>(0);
   const [sellerwallet, setsellerwallet] = useState<string>("");
+  const [itemcardgrade, setitemcardgrade] = useState<string>("");
+  const [itemcardnm, setitemcardnm] = useState("");
   // 옥션번호로 데이터받기
   useEffect(() => {
     axios
@@ -94,9 +96,11 @@ function MainMarketItem(): JSX.Element {
         console.log(res.data);
         setitemtitle(res.data.auction.auctionTitle);
         setitemdetail(res.data.auction.auctionDetail);
-        setitemimageurl(res.data.card.cardImgUrl);
         setitemprice(res.data.auction.price);
         setitemauctionNo(res.data.auction.auctionNo);
+        setitemcardgrade(res.data.card.cardGradeNM);
+        setitemimageurl(res.data.card.cardImgUrl);
+        setitemcardnm(res.data.card.cardNM);
         setitemtokenNo(res.data.card.tokenNo);
         setmemberNo(res.data.member.memberNo);
         setsellerwallet(res.data.sellerWallet.walletAdd);
@@ -161,9 +165,17 @@ function MainMarketItem(): JSX.Element {
                 )}
               </Tooltip>
               <div className={classes.iteminfo}>
+                <h4>
+                  {itemcardnm}({itemcardgrade})
+                </h4>
+              </div>
+              <div className={classes.iteminfo}>
                 <h1>{itemtitle}</h1>
               </div>
               <div className={classes.iteminfo}>{itemdetail}</div>
+              <div className={classes.iteminfo}>
+                <h1>{itemprice} eth</h1>
+              </div>
               <div className={classes.paper2}>
                 <div className="buybtn">
                   <MarketBuyItem

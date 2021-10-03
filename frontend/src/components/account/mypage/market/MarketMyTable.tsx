@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./MarketMyTable.css";
-
+import Button from "@material-ui/core/Button";
+import { useHistory } from "react-router-dom";
 interface MarketMyTableProps {
   card: {
     auctionNo: number;
@@ -17,7 +18,13 @@ interface MarketMyTableProps {
 function MarketMyTable(props: MarketMyTableProps) {
   const { auctionNo, cardImg, cardNm, price, state, memberNick } = props.card;
   const [hover, setHover] = useState<boolean>(false);
-
+  let history = useHistory();
+  const handleToMarket = (data: any) => {
+    history.push({
+      pathname: `/marketitem/${auctionNo}`,
+      state: { auctionNo: auctionNo },
+    });
+  };
   return (
     <tr
       className="marketMyTable"
@@ -45,7 +52,15 @@ function MarketMyTable(props: MarketMyTableProps) {
       </td>
       <td className="myMarketProduct">{cardNm}</td>
       <td className="myMarketCurrent">{price}</td>
-      {state === "SOLD" ? <td className="myMarketEnd">{memberNick}</td> : <td className="myMarketEnd">판매중</td>}
+      {state === "SOLD" ? (
+        <td className="myMarketEnd">{memberNick}</td>
+      ) : (
+        <td className="myMarketEnd">
+          <Button style={{ backgroundColor: "red", color: "white" }}>
+            판매중
+          </Button>
+        </td>
+      )}
     </tr>
   );
 }
