@@ -384,13 +384,13 @@ function MarketBuyItem(props: any): JSX.Element {
             {errortitle ? (
               <Alert severity="error">
                 <AlertTitle>Error</AlertTitle>
-                <strong>빠진 항목이 없는지 다시한번 체크해주세요</strong>
+                <strong>상품의 제목을 입력해주세요</strong>
               </Alert>
             ) : null}
             {errordetail ? (
               <Alert severity="error">
                 <AlertTitle>Error</AlertTitle>
-                <strong>빠진 항목이 없는지 다시한번 체크해주세요</strong>
+                <strong>상품의 상세내용을 입력해주세요</strong>
               </Alert>
             ) : null}
             {errorprice ? (

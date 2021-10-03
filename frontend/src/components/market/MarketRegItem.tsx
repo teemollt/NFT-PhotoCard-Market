@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import jwt_decode from "jwt-decode";
 import axios from "axios";
 import Grid from "@mui/material/Grid";
 import "./MarketRegItem.css";
@@ -10,6 +9,8 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
 
 function MarketRegItem() {
   // 선택하고 가격적어 올리는 창
@@ -40,11 +41,14 @@ function MarketRegItem() {
       });
   }
   const [inputprice, setinputprice] = useState<string>("");
+  const [errorprice, seterrorprice] = useState(false);
   const [selectedcardNo, setselectedcardNo] = useState<number>(0);
   const [selectedcardNm, setselectedcardNm] = useState<string>("");
   const [selectedtoken, setselectedtoken] = useState<number>(0);
   const [selectedcardtitle, setselectedcardtitle] = useState<string>("");
+  const [errortitle, seterrortitle] = useState(false);
   const [selectedcarddetail, setselectedcarddetail] = useState<string>("");
+  const [errordetail, seterrordetail] = useState(false);
   function register(data: any) {
     setOpen(true);
     setselectedcardNo(data.cardNo);
@@ -52,23 +56,45 @@ function MarketRegItem() {
     setselectedtoken(data.token[0].tokenNo);
   }
   function successregister() {
-    setOpen(false);
-    // 정말 카드등록하는 api
-    axios
-      .post(
-        "/api/auction/insert",
-        {
-          tokenNo: selectedtoken,
-          price: parseInt(inputprice),
-          auctionTitle: selectedcardtitle,
-          auctionDetail: selectedcarddetail,
-        },
-        { headers: { Authorization: localStorage.getItem("token") } }
-      )
-      .then(() => {
-        reloadbeforeinsert();
-      });
-    //
+    if (selectedcardtitle) {
+      if (selectedcarddetail) {
+        if (inputprice) {
+          // 다 통과하면 진짜 등록
+          axios
+            .post(
+              "/api/auction/insert",
+              {
+                tokenNo: selectedtoken,
+                price: parseInt(inputprice),
+                auctionTitle: selectedcardtitle,
+                auctionDetail: selectedcarddetail,
+              },
+              { headers: { Authorization: localStorage.getItem("token") } }
+            )
+            .then(() => {
+              reloadbeforeinsert();
+              setOpen(false);
+            });
+          //
+        } else {
+          seterrorprice(true);
+          setTimeout(() => {
+            setinputprice("");
+            seterrorprice(false);
+          }, 2000);
+        }
+      } else {
+        seterrordetail(true);
+        setTimeout(() => {
+          seterrordetail(false);
+        }, 2000);
+      }
+    } else {
+      seterrortitle(true);
+      setTimeout(() => {
+        seterrortitle(false);
+      }, 2000);
+    }
   }
   return (
     <div className="section full-height">
@@ -133,18 +159,6 @@ function MarketRegItem() {
             autoFocus
             margin="dense"
             id="name"
-            label="판매하고 싶은 가격을 입력해주세요"
-            type="number"
-            fullWidth
-            variant="standard"
-            onChange={(e) => {
-              setinputprice(e.target.value);
-            }}
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
             label="제목을 입력해주세요"
             type="text"
             fullWidth
@@ -166,7 +180,37 @@ function MarketRegItem() {
               setselectedcarddetail(e.target.value);
             }}
           />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="판매하고 싶은 가격을 입력해주세요"
+            type="number"
+            fullWidth
+            variant="standard"
+            onChange={(e) => {
+              setinputprice(e.target.value);
+            }}
+          />
         </DialogContent>
+        {errortitle ? (
+          <Alert severity="error">
+            <AlertTitle>Error</AlertTitle>
+            <strong>상품의 제목을 입력해주세요</strong>
+          </Alert>
+        ) : null}
+        {errordetail ? (
+          <Alert severity="error">
+            <AlertTitle>Error</AlertTitle>
+            <strong>상품의 상세내용을 입력해주세요</strong>
+          </Alert>
+        ) : null}
+        {errorprice ? (
+          <Alert severity="error">
+            <AlertTitle>Error</AlertTitle>
+            <strong>상품 가격을 0이상의 값으로 입력해주세요</strong>
+          </Alert>
+        ) : null}
         <DialogActions>
           <Button onClick={handleClose}>취소</Button>
           <Button onClick={successregister}>판매등록</Button>
