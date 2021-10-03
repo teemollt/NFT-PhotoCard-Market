@@ -48,7 +48,7 @@ function CardPackDetail(): JSX.Element {
         }
       })
       .catch();
-  }, []);
+  });
   const [islike, setislike] = useState(false);
   const [likepeople, setlikepeople] = useState(0);
   useEffect(() => {

@@ -40,6 +40,15 @@ function App(): JSX.Element {
         <Route path="/" exact>
           <Main />
         </Route>
+        <Route path="/join">
+          <Join />
+        </Route>
+        <Route path="/service">
+          <Service />
+        </Route>
+        <Route path="/searchall/:keyword">
+          <MainSearchAll />
+        </Route>
         {token ? (
           <div>
             <Route path="/mypage">
@@ -60,12 +69,6 @@ function App(): JSX.Element {
             <Route path="/cardpackdetail/:cardpackid">
               <CardPackDetail />
             </Route>
-            <Route path="/service">
-              <Service />
-            </Route>
-            <Route path="/join">
-              <Join />
-            </Route>
             <Route path="/marketitem/:id">
               <MainMarketItem />
             </Route>
@@ -78,12 +81,11 @@ function App(): JSX.Element {
             <Route path="/gboard">
               <GalleryBoard />
             </Route>
-            <Route path="/searchall/:keyword">
-              <MainSearchAll />
-            </Route>
           </div>
         ) : (
-          <Redirect to="/" />
+          <div>
+            <Redirect to="/" />
+          </div>
         )}
       </Switch>
       <Footer />
