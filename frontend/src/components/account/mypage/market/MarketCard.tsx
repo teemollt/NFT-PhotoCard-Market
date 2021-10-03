@@ -7,16 +7,16 @@ interface MarketCardProps {
     auctionNo: number;
     auctionTitle: string;
     price: number;
-    auctionImg: string
+    auctionImg: string;
   };
 }
 
-function MarketCard(props: MarketCardProps) { 
+function MarketCard(props: MarketCardProps) {
   let history = useHistory();
 
   const { auctionNo, auctionTitle, price, auctionImg } = props.card;
 
-const handleToMarket = (data: any) => {
+  const handleToMarket = (data: any) => {
     history.push({
       pathname: `/marketitem/${auctionNo}`,
       state: { auctionNo: auctionNo },
@@ -24,7 +24,7 @@ const handleToMarket = (data: any) => {
   };
 
   return (
-    <div className="marketCard" onClick={()=>handleToMarket(auctionNo)}>
+    <div className="marketCard" onClick={() => handleToMarket(auctionNo)}>
       <div className="marketCardImg">
         <img src={auctionImg} alt="" />
       </div>
