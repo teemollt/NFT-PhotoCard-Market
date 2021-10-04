@@ -30,9 +30,8 @@ function MarketItem(props: any) {
       }}
     >
       <div style={{ textAlign: "center" }}>
-        <strong>{props.item.auction.auctionTitle}</strong>
+        {props.item.auction.auctionTitle}
       </div>
-      <div style={{ textAlign: "center" }}>{props.item.auction.price} coin</div>
       <div style={{ textAlign: "center" }}>
         [{props.item.card.cardNM}({props.item.card.cardGradeNM})]
       </div>
@@ -55,6 +54,7 @@ function MarketItem(props: any) {
                   width: "100%",
                   height: "300px",
                   borderRadius: "20px",
+                  filter: "blur(5px)",
                 }}
                 src={props.image}
               />
