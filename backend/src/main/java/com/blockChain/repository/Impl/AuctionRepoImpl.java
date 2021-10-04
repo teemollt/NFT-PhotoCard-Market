@@ -205,6 +205,7 @@ public class AuctionRepoImpl implements AuctionRepoCustom{
 				.join(qpm).on(qp.eq(qpm.product))
 				.leftJoin(qao).on(qa.eq(qao.auction))
 				.leftJoin(qm).on(qao.member.eq(qm))
+				.orderBy(qa.auctionStart.desc())
 				.fetch());
 	}
 	
