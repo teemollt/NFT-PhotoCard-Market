@@ -21,19 +21,34 @@
 # EXPOSE 80
 # # 컨테이너 실행시 실행할 명령어
 # CMD ["nginx", "-g", "daemon off;"]
-FROM node:12.18.2 as build
+# FROM node:12.18.2 as build
 
-ARG REACT_APP_SERVICES_HOST=/services/m
+# ARG REACT_APP_SERVICES_HOST=/services/m
 
+# WORKDIR /app
+
+# COPY ./package.json /app/package.json
+# COPY ./package-lock.json /app/package-lock.json
+
+# RUN yarn install
+# COPY . .
+# RUN yarn build
+
+
+# FROM nginx
+# COPY ./nginx/homepage.conf /etc/nginx/conf.d/default.conf
+# COPY --from=build /app/build /usr/share/nginx/html
+# EXPOSE 80
+# CMD ["nginx", "-g", "daemon off;"]
+FROM node:12.17.0 as build-stage
 WORKDIR /app
+COPY package*.json ./
 
-COPY ./package.json /app/package.json
-COPY ./package-lock.json /app/package-lock.json
-
-RUN yarn install
+RUN npm cache clean --force
+RUN rm package-lock.json
+RUN npm install
 COPY . .
-RUN yarn build
-
+RUN npm run build
 
 FROM nginx
 COPY ./nginx/homepage.conf /etc/nginx/conf.d/default.conf
