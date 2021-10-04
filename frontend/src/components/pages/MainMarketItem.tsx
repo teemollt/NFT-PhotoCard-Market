@@ -145,7 +145,6 @@ function MainMarketItem(): JSX.Element {
                   alt=""
                   width="100%"
                   height="100%"
-                  style={{ filter: "blur(10px)" }}
                 />
               </Paper>
             </Grid>
@@ -174,7 +173,7 @@ function MainMarketItem(): JSX.Element {
               </div>
               <div className={classes.iteminfo}>{itemdetail}</div>
               <div className={classes.iteminfo}>
-                <h1>{itemprice} eth</h1>
+                <h1>{itemprice} coin</h1>
               </div>
               <div className={classes.paper2}>
                 <div className="buybtn">

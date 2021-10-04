@@ -36,11 +36,10 @@ function ResultCardsList(props: any) {
             {index === 4 && (
               <animated.img
                 style={{
-                  transform: f.to([1, 0], ["scale(0.7)", "scale(0.9)"]),
+                  transform: f.to([1, 0], ["scale(0.9)", "scale(1)"]),
                   width: "100%",
                   height: "300px",
                   borderRadius: "20px",
-                  filter: "blur(10px)",
                 }}
                 src={props.image}
               />
