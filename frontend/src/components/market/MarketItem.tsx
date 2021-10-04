@@ -30,8 +30,9 @@ function MarketItem(props: any) {
       }}
     >
       <div style={{ textAlign: "center" }}>
-        {props.item.auction.auctionTitle}
+        <strong>{props.item.auction.auctionTitle}</strong>
       </div>
+      <div style={{ textAlign: "center" }}>{props.item.auction.price} coin</div>
       <div style={{ textAlign: "center" }}>
         [{props.item.card.cardNM}({props.item.card.cardGradeNM})]
       </div>

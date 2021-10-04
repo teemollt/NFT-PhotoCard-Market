@@ -425,7 +425,7 @@ function MarketBuyItem(props: any): JSX.Element {
         </div>
       ) : (
         <Button fullWidth onClick={handleClickOpen}>
-          {props.price} eth 구매
+          {props.price} coin 구매
         </Button>
       )}
       <Dialog
