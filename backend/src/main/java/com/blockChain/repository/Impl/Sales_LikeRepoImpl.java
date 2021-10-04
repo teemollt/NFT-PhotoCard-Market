@@ -50,6 +50,7 @@ public class Sales_LikeRepoImpl implements Sales_LikeRepoCustom{
 				.from(qsl)
 				.join(qs).on(qs.eq(qsl.sales))
 				.where(qsl.member.memberNo.eq(memberPk))
+				.orderBy(qs.salesNo.asc())
 				.fetch());
 	}
 	

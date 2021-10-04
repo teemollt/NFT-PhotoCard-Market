@@ -49,6 +49,7 @@ public class Auction_OrderRepoImpl implements Auction_OrderRepoCustom{
 				.join(qpt).on(qt.eq(qpt.token))
 				.join(qp).on(qpt.product.eq(qp))
 				.join(qpm).on(qp.eq(qpm.product))
+				.orderBy(qao.auctionOrderDate.desc())
 				.fetch());
 	}
 	@Override
