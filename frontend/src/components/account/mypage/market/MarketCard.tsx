@@ -16,15 +16,8 @@ function MarketCard(props: MarketCardProps) {
 
   const { auctionNo, auctionTitle, price, auctionImg } = props.card
 
-  const handleToMarket = (data: any) => {
-    history.push({
-      pathname: `/marketitem/${auctionNo}`,
-      state: { auctionNo: auctionNo },
-    })
-  }
-
   return (
-    <div className="marketCard" onClick={() => handleToMarket(auctionNo)}>
+    <div className="marketCard">
       <div className="marketCardImg">
         <img src={auctionImg} alt="" />
       </div>
