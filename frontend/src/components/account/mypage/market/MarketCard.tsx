@@ -1,5 +1,4 @@
 import React from "react"
-import { useHistory } from "react-router-dom"
 import "./MarketCard.css"
 
 interface MarketCardProps {
@@ -12,9 +11,7 @@ interface MarketCardProps {
 }
 
 function MarketCard(props: MarketCardProps) {
-  let history = useHistory()
-
-  const { auctionNo, auctionTitle, price, auctionImg } = props.card
+  const { auctionTitle, price, auctionImg } = props.card
 
   return (
     <div className="marketCard">
