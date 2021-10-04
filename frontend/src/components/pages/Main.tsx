@@ -29,6 +29,7 @@ function Main(): JSX.Element {
         }}
       />
       <button onClick={test}>test</button> */}
+      <div>test</div>
       <div className="mainitem1">
         <div className="mainitem">
           <MainCarousel1 />
