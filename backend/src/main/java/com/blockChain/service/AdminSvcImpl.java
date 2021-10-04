@@ -194,8 +194,6 @@ public class AdminSvcImpl implements AdminSvcInter{
     @Autowired
 	private CelebRepo celebRepo;
 	@Autowired
-	private Celeb_GroupRepo celebGroupRepo;
-	@Autowired
 	private Member_GradeRepo memberGradeRepo;
 	@Autowired
 	private MemberRepo memberRepo;
@@ -209,6 +207,8 @@ public class AdminSvcImpl implements AdminSvcInter{
 	private Product_GradeRepo pgRepo;
 	@Autowired
 	private Product_Grade_PercentRepo pgpRepo;
+	@Autowired
+	private Celeb_GroupRepo celebGroupRepo;
 	@Autowired
 	private ProductRepo productRepo;
 	@Autowired
