@@ -49,6 +49,7 @@ public class Auction_LikeRepoImpl implements Auction_LikeRepoCustom{
 				.join(qp).on(qp.eq(qpt.product))
 				.join(qpm).on(qp.eq(qpm.product))
 				.where(qm.memberNo.eq(memberNo))
+				.orderBy(qa.auctionStart.desc())
 				.fetch());
 	}
 	@Override
