@@ -18,8 +18,7 @@ function Main(): JSX.Element {
     });
   }
   const [testinput, settestinput] = useState("");
-  function test() {
-  }
+  function test() {}
   return (
     <div>
       {/* <input
@@ -29,6 +28,7 @@ function Main(): JSX.Element {
         }}
       />
       <button onClick={test}>test</button> */}
+      <div>test</div>
       <div className="mainitem1">
         <div className="mainitem">
           <MainCarousel1 />
