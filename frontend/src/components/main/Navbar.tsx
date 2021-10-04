@@ -33,7 +33,11 @@ function Navbar(): JSX.Element {
   return (
     <div>
       <div className="navbar">
-        <img src="/image/thefanlogo2.png" alt="" style={{ width: "200px" }} />
+        <img
+          src="https://t1.daumcdn.net/cfile/blog/2518024D5335817C22"
+          alt=""
+          style={{ width: "100px" }}
+        />
       </div>
       <br />
       <div className="breadcrumbs">
