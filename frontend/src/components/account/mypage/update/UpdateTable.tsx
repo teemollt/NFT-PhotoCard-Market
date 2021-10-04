@@ -35,16 +35,16 @@ function JoinTable() {
       });
   }, []);
 
-  const handleMemberPw = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMemberPw(e.target.value.trim());
+  const handleMemberPw = (e: string) => {
     if (
-      memberPw
+      e
         .trim()
         .match(
           /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{1,50}).{8,16}$/
         )
     ) {
       setMemberPwCheck(1);
+      setMemberPw(e);
     } else {
       setMemberPwCheck(2);
     }
@@ -84,7 +84,7 @@ function JoinTable() {
     setMemberEmail(e.target.value.trim());
     if (
       memberEmail.match(
-        /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/
+        /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[com]{2,3}$/
       )
     ) {
       setCheckEmail(true);
@@ -125,25 +125,7 @@ function JoinTable() {
     if (memberEmail && memberNick) {
       if (memberPw === password2) {
         if (emailCheck === 1 && nickCheck === 1) {
-          if (memberPw.trim()) {
-            axios
-              .put(
-                "/api/member/update",
-                {
-                  memberPw: memberPw,
-                  memberEmail: memberEmail,
-                  memberNick: memberNick,
-                  celebNo: likeCeleb,
-                },
-                {
-                  headers: { Authorization: localStorage.getItem("token") },
-                }
-              )
-              .then((res) => {
-                setMessage("정보를 수정했습니다");
-                setOpen(true);
-              });
-          } else {
+          if (!memberPw.trim()) {
             axios
               .put(
                 "/api/member/update",
@@ -161,6 +143,47 @@ function JoinTable() {
                 setMessage("정보를 수정했습니다");
                 setOpen(true);
               });
+            axios
+              .put(
+                "/api/member/update",
+                {
+                  memberPw: memberPw,
+                  memberEmail: memberEmail,
+                  memberNick: memberNick,
+                  celebNo: likeCeleb,
+                },
+                {
+                  headers: { Authorization: localStorage.getItem("token") },
+                }
+              )
+              .then((res) => {
+                setMessage("정보를 수정했습니다");
+                setOpen(true);
+                window.location.replace("/mypage");
+              });
+          } else {
+            if (memberPwCheck === 1) {
+              axios
+                .put(
+                  "/api/member/update",
+                  {
+                    memberPw: memberPw,
+                    memberEmail: memberEmail,
+                    memberNick: memberNick,
+                    celebNo: likeCeleb,
+                  },
+                  {
+                    headers: { Authorization: localStorage.getItem("token") },
+                  }
+                )
+                .then((res) => {
+                  setMessage("정보를 수정했습니다");
+                  setOpen(true);
+                });
+            } else {
+              setMessage("비밀번호 양식을 확인해 주세요");
+              setOpen(true);
+            }
           }
         } else {
           setMessage("중복 확인을 해 주세요");
@@ -208,7 +231,7 @@ function JoinTable() {
                 type="password"
                 helperText="영문/숫자/특수문자, 8~16자"
                 error={memberPwCheck === 2 ? true : false}
-                onChange={handleMemberPw}
+                onChange={(e) => handleMemberPw(e.target.value)}
               />
             </td>
           </tr>
@@ -359,7 +382,7 @@ function JoinTable() {
         </div>
       </div>
       <div className="joinBtns">
-        <Link to="/" style={{ textDecoration: "none" }}>
+        <Link to="/mypage" style={{ textDecoration: "none" }}>
           <Button className="joinCancelBtn" variant="contained">
             취소
           </Button>

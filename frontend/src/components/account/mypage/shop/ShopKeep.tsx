@@ -1,65 +1,53 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Pagination } from "@mui/material";
 import ShopCard from "./ShopCard";
+import ShopEmpty from "./ShopEmpty"
+import axios from "axios";
 
-const tempCard: Array<tempCard> = [
-  {
-    imgUrl:
-      "http://m.tcgbox.co.kr/web/product/big/20191206/585b242c2158a94a993c5fb8a916e6e2.jpg",
-    title: "카드1",
-    price: 1,
-  },
-  {
-    imgUrl:
-      "http://m.tcgbox.co.kr/web/product/big/20191206/585b242c2158a94a993c5fb8a916e6e2.jpg",
-    title: "카드2",
-    price: 1,
-  },
-  {
-    imgUrl:
-      "http://m.tcgbox.co.kr/web/product/big/20191206/585b242c2158a94a993c5fb8a916e6e2.jpg",
-    title: "카드3",
-    price: 1,
-  },
-  {
-    imgUrl:
-      "http://m.tcgbox.co.kr/web/product/big/20191206/585b242c2158a94a993c5fb8a916e6e2.jpg",
-    title: "카드4",
-    price: 1,
-  },
-  {
-    imgUrl:
-      "http://m.tcgbox.co.kr/web/product/big/20191206/585b242c2158a94a993c5fb8a916e6e2.jpg",
-    title: "카드5",
-    price: 1,
-  },
-  {
-    imgUrl:
-      "http://m.tcgbox.co.kr/web/product/big/20191206/585b242c2158a94a993c5fb8a916e6e2.jpg",
-    title: "카드6",
-    price: 1,
-  },
-];
-
-export type tempCard = {
-  imgUrl: string;
-  title: string;
-  price: number;
-};
-
-export interface State {
-  productTemp: Array<tempCard>;
+interface BuyLike {
+  buyDate: string;
+  salesPrice: number;
+  salesNM: string;
+  salesImg: string;
+  salseNo: number;
 }
 
 function ShopKeep() {
-  const [productTemp, setProductTemp] = useState(tempCard);
+  const [buyLike, setBuyLike] = useState<Array<BuyLike>>([]);
+  const [cards, setCards] = useState<Array<BuyLike>>([]);
+
+  useEffect(() => {
+    axios
+      .get("/api/member/salesLike", {
+        headers: { Authorization: localStorage.getItem("token") },
+      })
+      .then((res) => {
+        setCards(res.data.res.slice(0, 8));
+        setBuyLike(res.data.res);
+      });
+  }, []);
+
+  const handlePage = (e: any) => {
+    const page = Number(e.target.innerText);
+    setCards(buyLike.slice(page * 8 - 8, page * 8));
+  };
 
   return (
     <div className="mypageBodyRightHeader">
       <h1>관심 상품</h1>
       <hr />
-      {productTemp.map((tempCard) => {
-        return <ShopCard tempCard={tempCard} />;
-      })}
+      { cards.length !== 0 ? cards.map((card, index) => {
+        return <ShopCard card={card} key={index} />;
+      })
+      : <ShopEmpty />}
+      <Pagination
+        className="GalleryBoardPage"
+        count={Math.ceil(buyLike.length / 8)}
+        shape="rounded"
+        onChange={handlePage}
+        hidePrevButton
+        hideNextButton
+      />
     </div>
   );
 }

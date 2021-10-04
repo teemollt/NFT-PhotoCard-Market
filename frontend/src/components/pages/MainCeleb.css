@@ -1,0 +1,25 @@
+.main {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.container {
+  width: 150px;
+  height: 150px;
+  margin: 15px;
+  transform-style: flat;
+}
+
+.container > div {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  will-change: transform;
+  cursor: pointer;
+}

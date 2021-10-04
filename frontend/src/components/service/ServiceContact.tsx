@@ -64,7 +64,7 @@ function ServiceContact(): JSX.Element {
       <br />
       <div className="map">
         <Card>
-          <CardMedia component="img" image="/images/지도.png" />
+          <CardMedia component="img" image="/image/지도.png" />
         </Card>
       </div>
     </div>

@@ -1,0 +1,44 @@
+.galleryBuyCard {
+  display: flex;
+  width: 1100px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.galleryEmpty li {
+  flex: 1;
+  height: 700px;
+  line-height: 700px;
+  transition: all 0.5s;
+  font-family: "East Sea Dokdo", cursive !important;
+  font-weight: 500 !important;
+  font-size: 100px;
+}
+
+.galleryEmpty li:hover {
+  flex: 2;
+  color: white;
+}
+
+.galleryEmpty li:not(:hover) {
+  flex: 0.8;
+  opacity: 0.6;
+}
+
+.galleryEmpty li:nth-child(1) {
+  background: url(https://dimg.donga.com/wps/NEWS/IMAGE/2021/01/25/105091661.2.jpg)
+    no-repeat center/cover;
+}
+.galleryEmpty li:nth-child(2) {
+  background: url(https://newsimg.hankookilbo.com/cms/articlerelease/2016/08/23/201608230494191514_1.jpg)
+    no-repeat center/cover;
+}
+.galleryEmpty li:nth-child(3) {
+  background: url(https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/XG2MW2H3ZRW5FHDVSOMF6FDT3E.jpg)
+    no-repeat center/cover;
+}
+.galleryEmpty li:nth-child(4) {
+  background: url(http://img.newspim.com/content/image/2015/12/04/20151204000077_0.jpg)
+    no-repeat center/cover;
+}

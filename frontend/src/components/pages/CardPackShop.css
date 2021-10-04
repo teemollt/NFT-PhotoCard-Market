@@ -1,9 +1,24 @@
-.celebmaintitle {
-  text-align: center;
+.main {
+  display: grid;
+  width: 70%;
+  margin: 0 auto;
 }
-.linkto {
-  margin: 10px;
-  text-decoration: none;
-  text-decoration-color: black;
-  color: black;
+
+.container {
+  /* width: 300px;
+  height: 200px; */
+  /* transform-style: flat; */
+}
+
+.container > div {
+  /* position: absolute; */
+  /* width: 300px;
+  height: 200px; */
+  background: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  will-change: transform;
+  cursor: pointer;
 }

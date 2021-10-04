@@ -1,67 +1,58 @@
-import React, { useState } from "react";
-import ShopCard from "./ShopCard";
+import React, { useEffect, useState } from "react"
+import { Pagination } from "@mui/material"
+import ShopCard from "./ShopCard"
+import ShopEmpty from "./ShopEmpty"
+import axios from "axios"
 
-const tempCard: Array<tempCard> = [
-  {
-    imgUrl:
-      "http://m.tcgbox.co.kr/web/product/big/201909/995d394ab4fa78479732c5cd72d65ee2.jpg",
-    title: "카드1",
-    price: 1,
-  },
-  {
-    imgUrl:
-      "http://m.tcgbox.co.kr/web/product/big/201909/995d394ab4fa78479732c5cd72d65ee2.jpg",
-    title: "카드2",
-    price: 1,
-  },
-  {
-    imgUrl:
-      "http://m.tcgbox.co.kr/web/product/big/201909/995d394ab4fa78479732c5cd72d65ee2.jpg",
-    title: "카드3",
-    price: 1,
-  },
-  {
-    imgUrl:
-      "http://m.tcgbox.co.kr/web/product/big/201909/995d394ab4fa78479732c5cd72d65ee2.jpg",
-    title: "카드4",
-    price: 1,
-  },
-  {
-    imgUrl:
-      "http://m.tcgbox.co.kr/web/product/big/201909/995d394ab4fa78479732c5cd72d65ee2.jpg",
-    title: "카드5",
-    price: 1,
-  },
-  {
-    imgUrl:
-      "http://m.tcgbox.co.kr/web/product/big/201909/995d394ab4fa78479732c5cd72d65ee2.jpg",
-    title: "카드6",
-    price: 1,
-  },
-];
-
-export type tempCard = {
-  imgUrl: string;
-  title: string;
-  price: number;
-};
-
-export interface State {
-  productTemp: Array<tempCard>;
+interface Buy {
+  buyDate: string
+  price: number
+  sales: string
+  salesImg: string
+  salseNo: number
 }
 
 function ShopBuy() {
-  const [productTemp, setProductTemp] = useState(tempCard);
+  const [buy, setBuy] = useState<Array<Buy>>([])
+  const [cards, setCards] = useState<Array<Buy>>([])
+
+  useEffect(() => {
+    axios
+      .get("/api/member/order", {
+        headers: { Authorization: localStorage.getItem("token") },
+      })
+      .then((res) => {
+        setCards(res.data.res.slice(0, 8))
+        setBuy(res.data.res)
+      })
+  }, [])
+
+  const handlePage = (e: any) => {
+    const page = Number(e.target.innerText)
+    setCards(buy.slice(page * 8 - 8, page * 8))
+  }
 
   return (
     <div className="mypageBodyRightHeader">
       <h1>구매 내역</h1>
       <hr />
-      {productTemp.map((tempCard) => {
-        return <ShopCard tempCard={tempCard} />;
-      })}
+      {cards.length !== 0 ? (
+        cards.map((card, index) => {
+          return <ShopCard card={card} key={index} />
+        })
+      ) : (
+        <ShopEmpty />
+      )}
+      <Pagination
+        className="GalleryBoardPage"
+        count={Math.ceil(buy.length / 8)}
+        shape="rounded"
+        onChange={handlePage}
+        hidePrevButton
+        hideNextButton
+      />
     </div>
-  );
+  )
 }
 
-export default ShopBuy;
+export default ShopBuy

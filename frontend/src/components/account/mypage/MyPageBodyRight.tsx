@@ -1,31 +1,29 @@
 import React from "react";
-import { connect } from "react-redux";
 import ShopBuy from "./shop/ShopBuy";
 import ShopKeep from "./shop/ShopKeep";
+import MarketMy from "./market/MarketMy";
+import MarketMyBid from "./market/MarketMyBid";
+import MarketLike from "./market/MarketLike";
 import "./MyPageBodyRight.css";
-import AuctionMy from "./auction/AuctionMy";
-import AuctionMyBid from "./auction/AuctionMyBid";
-import AuctionLike from "./auction/AuctionLike";
-import { myPageMenu } from "../../../redux/actions";
 
 interface MyPageBodyRightProps {
-  myPageMenu: number;
+  menu: number;
 }
 
 function MyPageBodyRight(props: MyPageBodyRightProps): JSX.Element {
-  const { myPageMenu } = props;
+  const { menu } = props;
   return (
     <div className="mypageBodyRight">
-      {myPageMenu === 0 ? (
+      {menu === 0 ? (
         <ShopBuy />
-      ) : myPageMenu === 1 ? (
+      ) : menu === 1 ? (
         <ShopKeep />
-      ) : myPageMenu === 2 ? (
-        <AuctionMy />
-      ) : myPageMenu === 3 ? (
-        <AuctionMyBid />
-      ) : myPageMenu === 4 ? (
-        <AuctionLike />
+      ) : menu === 2 ? (
+        <MarketMy />
+      ) : menu === 3 ? (
+        <MarketMyBid />
+      ) : menu === 4 ? (
+        <MarketLike />
       ) : null}
     </div>
   );
@@ -37,4 +35,4 @@ const mapStateToProps = (state: any) => {
   };
 };
 
-export default connect(mapStateToProps)(MyPageBodyRight);
+export default MyPageBodyRight;

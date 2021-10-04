@@ -1,0 +1,49 @@
+.marketCard {
+  display: inline-block;
+  margin: 15px;
+  padding: 16px;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%),
+    0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+  cursor: pointer;
+}
+
+.marketCard:hover {
+  box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%),
+    0px 5px 5px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+}
+
+.marketCardImg {
+  padding: 10px;
+}
+
+.marketCardImg > img {
+  width: 260px;
+  height: 300px;
+  border-radius: 4px;
+}
+
+.marketCardInfo {
+  font-size: 12px;
+  color: lightgray;
+}
+
+.marketCardCeleb,
+.marketCardTitle {
+  clear: both;
+  float: left;
+  margin-left: 10px;
+}
+
+.marketCardPriceTitle,
+.marketCardPrice {
+  float: right;
+  margin-right: 10px;
+}
+
+.marketCardTitle,
+.marketCardPrice {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}

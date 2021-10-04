@@ -1,0 +1,25 @@
+.loginTable {
+  text-align: left;
+}
+
+.loginTable > h1 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.loginTable > tbody > tr > th {
+  width: 50px;
+  height: 50px;
+}
+
+.loginBtns > div > Button {
+  margin-top: 20px;
+}
+
+.loginBtnsLeft {
+  float: left;
+}
+
+.loginBtnsRight {
+  float: right;
+}
