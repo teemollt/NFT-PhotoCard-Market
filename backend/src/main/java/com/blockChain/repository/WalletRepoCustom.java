@@ -7,7 +7,9 @@ import com.blockChain.dto.walletDTO;
 
 public interface WalletRepoCustom {
 
-	Optional<walletDTO> findByWallet(Long memberNo);
+	Optional<Wallets> findByWallet(Long memberNo);
+
+	Optional<walletDTO> findByMemberNoDTO(Long memberNo);
 
 //	Optional<Member> checkEmail(String email);
 //
