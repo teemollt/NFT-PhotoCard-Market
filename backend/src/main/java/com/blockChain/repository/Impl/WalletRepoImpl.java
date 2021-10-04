@@ -21,12 +21,18 @@ public class WalletRepoImpl implements WalletRepoCustom{
 	private final JPAQueryFactory queryFactory;
 	
 	@Override
-	public Optional<walletDTO> findByWallet(Long memberNo) {
+	public Optional<walletDTO> findByMemberNoDTO(Long memberNo) {
 		QWallets qw = QWallets.wallets;
 //		return Optional.ofNullable(queryFactory.selectFrom(qw).where(qw.member.memberNo.eq(memberNo)).fetchFirst());
 		return Optional.ofNullable(queryFactory.select(Projections.constructor(walletDTO.class
 				, qw.walletNo
 				, qw.walletAdd)).from(qw).where(qw.member.memberNo.eq(memberNo)).fetchOne());
+	}
+	@Override
+	public Optional<Wallets> findByWallet(Long memberNo) {
+		QWallets qw = QWallets.wallets;
+		return Optional.ofNullable(queryFactory.selectFrom(qw).where(qw.member.memberNo.eq(memberNo)).fetchFirst());
+
 	}
 
 }
