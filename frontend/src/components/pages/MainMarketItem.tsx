@@ -145,7 +145,6 @@ function MainMarketItem(): JSX.Element {
                   alt=""
                   width="100%"
                   height="100%"
-                  style={{ filter: "blur(10px)" }}
                 />
               </Paper>
             </Grid>
