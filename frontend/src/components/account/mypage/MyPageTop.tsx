@@ -25,22 +25,25 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
     countSalesOrder,
   } = props;
   const Web3 = require("web3");
-  const web3 = new Web3("http://13.125.37.55:8545");
+  const web3 = new Web3("http://13.125.37.55:8548");
   // 관리자 계정(이더 많은거)
-  const admin = "0x39dce082172253d8d816b0e9aa48345a72a2179a";
+  const admin = "0x8BBa1857fD94CF79c78BBE90f977055be015E17E";
   // api 통해 불러온 유저 계정
   const [userAddress, setAddress] = useState<string>("");
   // 잔액
   const [userBalance, setBalance] = useState<string>("0");
 
   const walletCheck = async () => {
+    console.log("walletchecktry");
     try {
       const res = await axios.get("/api/wallet/", {
         headers: { Authorization: localStorage.getItem("token") },
       });
+      console.log(res.data);
       if (res.data.success === true) {
         setAddress(res.data.address);
         setBalance(res.data.walletBal);
+        console.log("walletcheck");
       }
     } catch (err) {
       console.log(err);
@@ -77,13 +80,13 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
       gasPrice: "20000000000",
       gas: "21000",
       to: userAddress,
-      value: "10000000000000000000",
+      value: "7000000000000000000",
       data: "",
     };
     try {
       const adminUnlock = await web3.eth.personal.unlockAccount(
         admin,
-        "1234",
+        "qwer1234",
         6000
       );
       console.log(adminUnlock);
@@ -97,7 +100,7 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
       console.log(err);
     }
     try {
-      const charge = await web3.eth.sendTransaction(tx, "1234");
+      const charge = await web3.eth.sendTransaction(tx, "qwer1234");
       console.log(charge);
       setcharging(false);
     } catch (err) {
