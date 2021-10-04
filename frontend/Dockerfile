@@ -30,9 +30,9 @@ WORKDIR /app
 COPY ./package.json /app/package.json
 COPY ./package-lock.json /app/package-lock.json
 
-RUN yarn install
+RUN npm install
 COPY . .
-RUN yarn build
+RUN npm build
 
 
 FROM nginx
