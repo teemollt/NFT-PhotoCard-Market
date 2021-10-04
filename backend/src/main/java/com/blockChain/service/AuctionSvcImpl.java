@@ -281,7 +281,7 @@ public class AuctionSvcImpl implements AuctionSvcInter{
 			newTo.setToken(token);
 			newTo.setOnAuction(0L);
 			newTo.setOwnDate(LocalDateTime.now());
-			toRepo.save(newTo); // 이게 수정처리가 되는건가
+			toRepo.save(newTo); 
 			res.put("success", true);
 			res.put("msg", "구매가 완료되었습니다.");
 			//옥션 sold처리

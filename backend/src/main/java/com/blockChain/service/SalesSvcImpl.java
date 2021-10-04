@@ -233,6 +233,7 @@ public class SalesSvcImpl implements SalesSvcInter{
 				to.setMember(member);
 				to.setToken(tempToken);
 				to.setOwnDate(LocalDateTime.now());
+				to.setOnAuction(0L);
 				Token_Owner savedTo = toRepo.save(to); // 토큰 소유주 입력
 				//토큰의 카드 넘겨주기
 				resCardList.add(productRepo.sltByTokenNoAddToken(savedTo.getToken()));
