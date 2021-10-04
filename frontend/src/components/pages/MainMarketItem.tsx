@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router";
-import "./MainMarketItem.css";
-import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import MarketBuyItem from "../market/MarketBuyItem";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import Tooltip from "@mui/material/Tooltip";
-import axios from "axios";
-import jwt_decode from "jwt-decode";
+import React, { useState, useEffect } from "react"
+import { useLocation } from "react-router"
+import "./MainMarketItem.css"
+import Grid from "@material-ui/core/Grid"
+import Container from "@material-ui/core/Container"
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
+import Paper from "@material-ui/core/Paper"
+import MarketBuyItem from "../market/MarketBuyItem"
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart"
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"
+import Tooltip from "@mui/material/Tooltip"
+import axios from "axios"
+import jwt_decode from "jwt-decode"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,10 +35,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     iteminfo: {},
   })
-);
+)
 function MainMarketItem(): JSX.Element {
-  const [islike, setislike] = useState(false);
-  const [likepeople, setlikepeople] = useState(0);
+  const [islike, setislike] = useState(false)
+  const [likepeople, setlikepeople] = useState(0)
   // like, unlike
   const changelike = () => {
     if (islike) {
@@ -55,8 +55,8 @@ function MainMarketItem(): JSX.Element {
           }
         )
         .then((res) => {
-          setislike(false);
-        });
+          setislike(false)
+        })
     } else {
       axios
         .post(
@@ -71,20 +71,20 @@ function MainMarketItem(): JSX.Element {
           }
         )
         .then((res) => {
-          setislike(true);
-        });
+          setislike(true)
+        })
     }
-  };
-  const [itemtitle, setitemtitle] = useState<string>("");
-  const [itemdetail, setitemdetail] = useState<string>("");
-  const [itemimageurl, setitemimageurl] = useState<string>("");
-  const [itemprice, setitemprice] = useState<number>(0);
-  const [itemauctionNo, setitemauctionNo] = useState<number>(0);
-  const [itemtokenNo, setitemtokenNo] = useState<number>(0);
-  const [memberNo, setmemberNo] = useState<number>(0);
-  const [sellerwallet, setsellerwallet] = useState<string>("");
-  const [itemcardgrade, setitemcardgrade] = useState<string>("");
-  const [itemcardnm, setitemcardnm] = useState("");
+  }
+  const [itemtitle, setitemtitle] = useState<string>("")
+  const [itemdetail, setitemdetail] = useState<string>("")
+  const [itemimageurl, setitemimageurl] = useState<string>("")
+  const [itemprice, setitemprice] = useState<number>(0)
+  const [itemauctionNo, setitemauctionNo] = useState<number>(0)
+  const [itemtokenNo, setitemtokenNo] = useState<string>("")
+  const [memberNo, setmemberNo] = useState<number>(0)
+  const [sellerwallet, setsellerwallet] = useState<string>("")
+  const [itemcardgrade, setitemcardgrade] = useState<string>("")
+  const [itemcardnm, setitemcardnm] = useState("")
   // 옥션번호로 데이터받기
   useEffect(() => {
     axios
@@ -93,20 +93,20 @@ function MainMarketItem(): JSX.Element {
         headers: { Authorization: localStorage.getItem("token") },
       })
       .then((res) => {
-        console.log(res.data);
-        setitemtitle(res.data.auction.auctionTitle);
-        setitemdetail(res.data.auction.auctionDetail);
-        setitemprice(res.data.auction.price);
-        setitemauctionNo(res.data.auction.auctionNo);
-        setitemcardgrade(res.data.card.cardGradeNM);
-        setitemimageurl(res.data.card.cardImgUrl);
-        setitemcardnm(res.data.card.cardNM);
-        setitemtokenNo(res.data.card.tokenNo);
-        setmemberNo(res.data.member.memberNo);
-        setsellerwallet(res.data.sellerWallet.walletAdd);
+        console.log(res.data)
+        setitemtitle(res.data.auction.auctionTitle)
+        setitemdetail(res.data.auction.auctionDetail)
+        setitemprice(res.data.auction.price)
+        setitemauctionNo(res.data.auction.auctionNo)
+        setitemcardgrade(res.data.card.cardGradeNM)
+        setitemimageurl(res.data.card.cardImgUrl)
+        setitemcardnm(res.data.card.cardNM)
+        setitemtokenNo(res.data.card.tokenSer)
+        setmemberNo(res.data.member.memberNo)
+        setsellerwallet(res.data.sellerWallet.walletAdd)
       })
-      .catch();
-  }, []);
+      .catch()
+  }, [])
   useEffect(() => {
     axios
       .get(`/api/auction/likecheck/${location.state.auctionNo}`, {
@@ -114,25 +114,25 @@ function MainMarketItem(): JSX.Element {
         headers: { Authorization: localStorage.getItem("token") },
       })
       .then((res) => {
-        setlikepeople(res.data.peoplelike);
+        setlikepeople(res.data.peoplelike)
         if (res.data.islike === true) {
-          setislike(true);
+          setislike(true)
         } else {
-          setislike(false);
+          setislike(false)
         }
       })
-      .catch();
-  });
-  const [Iam, setIam] = useState<number>(0);
+      .catch()
+  })
+  const [Iam, setIam] = useState<number>(0)
   useEffect(() => {
-    var token = localStorage.getItem("token");
+    var token = localStorage.getItem("token")
     if (token) {
-      var decoded: any | unknown = jwt_decode(token);
-      setIam(decoded.sub);
+      var decoded: any | unknown = jwt_decode(token)
+      setIam(decoded.sub)
     }
-  }, []);
-  const classes = useStyles();
-  const location: any = useLocation();
+  }, [])
+  const classes = useStyles()
+  const location: any = useLocation()
   return (
     <div style={{ textAlign: "center" }}>
       <div>
@@ -194,7 +194,7 @@ function MainMarketItem(): JSX.Element {
         </Container>
       </div>
     </div>
-  );
+  )
 }
 
-export default MainMarketItem;
+export default MainMarketItem
