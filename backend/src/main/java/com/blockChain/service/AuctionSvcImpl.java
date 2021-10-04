@@ -173,7 +173,7 @@ public class AuctionSvcImpl implements AuctionSvcInter{
 		res.put("member", auction.getMember());
 		res.put("card", auction.getCard());
 		res.put("auction", auction.getAuction());
-		res.put("sellerWallet", walletRepo.findByWallet(auction.getMember().getMemberNo()));
+		res.put("sellerWallet", walletRepo.findByMemberNoDTO(auction.getMember().getMemberNo()));
 		return res;
 		}catch(IllegalStateException e){
 			res.put("success", false);
