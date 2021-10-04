@@ -76,7 +76,7 @@ public class WalletSvcImpl implements WalletSvcInter {
 		Map<String, Object> res = new HashMap<String,Object>();
 		
 		try {
-			Web3j web3 = Web3j.build(new HttpService("http://13.125.37.55:8545"));
+			Web3j web3 = Web3j.build(new HttpService("http://13.125.37.55:8548"));
 			System.out.println("Successfuly connected to Ethereum");
 			
 			Member member = memberRepo.findById(SecurityUtil.getCurrentMemberId()).orElseThrow(() -> new IllegalStateException("로그인 유저정보가 없습니다"));
