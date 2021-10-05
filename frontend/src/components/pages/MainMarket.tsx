@@ -83,7 +83,6 @@ function MainMarket(): JSX.Element {
         keyword: data,
       })
       .then((res) => {
-        console.log(res.data);
         setsearchresult(res.data.auctionList);
         setclicksearch(true);
       });

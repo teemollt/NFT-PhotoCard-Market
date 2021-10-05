@@ -34,20 +34,16 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
   const [userBalance, setBalance] = useState<string>("0");
 
   const walletCheck = async () => {
-    console.log("walletchecktry");
     try {
       const res = await axios.get("/api/wallet/", {
         headers: { Authorization: localStorage.getItem("token") },
       });
-      console.log(res.data);
+
       if (res.data.success === true) {
         setAddress(res.data.address);
         setBalance(res.data.walletBal);
-        console.log("walletcheck");
       }
-    } catch (err) {
-      console.log(err);
-    }
+    } catch {}
   };
 
   useEffect(() => {
@@ -60,7 +56,6 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
     setmakingwallet(true);
     // 계정 생성 - 추후에 비밀번호 직접 입력 가능하게
     const newAccount = await web3.eth.personal.newAccount("123");
-    console.log(newAccount);
     setAddress(newAccount);
     setmakingwallet(false);
     // 생성된 주소 서버로 넘겨서 저장하기
@@ -73,7 +68,6 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
   const [charging, setcharging] = useState(false);
   // 이더 충전 횟수 제한 혹은 일정 잔액 이하일때만 충전 가능하게 api로 변경
   const chargeEth = async () => {
-    console.log(userAddress);
     setcharging(true);
     const tx = {
       from: admin,
@@ -87,25 +81,18 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
       const adminUnlock = await web3.eth.personal.unlockAccount(
         admin,
         "qwer1234",
-        6000
+        60000
       );
-      console.log(adminUnlock);
       const unlock = await web3.eth.personal.unlockAccount(
         userAddress,
         "123",
-        6000
+        60000
       );
-      console.log(unlock);
-    } catch (err) {
-      console.log(err);
-    }
+    } catch {}
     try {
       const charge = await web3.eth.sendTransaction(tx, "qwer1234");
-      console.log(charge);
       setcharging(false);
-    } catch (err) {
-      console.log(err);
-    }
+    } catch {}
     walletCheck();
   };
   return (
@@ -118,34 +105,12 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
           <p className="mypageGrade">{memberGrade}</p>
           {userAddress !== "" ? (
             <div className="mypageAccount">
-              <p>지갑주소: {userAddress}</p>
-              <p>잔액: {userBalance} </p>
+              {/* <p>지갑주소: {userAddress}</p> */}
+              <h1 style={{ marginTop: "5px", marginBottom: "0" }}>
+                잔액: {userBalance}{" "}
+              </h1>
             </div>
-          ) : makingwallet ? (
-            <LoadingButton
-              loading
-              loadingPosition="start"
-              startIcon={<SaveIcon />}
-              variant="outlined"
-              size="medium"
-              style={{
-                color: "black",
-                backgroundColor: "white",
-                marginLeft: "5px",
-              }}
-            >
-              지갑생성중
-            </LoadingButton>
-          ) : (
-            <Button
-              className="mypageUpdateBtn"
-              variant="outlined"
-              size="medium"
-              onClick={getAccount}
-            >
-              지갑 생성
-            </Button>
-          )}
+          ) : null}
           <br />
         </div>
         <div className="mypageUserUpdate">
@@ -155,13 +120,35 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
             </Button>
           </Link>
           <div>
-            <Button
-              className="mypageAccountBtn"
-              variant="outlined"
-              size="medium"
-            >
-              잔액 조회
-            </Button>
+            {userAddress === "" ? (
+              makingwallet ? (
+                <LoadingButton
+                  className="mypageAccountBtn"
+                  loading
+                  loadingPosition="start"
+                  startIcon={<SaveIcon />}
+                  variant="outlined"
+                  size="medium"
+                  style={{
+                    color: "black",
+                    backgroundColor: "white",
+                    marginLeft: "5px",
+                  }}
+                >
+                  지갑생성중
+                </LoadingButton>
+              ) : (
+                <Button
+                  className="mypageAccountBtn"
+                  variant="outlined"
+                  size="medium"
+                  onClick={getAccount}
+                >
+                  지갑 생성
+                </Button>
+              )
+            ) : null}
+
             {charging ? (
               <LoadingButton
                 loading
@@ -185,7 +172,7 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
                 size="medium"
                 onClick={chargeEth}
               >
-                이더 충전
+                Coin 충전
               </Button>
             )}
           </div>
