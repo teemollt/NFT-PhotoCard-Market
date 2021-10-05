@@ -1,37 +1,33 @@
-import React from "react"
-import "./GalleryBody.css"
+import React from "react";
+import "./GalleryBody.css";
 
 interface GalleryBodyProps {
-  view: number
+  view: number;
   card: {
-    cardGradeNM: string
-    cardGradeNo: number
-    cardImgUrl: string
-    cardNM: string
-    cardNo: number
+    cardGradeNM: string;
+    cardGradeNo: number;
+    cardImgUrl: string;
+    cardNM: string;
+    cardNo: number;
     token: [
       {
-        ownDate: string
-        tokenNo: number
-        tokenSeriarlizeNo: string
+        ownDate: string;
+        tokenNo: number;
+        tokenSeriarlizeNo: string;
       }
-    ]
-  }
+    ];
+  };
 }
 
 function GalleryBody(props: GalleryBodyProps) {
-  const { view } = props
-  const { cardGradeNM, cardImgUrl, cardNM, token } = props.card
+  const { view } = props;
+  const { cardGradeNM, cardImgUrl, cardNM, token } = props.card;
 
   return (
     <div className={"galleryCard " + ("view" + view)}>
       <div className={"front " + ("view" + view)}>
         <figure>
-          <img
-            src={cardImgUrl}
-            className={"view" + view}
-            alt=""
-          />
+          <img src={cardImgUrl} className={"view" + view} alt="" />
         </figure>
       </div>
       <div className={"back " + ("view" + view)}>
@@ -100,7 +96,7 @@ function GalleryBody(props: GalleryBodyProps) {
         </figure>
       </div>
     </div>
-  )
+  );
 }
 
-export default GalleryBody
+export default GalleryBody;
