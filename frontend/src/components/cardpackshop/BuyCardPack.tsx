@@ -127,19 +127,12 @@ function BuyCardPack(props: any): JSX.Element {
   }
   const [loading, setloading] = useState(false)
   // 결제함수
-  const pay = () => {
+  const pay2 = async () => {
+    await walletCheck()
     if (userAddress) {
-      walletCheck()
-
-      console.log("pay함수 실행")
-      console.log(userBalance)
-      // 결재코드
-      // 잔액이 얼마 이상이면?
       if (parseFloat(userBalance) > props.cardpackprice + 0.01) {
-        console.log("통과했니")
-        // 로딩돌기시작
+        //로딩 시작
         setloading(true)
-        // 컨트랙트 buyCardPack 호출
         const tx = {
           from: userAddress,
           gasPrice: "20000000000",
@@ -148,51 +141,122 @@ function BuyCardPack(props: any): JSX.Element {
           value: props.cardpackprice * Math.pow(10, 18),
           data: "",
         }
-        web3.eth.personal.unlockAccount(
-          admin,
-          "qwer1234",
-          6000
-        )
-        web3.eth.personal.unlockAccount(
+        await web3.eth.personal.unlockAccount(
           userAddress,
           "123",
-          6000
+          10000
         )
-        web3.eth.sendTransaction(tx, "qwer1234").then(
-          axios
-            .get(`/api/cardPack/buy/${props.cardpackNo}`, {
-              headers: { Authorization: localStorage.getItem("token") },
-              cardpackNo: props.cardpackNo,
-            })
-            .then((res) => {
-              console.log(res.data)
-              handleClickcardOpen()
-              setnewcardlist(res.data.cardList)
-              const tokenIds = res.data.cardList
-              for (let i = 0; i < tokenIds.length; i++) {
-                myContract.methods
-                  .transferFrom(admin, userAddress, parseInt(tokenIds[i].tokenSer))
-                  .send({
-                    from: admin,
-                  })
-                  .then(function (receipt: any) {
-                    console.log(receipt)
-                    walletCheck()
-                  }).catch(console.log)
-              }
-              // 로딩종료
-              setloading(false)
-              setOpen(false)
-            })
-            .catch()
-        )
+        // 카드팩 구매 api 요청
+        try {
+          const res = await axios.get(`/api/cardPack/buy/${props.cardpackNo}`, {
+            headers: { Authorization: localStorage.getItem("token") },
+            cardpackNo: props.cardpackNo,
+          })
+          console.log(res.data)
+          // api 요청 성공하면 돈보내기
+          const re = await web3.eth.sendTransaction(tx, "qwer1234")
+          console.log(re)
+          handleClickcardOpen()
+          setnewcardlist(res.data.cardList)
+          const tokenIds = res.data.cardList
+          for (let i = 0; i < tokenIds.length; i++) {
+            myContract.methods
+              .transferFrom(admin, userAddress, parseInt(tokenIds[i].tokenSer))
+              .send({
+                from: admin,
+              })
+              .then(function (receipt: any) {
+                console.log(receipt)
+                walletCheck()
+              }).catch(console.log)
+          }
+          setloading(false)
+          setOpen(false)
+        } catch (e) {
+          console.log(e)
+          // 카드팩 구매 api 요청 실패
+          alert('구매 실패')
+          setloading(false)
+          setOpen(false)
+        }
       } else {
-        alert("잔액이 부족합니다. 캐시를 충전해주세요")
+        alert("잔액이 부족합니다. 코인을 충전해주세요")
+        setloading(false)
+        setOpen(false)
       }
     } else {
       alert("지갑을 생성해주세요")
+      setloading(false)
+      setOpen(false)
     }
   }
+
+  // const pay = () => {
+  //   if (userAddress) {
+  //     walletCheck()
+
+  //     console.log("pay함수 실행")
+  //     console.log(userBalance)
+  //     // 결재코드
+  //     // 잔액이 얼마 이상이면?
+  //     if (parseFloat(userBalance) > props.cardpackprice + 0.01) {
+  //       console.log("통과했니")
+  //       // 로딩돌기시작
+  //       setloading(true)
+  //       // 컨트랙트 buyCardPack 호출
+  //       const tx = {
+  //         from: userAddress,
+  //         gasPrice: "20000000000",
+  //         gas: "21000",
+  //         to: admin,
+  //         value: props.cardpackprice * Math.pow(10, 18),
+  //         data: "",
+  //       }
+  //       web3.eth.personal.unlockAccount(
+  //         admin,
+  //         "qwer1234",
+  //         6000
+  //       )
+  //       web3.eth.personal.unlockAccount(
+  //         userAddress,
+  //         "123",
+  //         6000
+  //       )
+  //       web3.eth.sendTransaction(tx, "qwer1234").then(
+  //         axios
+  //           .get(`/api/cardPack/buy/${props.cardpackNo}`, {
+  //             headers: { Authorization: localStorage.getItem("token") },
+  //             cardpackNo: props.cardpackNo,
+  //           })
+  //           .then((res) => {
+  //             console.log(res.data)
+  //             handleClickcardOpen()
+  //             setnewcardlist(res.data.cardList)
+  //             const tokenIds = res.data.cardList
+  //             for (let i = 0; i < tokenIds.length; i++) {
+  //               myContract.methods
+  //                 .transferFrom(admin, userAddress, parseInt(tokenIds[i].tokenSer))
+  //                 .send({
+  //                   from: admin,
+  //                 })
+  //                 .then(function (receipt: any) {
+  //                   console.log(receipt)
+  //                   walletCheck()
+  //                 }).catch(console.log)
+  //             }
+  //             // 로딩종료
+  //             setloading(false)
+  //             setOpen(false)
+  //           })
+  //           .catch()
+  //       )
+  //     } else {
+  //       alert("잔액이 부족합니다. 캐시를 충전해주세요")
+  //     }
+  //   } else {
+  //     alert("지갑을 생성해주세요")
+  //   }
+  // }
   let history = useHistory()
   function makewallet() {
     history.push({
@@ -263,7 +327,7 @@ function BuyCardPack(props: any): JSX.Element {
                   </div>
                 </LoadingButton>
               ) : (
-                <Button autoFocus onClick={pay} color="primary" fullWidth>
+                <Button autoFocus onClick={pay2} color="primary" fullWidth>
                   <h1 style={{ color: "black" }}>pay</h1>
                 </Button>
               )}
