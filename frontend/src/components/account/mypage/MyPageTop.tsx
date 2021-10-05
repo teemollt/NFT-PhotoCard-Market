@@ -119,7 +119,7 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
           {userAddress !== "" ? (
             <div className="mypageAccount">
               {/* <p>지갑주소: {userAddress}</p> */}
-              <h1 style={{ marginTop: "5px" }}>잔액: {userBalance} </h1>
+              <h1 style={{ marginTop: "5px", marginBottom:"0" }}>잔액: {userBalance} </h1>
             </div>
           ) : null}
           <br />
@@ -183,7 +183,7 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
                 size="medium"
                 onClick={chargeEth}
               >
-                이더 충전
+                Coin 충전
               </Button>
             )}
           </div>

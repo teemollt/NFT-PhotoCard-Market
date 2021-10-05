@@ -1,33 +1,33 @@
-import React, { useState, useEffect } from "react"
-import { useHistory } from "react-router-dom"
-import "./MarketBuyItem.css"
-import jwt_decode from "jwt-decode"
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import "./MarketBuyItem.css";
+import jwt_decode from "jwt-decode";
 import {
   createStyles,
   Theme,
   withStyles,
   WithStyles,
-} from "@material-ui/core/styles"
-import Button from "@material-ui/core/Button"
-import Dialog from "@material-ui/core/Dialog"
-import MuiDialogTitle from "@material-ui/core/DialogTitle"
-import MuiDialogContent from "@material-ui/core/DialogContent"
-import IconButton from "@material-ui/core/IconButton"
-import CloseIcon from "@material-ui/icons/Close"
-import LoadingButton from "@mui/lab/LoadingButton"
-import TextField from "@mui/material/TextField"
-import DialogActions from "@mui/material/DialogActions"
-import DialogContentText from "@mui/material/DialogContentText"
-import Typography from "@mui/material/Typography"
-import Alert from "@mui/material/Alert"
-import AlertTitle from "@mui/material/AlertTitle"
-import axios from "axios"
-import { contractAbi } from "../abi"
+} from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import MuiDialogTitle from "@material-ui/core/DialogTitle";
+import MuiDialogContent from "@material-ui/core/DialogContent";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
+import LoadingButton from "@mui/lab/LoadingButton";
+import TextField from "@mui/material/TextField";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContentText from "@mui/material/DialogContentText";
+import Typography from "@mui/material/Typography";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
+import axios from "axios";
+import { contractAbi } from "../abi";
 
 export interface DialogTitleProps extends WithStyles<typeof styles> {
-  id: string
-  children: React.ReactNode
-  onClose: () => void
+  id: string;
+  children: React.ReactNode;
+  onClose: () => void;
 }
 const styles = (theme: Theme) =>
   createStyles({
@@ -41,9 +41,9 @@ const styles = (theme: Theme) =>
       top: theme.spacing(1),
       color: theme.palette.grey[500],
     },
-  })
+  });
 const DialogTitle = withStyles(styles)((props: DialogTitleProps) => {
-  const { children, classes, onClose, ...other } = props
+  const { children, classes, onClose, ...other } = props;
   return (
     <MuiDialogTitle disableTypography className={classes.root} {...other}>
       <Typography variant="h6">{children}</Typography>
@@ -57,112 +57,75 @@ const DialogTitle = withStyles(styles)((props: DialogTitleProps) => {
         </IconButton>
       ) : null}
     </MuiDialogTitle>
-  )
-})
+  );
+});
 
 const DialogContent = withStyles((theme: Theme) => ({
   root: {
     padding: theme.spacing(2),
   },
-}))(MuiDialogContent)
+}))(MuiDialogContent);
 
 function MarketBuyItem(props: any): JSX.Element {
   // 판매자와 구매자 비교
-  const [Iam, setIam] = useState(0)
+  const [Iam, setIam] = useState(0);
   // web3 객체
-  const Web3 = require("web3")
-  const web3 = new Web3("http://13.125.37.55:8548")
+  const Web3 = require("web3");
+  const web3 = new Web3("http://13.125.37.55:8548");
   // contract 객체
-  const myContractAddress = "0x0B8cbc026DAEb1708245F66E08e56238235778cA"
-  const admin = "0x8BBa1857fD94CF79c78BBE90f977055be015E17E"
-  const myContract = new web3.eth.Contract(contractAbi, myContractAddress)
-  const [open, setOpen] = React.useState(false)
-  const [userAddress, setAddress] = useState<string>("")
-  const [userBalance, setBalance] = useState<string>("0")
+  const myContractAddress = "0x0B8cbc026DAEb1708245F66E08e56238235778cA";
+  const admin = "0x8BBa1857fD94CF79c78BBE90f977055be015E17E";
+  const myContract = new web3.eth.Contract(contractAbi, myContractAddress);
+  const [open, setOpen] = React.useState(false);
+  const [userAddress, setAddress] = useState<string>("");
+  const [userBalance, setBalance] = useState<string>("0");
   const walletCheck = async () => {
     try {
       const res = await axios.get("/api/wallet/", {
         headers: { Authorization: localStorage.getItem("token") },
-      })
+      });
       if (res.data.success == true) {
-        setAddress(res.data.address)
-        setBalance(res.data.walletBal)
+        setAddress(res.data.address);
+        setBalance(res.data.walletBal);
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
   useEffect(() => {
-    var token = localStorage.getItem("token")
+    var token = localStorage.getItem("token");
     if (token) {
-      var decoded: any | unknown = jwt_decode(token)
-      setIam(decoded.sub)
+      var decoded: any | unknown = jwt_decode(token);
+      setIam(decoded.sub);
     }
-    walletCheck()
-  })
+    walletCheck();
+  });
   const handleClickOpen = () => {
-    setOpen(true)
-  }
+    setOpen(true);
+  };
   const handleClose = () => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
-  const [loading, setloading] = useState(false)
-  const refund = async () => {
-    const tx = {
-      from: props.sellerwallet,
-      gasPrice: "20000000000",
-      gas: "21000",
-      to: userAddress,
-      value: props.price,
-      data: "",
-    }
-    try {
-      const adminUnlock = await web3.eth.personal.unlockAccount(
-        props.sellerwallet,
-        "123",
-        6000
-      )
-      console.log(adminUnlock)
-      const unlock = await web3.eth.personal.unlockAccount(
-        userAddress,
-        "123",
-        6000
-      )
-      console.log(unlock)
-    } catch (err) {
-      console.log(err)
-    }
-    try {
-      const charge = await web3.eth.sendTransaction(tx, "123")
-      console.log(charge)
-      // 환불 완료 alert 띄우기
-    } catch (err) {
-      console.log(err)
-      // 환불실패 돈먹튀당함 ㅅㄱ
-    }
-  }
+  const [loading, setloading] = useState(false);
+
   // 결제함수
   const pay2 = async () => {
-    await walletCheck()
+    await walletCheck();
     if (userAddress) {
       if (props.sellerwallet) {
         if (parseFloat(userBalance) > props.price + 0.01) {
           // 로딩 시작
-          setloading(true)
-          const tokenSer = parseInt(props.itemtoken)
+          setloading(true);
+          const tokenSer = parseInt(props.itemtoken);
           try {
             // 언락
-            await web3.eth.personal.unlockAccount(
-              userAddress,
-              "123",
-              10000
-            )
+            await web3.eth.personal.unlockAccount(userAddress, "123", 10000);
             await web3.eth.personal.unlockAccount(
               props.sellerwallet,
               "123",
               10000
-            )
+            );
             // 구매 api요청
             const res = await axios.post(
               "/api/auction/buy",
@@ -170,88 +133,84 @@ function MarketBuyItem(props: any): JSX.Element {
                 auctionNo: parseInt(props.auctionNo),
               },
               { headers: { Authorization: localStorage.getItem("token") } }
-            )
-            console.log(res.data)
+            );
+            console.log(res.data);
             // 결제
             if (res.data.success) {
-              const re = await myContract.methods
-                .buyCard(tokenSer)
-                .send({
-                  from: userAddress,
-                  value: props.price * Math.pow(10, 18),
-                })
-              console.log(re)
-              setOpen(false)
-              setloading(false)
+              const re = await myContract.methods.buyCard(tokenSer).send({
+                from: userAddress,
+                value: props.price * Math.pow(10, 18),
+              });
+              console.log(re);
+              setOpen(false);
+              setloading(false);
               // 소유권 이전
               const change = await myContract.methods
                 .transferFrom(props.sellerwallet, userAddress, tokenSer)
                 .send({
                   from: props.sellerwallet,
-                })
-              console.log(change)
+                });
+              console.log(change);
             } else {
-              alert(res.data.msg)
+              alert(res.data.msg);
             }
             history.push({
               pathname: "/market",
-            })
+            });
           } catch (e) {
-            console.log(e)
-            setOpen(false)
-            setloading(false)
-            alert('구매 실패')
+            console.log(e);
+            setOpen(false);
+            setloading(false);
+            alert("구매 실패");
           }
-
         } else {
-          alert('잔액이 부족합니다.')
+          alert("잔액이 부족합니다.");
         }
       } else {
-        alert('다시 시도해 주세요.')
+        alert("다시 시도해 주세요.");
       }
-
     } else {
-      alert('지갑을 만들어 주세요.')
+      alert("지갑을 만들어 주세요.");
     }
-  }
-  let history = useHistory()
+  };
+  let history = useHistory();
   function makewallet() {
     history.push({
       pathname: "/mypage",
-    })
+    });
   }
   // 수정
   function setinfo() {
-    setnewtitle(props.title)
-    setnewdetail(props.detail)
-    setnewprice(props.price)
+    setnewtitle(props.title);
+    setnewdetail(props.detail);
+    setnewprice(props.price);
   }
   const handleOpenedit = () => {
-    setinfo()
-    setopenedit(true)
-  }
+    setinfo();
+    setopenedit(true);
+  };
   const handleCloseedit = () => {
-    setopenedit(false)
-  }
-  const [openedit, setopenedit] = useState<boolean>(false)
-  const [newtitle, setnewtitle] = useState<string>("")
-  const [errortitle, seterrortitle] = useState(false)
-  const [newdetail, setnewdetail] = useState<string>("")
-  const [errordetail, seterrordetail] = useState(false)
-  const [newprice, setnewprice] = useState<number>(0)
-  const [errorprice, seterrorprice] = useState(false)
+    setopenedit(false);
+  };
+  const [openedit, setopenedit] = useState<boolean>(false);
+  const [newtitle, setnewtitle] = useState<string>("");
+  const [errortitle, seterrortitle] = useState(false);
+  const [newdetail, setnewdetail] = useState<string>("");
+  const [errordetail, seterrordetail] = useState(false);
+  const [newprice, setnewprice] = useState<number>(0);
+  const [errorprice, seterrorprice] = useState(false);
   useEffect(() => {
-    setinfo()
-  }, [])
+    setinfo();
+  }, []);
   const changetitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setnewtitle(e.target.value.trim())
-  }
+    setnewtitle(e.target.value.trim());
+  };
   const changedetail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setnewdetail(e.target.value.trim())
-  }
+    setnewdetail(e.target.value.trim());
+  };
   const changeprice = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setnewprice(parseInt(e.target.value.trim()))
-  }
+    setnewprice(parseInt(e.target.value.trim()));
+  };
   function editfunction() {
     axios
       .put(
@@ -267,51 +226,51 @@ function MarketBuyItem(props: any): JSX.Element {
         }
       )
       .then((res) => {
-        setopenedit(false)
-        window.location.reload()
+        setopenedit(false);
+        window.location.reload();
       })
       .catch((err) => {
-        console.log(err)
-      })
+        console.log(err);
+      });
   }
   function edit() {
-    setopenedit(true)
+    setopenedit(true);
     if (newtitle) {
       if (newdetail) {
         if (newprice > 0) {
-          editfunction()
+          editfunction();
         } else {
-          seterrorprice(true)
+          seterrorprice(true);
           setTimeout(() => {
-            setnewprice(props.price)
-            seterrorprice(false)
-          }, 2000)
+            setnewprice(props.price);
+            seterrorprice(false);
+          }, 2000);
         }
       } else {
-        seterrordetail(true)
+        seterrordetail(true);
         setTimeout(() => {
-          setnewdetail(props.detail)
-          seterrordetail(false)
-        }, 2000)
+          setnewdetail(props.detail);
+          seterrordetail(false);
+        }, 2000);
       }
     } else {
-      seterrortitle(true)
+      seterrortitle(true);
       setTimeout(() => {
-        setnewtitle(props.title)
-        seterrortitle(false)
-      }, 2000)
+        setnewtitle(props.title);
+        seterrortitle(false);
+      }, 2000);
     }
   }
 
-  const [opendelete, setopendelete] = useState(false)
+  const [opendelete, setopendelete] = useState(false);
 
   const handleClickOpendelete = () => {
-    setopendelete(true)
-  }
+    setopendelete(true);
+  };
 
   const handleClosedelete = () => {
-    setopendelete(false)
-  }
+    setopendelete(false);
+  };
 
   function deleteitem() {
     axios
@@ -322,13 +281,13 @@ function MarketBuyItem(props: any): JSX.Element {
         headers: { Authorization: localStorage.getItem("token") },
       })
       .then((res) => {
-        console.log(res)
-        setopendelete(false)
+        console.log(res);
+        setopendelete(false);
         history.push({
           pathname: "/market",
-        })
+        });
       })
-      .catch(() => { })
+      .catch(() => {});
   }
 
   return (
@@ -466,8 +425,8 @@ function MarketBuyItem(props: any): JSX.Element {
             <Button
               autoFocus
               onClick={() => {
-                setOpen(false)
-                setloading(false)
+                setOpen(false);
+                setloading(false);
               }}
               color="primary"
               fullWidth
@@ -478,6 +437,6 @@ function MarketBuyItem(props: any): JSX.Element {
         </DialogContent>
       </Dialog>
     </div>
-  )
+  );
 }
-export default MarketBuyItem
+export default MarketBuyItem;
