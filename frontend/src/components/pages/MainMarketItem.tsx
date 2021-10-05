@@ -93,10 +93,6 @@ function MainMarketItem(): JSX.Element {
         headers: { Authorization: localStorage.getItem("token") },
       })
       .then((res) => {
-<<<<<<< HEAD
-        console.log(res.data);
-=======
->>>>>>> 9a5b253e66c57e19e80f7f6f637a7a9705c9c5a5
         setitemtitle(res.data.auction.auctionTitle);
         setitemdetail(res.data.auction.auctionDetail);
         setitemprice(res.data.auction.price);
