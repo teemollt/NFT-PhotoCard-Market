@@ -28,7 +28,7 @@ function MarketRegItem() {
       })
       .then((res) => {
         setmycardlist(res.data.res);
-        console.log(res.data.res);
+
       });
   }, []);
   //

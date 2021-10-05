@@ -78,9 +78,6 @@ function App(): JSX.Element {
             <Route path="/gboard">
               <GalleryBoard />
             </Route>
-            <Route path="/gboard">
-              <GalleryBoard />
-            </Route>
           </div>
         ) : (
           <div>

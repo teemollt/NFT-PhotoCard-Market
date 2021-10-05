@@ -88,9 +88,7 @@ function MarketBuyItem(props: any): JSX.Element {
         setAddress(res.data.address);
         setBalance(res.data.walletBal);
       }
-    } catch (err) {
-      console.log(err);
-    }
+    } catch {}
   };
   useEffect(() => {
     var token = localStorage.getItem("token");
@@ -134,31 +132,29 @@ function MarketBuyItem(props: any): JSX.Element {
               },
               { headers: { Authorization: localStorage.getItem("token") } }
             );
-            console.log(res.data);
+
             // 결제
             if (res.data.success) {
-              const re = await myContract.methods.buyCard(tokenSer).send({
+              await myContract.methods.buyCard(tokenSer).send({
                 from: userAddress,
                 value: props.price * Math.pow(10, 18),
               });
-              console.log(re);
+
               setOpen(false);
               setloading(false);
               // 소유권 이전
-              const change = await myContract.methods
+              await myContract.methods
                 .transferFrom(props.sellerwallet, userAddress, tokenSer)
                 .send({
                   from: props.sellerwallet,
                 });
-              console.log(change);
             } else {
               alert(res.data.msg);
             }
             history.push({
               pathname: "/market",
             });
-          } catch (e) {
-            console.log(e);
+          } catch {
             setOpen(false);
             setloading(false);
             alert("구매 실패");
@@ -228,9 +224,6 @@ function MarketBuyItem(props: any): JSX.Element {
       .then((res) => {
         setopenedit(false);
         window.location.reload();
-      })
-      .catch((err) => {
-        console.log(err);
       });
   }
   function edit() {
@@ -280,14 +273,12 @@ function MarketBuyItem(props: any): JSX.Element {
         },
         headers: { Authorization: localStorage.getItem("token") },
       })
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         setopendelete(false);
         history.push({
           pathname: "/market",
         });
-      })
-      .catch(() => {});
+      });
   }
 
   return (
@@ -433,6 +424,7 @@ function MarketBuyItem(props: any): JSX.Element {
             >
               <h4 style={{ color: "black" }}>cancel</h4>
             </Button>
+            <h6>* 카드팩 구매시, 일정 수수료가 부과됩니다.</h6>
           </div>
         </DialogContent>
       </Dialog>

@@ -24,7 +24,6 @@ function MarketMyBid() {
         headers: { Authorization: localStorage.getItem("token") },
       })
       .then((res) => {
-        console.log(res)
         setPage(res.data.res.slice(0, 5))
         setMarket(res.data.res)
       })
@@ -32,7 +31,6 @@ function MarketMyBid() {
 
   const handlePage = (e: any) => {
     const page = Number(e.target.innerText)
-    console.log(page)
     setPage(market.slice(page * 5 - 5, page * 5))
   }
 

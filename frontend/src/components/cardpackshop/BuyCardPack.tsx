@@ -121,9 +121,7 @@ function BuyCardPack(props: any): JSX.Element {
         setAddress(res.data.address);
         setBalance(res.data.walletBal);
       }
-    } catch (err) {
-      console.log(err);
-    }
+    } catch {}
   };
   const [loading, setloading] = useState(false);
   // 결제함수
@@ -148,10 +146,8 @@ function BuyCardPack(props: any): JSX.Element {
             headers: { Authorization: localStorage.getItem("token") },
             cardpackNo: props.cardpackNo,
           });
-          console.log(res.data);
           // api 요청 성공하면 돈보내기
-          const re = await web3.eth.sendTransaction(tx, "qwer1234");
-          console.log(re);
+          await web3.eth.sendTransaction(tx, "qwer1234");
           handleClickcardOpen();
           setnewcardlist(res.data.cardList);
           const tokenIds = res.data.cardList;
@@ -162,15 +158,12 @@ function BuyCardPack(props: any): JSX.Element {
                 from: admin,
               })
               .then(function (receipt: any) {
-                console.log(receipt);
                 walletCheck();
               })
-              .catch(console.log);
           }
           setloading(false);
           setOpen(false);
-        } catch (e) {
-          console.log(e);
+        } catch {
           // 카드팩 구매 api 요청 실패
           alert("구매 실패");
           setloading(false);
@@ -193,11 +186,8 @@ function BuyCardPack(props: any): JSX.Element {
       pathname: "/mypage",
     });
   }
-  const [alert1, setalert1] = useState(false);
   return (
     <div>
-      {alert1 ? <Alert severity="error">alert1</Alert> : null}
-
       {/* GRADIENT CIRCLE PLANES */}
       <div style={{ textAlign: "center" }}>
         {props.soldout ? (
@@ -273,9 +263,9 @@ function BuyCardPack(props: any): JSX.Element {
               >
                 <h4 style={{ color: "black" }}>cancel</h4>
               </Button>
+              <h6>* 카드팩 구매시, 일정 수수료가 부과됩니다.</h6>
             </div>
           </DialogContent>
-          <DialogActions></DialogActions>
         </Dialog>
       </div>
       <div>
