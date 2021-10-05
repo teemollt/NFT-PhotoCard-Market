@@ -80,7 +80,7 @@ function ShopEmpty() {
                 <span className="shopCardPriceTitle">상품 가격</span>
               </div>
               <span className="shopCardTitle">{card.salesNM}</span>
-              <span className="shopCardPrice">{card.salesPrice}coin</span>
+              <span className="shopCardPrice">{card.salesPrice} coin</span>
             </div>
           </div>
         );
