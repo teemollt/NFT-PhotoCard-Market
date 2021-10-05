@@ -121,17 +121,7 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
               <p>지갑주소: {userAddress}</p>
               <p>잔액: {userBalance} </p>
             </div>
-          ) : (
-            <Button
-              className="mypageUpdateBtn"
-              variant="outlined"
-              size="medium"
-              onClick={getAccount}
-            >
-              지갑 생성
-            </Button>
-          )}
-          {makingwallet ? (
+          ) : makingwallet ? (
             <LoadingButton
               loading
               loadingPosition="start"
@@ -146,8 +136,16 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
             >
               지갑생성중
             </LoadingButton>
-          ) : null}
-
+          ) : (
+            <Button
+              className="mypageUpdateBtn"
+              variant="outlined"
+              size="medium"
+              onClick={getAccount}
+            >
+              지갑 생성
+            </Button>
+          )}
           <br />
         </div>
         <div className="mypageUserUpdate">
