@@ -25,8 +25,8 @@ function MarketMy() {
         headers: { Authorization: localStorage.getItem("token") },
       })
       .then((res) => {
-        setPage(res.data.res.slice(0, 5))
-        setMarket(res.data.res)
+        setPage(res.data.res.slice(0, 5));
+        setMarket(res.data.res);
       });
   }, []);
 

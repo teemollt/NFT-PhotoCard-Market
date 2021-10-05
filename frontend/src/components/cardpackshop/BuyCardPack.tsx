@@ -1,31 +1,31 @@
-import React, { useEffect, useState } from "react"
-import { useHistory } from "react-router-dom"
-import "./BuyCardPack.css"
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import "./BuyCardPack.css";
 import {
   createStyles,
   Theme,
   withStyles,
   WithStyles,
-} from "@material-ui/core/styles"
-import Button from "@material-ui/core/Button"
-import Dialog from "@material-ui/core/Dialog"
-import MuiDialogTitle from "@material-ui/core/DialogTitle"
-import MuiDialogContent from "@material-ui/core/DialogContent"
-import MuiDialogActions from "@material-ui/core/DialogActions"
-import IconButton from "@material-ui/core/IconButton"
-import CloseIcon from "@material-ui/icons/Close"
-import Typography from "@material-ui/core/Typography"
-import LoadingButton from "@mui/lab/LoadingButton"
-import Alert from "@mui/material/Alert"
+} from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import MuiDialogTitle from "@material-ui/core/DialogTitle";
+import MuiDialogContent from "@material-ui/core/DialogContent";
+import MuiDialogActions from "@material-ui/core/DialogActions";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
+import Typography from "@material-ui/core/Typography";
+import LoadingButton from "@mui/lab/LoadingButton";
+import Alert from "@mui/material/Alert";
 
-import axios from "axios"
-import { contractAbi } from "../abi"
-import MyNewCards from "./MyNewCards"
+import axios from "axios";
+import { contractAbi } from "../abi";
+import MyNewCards from "./MyNewCards";
 
 export interface DialogTitleProps extends WithStyles<typeof styles> {
-  id: string
-  children: React.ReactNode
-  onClose: () => void
+  id: string;
+  children: React.ReactNode;
+  onClose: () => void;
 }
 const styles = (theme: Theme) =>
   createStyles({
@@ -47,9 +47,9 @@ const styles = (theme: Theme) =>
         fontSize: "inherit",
       },
     },
-  })
+  });
 const DialogTitle = withStyles(styles)((props: DialogTitleProps) => {
-  const { children, classes, onClose, ...other } = props
+  const { children, classes, onClose, ...other } = props;
   return (
     <MuiDialogTitle disableTypography className={classes.root} {...other}>
       <Typography variant="h6">{children}</Typography>
@@ -63,26 +63,26 @@ const DialogTitle = withStyles(styles)((props: DialogTitleProps) => {
         </IconButton>
       ) : null}
     </MuiDialogTitle>
-  )
-})
+  );
+});
 
 const DialogContent = withStyles((theme: Theme) => ({
   root: {
     padding: theme.spacing(2),
   },
-}))(MuiDialogContent)
+}))(MuiDialogContent);
 
 const DialogActions = withStyles((theme: Theme) => ({
   root: {
     margin: 0,
     padding: theme.spacing(1),
   },
-}))(MuiDialogActions)
+}))(MuiDialogActions);
 
 function BuyCardPack(props: any): JSX.Element {
   // web3 객체
-  const Web3 = require("web3")
-  const web3 = new Web3("http://13.125.37.55:8548")
+  const Web3 = require("web3");
+  const web3 = new Web3("http://13.125.37.55:8548");
   // contract 객체
   const myContractAddress = "0xf1C563Ad18747384222dD4F8D21445bb0Fe4F51D"
   const myContract = new web3.eth.Contract(contractAbi, myContractAddress)
@@ -90,36 +90,36 @@ function BuyCardPack(props: any): JSX.Element {
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    walletCheck()
-  }, [])
+    walletCheck();
+  }, []);
 
   const handleClickOpen = () => {
-    setOpen(true)
-  }
+    setOpen(true);
+  };
   const handleClose = () => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
   // 카드창;
-  const [cardopen, setcardopen] = useState(false)
+  const [cardopen, setcardopen] = useState(false);
 
   const handleClickcardOpen = () => {
-    setcardopen(true)
-  }
+    setcardopen(true);
+  };
 
   const handlecardClose = () => {
-    setcardopen(false)
-  }
-  const [newcardlist, setnewcardlist] = useState<any[]>([])
-  const [userAddress, setAddress] = useState<string>("")
-  const [userBalance, setBalance] = useState<string>("0")
+    setcardopen(false);
+  };
+  const [newcardlist, setnewcardlist] = useState<any[]>([]);
+  const [userAddress, setAddress] = useState<string>("");
+  const [userBalance, setBalance] = useState<string>("0");
   const walletCheck = async () => {
     try {
       const res = await axios.get("/api/wallet/", {
         headers: { Authorization: localStorage.getItem("token") },
-      })
+      });
       if (res.data.success === true) {
-        setAddress(res.data.address)
-        setBalance(res.data.walletBal)
+        setAddress(res.data.address);
+        setBalance(res.data.walletBal);
       }
     } catch { }
   }
@@ -179,12 +179,12 @@ function BuyCardPack(props: any): JSX.Element {
       setloading(false)
       setOpen(false)
     }
-  }
-  let history = useHistory()
+  };
+  let history = useHistory();
   function makewallet() {
     history.push({
       pathname: "/mypage",
-    })
+    });
   }
   return (
     <div>
@@ -255,8 +255,8 @@ function BuyCardPack(props: any): JSX.Element {
               <Button
                 autoFocus
                 onClick={() => {
-                  setOpen(false)
-                  setloading(false)
+                  setOpen(false);
+                  setloading(false);
                 }}
                 color="primary"
                 fullWidth
@@ -285,7 +285,7 @@ function BuyCardPack(props: any): JSX.Element {
         </Dialog>
       </div>
     </div>
-  )
+  );
 }
 
-export default BuyCardPack
+export default BuyCardPack;

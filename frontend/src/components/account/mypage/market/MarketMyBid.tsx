@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from "react"
-import { Pagination } from "@mui/material"
-import MarketMyBidTable from "./MarketMyBidTable"
-import "./MarketMyBid.css"
-import axios from "axios"
+import React, { useEffect, useState } from "react";
+import { Pagination } from "@mui/material";
+import MarketMyBidTable from "./MarketMyBidTable";
+import "./MarketMyBid.css";
+import axios from "axios";
 
 export type market = {
-  auctionNo: number
-  cardNm: string
-  cardImg: string
-  price: number
-  memberNo: number
-  memberNick: string
-  buyDate: string
-}
+  auctionNo: number;
+  cardNm: string;
+  cardImg: string;
+  price: number;
+  memberNo: number;
+  memberNick: string;
+  buyDate: string;
+};
 
 function MarketMyBid() {
-  const [market, setMarket] = useState<Array<market>>([])
-  const [page, setPage] = useState<Array<market>>([])
+  const [market, setMarket] = useState<Array<market>>([]);
+  const [page, setPage] = useState<Array<market>>([]);
 
   useEffect(() => {
     axios
@@ -49,7 +49,7 @@ function MarketMyBid() {
             <th className="myBidEnd">구매일</th>
           </tr>
           {page.map((card, index) => {
-            return <MarketMyBidTable card={card} key={index} />
+            return <MarketMyBidTable card={card} key={index} />;
           })}
         </tbody>
       </table>
@@ -62,7 +62,7 @@ function MarketMyBid() {
         hideNextButton
       />
     </div>
-  )
+  );
 }
 
-export default MarketMyBid
+export default MarketMyBid;
