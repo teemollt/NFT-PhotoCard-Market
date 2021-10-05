@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme: Theme) =>
       width: "100%",
       maxWidth: "1000px",
       margin: "auto",
-      // maxHeight: 300,
+
     },
     inline: {
       display: "inline",
@@ -49,9 +49,7 @@ function CardpackReviewList(props: any): JSX.Element {
         .then((res) => {
           setreviews(res.data.res);
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch(() => {});
     };
     fetchReviews();
   }, []);
@@ -77,7 +75,6 @@ function CardpackReviewList(props: any): JSX.Element {
         .then((res) => {
           setreview("");
         })
-        .catch();
     }
   }
   return (

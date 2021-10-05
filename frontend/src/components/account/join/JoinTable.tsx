@@ -162,7 +162,7 @@ function JoinTable(props: JoinTableProps): JSX.Element {
             .then((res) => {
               handleJoinRes();
             })
-            .catch((err) => console.log(err));
+
         } else {
           setMessage("중복 확인을 해 주세요");
           setOpen(true);

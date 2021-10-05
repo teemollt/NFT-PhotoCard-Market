@@ -24,17 +24,15 @@ function MarketMyBid() {
         headers: { Authorization: localStorage.getItem("token") },
       })
       .then((res) => {
-        console.log(res);
-        setPage(res.data.res.slice(0, 5));
-        setMarket(res.data.res);
-      });
-  }, []);
+        setPage(res.data.res.slice(0, 5))
+        setMarket(res.data.res)
+      })
+  }, [])
 
   const handlePage = (e: any) => {
-    const page = Number(e.target.innerText);
-    console.log(page);
-    setPage(market.slice(page * 5 - 5, page * 5));
-  };
+    const page = Number(e.target.innerText)
+    setPage(market.slice(page * 5 - 5, page * 5))
+  }
 
   return (
     <div className="mypageBodyRightHeader">
