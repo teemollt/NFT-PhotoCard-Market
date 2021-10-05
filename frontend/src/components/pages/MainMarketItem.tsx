@@ -93,17 +93,17 @@ function MainMarketItem(): JSX.Element {
         headers: { Authorization: localStorage.getItem("token") },
       })
       .then((res) => {
-        console.log(res.data)
-        setitemtitle(res.data.auction.auctionTitle)
-        setitemdetail(res.data.auction.auctionDetail)
-        setitemprice(res.data.auction.price)
-        setitemauctionNo(res.data.auction.auctionNo)
-        setitemcardgrade(res.data.card.cardGradeNM)
-        setitemimageurl(res.data.card.cardImgUrl)
-        setitemcardnm(res.data.card.cardNM)
-        setitemtokenNo(res.data.card.tokenSer)
-        setmemberNo(res.data.member.memberNo)
-        setsellerwallet(res.data.sellerWallet.salletAdd)
+        console.log(res.data);
+        setitemtitle(res.data.auction.auctionTitle);
+        setitemdetail(res.data.auction.auctionDetail);
+        setitemprice(res.data.auction.price);
+        setitemauctionNo(res.data.auction.auctionNo);
+        setitemcardgrade(res.data.card.cardGradeNM);
+        setitemimageurl(res.data.card.cardImgUrl);
+        setitemcardnm(res.data.card.cardNM);
+        setitemtokenNo(res.data.card.tokenSer);
+        setmemberNo(res.data.member.memberNo);
+        setsellerwallet(res.data.sellerWallet.salletAdd);
       })
       .catch();
   }, []);
