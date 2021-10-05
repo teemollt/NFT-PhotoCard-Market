@@ -1,22 +1,22 @@
-import React, { useState } from "react"
-import "./MarketMyBidTable.css"
+import React, { useState } from "react";
+import "./MarketMyBidTable.css";
 
 interface MarketMyBidTableProps {
   card: {
-    auctionNo: number
-    cardNm: string
-    cardImg: string
-    price: number
-    memberNo: number
-    memberNick: string
-    buyDate: string
-  }
+    auctionNo: number;
+    cardNm: string;
+    cardImg: string;
+    price: number;
+    memberNo: number;
+    memberNick: string;
+    buyDate: string;
+  };
 }
 
 function MarketMyBidTable(props: MarketMyBidTableProps) {
-  const { auctionNo, memberNick, cardImg, cardNm, price, buyDate } = props.card
+  const { auctionNo, memberNick, cardImg, cardNm, price, buyDate } = props.card;
 
-  const [hover, setHover] = useState<boolean>(false)
+  const [hover, setHover] = useState<boolean>(false);
 
   return (
     <tr
@@ -45,10 +45,10 @@ function MarketMyBidTable(props: MarketMyBidTableProps) {
         )}
       </td>
       <td className="myBidProduct">{cardNm}</td>
-      <td className="myBidMyPrice">{price}</td>
+      <td className="myBidMyPrice">{price} coin</td>
       <td className="myBidEnd">{buyDate.slice(2, 10)}</td>
     </tr>
-  )
+  );
 }
 
-export default MarketMyBidTable
+export default MarketMyBidTable;

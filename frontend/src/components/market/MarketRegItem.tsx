@@ -50,17 +50,17 @@ function MarketRegItem() {
   const [errortitle, seterrortitle] = useState(false);
   const [selectedcarddetail, setselectedcarddetail] = useState<string>("");
   const [errordetail, seterrordetail] = useState(false);
-
   function register(data: any) {
     setOpen(true);
     setselectedcardNo(data.cardNo);
     setselectedcardNm(data.cardNM);
     setselectedtoken(data.token[0].tokenNo);
   }
+
   function successregister() {
     if (selectedcardtitle) {
       if (selectedcarddetail) {
-        if (inputprice) {
+        if (Number.isInteger(Number(inputprice))) {
           // 다 통과하면 진짜 등록
           axios
             .post(
@@ -76,7 +76,6 @@ function MarketRegItem() {
             .then(() => {
               reloadbeforeinsert();
               setOpen(false);
-              setinputprice("");
             });
           //
         } else {
@@ -156,8 +155,7 @@ function MarketRegItem() {
             {selectedcardNm} 카드를 판매하시겠습니까?
             <br />
             <br />
-            내가 설정한 금액 :{" "}
-            <h1>{inputprice === "NaN" ? null : inputprice}</h1>
+            내가 설정한 금액 : <h1>{inputprice}</h1>
           </DialogContentText>
           <TextField
             autoFocus
@@ -192,13 +190,10 @@ function MarketRegItem() {
             type="number"
             fullWidth
             variant="standard"
-            value={inputprice}
             onChange={(e) => {
-              setinputprice(parseFloat(e.target.value).toFixed(0));
+              setinputprice(e.target.value);
             }}
-            InputProps={{
-              inputProps: { min: 0 },
-            }}
+            InputProps={{ inputProps: { min: 0 } }}
           />
         </DialogContent>
         {errortitle ? (
@@ -216,7 +211,7 @@ function MarketRegItem() {
         {errorprice ? (
           <Alert severity="error">
             <AlertTitle>Error</AlertTitle>
-            <strong>상품 가격을 0이상의 값으로 입력해주세요</strong>
+            <strong>상품 가격을 0 이상의 정수로 입력해주세요</strong>
           </Alert>
         ) : null}
         <DialogActions>
