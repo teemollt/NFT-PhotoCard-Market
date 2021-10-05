@@ -58,7 +58,9 @@ function ShopEmpty() {
     <div className="ShopEmpty">
       <div className="shopEmptyText">
         <h1>
-          <span>" <span style={{ color: "#356CFB" }}>{celeb}</span> "</span>
+          <span>
+            " <span style={{ color: "#356CFB" }}>{celeb}</span> "
+          </span>
           <span> 데리러 가기</span>
         </h1>
       </div>
@@ -78,7 +80,7 @@ function ShopEmpty() {
                 <span className="shopCardPriceTitle">상품 가격</span>
               </div>
               <span className="shopCardTitle">{card.salesNM}</span>
-              <span className="shopCardPrice">{card.salesPrice}BTC</span>
+              <span className="shopCardPrice">{card.salesPrice}coin</span>
             </div>
           </div>
         );

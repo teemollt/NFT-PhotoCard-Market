@@ -44,9 +44,9 @@ function ShopCard(props: ShopCardProps) {
         )}
 
         {price ? (
-          <span className="shopCardPrice">{price}BTC</span>
+          <span className="shopCardPrice">{price}coin</span>
         ) : (
-          <span className="shopCardPrice">{salesPrice}BTC</span>
+          <span className="shopCardPrice">{salesPrice}coin</span>
         )}
       </div>
     </div>
