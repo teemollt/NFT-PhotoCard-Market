@@ -103,7 +103,7 @@ function MainMarketItem(): JSX.Element {
         setitemcardnm(res.data.card.cardNM)
         setitemtokenNo(res.data.card.tokenSer)
         setmemberNo(res.data.member.memberNo)
-        setsellerwallet(res.data.sellerWallet.walletAdd)
+        setsellerwallet(res.data.sellerWallet.salletAdd)
       })
       .catch()
   }, [])
