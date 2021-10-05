@@ -85,7 +85,7 @@ public class AuctionRepoImpl implements AuctionRepoCustom{
 				.join(qp).on(qpt.product.productNo.eq(qp.productNo))
 				.join(qpm).on(qp.productNo.eq(qpm.product.productNo))
 				.where(builder)
-				.orderBy(qa.auctionStart.asc())
+				.orderBy(qa.auctionStart.desc())
 				.fetch();
 		return Optional.ofNullable(res);
 	}
