@@ -1,32 +1,32 @@
-import React, { useState } from "react"
-import Button from "@material-ui/core/Button"
-import { useHistory } from "react-router-dom"
-import "./MarketMyTable.css"
+import React, { useState } from "react";
+import Button from "@material-ui/core/Button";
+import { useHistory } from "react-router-dom";
+import "./MarketMyTable.css";
 
 interface MarketMyTableProps {
   card: {
-    auctionNo: number
-    cardNm: string
-    cardImg: string
-    price: number
-    state: string
-    memberNo: number
-    memberNick: string
-    soldDate: string
-  }
+    auctionNo: number;
+    cardNm: string;
+    cardImg: string;
+    price: number;
+    state: string;
+    memberNo: number;
+    memberNick: string;
+    soldDate: string;
+  };
 }
 
 function MarketMyTable(props: MarketMyTableProps) {
-  const { auctionNo, cardImg, cardNm, price, state, memberNick } = props.card
-  const [hover, setHover] = useState<boolean>(false)
-  let history = useHistory()
+  const { auctionNo, cardImg, cardNm, price, state, memberNick } = props.card;
+  const [hover, setHover] = useState<boolean>(false);
+  let history = useHistory();
 
   const handleToMarket = (data: any) => {
     history.push({
       pathname: `/marketitem/${auctionNo}`,
       state: { auctionNo: auctionNo },
-    })
-  }
+    });
+  };
 
   return (
     <tr
@@ -54,7 +54,7 @@ function MarketMyTable(props: MarketMyTableProps) {
         )}
       </td>
       <td className="myMarketProduct">{cardNm}</td>
-      <td className="myMarketCurrent">{price}</td>
+      <td className="myMarketCurrent">{price} coin</td>
       {state === "SOLD" ? (
         <td className="myMarketEnd">{memberNick}</td>
       ) : (
@@ -68,7 +68,7 @@ function MarketMyTable(props: MarketMyTableProps) {
         </td>
       )}
     </tr>
-  )
+  );
 }
 
-export default MarketMyTable
+export default MarketMyTable;

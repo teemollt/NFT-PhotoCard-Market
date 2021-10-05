@@ -20,7 +20,7 @@ function MarketCard(props: MarketCardProps) {
       </div>
       <div>
         <span className="marketCardTitle">{auctionTitle}</span>
-        <span className="marketCardPrice">{price}coin</span>
+        <span className="marketCardPrice">{price} coin</span>
       </div>
     </div>
   );
