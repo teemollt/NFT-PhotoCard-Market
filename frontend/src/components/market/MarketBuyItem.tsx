@@ -71,9 +71,10 @@ function MarketBuyItem(props: any): JSX.Element {
   const [Iam, setIam] = useState(0);
   // web3 객체
   const Web3 = require("web3");
-  const web3 = new Web3("http://13.125.37.55:8545");
+  const web3 = new Web3("http://13.125.37.55:8548");
   // contract 객체
-  const myContractAddress = "0x55e333149CE4558612055f453Bf1c7f7D81A3CAa";
+  const myContractAddress = "0x0B8cbc026DAEb1708245F66E08e56238235778cA";
+  const admin = "0x8BBa1857fD94CF79c78BBE90f977055be015E17E";
   const myContract = new web3.eth.Contract(contractAbi, myContractAddress);
   const [open, setOpen] = React.useState(false);
   const [userAddress, setAddress] = useState<string>("");
@@ -107,18 +108,54 @@ function MarketBuyItem(props: any): JSX.Element {
   };
 
   const [loading, setloading] = useState(false);
+  const refund = async () => {
+    const tx = {
+      from: props.sellerwallet,
+      gasPrice: "20000000000",
+      gas: "21000",
+      to: userAddress,
+      value: props.price,
+      data: "",
+    };
+    try {
+      const adminUnlock = await web3.eth.personal.unlockAccount(
+        props.sellerwallet,
+        "123",
+        6000
+      );
+      console.log(adminUnlock);
+      const unlock = await web3.eth.personal.unlockAccount(
+        userAddress,
+        "123",
+        6000
+      );
+      console.log(unlock);
+    } catch (err) {
+      console.log(err);
+    }
+    try {
+      const charge = await web3.eth.sendTransaction(tx, "123");
+      console.log(charge);
+      // 환불 완료 alert 띄우기
+    } catch (err) {
+      console.log(err);
+      // 환불실패 돈먹튀당함 ㅅㄱ
+    }
+  };
   // 결제함수
   const pay = () => {
     // 지갑이 있으면
+    walletCheck();
+    console.log(props.sellerwallet);
     if (userAddress) {
-      walletCheck();
       // 잔액이 가격+가스비 이상이면
       if (parseFloat(userBalance) > props.price + 0.01) {
         // 로딩 시작
         setloading(true);
         // 컨트랙트 buycard 호출
+        const tokenSer = parseInt(props.itemtoken);
         myContract.methods
-          .buyCard(props.itemtoken)
+          .buyCard(tokenSer)
           .send({
             from: userAddress,
             value: props.price * Math.pow(10, 18),
@@ -137,62 +174,34 @@ function MarketBuyItem(props: any): JSX.Element {
                 console.log(res);
                 setOpen(false);
                 setloading(false);
-                alert("물건을 성공적으로 구매하였습니다");
+
                 history.push({
                   pathname: "/market",
                 });
-
+                if (res.data.success) {
+                  myContract.methods
+                    .transferFrom(props.sellerwallet, userAddress, tokenSer)
+                    .send({
+                      from: props.sellerwallet,
+                    })
+                    .then(function (receipt: any) {
+                      alert("물건을 성공적으로 구매하였습니다");
+                      console.log(receipt);
+                      walletCheck();
+                    });
+                } else {
+                  refund();
+                  alert(res.data.msg);
+                }
                 // 성공했으면 소유권 이전 함수 호출
-                myContract.methods
-                  .changeOwner(props.itemtoken)
-                  .send({
-                    from: userAddress,
-                  })
-                  .then(function (receipt: any) {
-                    console.log(receipt);
-                    walletCheck();
-                  });
               })
               .catch((err) => {
                 // api요청 실패
                 console.log(err);
+                refund();
+                alert("구매 실패!");
                 // 구매 실패 alert 띄우기
                 // 여기서 환불 함수 호출
-                const refund = async () => {
-                  const tx = {
-                    from: props.sellerwallet,
-                    gasPrice: "20000000000",
-                    gas: "21000",
-                    to: userAddress,
-                    value: props.price,
-                    data: "",
-                  };
-                  try {
-                    const adminUnlock = await web3.eth.personal.unlockAccount(
-                      props.sellerwallet,
-                      "123",
-                      6000
-                    );
-                    console.log(adminUnlock);
-                    const unlock = await web3.eth.personal.unlockAccount(
-                      userAddress,
-                      "123",
-                      6000
-                    );
-                    console.log(unlock);
-                  } catch (err) {
-                    console.log(err);
-                  }
-                  try {
-                    const charge = await web3.eth.sendTransaction(tx, "123");
-                    console.log(charge);
-                    // 환불 완료 alert 띄우기
-                  } catch (err) {
-                    console.log(err);
-                    // 환불실패 돈먹튀당함 ㅅㄱ
-                  }
-                };
-                refund();
               });
           });
       } else {
@@ -425,7 +434,7 @@ function MarketBuyItem(props: any): JSX.Element {
         </div>
       ) : (
         <Button fullWidth onClick={handleClickOpen}>
-          {props.price} eth 구매
+          {props.price} coin 구매
         </Button>
       )}
       <Dialog

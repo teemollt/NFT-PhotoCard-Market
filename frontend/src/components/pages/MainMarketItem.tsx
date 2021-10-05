@@ -80,7 +80,7 @@ function MainMarketItem(): JSX.Element {
   const [itemimageurl, setitemimageurl] = useState<string>("");
   const [itemprice, setitemprice] = useState<number>(0);
   const [itemauctionNo, setitemauctionNo] = useState<number>(0);
-  const [itemtokenNo, setitemtokenNo] = useState<number>(0);
+  const [itemtokenNo, setitemtokenNo] = useState<string>("");
   const [memberNo, setmemberNo] = useState<number>(0);
   const [sellerwallet, setsellerwallet] = useState<string>("");
   const [itemcardgrade, setitemcardgrade] = useState<string>("");
@@ -101,9 +101,9 @@ function MainMarketItem(): JSX.Element {
         setitemcardgrade(res.data.card.cardGradeNM);
         setitemimageurl(res.data.card.cardImgUrl);
         setitemcardnm(res.data.card.cardNM);
-        setitemtokenNo(res.data.card.tokenNo);
+        setitemtokenNo(res.data.card.tokenSer);
         setmemberNo(res.data.member.memberNo);
-        setsellerwallet(res.data.sellerWallet.walletAdd);
+        setsellerwallet(res.data.sellerWallet.salletAdd);
       })
       .catch();
   }, []);
@@ -140,13 +140,7 @@ function MainMarketItem(): JSX.Element {
           <Grid container spacing={5}>
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <img
-                  src={itemimageurl}
-                  alt=""
-                  width="100%"
-                  height="100%"
-                  style={{ filter: "blur(10px)" }}
-                />
+                <img src={itemimageurl} alt="" width="100%" height="100%" />
               </Paper>
             </Grid>
             <Grid item xs={12}>
@@ -174,7 +168,7 @@ function MainMarketItem(): JSX.Element {
               </div>
               <div className={classes.iteminfo}>{itemdetail}</div>
               <div className={classes.iteminfo}>
-                <h1>{itemprice} eth</h1>
+                <h1>{itemprice} coin</h1>
               </div>
               <div className={classes.paper2}>
                 <div className="buybtn">

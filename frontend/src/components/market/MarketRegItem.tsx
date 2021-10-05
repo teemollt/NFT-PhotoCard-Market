@@ -17,6 +17,7 @@ function MarketRegItem() {
   const [open, setOpen] = React.useState(false);
   const handleClose = () => {
     setOpen(false);
+    setinputprice(0);
   };
   // 내 카드 리스트목록
   const [mycardlist, setmycardlist] = useState<any[]>([]);
@@ -40,7 +41,7 @@ function MarketRegItem() {
         setmycardlist(res.data.res);
       });
   }
-  const [inputprice, setinputprice] = useState<string>("");
+  const [inputprice, setinputprice] = useState<number>(0);
   const [errorprice, seterrorprice] = useState(false);
   const [selectedcardNo, setselectedcardNo] = useState<number>(0);
   const [selectedcardNm, setselectedcardNm] = useState<string>("");
@@ -55,17 +56,18 @@ function MarketRegItem() {
     setselectedcardNm(data.cardNM);
     setselectedtoken(data.token[0].tokenNo);
   }
+
   function successregister() {
     if (selectedcardtitle) {
       if (selectedcarddetail) {
-        if (inputprice) {
+        if (Number.isInteger(Number(inputprice))) {
           // 다 통과하면 진짜 등록
           axios
             .post(
               "/api/auction/insert",
               {
                 tokenNo: selectedtoken,
-                price: parseInt(inputprice),
+                price: inputprice,
                 auctionTitle: selectedcardtitle,
                 auctionDetail: selectedcarddetail,
               },
@@ -79,7 +81,7 @@ function MarketRegItem() {
         } else {
           seterrorprice(true);
           setTimeout(() => {
-            setinputprice("");
+            setinputprice(0);
             seterrorprice(false);
           }, 2000);
         }
@@ -96,6 +98,9 @@ function MarketRegItem() {
       }, 2000);
     }
   }
+  const inputpricevalue = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setinputprice(parseInt(e.target.value.trim()));
+  };
   return (
     <div className="section full-height">
       <input
@@ -153,7 +158,7 @@ function MarketRegItem() {
             {selectedcardNm} 카드를 판매하시겠습니까?
             <br />
             <br />
-            내가 설정한 금액 : <h1>{inputprice}</h1>
+            내가 설정한 금액 :{inputprice ? <h1>{inputprice}</h1> : null}
           </DialogContentText>
           <TextField
             autoFocus
@@ -187,10 +192,10 @@ function MarketRegItem() {
             label="판매하고 싶은 가격을 입력해주세요"
             type="number"
             fullWidth
+            value={inputprice}
             variant="standard"
-            onChange={(e) => {
-              setinputprice(e.target.value);
-            }}
+            onChange={inputpricevalue}
+            InputProps={{ inputProps: { min: 0 } }}
           />
         </DialogContent>
         {errortitle ? (
@@ -208,7 +213,7 @@ function MarketRegItem() {
         {errorprice ? (
           <Alert severity="error">
             <AlertTitle>Error</AlertTitle>
-            <strong>상품 가격을 0이상의 값으로 입력해주세요</strong>
+            <strong>상품 가격을 0 이상의 정수로 입력해주세요</strong>
           </Alert>
         ) : null}
         <DialogActions>

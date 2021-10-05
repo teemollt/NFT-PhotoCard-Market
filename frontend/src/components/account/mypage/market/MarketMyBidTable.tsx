@@ -45,7 +45,7 @@ function MarketMyBidTable(props: MarketMyBidTableProps) {
         )}
       </td>
       <td className="myBidProduct">{cardNm}</td>
-      <td className="myBidMyPrice">{price}</td>
+      <td className="myBidMyPrice">{price} coin</td>
       <td className="myBidEnd">{buyDate.slice(2, 10)}</td>
     </tr>
   );

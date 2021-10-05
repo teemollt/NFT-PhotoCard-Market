@@ -82,10 +82,11 @@ const DialogActions = withStyles((theme: Theme) => ({
 function BuyCardPack(props: any): JSX.Element {
   // web3 객체
   const Web3 = require("web3");
-  const web3 = new Web3("http://13.125.37.55:8545");
+  const web3 = new Web3("http://13.125.37.55:8548");
   // contract 객체
-  const myContractAddress = "0x55e333149CE4558612055f453Bf1c7f7D81A3CAa";
+  const myContractAddress = "0x0B8cbc026DAEb1708245F66E08e56238235778cA";
   const myContract = new web3.eth.Contract(contractAbi, myContractAddress);
+  const admin = "0x8BBa1857fD94CF79c78BBE90f977055be015E17E";
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -139,41 +140,49 @@ function BuyCardPack(props: any): JSX.Element {
         // 로딩돌기시작
         setloading(true);
         // 컨트랙트 buyCardPack 호출
-        myContract.methods
-          .buyCardPack()
-          .send({
-            from: userAddress,
-            value: props.cardpackprice * Math.pow(10, 18),
-          })
-          .then(function (receipt: any) {
-            console.log(receipt);
-            axios
-              .get(`/api/cardPack/buy/${props.cardpackNo}`, {
-                headers: { Authorization: localStorage.getItem("token") },
-                cardpackNo: props.cardpackNo,
-              })
-              .then((res) => {
-                console.log(res.data);
-                handleClickcardOpen();
-                setnewcardlist(res.data.cardList);
-                const tokenIds = res.data.cardList;
-                for (let i = 0; i < tokenIds.length; i++) {
-                  myContract.methods
-                    .changeOwner(tokenIds[i].tokenNo)
-                    .send({
-                      from: userAddress,
-                    })
-                    .then(function (receipt: any) {
-                      console.log(receipt);
-                      walletCheck();
-                    });
-                }
-                // 로딩종료
-                setloading(false);
-                setOpen(false);
-              })
-              .catch();
-          });
+        const tx = {
+          from: userAddress,
+          gasPrice: "20000000000",
+          gas: "21000",
+          to: admin,
+          value: props.cardpackprice * Math.pow(10, 18),
+          data: "",
+        };
+        web3.eth.personal.unlockAccount(admin, "qwer1234", 6000);
+        web3.eth.personal.unlockAccount(userAddress, "123", 6000);
+        web3.eth.sendTransaction(tx, "qwer1234").then(
+          axios
+            .get(`/api/cardPack/buy/${props.cardpackNo}`, {
+              headers: { Authorization: localStorage.getItem("token") },
+              cardpackNo: props.cardpackNo,
+            })
+            .then((res) => {
+              console.log(res.data);
+              handleClickcardOpen();
+              setnewcardlist(res.data.cardList);
+              const tokenIds = res.data.cardList;
+              for (let i = 0; i < tokenIds.length; i++) {
+                myContract.methods
+                  .transferFrom(
+                    admin,
+                    userAddress,
+                    parseInt(tokenIds[i].tokenSer)
+                  )
+                  .send({
+                    from: admin,
+                  })
+                  .then(function (receipt: any) {
+                    console.log(receipt);
+                    walletCheck();
+                  })
+                  .catch(console.log);
+              }
+              // 로딩종료
+              setloading(false);
+              setOpen(false);
+            })
+            .catch()
+        );
       } else {
         alert("잔액이 부족합니다. 캐시를 충전해주세요");
       }
