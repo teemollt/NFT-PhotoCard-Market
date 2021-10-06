@@ -202,19 +202,19 @@ npm start
 
 ##### 1) http://j5d102.p.ssafy.io/ 사이트 접속
 
-![image-20211006111150153](C:\Users\multicampus\Desktop\특화프로젝트\master\exec\README.assets/image-20211006111150153.png)
+![image-20211006111150153](https://lab.ssafy.com/s05-blockchain/S05P21D102/-/tree/master/exec/README.assets/image-20211006111150153.png)
 
 
 
 ##### 2) 상단 메뉴에서 JOIN 클릭
 
-![image-20211006111426558](C:\Users\multicampus\Desktop\특화프로젝트\master\exec\README.assets/image-20211006111426558.png)
+![image-20211006111426558](https://lab.ssafy.com/s05-blockchain/S05P21D102/-/tree/master/exec/README.assets/image-20211006111426558.png)
 
 
 
 ##### 3) 회원가입
 
-<img src="C:\Users\multicampus\Desktop\특화프로젝트\master\exec\README.assets/image-20211006111449875.png" width="70%" height="60%">
+<img src="https://lab.ssafy.com/s05-blockchain/S05P21D102/-/tree/master/exec/README.assets/image-20211006111449875.png" width="70%" height="60%">
 
 - 아이디, 비밀번호, 닉네임은 조건 충족 필요
 - 아이디, 닉네임, 이메일 중복 확인 필요
@@ -223,25 +223,25 @@ npm start
 
 ##### 4) 회원가입 성공 후, 상단 메뉴에서 LOGIN 클릭
 
-![image-20211006111332573](C:\Users\multicampus\Desktop\특화프로젝트\master\exec\README.assets/image-20211006111332573.png)
+![image-20211006111332573](https://lab.ssafy.com/s05-blockchain/S05P21D102/-/tree/master/exec/README.assets/image-20211006111332573.png)
 
 
 
 ##### 5) 가입한 아이디와 비밀번호 입력
 
-![image-20211006111635466](C:\Users\multicampus\Desktop\특화프로젝트\master\exec\README.assets/image-20211006111635466.png)
+![image-20211006111635466](https://lab.ssafy.com/s05-blockchain/S05P21D102/-/tree/master/exec/README.assets/image-20211006111635466.png)
 
 
 
 ##### 6) 상단 메뉴에서 MY PAGE 클릭
 
-![image-20211006113252065](C:\Users\multicampus\Desktop\특화프로젝트\master\exec\README.assets/image-20211006113252065.png)
+![image-20211006113252065](https://lab.ssafy.com/s05-blockchain/S05P21D102/-/tree/master/exec/README.assets/image-20211006113252065.png)
 
 
 
 ##### 7) 지갑 생성 버튼 클릭
 
-![image-20211006113312160](C:\Users\multicampus\Desktop\특화프로젝트\master\exec\README.assets/image-20211006113312160.png)
+![image-20211006113312160](https://lab.ssafy.com/s05-blockchain/S05P21D102/-/tree/master/exec/README.assets/image-20211006113312160.png)
 
 - 시간이 다소 소요될 수 있음
 - 지갑 생성 중이라는 표시가 사라지고, 닉네임 옆에 잔액 칸이 생성되면 지갑 생성 성공
@@ -250,7 +250,7 @@ npm start
 
 ##### 8) COIN 충전 버튼 클릭
 
-![image-20211006113403157](C:\Users\multicampus\Desktop\특화프로젝트\master\exec\README.assets/image-20211006113403157.png)
+![image-20211006113403157](https://lab.ssafy.com/s05-blockchain/S05P21D102/-/tree/master/exec/README.assets/image-20211006113403157.png)
 
 - 시간이 다소 소요될 수 있음
 - 잔액이 7이되면 COIN 충전이 완료된 것
@@ -259,19 +259,19 @@ npm start
 
 ##### 9) 상단 메뉴에서 SHOP 클릭
 
-![image-20211006113452090](C:\Users\multicampus\Desktop\특화프로젝트\master\exec\README.assets/image-20211006113452090.png)
+![image-20211006113452090](https://lab.ssafy.com/s05-blockchain/S05P21D102/-/tree/master/exec/README.assets/image-20211006113452090.png)
 
 
 
 ##### 10) 원하는 카드팩을 선택하여 클릭
 
-![image-20211006113507034](C:\Users\multicampus\Desktop\특화프로젝트\master\exec\README.assets/image-20211006113507034.png)
+![image-20211006113507034](https://lab.ssafy.com/s05-blockchain/S05P21D102/-/tree/master/exec/README.assets/image-20211006113507034.png)
 
 
 
 ##### 11) 구매하기 버튼 클릭
 
-![image-20211006113529631](C:\Users\multicampus\Desktop\특화프로젝트\master\exec\README.assets/image-20211006113529631.png)
+![image-20211006113529631](https://lab.ssafy.com/s05-blockchain/S05P21D102/-/tree/master/exec/README.assets/image-20211006113529631.png)
 
 - 시간이 다소 소요될 수 있음
 
@@ -279,31 +279,31 @@ npm start
 
 ##### 12) 구매에 성공하면 뽑은 카드 확인 가능
 
-![image-20211006113626280](C:\Users\multicampus\Desktop\특화프로젝트\master\exec\README.assets/image-20211006113626280.png)
+![image-20211006113626280](https://lab.ssafy.com/s05-blockchain/S05P21D102/-/tree/master/exec/README.assets/image-20211006113626280.png)
 
 
 
 ##### 13) 상단 메뉴에 GALLERY 클릭
 
-![image-20211006113650575](C:\Users\multicampus\Desktop\특화프로젝트\master\exec\README.assets/image-20211006113650575.png)
+![image-20211006113650575](https://lab.ssafy.com/s05-blockchain/S05P21D102/-/tree/master/exec/README.assets/image-20211006113650575.png)
 
 
 
 ##### 14) 뽑은 카드 확인 
 
-![image-20211006113722422](C:\Users\multicampus\Desktop\특화프로젝트\master\exec\README.assets/image-20211006113722422.png)
+![image-20211006113722422](https://lab.ssafy.com/s05-blockchain/S05P21D102/-/tree/master/exec/README.assets/image-20211006113722422.png)
 
 
 
 ##### 15) 상단 메뉴에서 BOARD 클릭
 
-![image-20211006113804132](C:\Users\multicampus\Desktop\특화프로젝트\master\exec\README.assets/image-20211006113804132.png)
+![image-20211006113804132](https://lab.ssafy.com/s05-blockchain/S05P21D102/-/tree/master/exec/README.assets/image-20211006113804132.png)
 
 
 
 ##### 16) 갤러리 게시판
 
-![image-20211006113827126](C:\Users\multicampus\Desktop\특화프로젝트\master\exec\README.assets/image-20211006113827126.png)
+![image-20211006113827126](https://lab.ssafy.com/s05-blockchain/S05P21D102/-/tree/master/exec/README.assets/image-20211006113827126.png)
 
 - 작성 버튼 클릭해 게시글 작성 가능
 - 게시글 클릭을 통해 다른 사람 갤러리로 이동 가능
@@ -312,19 +312,19 @@ npm start
 
 ##### 17) 상단 메뉴에서 MARKET 클릭
 
-![image-20211006113749323](C:\Users\multicampus\Desktop\특화프로젝트\master\exec\README.assets/image-20211006113749323.png)
+![image-20211006113749323](https://lab.ssafy.com/s05-blockchain/S05P21D102/-/tree/master/exec/README.assets/image-20211006113749323.png)
 
 
 
 ##### 18) MARKET
 
-![image-20211006114314967](C:\Users\multicampus\Desktop\특화프로젝트\master\exec\README.assets/image-20211006114314967.png)
+![image-20211006114314967](https://lab.ssafy.com/s05-blockchain/S05P21D102/-/tree/master/exec/README.assets/image-20211006114314967.png)
 
 
 
 ##### 19) 물품 등록 클릭
 
-![image-20211006113916307](C:\Users\multicampus\Desktop\특화프로젝트\master\exec\README.assets/image-20211006113916307.png)
+![image-20211006113916307](https://lab.ssafy.com/s05-blockchain/S05P21D102/-/tree/master/exec/README.assets/image-20211006113916307.png)
 
 - 내가 가진 카드들 중 판매하고 싶은 카드를 선택
 - 제목, 내용, 가격을 작성해 카드를 MARKET에 등록 가능
@@ -333,7 +333,7 @@ npm start
 
 ##### 20) MARKET 카드 검색
 
-![image-20211006131047830](C:\Users\multicampus\Desktop\특화프로젝트\master\exec\README.assets/image-20211006131047830.png)
+![image-20211006131047830](https://lab.ssafy.com/s05-blockchain/S05P21D102/-/tree/master/exec/README.assets/image-20211006131047830.png)
 
 - 카드 이름이 아닌, MARKET 제목으로 검색 
 
@@ -341,7 +341,7 @@ npm start
 
 ##### 21) MARKET 카드 구매
 
-<img src="C:\Users\multicampus\Desktop\특화프로젝트\master\exec\README.assets/image-20211006114334123.png" width="70%" height="60%">
+<img src="https://lab.ssafy.com/s05-blockchain/S05P21D102/-/tree/master/exec/README.assets/image-20211006114334123.png" width="70%" height="60%">
 
 - 시간이 다소 소요될 수 있음
 - 구매가 완료되면 구매 진행창이 사라짐
@@ -350,7 +350,7 @@ npm start
 
 ##### 21) 갤러리에서 구매 카드 확인
 
-![image-20211006114624097](C:\Users\multicampus\Desktop\특화프로젝트\master\exec\README.assets/image-20211006114624097.png)
+![image-20211006114624097](https://lab.ssafy.com/s05-blockchain/S05P21D102/-/tree/master/exec/README.assets/image-20211006114624097.png)
 
 
 
