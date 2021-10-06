@@ -182,7 +182,7 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
       <div className="mypageShop">
         <div className="mypageOrder">
           <p>구매 내역</p>
-          <span>{countAuctionRegist}</span>
+          <span>{countSalesOrder}</span>
         </div>
         <div className="mypageOrder">
           <p>관심 상품</p>
@@ -190,7 +190,7 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
         </div>
         <div className="mypageOrder">
           <p>경매 등록</p>
-          <span>{countSalesOrder}</span>
+          <span>{countAuctionRegist}</span>
         </div>
       </div>
     </div>

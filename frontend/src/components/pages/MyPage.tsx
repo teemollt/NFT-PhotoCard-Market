@@ -21,7 +21,7 @@ function MyPage(): JSX.Element {
         setMemberGrade(res.data.mypage.gradeNm);
         setCountAuctionRegist(res.data.countAuctionRegist);
         setCountSalesLike(res.data.countSalesLike);
-        setCountSalesOrder(res.data.countSalesLike);
+        setCountSalesOrder(res.data.countSalesOrder);
       });
   }, []);
   return (
