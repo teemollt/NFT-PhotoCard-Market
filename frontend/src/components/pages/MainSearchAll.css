@@ -1,0 +1,28 @@
+.result1 {
+  display: grid;
+  width: 60%;
+  margin: 0 auto;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.noresult {
+  text-align: center;
+}
+.result3 {
+  display: grid;
+  width: 60%;
+  margin: 0 auto;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.container > div {
+  /* position: absolute; */
+  /* width: 300px;
+  height: 200px; */
+  background: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  will-change: transform;
+  cursor: pointer;
+}

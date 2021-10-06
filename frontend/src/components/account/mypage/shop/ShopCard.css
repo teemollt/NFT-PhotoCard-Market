@@ -1,0 +1,50 @@
+.shopCard {
+  display: inline-block;
+  margin: 15px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%),
+    0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+  cursor: pointer;
+  transition: all .2s linear;
+}
+
+.shopCard:hover {
+  box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%),
+    0px 5px 5px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+  transform: scale(1.1);
+}
+
+.shopCardImg {
+  padding: 10px;
+}
+
+.shopCardImg > img {
+  width: 200px;
+  height: 200px;
+}
+
+.shopCardInfo {
+  font-size: 12px;
+  color: lightgray;
+}
+
+.shopCardDate,
+.shopCardTitle {
+  clear: both;
+  float: left;
+  margin-left: 10px;
+}
+
+.shopCardPriceTitle,
+.shopCardPrice {
+  float: right;
+  margin-right: 10px;
+}
+
+.shopCardTitle,
+.shopCardPrice {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}

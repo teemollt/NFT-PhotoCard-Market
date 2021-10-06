@@ -1,0 +1,92 @@
+.galleryTop {
+  display: inline-block;
+  justify-content: center;
+  text-align: left;
+  margin-top: 50px;
+}
+
+.galleryTopMenu {
+  padding-top: 20px;
+  padding-right: 20px;
+  width: 1300px;
+  height: 50px;
+  line-height: 15px;
+}
+
+.galleryTop > hr {
+  height: 3px;
+  background-color: black;
+  margin-top: 0;
+}
+
+.galleryTopMenuGroup {
+  float: left;
+  cursor: pointer;
+}
+
+.galleryTopMenuGroup > span {
+  margin-left: 40px;
+  padding-bottom: 1px;
+}
+
+.galleryLike {
+  float: right;
+  padding-left: 10px;
+  padding-right: 20px;
+  cursor: pointer;
+}
+
+.galleryLike svg {
+  color: pink;
+  font-size: 25px;
+  margin-right: 10px;
+  transition: all .3s ease;
+}
+
+.galleryLike span {
+  font-size: 23px;
+  transition: all .3s ease;
+}
+
+
+.galleryLike:hover svg, .galleryLike:hover span {
+  font-size: 28px;
+  color: rgb(255, 146, 164);
+}
+
+.underline {
+  color: rgb(38, 104, 202);
+}
+
+.galleryTopSub {
+  margin-top: 15px;
+}
+
+.galleryTopSubMem {
+  float: left;
+  padding-left: 20px;
+}
+
+.galleryTopSubMem > span {
+  margin-left: 20px;
+  padding-bottom: 1px;
+  cursor: pointer;
+}
+
+.galleryTopSubView {
+  float: right;
+  padding-right: 20px;
+}
+
+.galleryTopSubView > span {
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.galleryBody {
+  max-width: 1400px !important;
+}

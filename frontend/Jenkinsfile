@@ -1,0 +1,94 @@
+pipeline {
+    agent any
+    stages {
+        stage('Docker Image Remove'){
+            steps{
+                script {
+                    try {    
+                        mattermostSend (
+                            color: "#000000", 
+                            message: "************************************************************************"
+                        )                      
+                        mattermostSend (
+                            color: "#2A42EE", 
+                            message: "Remove STARTED: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Link to build>)"
+                        )                   
+                        sh 'docker stop frontend || true' 
+                        sh 'docker rm -f frontend || true'
+                        sh 'docker rmi frontend || true'
+                    } catch(e) {
+                        currentBuild.result = "FAILURE"
+                    } finally {
+                        if(currentBuild.result == "FAILURE") {
+                            mattermostSend (
+                                color: "danger", 
+                                message: "Remove FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Link to build>)"
+                            )
+                        } else {
+                            mattermostSend (
+                                color: "good", 
+                                message: "Remove SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Link to build>)"
+                            )
+                        }                            
+                    }           
+                }
+            }
+        }
+        stage('Build') {
+            steps {  
+                script {
+                    try {
+                        mattermostSend (
+                            color: "#2A42EE", 
+                            message: "Build STARTED: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Link to build>)"
+                        )                   
+                        sh 'docker build -t frontend ./frontend/'
+                    } catch(e) {
+                        currentBuild.result = "FAILURE"
+                    } finally {
+                        if(currentBuild.result == "FAILURE") {
+                            mattermostSend (
+                                color: "danger", 
+                                message: "Build FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Link to build>)"
+                            )
+                        } else {
+                            mattermostSend (
+                                color: "good", 
+                                message: "Build SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Link to build>)"
+                            )
+                        }                            
+                    }           
+                }
+            }      
+        }
+        stage('Docker Run'){
+            steps{
+                script {
+                    try {
+                        mattermostSend (
+                            color: "#2A42EE", 
+                            message: "Run STARTED: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Link to build>)"
+                        )                   
+                        // sh 'docker run -d -v /home/ubuntu/ssh:/home/node/app/ssh -p 80:80 -p 443:443 --name frontend frontend'
+                        sh 'docker run -d -p 80:80 --name frontend frontend'
+                    } catch(e) {
+                        currentBuild.result = "FAILURE"
+                    } finally {
+                        if(currentBuild.result == "FAILURE") {
+                            mattermostSend (
+                                color: "danger", 
+                                message: "Run FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Link to build>)"
+                            )
+                        } else {
+                            mattermostSend (
+                                color: "good", 
+                                message: "Run SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Link to build>)"
+                            )
+                        }                            
+                    }           
+                }
+            }
+        }
+    }
+
+}

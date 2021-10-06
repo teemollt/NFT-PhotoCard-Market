@@ -1,0 +1,103 @@
+.joinCheckBtn {
+  margin-left: 10px !important;
+}
+
+.joinTable > tbody > tr > th {
+  width: 140px;
+  height: 50px;
+}
+
+.require {
+  color: red;
+  margin-right: 10px;
+  font-size: 1px;
+}
+
+.joinTable,
+.joinSelectCeleb {
+  margin: 0 auto;
+  width: 450px;
+  text-align: left;
+}
+
+.joinTable {
+  margin-top: 50px;
+}
+
+
+.joinCelebInfo {
+  text-align: left;
+  margin-top: 30px;
+  margin-left: 5px;
+}
+
+.joinCelebSubInfo {
+  font-size: 12px;
+  margin-left: 20px;
+}
+
+.joinCelebBox {
+  border: 1px solid lightgray;
+  float: left;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-top: 28px;
+  margin-left: 20px;
+  margin-right: 20px;
+  line-height: 100px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.joinHyun,
+.joinGd,
+.joinIu {
+  margin-bottom: 40px;
+}
+
+.joinCelebBoxs > div:hover {
+  transition: 0.5s;
+}
+
+.joinKim:hover {
+  background-color: rgba(95, 0, 247, 0.329);
+}
+
+.joinTi:hover {
+  background-color: rgba(248, 10, 248, 0.329);
+}
+
+.joinSeo:hover {
+  background-color: rgb(241, 162, 13, 0.329);
+}
+
+.joinHyun:hover {
+  background-color: rgba(235, 12, 49, 0.329);
+}
+
+.joinGd:hover {
+  background-color: rgba(235, 231, 12, 0.329);
+}
+.joinIu:hover {
+  background-color: rgba(176, 235, 12, 0.329);
+}
+
+.joinBtns {
+  width: 450px;
+  margin: 0px auto;
+  margin-top: 40px;
+  margin-bottom: 50px;
+  clear: both;
+  text-align: left;
+}
+
+.joinCancelBtn {
+  margin-right: 30px !important;
+}
+
+.joinCancelBtn,
+.joinBtn {
+  width: 200px;
+  display: inline-block;
+}

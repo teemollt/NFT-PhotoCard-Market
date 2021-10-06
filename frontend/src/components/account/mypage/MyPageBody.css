@@ -1,0 +1,26 @@
+.mypageBody {
+  clear: both;
+  text-align: left;
+  padding: 50px;
+}
+
+.mypageBodyLeft {
+  float: left;
+  width: 15%;
+}
+
+.mypageBodyLeft > h1 {
+  font-size: 25px;
+}
+
+.mypageBodyLeft > p,
+.menuService {
+  font-size: 15px;
+  margin-left: 30px;
+  color: black;
+  cursor: pointer;
+}
+
+.mypageBodyLeft > hr {
+  border: 1px solid #000000;
+}
