@@ -28,8 +28,12 @@
   - QueryDsl^4.3.1
   - MariaDB
 - :chains: BlockChain
+  - Go Ethereum(Geth) : ^1.10.8
+  - Go:  ^go1.16.4
+  - Solidity: ^0.5.0
   - web-vitals: ^1.1.2
-  - web3: ^1.5.3
+  - web3.js: ^1.5.3
+  - web3j: ^4.8.7
 
 #### Start with Local
 
@@ -39,28 +43,48 @@ npm install
 npm start
 ```
 
+#### Mining start & Mining stop
 
+```
+geth attach http://13.125.37.55:8548
+miner.start(1)
+miner.stop()
+```
 
 #### 데이터베이스
 
 - 버전
-- 접속정보
+  mariadb^10.6
+
+- 접속정보 
+
+  호스트명/ ip : j5d102.p.ssafy.io
+  포트 3306
+  사용자 : ssafy
+  암호 : ssafy
+
+![image-20211007003752638](./README.assets/image-20211007003752638.png)
 
 
 
 #### 외부서비스 문서 참조
 
 - BlockChain파트
-- 프론트 외부서비스 없음
-- 백엔드 
+  - web3j : https://docs.web3j.io/4.8.7/
+  - web3js : https://web3js.readthedocs.io/en/v1.5.2/#
+  - Go Ethereum : https://geth.ethereum.org/docs/
 
 
 
 #### 기획배경
 
+가상데이터를 판매하는 사이트를 접하고 어떤것을 팔면 시장이 활성화가 될까 고민을 하게 되었습니다. 
 
+개인, 기업간에도 꾸준한 수요와 공급이 존재하고있는 연예인, 아이돌 포토카드시장에 주목하게 되었고 
 
+이에 NFT기술을 활용해 소유자를 등록해줌으로써 해당 카드를 소유하고 
 
+갤러리를 오픈해 남들과 공유할 수 있는 'TheFan' 웹플랫폼을 기획하게 되었습니다.
 
 
 
