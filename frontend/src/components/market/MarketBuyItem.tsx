@@ -424,7 +424,7 @@ function MarketBuyItem(props: any): JSX.Element {
             >
               <h4 style={{ color: "black" }}>cancel</h4>
             </Button>
-            <h6>* 카드팩 구매시, 일정 수수료가 부과됩니다.</h6>
+            <h6>* 거래시, 일정 수수료가 부과됩니다.</h6>
           </div>
         </DialogContent>
       </Dialog>
