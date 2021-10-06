@@ -58,7 +58,7 @@ function JoinTable(props: JoinTableProps): JSX.Element {
       e
         .trim()
         .match(
-          /(?=.*\d{1,50})(?=.*[-~`!@#$%&*()+=^]{1,50})(?=.*[a-zA-Z]{1,50}).{8,16}$/
+          /(?=.\d{1,50})(?=.[-~`!@#$%&()+=^]{1,50})(?=.[a-zA-Z]{1,50}).{8,16}$/
         )
     ) {
       setMemberPwCheck(1);
@@ -100,11 +100,7 @@ function JoinTable(props: JoinTableProps): JSX.Element {
 
   const handleMemberEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMemberEmail(e.target.value.trim());
-    if (
-      memberEmail.match(
-        /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[com]{2,3}$/
-      )
-    ) {
+    if (memberEmail.match(/^0-9a-zA-Z@0-9a-zA-Z.[com]{2,3}$/)) {
       setCheckEmail(true);
       if (memberEmail !== e.target.value) {
         setEmailCheck(0);
@@ -119,7 +115,7 @@ function JoinTable(props: JoinTableProps): JSX.Element {
       memberEmail
         .trim()
         .match(
-          /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/
+          /^(([^<>()[].,;:\s@"]+(.[^<>()[].,;:\s@"]+)*)|(".+"))@(([^<>()[].,;:\s@"]+.)+[^<>()[].,;:\s@"]{2,})$/
         )
     ) {
       axios
@@ -162,7 +158,7 @@ function JoinTable(props: JoinTableProps): JSX.Element {
             .then((res) => {
               handleJoinRes();
             })
-
+            .catch((err) => console.log(err));
         } else {
           setMessage("중복 확인을 해 주세요");
           setOpen(true);
@@ -230,6 +226,9 @@ function JoinTable(props: JoinTableProps): JSX.Element {
                 helperText="영문, 숫자, -~`!@#$%&*()+=^, 8~16자"
                 error={memberPwCheck === 2 ? true : false}
                 onChange={(e) => handleMemberPw(e.target.value)}
+                inputProps={{
+                  maxlength: 16,
+                }}
               />
             </td>
           </tr>

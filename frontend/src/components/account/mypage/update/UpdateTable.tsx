@@ -4,7 +4,7 @@ import { TextField, Button } from "@material-ui/core";
 import axios from "axios";
 import JoinAlert from "../../join/JoinAlert";
 
-function JoinTable() {
+function UpdateTable() {
   const [memberId, setMemberId] = useState<string>("");
   const [memberPw, setMemberPw] = useState<string>("");
   const [password2, setPassword2] = useState<string>("");
@@ -40,7 +40,7 @@ function JoinTable() {
       e
         .trim()
         .match(
-          /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{1,50}).{8,16}$/
+          /(?=.\d{1,50})(?=.[~`!@#$%\^&()-+=]{1,50})(?=.[a-zA-Z]{1,50}).{8,16}$/
         )
     ) {
       setMemberPwCheck(1);
@@ -82,11 +82,7 @@ function JoinTable() {
 
   const handleMemberEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMemberEmail(e.target.value.trim());
-    if (
-      memberEmail.match(
-        /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[com]{2,3}$/
-      )
-    ) {
+    if (memberEmail.match(/^0-9a-zA-Z@0-9a-zA-Z.[com]{2,3}$/)) {
       setCheckEmail(true);
       if (memberEmail !== e.target.value) {
         setEmailCheck(0);
@@ -101,7 +97,7 @@ function JoinTable() {
       memberEmail
         .trim()
         .match(
-          /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/
+          /^(([^<>()[].,;:\s@"]+(.[^<>()[].,;:\s@"]+)*)|(".+"))@(([^<>()[].,;:\s@"]+.)+[^<>()[].,;:\s@"]{2,})$/
         )
     ) {
       axios
@@ -232,6 +228,9 @@ function JoinTable() {
                 helperText="영문/숫자/특수문자, 8~16자"
                 error={memberPwCheck === 2 ? true : false}
                 onChange={(e) => handleMemberPw(e.target.value)}
+                inputProps={{
+                  maxlength: 16,
+                }}
               />
             </td>
           </tr>
@@ -400,4 +399,4 @@ function JoinTable() {
   );
 }
 
-export default JoinTable;
+export default UpdateTable;

@@ -91,6 +91,7 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
     } catch {}
     try {
       const charge = await web3.eth.sendTransaction(tx, "qwer1234");
+      alert("지갑이 생성되었습니다.");
       setcharging(false);
     } catch {}
     walletCheck();
