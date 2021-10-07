@@ -36,8 +36,11 @@ function Stack(props: any): JSX.Element {
       <div style={{ textAlign: "center" }}>
         <h3>{props.cardpackinfo.salesNM}</h3>
       </div>
-      <div style={{ textAlign: "center", marginBottom: "50px" }}>
-        <img src={props.image} alt="" />
+      <div
+        className="shopcardpack"
+        style={{ textAlign: "center", marginBottom: "50px" }}
+      >
+        <img className="shopcardpackimg" src={props.image} alt="" />
       </div>
     </div>
   );

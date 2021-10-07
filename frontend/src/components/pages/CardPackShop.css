@@ -4,10 +4,6 @@
   margin: 0 auto;
 }
 
-.containercardpack {
-
-}
-
 .containercardpack > div {
   /* position: absolute; */
   /* width: 300px;
@@ -19,4 +15,14 @@
   overflow: hidden;
   will-change: transform;
   cursor: pointer;
+}
+
+.shopcardpack {
+  transition: all 0.2s linear;
+}
+.shopcardpack:hover {
+  transform: scale(1.2);
+}
+.shopcardpackimg {
+  width: 50%;
 }

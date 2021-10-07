@@ -26,3 +26,13 @@
   will-change: transform;
   cursor: pointer;
 }
+
+.shopcardpack {
+  transition: all 0.2s linear;
+}
+.shopcardpack:hover {
+  transform: scale(1.2);
+}
+.shopcardpackimg {
+  width: 50%;
+}
