@@ -289,7 +289,7 @@ miner.stop()
 
 ##### 10) 원하는 카드팩을 선택하여 클릭
 
-![image-20211006113507034](./README.assets/image-20211006113507034.png)
+![image-20211007172714983](./README.assets/image-20211007172714983.png)
 
 
 

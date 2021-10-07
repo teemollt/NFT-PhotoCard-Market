@@ -14,12 +14,10 @@
 
 
 -- blockChain 데이터베이스 구조 내보내기
-DROP DATABASE IF EXISTS `blockChain`;
 CREATE DATABASE IF NOT EXISTS `blockChain` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
 USE `blockChain`;
 
 -- 테이블 blockChain.auction 구조 내보내기
-DROP TABLE IF EXISTS `auction`;
 CREATE TABLE IF NOT EXISTS `auction` (
   `auction_no` bigint(20) NOT NULL,
   `auction_deadline` datetime(6) DEFAULT NULL,
@@ -37,16 +35,22 @@ CREATE TABLE IF NOT EXISTS `auction` (
   CONSTRAINT `FKm9puylvw733xmpmx06b6hlu3r` FOREIGN KEY (`token_no`) REFERENCES `token` (`token_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 테이블 데이터 blockChain.auction:~2 rows (대략적) 내보내기
+-- 테이블 데이터 blockChain.auction:~9 rows (대략적) 내보내기
 DELETE FROM `auction`;
 /*!40000 ALTER TABLE `auction` DISABLE KEYS */;
 INSERT INTO `auction` (`auction_no`, `auction_deadline`, `auction_detail`, `immeprice`, `auction_name`, `auction_start`, `auction_state`, `member_no`, `token_no`) VALUES
 	(1610, '2021-10-08 20:15:20.495460', '아이유 로얄C ', 50, '아이유 떳습니다 ㅋㅋㅋㅋ', '2021-10-05 20:15:20.495447', 'SELL', 1599, 1035),
-	(1617, '2021-10-08 20:33:08.306421', '이번엔 현아가떳넼ㅋㅋㅋ', 100, '로얄B 현아 ㅍㅍㅍㅍㅍㅍㅍ', '2021-10-05 20:33:08.306411', 'SELL', 1599, 1036);
+	(1617, '2021-10-08 20:33:08.306421', '이번엔 현아가떳넼ㅋㅋㅋ', 100, '로얄B 현아 ㅍㅍㅍㅍㅍㅍㅍ', '2021-10-05 20:33:08.306411', 'SELL', 1599, 1036),
+	(1624, '2021-10-09 10:47:37.783636', '카드이쁩니당', 3, '2019서현 A 카드', '2021-10-06 10:47:37.783625', 'SOLD', 1619, 456),
+	(1631, '2021-10-09 11:42:25.759646', '2021 티파니 카드입니다.', 1, '2021 티파니 카드입니다.', '2021-10-06 11:42:25.759635', 'SOLD', 1619, 402),
+	(1633, '2021-10-09 13:19:25.294270', '태연이잖아요 사세요', 2, '태연 팔아요', '2021-10-06 13:19:25.294258', 'SOLD', 1628, 162),
+	(1639, '2021-10-10 10:33:45.524734', '사가주세요!!', 5, '2021GD카드 팝니다!! B등급', '2021-10-07 10:33:45.524721', 'SELL', 1599, 900),
+	(1640, '2021-10-10 10:34:07.740247', '2019 SS카드 팝니다!!', 20, '현아카드SS~~', '2021-10-07 10:34:07.740237', 'SELL', 1599, 626),
+	(1647, '2021-10-10 11:49:08.591464', '팔아요~~', 99999999, 'test중입니다~ㅅ', '2021-10-07 11:49:08.591454', 'SELL', 1598, 246),
+	(1657, '2021-10-10 16:45:20.883533', 'C등급중왕입니다!!', 8, '2018 현아 카드', '2021-10-07 16:45:20.883521', 'SELL', 1599, 789);
 /*!40000 ALTER TABLE `auction` ENABLE KEYS */;
 
 -- 테이블 blockChain.auction_like 구조 내보내기
-DROP TABLE IF EXISTS `auction_like`;
 CREATE TABLE IF NOT EXISTS `auction_like` (
   `auction_no` bigint(20) NOT NULL,
   `member_no` bigint(20) NOT NULL,
@@ -56,13 +60,16 @@ CREATE TABLE IF NOT EXISTS `auction_like` (
   CONSTRAINT `FKimbj8t1u4b0p6xfp596t43tk1` FOREIGN KEY (`member_no`) REFERENCES `member` (`member_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 테이블 데이터 blockChain.auction_like:~0 rows (대략적) 내보내기
+-- 테이블 데이터 blockChain.auction_like:~3 rows (대략적) 내보내기
 DELETE FROM `auction_like`;
 /*!40000 ALTER TABLE `auction_like` DISABLE KEYS */;
+INSERT INTO `auction_like` (`auction_no`, `member_no`) VALUES
+	(1610, 1628),
+	(1617, 1599),
+	(1617, 1628);
 /*!40000 ALTER TABLE `auction_like` ENABLE KEYS */;
 
 -- 테이블 blockChain.auction_order 구조 내보내기
-DROP TABLE IF EXISTS `auction_order`;
 CREATE TABLE IF NOT EXISTS `auction_order` (
   `auction_order_no` bigint(20) NOT NULL,
   `auction_order_date` datetime(6) DEFAULT NULL,
@@ -75,13 +82,16 @@ CREATE TABLE IF NOT EXISTS `auction_order` (
   CONSTRAINT `FKorkmxexopn9ewogkbf0m0807` FOREIGN KEY (`member_no`) REFERENCES `member` (`member_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 테이블 데이터 blockChain.auction_order:~0 rows (대략적) 내보내기
+-- 테이블 데이터 blockChain.auction_order:~3 rows (대략적) 내보내기
 DELETE FROM `auction_order`;
 /*!40000 ALTER TABLE `auction_order` DISABLE KEYS */;
+INSERT INTO `auction_order` (`auction_order_no`, `auction_order_date`, `auction_no`, `member_no`) VALUES
+	(1627, '2021-10-06 10:51:13.230322', 1624, 1625),
+	(1632, '2021-10-06 11:44:10.883018', 1631, 1628),
+	(1651, '2021-10-07 12:00:40.713746', 1633, 1598);
 /*!40000 ALTER TABLE `auction_order` ENABLE KEYS */;
 
 -- 테이블 blockChain.bid 구조 내보내기
-DROP TABLE IF EXISTS `bid`;
 CREATE TABLE IF NOT EXISTS `bid` (
   `bid_no` bigint(20) NOT NULL,
   `bid_date` datetime(6) DEFAULT NULL,
@@ -101,7 +111,6 @@ DELETE FROM `bid`;
 /*!40000 ALTER TABLE `bid` ENABLE KEYS */;
 
 -- 테이블 blockChain.celeb 구조 내보내기
-DROP TABLE IF EXISTS `celeb`;
 CREATE TABLE IF NOT EXISTS `celeb` (
   `celeb_no` bigint(20) NOT NULL,
   `celeb_debut` datetime(6) DEFAULT NULL,
@@ -128,7 +137,6 @@ INSERT INTO `celeb` (`celeb_no`, `celeb_debut`, `celeb_mw`, `celeb_nm`, `celeb_r
 /*!40000 ALTER TABLE `celeb` ENABLE KEYS */;
 
 -- 테이블 blockChain.celeb_group 구조 내보내기
-DROP TABLE IF EXISTS `celeb_group`;
 CREATE TABLE IF NOT EXISTS `celeb_group` (
   `group_no` bigint(20) NOT NULL,
   `group_nm` varchar(255) DEFAULT NULL,
@@ -148,7 +156,6 @@ INSERT INTO `celeb_group` (`group_no`, `group_nm`, `group_nofp`) VALUES
 /*!40000 ALTER TABLE `celeb_group` ENABLE KEYS */;
 
 -- 테이블 blockChain.celeb_like 구조 내보내기
-DROP TABLE IF EXISTS `celeb_like`;
 CREATE TABLE IF NOT EXISTS `celeb_like` (
   `celeb_no` bigint(20) NOT NULL,
   `member_no` bigint(20) NOT NULL,
@@ -158,26 +165,35 @@ CREATE TABLE IF NOT EXISTS `celeb_like` (
   CONSTRAINT `FKs0yj5lyeo1ue9mr14dto8vj3a` FOREIGN KEY (`celeb_no`) REFERENCES `celeb` (`celeb_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 테이블 데이터 blockChain.celeb_like:~21 rows (대략적) 내보내기
+-- 테이블 데이터 blockChain.celeb_like:~30 rows (대략적) 내보내기
 DELETE FROM `celeb_like`;
 /*!40000 ALTER TABLE `celeb_like` DISABLE KEYS */;
 INSERT INTO `celeb_like` (`celeb_no`, `member_no`) VALUES
-	(0, 1598),
+	(0, 1619),
+	(0, 1637),
 	(1, 15),
 	(2, 8),
 	(2, 10),
 	(2, 13),
 	(2, 14),
+	(2, 1625),
 	(3, 16),
 	(3, 21),
 	(4, 9),
 	(4, 12),
+	(4, 1598),
+	(4, 1623),
 	(5, 5),
 	(5, 18),
 	(5, 19),
 	(5, 20),
 	(5, 22),
 	(5, 1599),
+	(5, 1628),
+	(5, 1634),
+	(5, 1636),
+	(5, 1643),
+	(5, 1644),
 	(6, 6),
 	(6, 7),
 	(6, 11),
@@ -186,7 +202,6 @@ INSERT INTO `celeb_like` (`celeb_no`, `member_no`) VALUES
 /*!40000 ALTER TABLE `celeb_like` ENABLE KEYS */;
 
 -- 테이블 blockChain.celeb_record 구조 내보내기
-DROP TABLE IF EXISTS `celeb_record`;
 CREATE TABLE IF NOT EXISTS `celeb_record` (
   `record_no` bigint(20) NOT NULL,
   `record_date` datetime(6) DEFAULT NULL,
@@ -203,7 +218,6 @@ DELETE FROM `celeb_record`;
 /*!40000 ALTER TABLE `celeb_record` ENABLE KEYS */;
 
 -- 테이블 blockChain.eth_info 구조 내보내기
-DROP TABLE IF EXISTS `eth_info`;
 CREATE TABLE IF NOT EXISTS `eth_info` (
   `ethnet_url` varchar(500) NOT NULL,
   `latest_bno` varchar(500) DEFAULT NULL,
@@ -216,7 +230,6 @@ DELETE FROM `eth_info`;
 /*!40000 ALTER TABLE `eth_info` ENABLE KEYS */;
 
 -- 테이블 blockChain.gallery_article 구조 내보내기
-DROP TABLE IF EXISTS `gallery_article`;
 CREATE TABLE IF NOT EXISTS `gallery_article` (
   `gallery_no` bigint(20) NOT NULL,
   `gallery_content` varchar(255) DEFAULT NULL,
@@ -226,48 +239,19 @@ CREATE TABLE IF NOT EXISTS `gallery_article` (
   CONSTRAINT `FK3mqsc1ichgmtfp25l1d5gv07a` FOREIGN KEY (`gallery_host_member`) REFERENCES `member` (`member_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 테이블 데이터 blockChain.gallery_article:~34 rows (대략적) 내보내기
+-- 테이블 데이터 blockChain.gallery_article:~6 rows (대략적) 내보내기
 DELETE FROM `gallery_article`;
 /*!40000 ALTER TABLE `gallery_article` DISABLE KEYS */;
 INSERT INTO `gallery_article` (`gallery_no`, `gallery_content`, `gallery_host_member`) VALUES
-	(1565, '테스트 갤러리 콘텐츠 1', 5),
-	(1566, '테스트 갤러리 콘텐츠 2', 5),
-	(1567, '테스트 갤러리 콘텐츠 3', 6),
-	(1568, '테스트 갤러리 콘텐츠 4', 6),
-	(1569, '테스트 갤러리 콘텐츠 5', 7),
-	(1570, '테스트 갤러리 콘텐츠 6', 7),
-	(1571, '테스트 갤러리 콘텐츠 7', 8),
-	(1572, '테스트 갤러리 콘텐츠 8', 8),
-	(1573, '테스트 갤러리 콘텐츠 9', 8),
-	(1574, '테스트 갤러리 콘텐츠 10', 9),
-	(1575, '테스트 갤러리 콘텐츠 11', 9),
-	(1576, '테스트 갤러리 콘텐츠 12', 9),
-	(1577, '테스트 갤러리 콘텐츠 13', 10),
-	(1578, '테스트 갤러리 콘텐츠 14', 11),
-	(1579, '테스트 갤러리 콘텐츠 15', 11),
-	(1580, '테스트 갤러리 콘텐츠 16', 12),
-	(1581, '테스트 갤러리 콘텐츠 17', 13),
-	(1582, '테스트 갤러리 콘텐츠 18', 15),
-	(1583, '테스트 갤러리 콘텐츠 19', 15),
-	(1584, '테스트 갤러리 콘텐츠 20', 16),
-	(1585, '테스트 갤러리 콘텐츠 21', 16),
-	(1586, '테스트 갤러리 콘텐츠 22', 17),
-	(1587, '테스트 갤러리 콘텐츠 23', 18),
-	(1588, '테스트 갤러리 콘텐츠 24', 18),
-	(1589, '테스트 갤러리 콘텐츠 25', 18),
-	(1590, '테스트 갤러리 콘텐츠 26', 19),
-	(1591, '테스트 갤러리 콘텐츠 27', 19),
-	(1592, '테스트 갤러리 콘텐츠 28', 20),
-	(1593, '테스트 갤러리 콘텐츠 29', 21),
-	(1594, '테스트 갤러리 콘텐츠 30', 21),
-	(1595, '테스트 갤러리 콘텐츠 31', 22),
-	(1596, '테스트 갤러리 콘텐츠 32', 22),
-	(1597, '테스트 갤러리 콘텐츠 33', 24),
-	(1611, '아이유떳다 ㅋㅋㅋㅋㅋㅋ', 1599);
+	(1611, '아이유떳다 ㅋㅋㅋㅋㅋㅋ', 1599),
+	(1622, '처음 뽑아봄', 1619),
+	(1652, '차은우 보러 오세요', 1628),
+	(1654, '제 갤러리에 놀러오세요~!', 1599),
+	(1655, '제 갤러리입니다.', 1628),
+	(1658, '제 갤러리에 한번 놀러오세요!!', 1599);
 /*!40000 ALTER TABLE `gallery_article` ENABLE KEYS */;
 
 -- 테이블 blockChain.hibernate_sequence 구조 내보내기
-DROP TABLE IF EXISTS `hibernate_sequence`;
 CREATE TABLE IF NOT EXISTS `hibernate_sequence` (
   `next_not_cached_value` bigint(21) NOT NULL,
   `minimum_value` bigint(21) NOT NULL,
@@ -287,7 +271,6 @@ INSERT INTO `hibernate_sequence` (`next_not_cached_value`, `minimum_value`, `max
 /*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
 
 -- 테이블 blockChain.member 구조 내보내기
-DROP TABLE IF EXISTS `member`;
 CREATE TABLE IF NOT EXISTS `member` (
   `member_no` bigint(20) NOT NULL,
   `member_email` varchar(45) DEFAULT NULL,
@@ -301,36 +284,44 @@ CREATE TABLE IF NOT EXISTS `member` (
   CONSTRAINT `FKgvt8vpkistnrnje7emc84shja` FOREIGN KEY (`member_grade`) REFERENCES `member_grade` (`member_grade_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 테이블 데이터 blockChain.member:~22 rows (대략적) 내보내기
+-- 테이블 데이터 blockChain.member:~31 rows (대략적) 내보내기
 DELETE FROM `member`;
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
 INSERT INTO `member` (`member_no`, `member_email`, `member_id`, `member_nick`, `member_phone`, `member_pw`, `member_grade`) VALUES
-	(5, 'test@test.com0', 'test0', '테스트0', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 1),
-	(6, 'test@test.com1', 'test1', '테스트1', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 2),
-	(7, 'test@test.com2', 'test2', '테스트2', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 4),
-	(8, 'test@test.com3', 'test3', '테스트3', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 3),
-	(9, 'test@test.com4', 'test4', '테스트4', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 1),
-	(10, 'test@test.com5', 'test5', '테스트5', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 3),
-	(11, 'test@test.com6', 'test6', '테스트6', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 3),
-	(12, 'test@test.com7', 'test7', '테스트7', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 3),
-	(13, 'test@test.com8', 'test8', '테스트8', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 3),
-	(14, 'test@test.com9', 'test9', '테스트9', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 4),
-	(15, 'test@test.com10', 'test10', '테스트10', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 3),
-	(16, 'test@test.com11', 'test11', '테스트11', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 1),
-	(17, 'test@test.com12', 'test12', '테스트12', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 1),
-	(18, 'test@test.com13', 'test13', '테스트13', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 1),
-	(19, 'test@test.com14', 'test14', '테스트14', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 3),
-	(20, 'test@test.com15', 'test15', '테스트15', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 4),
-	(21, 'test@test.com16', 'test16', '테스트16', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 1),
-	(22, 'test@test.com17', 'test17', '테스트17', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 4),
-	(23, 'test@test.com18', 'test18', '테스트18', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 4),
-	(24, 'test@test.com19', 'test19', '테스트19', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 2),
-	(1598, 'zxcv@zxcv.com', 'test123', 'asdf', NULL, '$2a$10$zX3iaZS9sVoPsPmZY7NIB.1v3Hunm6Pg7541T/P.mc0QVQLxA.kYO', 1),
-	(1599, 'ssafy@ssafy.com', 'sonam777', 'BJ근형', NULL, '$2a$10$Edwpf5NFJFbLg5dRu9LND.0r7T/HAwg9/33s98Z5rIZVZKEvqGmvK', 1);
+	(5, 'test@test.com0', 'test0', '오늘은아이유', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 1),
+	(6, 'test@test.com1', 'test1', '티모왕', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 2),
+	(7, 'test@test.com2', 'test2', '차은우뽑을래요', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 4),
+	(8, 'test@test.com3', 'test3', '태연티파니서현', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 3),
+	(9, 'test@test.com4', 'test4', '자소서쓰자', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 1),
+	(10, 'test@test.com5', 'test5', '엉덩이찰싹', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 3),
+	(11, 'test@test.com6', 'test6', 'teemo12', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 3),
+	(12, 'test@test.com7', 'test7', 'S2지존S2', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 3),
+	(13, 'test@test.com8', 'test8', '대충지은닉', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 3),
+	(14, 'test@test.com9', 'test9', '아잉츄', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 4),
+	(15, 'test@test.com10', 'test10', '에이핑크도달라', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 3),
+	(16, 'test@test.com11', 'test11', '응애', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 1),
+	(17, 'test@test.com12', 'test12', '아기상어뚜루룻', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 1),
+	(18, 'test@test.com13', 'test13', '이영호', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 1),
+	(19, 'test@test.com14', 'test14', '홍진호2등', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 3),
+	(20, 'test@test.com15', 'test15', '싸피좋아오', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 4),
+	(21, 'test@test.com16', 'test16', '나만고양이없어', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 1),
+	(22, 'test@test.com17', 'test17', '왈왈으르르멍멍', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 4),
+	(23, 'test@test.com18', 'test18', '알리123', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 4),
+	(24, 'test@test.com19', 'test19', 'mama22', '01011112222', '$2a$10$LhCvSIPidAAoDJX0x3QH1.iHPaAnVbBwJ1IvB9IMeQ3PhJgmppFNe', 2),
+	(1598, 'zxcv@zxcv.com', 'test123', '조영우짱짱맨', NULL, '$2a$10$zX3iaZS9sVoPsPmZY7NIB.1v3Hunm6Pg7541T/P.mc0QVQLxA.kYO', 1),
+	(1599, 'ssafy@ssafy.com', 'sonam777', 'BJ근형', NULL, '$2a$10$Edwpf5NFJFbLg5dRu9LND.0r7T/HAwg9/33s98Z5rIZVZKEvqGmvK', 1),
+	(1619, 'tets@gmail.com', 'testman', 'testm', NULL, '$2a$10$LLXlvpdJaWoj/xCigx3USu.LMp6Fag/4vGZu0GTj8HahJWKeRquxG', 1),
+	(1623, 'ssafy@sd.com', 'ssafy2', 'qwe', NULL, '$2a$10$ahsYMcr8DwSe4NFlf2PtKO8nSXRpM/KCYNmgpMCW6ZUDAfCypySqy', 1),
+	(1625, 'efef@faef.com', 'testgirl', 'testg', NULL, '$2a$10$FBnCN2.m7DjsEF0487UTluHZEkdsCg.Cn5rormLaCSN8uSTsKxR5q', 1),
+	(1628, 'ssafy@sa.com', 'ssafy', '뻥이야', NULL, '$2a$10$qk7j5b6CVh7h77vlIoAhW.P.CYOzdQJRp1pScXex9b/cA8Qt2hsaq', 1),
+	(1634, 'ssafy@dsdf.com', 'ssafy9', 'ssafy9', NULL, '$2a$10$4CFK9w9Eq2S4vZnqet1PyeVZFuQx9.5i39dgsdQ0f4kh7tYd2QyI6', 1),
+	(1636, 'ssafy8@ssafy.com', 'ssafy8', 'ssafy8', NULL, '$2a$10$25BbdRNIzGtsj6XGHZg04uThSyuTKoS3PHp2nQXLi.dFBcHHRHttC', 1),
+	(1637, 'testw@testw.com', 'testwallet', 'testw', NULL, '$2a$10$6UMLXD80idubegwhSVUGhOD.V4ihAPnyPh5kr9UAWWGo3oYx2FaZu', 1),
+	(1643, 'teemo@gmai.comr', 'teemo', 'teemo', NULL, '$2a$10$mVKEiCkAp.YOgSEWqsOekuruL1qG42Ui4XDU18I0RIqkmt5.eBq2.', 1),
+	(1644, 'ssafy@dsgf.com', 'sdf22', '닉네임여덟글자임', NULL, '$2a$10$SXe/9LBJMTfswB4a6IYAMeJjOq3ttPLPU7cFmcxxcZh3xoBrT711i', 1);
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 
 -- 테이블 blockChain.member_gall_like 구조 내보내기
-DROP TABLE IF EXISTS `member_gall_like`;
 CREATE TABLE IF NOT EXISTS `member_gall_like` (
   `from_member` bigint(20) NOT NULL,
   `to_member` bigint(20) NOT NULL,
@@ -340,13 +331,15 @@ CREATE TABLE IF NOT EXISTS `member_gall_like` (
   CONSTRAINT `FKg72d9425uexwb99rxyvilb9mi` FOREIGN KEY (`from_member`) REFERENCES `member` (`member_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 테이블 데이터 blockChain.member_gall_like:~0 rows (대략적) 내보내기
+-- 테이블 데이터 blockChain.member_gall_like:~2 rows (대략적) 내보내기
 DELETE FROM `member_gall_like`;
 /*!40000 ALTER TABLE `member_gall_like` DISABLE KEYS */;
+INSERT INTO `member_gall_like` (`from_member`, `to_member`) VALUES
+	(1599, 1599),
+	(1599, 1619);
 /*!40000 ALTER TABLE `member_gall_like` ENABLE KEYS */;
 
 -- 테이블 blockChain.member_grade 구조 내보내기
-DROP TABLE IF EXISTS `member_grade`;
 CREATE TABLE IF NOT EXISTS `member_grade` (
   `member_grade_no` bigint(20) NOT NULL,
   `member_grade_nm` varchar(45) DEFAULT NULL,
@@ -364,7 +357,6 @@ INSERT INTO `member_grade` (`member_grade_no`, `member_grade_nm`) VALUES
 /*!40000 ALTER TABLE `member_grade` ENABLE KEYS */;
 
 -- 테이블 blockChain.product 구조 내보내기
-DROP TABLE IF EXISTS `product`;
 CREATE TABLE IF NOT EXISTS `product` (
   `product_no` bigint(20) NOT NULL,
   `product_detail` varchar(3000) DEFAULT NULL,
@@ -415,7 +407,6 @@ INSERT INTO `product` (`product_no`, `product_detail`, `product_nm`, `product_qu
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 
 -- 테이블 blockChain.product_grade 구조 내보내기
-DROP TABLE IF EXISTS `product_grade`;
 CREATE TABLE IF NOT EXISTS `product_grade` (
   `product_grade_no` bigint(20) NOT NULL,
   `product_grade_nm` varchar(45) DEFAULT NULL,
@@ -440,7 +431,6 @@ INSERT INTO `product_grade` (`product_grade_no`, `product_grade_nm`, `product_pe
 /*!40000 ALTER TABLE `product_grade` ENABLE KEYS */;
 
 -- 테이블 blockChain.product_grade_percent 구조 내보내기
-DROP TABLE IF EXISTS `product_grade_percent`;
 CREATE TABLE IF NOT EXISTS `product_grade_percent` (
   `product_grade_percent_no` bigint(20) NOT NULL,
   `product_grade_no` bigint(20) DEFAULT NULL,
@@ -455,7 +445,6 @@ DELETE FROM `product_grade_percent`;
 /*!40000 ALTER TABLE `product_grade_percent` ENABLE KEYS */;
 
 -- 테이블 blockChain.product_media 구조 내보내기
-DROP TABLE IF EXISTS `product_media`;
 CREATE TABLE IF NOT EXISTS `product_media` (
   `product_media_no` bigint(20) NOT NULL,
   `product_media_adres` varchar(450) DEFAULT NULL,
@@ -501,7 +490,6 @@ INSERT INTO `product_media` (`product_media_no`, `product_media_adres`, `product
 /*!40000 ALTER TABLE `product_media` ENABLE KEYS */;
 
 -- 테이블 blockChain.product_token 구조 내보내기
-DROP TABLE IF EXISTS `product_token`;
 CREATE TABLE IF NOT EXISTS `product_token` (
   `product_no` bigint(20) NOT NULL,
   `token_no` bigint(20) NOT NULL,
@@ -1534,25 +1522,32 @@ INSERT INTO `product_token` (`product_no`, `token_no`) VALUES
 /*!40000 ALTER TABLE `product_token` ENABLE KEYS */;
 
 -- 테이블 blockChain.refresh_token 구조 내보내기
-DROP TABLE IF EXISTS `refresh_token`;
 CREATE TABLE IF NOT EXISTS `refresh_token` (
   `member_id` varchar(255) NOT NULL,
   `refresh_token` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`member_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 테이블 데이터 blockChain.refresh_token:~4 rows (대략적) 내보내기
+-- 테이블 데이터 blockChain.refresh_token:~13 rows (대략적) 내보내기
 DELETE FROM `refresh_token`;
 /*!40000 ALTER TABLE `refresh_token` DISABLE KEYS */;
 INSERT INTO `refresh_token` (`member_id`, `refresh_token`) VALUES
-	('1598', 'eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MzQwMzE2ODJ9.hdWMhrSSwRkJ1_Nxjaf0Ayh2TRq7Cl3WLGKtJsbpO4APdSJmwv6vymIpjrJk31zT3S72ZQcDdQVD5W47DkiUTQ'),
-	('1599', 'eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MzQwMzgwNzN9.Wa8p-U1GfMvaarZBVBou9_Poc6zGbyXvsGbQlZSV98-laOOvPBNkpJnq0GG4Qilq4KE-rTkgvV4I07MjMf2Zug'),
-	('5', 'eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MzQwMzQwNjN9.3cNxPba_rNboa49dQ5Wf7F3UJVmYHTNzR4CJArYrTN4lzNsbzlND5ta9BXdRQlygr-QU8rnh7-94WYHP23hUvg'),
+	('1598', 'eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MzQxODU0ODJ9.ZE-MBHBvaLcLpxaZ5FgjqzFoYq6r8fV_YTZBOF2Ddnu571opmIZJJHvQA9u9H9iInDd3iEUUkvQa3DR_hvIfaQ'),
+	('1599', 'eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MzQxOTczNDV9.GDW_9u6gOvMh8KFqi6LB7f-qBs84ObAhH5eHQRd-H-CT1lGn8RS8cIaYnVONNF9evyOsu0kbU-1PIl95YLnd8w'),
+	('1619', 'eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MzQwOTE1MjB9.eTQF9sX5zKKreErH6_l8smyjGBx6BECqGJeGEtltg6ibcBRtJxRIx7JbGxkB-OkgAqliwzy4lwnZXr70CA-xHQ'),
+	('1623', 'eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MzQwODk2MjF9.aA-twA2GeEIygFcPVhT9Cm5xjepZji0E0HhRqYIqwWp0gBbNNKy6cesDnyu4UyE61wf9vOyAuwmlD3VUEpMUEA'),
+	('1625', 'eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MzQwODk3ODZ9.DWkVpTw_YXVS-UVemw05HUZ4dGhi7tO2aHIu1XQNIQ2OpIB868KFjuGRNvlXnD0rVx0Sp-C4pd2r8l6VwOQ0ag'),
+	('1628', 'eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MzQxNzUyMTN9.QB0A9PJqjlEJ3uGnw6B9LGdYQGsTXPKmblMqkQmLECedoqCELtw4jDGhQmvN_bDi2z_ShMW2Z9BNo3C0Otiygg'),
+	('1634', 'eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MzQxMDI4Mzh9.kGskpJwStBt45UuEZFlzWeHR-RI_n_KSYAV6S0yCVwcLp75xcafxlR3tzKv23XZtwzfZEYuyJSAhB1kZEQznUg'),
+	('1636', 'eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MzQxNzcwMjl9.23U0gsnp8UnAA3gUjfRRRBh6xUQtRTMtwvVYARbeAnjJ1EstzPxKOvBjpd3jwF5lNj284Rlsn88D84BUNVGUTg'),
+	('1637', 'eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MzQxMTE0NTB9.DDeEUfyj0uPGhldVL2gmlcm-Wt4isknfG8X6EDYtNz-dJsTD_u9jKwezJx11GSNYPo7vVLG3CqB82ligXvl03g'),
+	('1643', 'eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MzQxNzY4MjV9.5_yJnEF0dZUzJhrD7iZkdYpsg4lXDEkv8bGybhYcq4dHw77iIMmCOnGYCLklS3F7Qy_NpCc7-cpATtTdpN_cdg'),
+	('1644', 'eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MzQxNzcwNzl9.kO8ytU7aiPTjWMeXE0C5kKP1x2CJnXy7hHzMdxxhq4AbOriGjb1N8WDmYtGXjt0erc-taFQZ3m55MHBkQroyNw'),
+	('5', 'eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MzQxNzM5Nzh9.6mb_PIPlNziPE9NL_2MLWwlRK14wupvpsQ9Xaj1lrNSlV3WTU03IsXZpcFu9cgV7w0J18L7R-MJRdHAKzcw80g'),
 	('8', 'eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MzQwMzEzNTd9.1pr_Dk2FS_WmDwPql1odwgK0MB3hzo7WM7bLj1y66L0VC91wObzh9CbqF1ORik2cSVs6HBnUrCpuyxUIHGN8wA');
 /*!40000 ALTER TABLE `refresh_token` ENABLE KEYS */;
 
 -- 테이블 blockChain.reply 구조 내보내기
-DROP TABLE IF EXISTS `reply`;
 CREATE TABLE IF NOT EXISTS `reply` (
   `reply_no` bigint(20) NOT NULL,
   `reply_content` varchar(3000) DEFAULT NULL,
@@ -1566,7 +1561,7 @@ CREATE TABLE IF NOT EXISTS `reply` (
   CONSTRAINT `FKn736cv19l0pmocdj0fhf285g6` FOREIGN KEY (`member_no`) REFERENCES `member` (`member_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 테이블 데이터 blockChain.reply:~260 rows (대략적) 내보내기
+-- 테이블 데이터 blockChain.reply:~266 rows (대략적) 내보내기
 DELETE FROM `reply`;
 /*!40000 ALTER TABLE `reply` DISABLE KEYS */;
 INSERT INTO `reply` (`reply_no`, `reply_content`, `reply_date`, `member_no`, `sales_no`) VALUES
@@ -1829,11 +1824,16 @@ INSERT INTO `reply` (`reply_no`, `reply_content`, `reply_date`, `member_no`, `sa
 	(1561, '257 서로를 닮아 기울어진 삶\r\n\r\n소원을 담아 차오르는 달', '2021-10-02 20:55:48.388282', 21, 1304),
 	(1562, '258 서로를 닮아 기울어진 삶\r\n\r\n소원을 담아 차오르는 달', '2021-10-02 20:56:48.397284', 22, 1304),
 	(1563, '259 이른 아침 작은 새들 노랫소리 들려오면\r\n언제나 그랬듯 아쉽게 잠을 깬다\r\n창문 하나 햇살 가득 눈부시게 비쳐오고\r\n서늘한 냉기에 재채기할까 말까 음', '2021-10-02 20:57:48.417288', 23, 1304),
-	(1564, '260 이른 아침 작은 새들 노랫소리 들려오면\r\n언제나 그랬듯 아쉽게 잠을 깬다\r\n창문 하나 햇살 가득 눈부시게 비쳐오고\r\n서늘한 냉기에 재채기할까 말까 음', '2021-10-02 20:58:48.433292', 24, 1304);
+	(1564, '260 이른 아침 작은 새들 노랫소리 들려오면\r\n언제나 그랬듯 아쉽게 잠을 깬다\r\n창문 하나 햇살 가득 눈부시게 비쳐오고\r\n서늘한 냉기에 재채기할까 말까 음', '2021-10-02 20:58:48.433292', 24, 1304),
+	(1641, '아이유!! 아이유! 아이유!!!', '2021-10-07 10:53:56.284836', 1599, 1292),
+	(1642, '아이유!! 아이유!!', '2021-10-07 10:54:09.488783', 1599, 1292),
+	(1646, '이거 언제사냐....', '2021-10-07 11:08:25.803176', 1643, 1303),
+	(1648, '나와라 얍!!', '2021-10-07 11:52:52.707159', 1598, 1292),
+	(1649, '제발나와라!!!!!!', '2021-10-07 11:56:33.512754', 1598, 1292),
+	(1650, '나와줘라 ㅠㅠㅠㅠ', '2021-10-07 11:58:31.843802', 1598, 1292);
 /*!40000 ALTER TABLE `reply` ENABLE KEYS */;
 
 -- 테이블 blockChain.reply_like 구조 내보내기
-DROP TABLE IF EXISTS `reply_like`;
 CREATE TABLE IF NOT EXISTS `reply_like` (
   `member_no` bigint(20) NOT NULL,
   `reply_no` bigint(20) NOT NULL,
@@ -1849,7 +1849,6 @@ DELETE FROM `reply_like`;
 /*!40000 ALTER TABLE `reply_like` ENABLE KEYS */;
 
 -- 테이블 blockChain.sales 구조 내보내기
-DROP TABLE IF EXISTS `sales`;
 CREATE TABLE IF NOT EXISTS `sales` (
   `sales_no` bigint(20) NOT NULL,
   `sales_img` varchar(255) DEFAULT NULL,
@@ -1864,23 +1863,22 @@ CREATE TABLE IF NOT EXISTS `sales` (
 DELETE FROM `sales`;
 /*!40000 ALTER TABLE `sales` DISABLE KEYS */;
 INSERT INTO `sales` (`sales_no`, `sales_img`, `sales_detail`, `sales_div`, `sales_nm`, `sales_price`) VALUES
-	(1292, '/image/여성샐럽.jpg', '제품상세 내용', 'MW', '여성샐럽 카드팩', 3),
-	(1293, '/image/남성샐럽.jpg', '제품상세 내용', 'MW', '남성샐럽 카드팩', 3),
-	(1294, '/image/태티서.jpg', '제품상세 내용', 'GR', '태티서 카드팩', 3),
-	(1295, '/image/솔로 샐럽.jpg', '제품상세 내용', 'GR', '솔로 샐럽 카드팩', 3),
-	(1296, '/image/2016~2018.jpg', '제품상세 내용', 'YR', '2016~2018 카드팩', 3),
-	(1297, '/image/2019~2021.jpg', '제품상세 내용', 'YR', '2019~2021 카드팩', 3),
-	(1298, '/image/태연.jpg', '제품상세 내용', 'CL', '태연 카드팩', 3),
-	(1299, '/image/티파니.jpg', '제품상세 내용', 'CL', '티파니 카드팩', 3),
-	(1300, '/image/서현.jpg', '제품상세 내용', 'CL', '서현 카드팩', 3),
-	(1301, '/image/현아.jpg', '제품상세 내용', 'CL', '현아 카드팩', 3),
-	(1302, '/image/GD.jpg', '제품상세 내용', 'CL', 'GD 카드팩', 3),
-	(1303, '/image/아이유.jpg', '제품상세 내용', 'CL', '아이유 카드팩', 5000),
-	(1304, '/image/차은우.jpg', '제품상세 내용', 'CL', '차은우 카드팩', 10000);
+	(1292, '/image/여성샐럽.gif', '제품상세 내용', 'MW', '여성샐럽 카드팩', 3),
+	(1293, '/image/남성샐럽.gif', '제품상세 내용', 'MW', '남성샐럽 카드팩', 3),
+	(1294, '/image/태티서.gif', '제품상세 내용', 'GR', '태티서 카드팩', 3),
+	(1295, '/image/솔로샐럽.gif', '제품상세 내용', 'GR', '솔로 샐럽 카드팩', 3),
+	(1296, '/image/2016~2018.gif', '제품상세 내용', 'YR', '2016~2018 카드팩', 3),
+	(1297, '/image/2019~2021.gif', '제품상세 내용', 'YR', '2019~2021 카드팩', 3),
+	(1298, '/image/태연.gif', '제품상세 내용', 'CL', '태연 카드팩', 3),
+	(1299, '/image/티파니.gif', '제품상세 내용', 'CL', '티파니 카드팩', 3),
+	(1300, '/image/서현.gif', '제품상세 내용', 'CL', '서현 카드팩', 3),
+	(1301, '/image/현아.gif', '제품상세 내용', 'CL', '현아 카드팩', 3),
+	(1302, '/image/GD.gif', '제품상세 내용', 'CL', 'GD 카드팩', 3),
+	(1303, '/image/아이유.gif', '제품상세 내용', 'CL', '아이유 카드팩', 5000),
+	(1304, '/image/차은우.gif', '제품상세 내용', 'CL', '차은우 카드팩', 10000);
 /*!40000 ALTER TABLE `sales` ENABLE KEYS */;
 
 -- 테이블 blockChain.sales_like 구조 내보내기
-DROP TABLE IF EXISTS `sales_like`;
 CREATE TABLE IF NOT EXISTS `sales_like` (
   `member_no` bigint(20) NOT NULL,
   `sales_no` bigint(20) NOT NULL,
@@ -1890,7 +1888,7 @@ CREATE TABLE IF NOT EXISTS `sales_like` (
   CONSTRAINT `FKmm5lg6x7isd4enu3wrsfc01hb` FOREIGN KEY (`sales_no`) REFERENCES `sales` (`sales_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 테이블 데이터 blockChain.sales_like:~50 rows (대략적) 내보내기
+-- 테이블 데이터 blockChain.sales_like:~53 rows (대략적) 내보내기
 DELETE FROM `sales_like`;
 /*!40000 ALTER TABLE `sales_like` DISABLE KEYS */;
 INSERT INTO `sales_like` (`member_no`, `sales_no`) VALUES
@@ -1943,11 +1941,13 @@ INSERT INTO `sales_like` (`member_no`, `sales_no`) VALUES
 	(23, 1292),
 	(23, 1304),
 	(24, 1299),
-	(24, 1303);
+	(24, 1303),
+	(1599, 1292),
+	(1623, 1292),
+	(1625, 1294);
 /*!40000 ALTER TABLE `sales_like` ENABLE KEYS */;
 
 -- 테이블 blockChain.sales_order 구조 내보내기
-DROP TABLE IF EXISTS `sales_order`;
 CREATE TABLE IF NOT EXISTS `sales_order` (
   `sales_order_no` bigint(20) NOT NULL,
   `sales_order_date` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -1960,7 +1960,7 @@ CREATE TABLE IF NOT EXISTS `sales_order` (
   CONSTRAINT `FKk96us8keiw11wpyv2g2dnrms3` FOREIGN KEY (`member_no`) REFERENCES `member` (`member_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 테이블 데이터 blockChain.sales_order:~13 rows (대략적) 내보내기
+-- 테이블 데이터 blockChain.sales_order:~17 rows (대략적) 내보내기
 DELETE FROM `sales_order`;
 /*!40000 ALTER TABLE `sales_order` DISABLE KEYS */;
 INSERT INTO `sales_order` (`sales_order_no`, `sales_order_date`, `member_no`, `sales_no`) VALUES
@@ -1976,11 +1976,14 @@ INSERT INTO `sales_order` (`sales_order_no`, `sales_order_date`, `member_no`, `s
 	(1614, '2021-10-05 20:28:57', 1599, 1295),
 	(1615, '2021-10-05 20:29:25', 1599, 1295),
 	(1616, '2021-10-05 20:29:58', 1599, 1295),
-	(1618, '2021-10-05 20:33:43', 1599, 1297);
+	(1618, '2021-10-05 20:33:43', 1599, 1297),
+	(1621, '2021-10-06 10:40:02', 1619, 1296),
+	(1630, '2021-10-06 11:35:43', 1628, 1292),
+	(1653, '2021-10-07 15:18:18', 1599, 1293),
+	(1656, '2021-10-07 16:43:41', 1599, 1293);
 /*!40000 ALTER TABLE `sales_order` ENABLE KEYS */;
 
 -- 테이블 blockChain.sales_product 구조 내보내기
-DROP TABLE IF EXISTS `sales_product`;
 CREATE TABLE IF NOT EXISTS `sales_product` (
   `product_no` bigint(20) NOT NULL,
   `sales_no` bigint(20) NOT NULL,
@@ -2137,7 +2140,6 @@ INSERT INTO `sales_product` (`product_no`, `sales_no`) VALUES
 /*!40000 ALTER TABLE `sales_product` ENABLE KEYS */;
 
 -- 테이블 blockChain.sold_bundle_inside 구조 내보내기
-DROP TABLE IF EXISTS `sold_bundle_inside`;
 CREATE TABLE IF NOT EXISTS `sold_bundle_inside` (
   `sales_order_no` bigint(20) NOT NULL,
   `token` bigint(20) NOT NULL,
@@ -2147,7 +2149,7 @@ CREATE TABLE IF NOT EXISTS `sold_bundle_inside` (
   CONSTRAINT `FKjc45rdy70rn1erk92cjdj4ade` FOREIGN KEY (`sales_order_no`) REFERENCES `sales_order` (`sales_order_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 테이블 데이터 blockChain.sold_bundle_inside:~65 rows (대략적) 내보내기
+-- 테이블 데이터 blockChain.sold_bundle_inside:~85 rows (대략적) 내보내기
 DELETE FROM `sold_bundle_inside`;
 /*!40000 ALTER TABLE `sold_bundle_inside` DISABLE KEYS */;
 INSERT INTO `sold_bundle_inside` (`sales_order_no`, `token`) VALUES
@@ -2215,11 +2217,30 @@ INSERT INTO `sold_bundle_inside` (`sales_order_no`, `token`) VALUES
 	(1618, 466),
 	(1618, 649),
 	(1618, 811),
-	(1618, 1024);
+	(1618, 1024),
+	(1621, 402),
+	(1621, 456),
+	(1621, 525),
+	(1621, 531),
+	(1621, 862),
+	(1630, 154),
+	(1630, 162),
+	(1630, 210),
+	(1630, 501),
+	(1630, 683),
+	(1653, 858),
+	(1653, 924),
+	(1653, 996),
+	(1653, 1000),
+	(1653, 1014),
+	(1656, 826),
+	(1656, 850),
+	(1656, 867),
+	(1656, 870),
+	(1656, 1018);
 /*!40000 ALTER TABLE `sold_bundle_inside` ENABLE KEYS */;
 
 -- 테이블 blockChain.token 구조 내보내기
-DROP TABLE IF EXISTS `token`;
 CREATE TABLE IF NOT EXISTS `token` (
   `token_no` bigint(20) NOT NULL,
   `token_seriarlize_no` varchar(300) DEFAULT NULL,
@@ -3433,7 +3454,6 @@ INSERT INTO `token` (`token_no`, `token_seriarlize_no`) VALUES
 /*!40000 ALTER TABLE `token` ENABLE KEYS */;
 
 -- 테이블 blockChain.token_owner 구조 내보내기
-DROP TABLE IF EXISTS `token_owner`;
 CREATE TABLE IF NOT EXISTS `token_owner` (
   `member_no` bigint(20) NOT NULL,
   `token_no` bigint(20) NOT NULL,
@@ -3445,7 +3465,7 @@ CREATE TABLE IF NOT EXISTS `token_owner` (
   CONSTRAINT `FKb591mre11fn6cvaem6yuds758` FOREIGN KEY (`token_no`) REFERENCES `token` (`token_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 테이블 데이터 blockChain.token_owner:~65 rows (대략적) 내보내기
+-- 테이블 데이터 blockChain.token_owner:~85 rows (대략적) 내보내기
 DELETE FROM `token_owner`;
 /*!40000 ALTER TABLE `token_owner` DISABLE KEYS */;
 INSERT INTO `token_owner` (`member_no`, `token_no`, `on_auction`, `own_date`) VALUES
@@ -3470,7 +3490,8 @@ INSERT INTO `token_owner` (`member_no`, `token_no`, `on_auction`, `own_date`) VA
 	(5, 783, 0, '2021-10-05 19:22:33.081811'),
 	(5, 816, 0, '2021-10-05 18:18:32.197860'),
 	(1598, 111, 0, '2021-10-05 18:08:27.274631'),
-	(1598, 246, 0, '2021-10-05 18:08:27.515056'),
+	(1598, 162, 0, '2021-10-07 12:00:40.716110'),
+	(1598, 246, 1, '2021-10-05 18:08:27.515056'),
 	(1598, 260, 0, '2021-10-05 18:08:27.354386'),
 	(1598, 607, 0, '2021-10-05 18:08:27.442029'),
 	(1598, 818, 0, '2021-10-05 18:08:27.389786'),
@@ -3483,7 +3504,7 @@ INSERT INTO `token_owner` (`member_no`, `token_no`, `on_auction`, `own_date`) VA
 	(1599, 467, 0, '2021-10-05 18:02:09.783583'),
 	(1599, 478, 0, '2021-10-05 20:13:35.070820'),
 	(1599, 483, 0, '2021-10-05 20:13:35.232659'),
-	(1599, 626, 0, '2021-10-05 20:28:12.436724'),
+	(1599, 626, 1, '2021-10-05 20:28:12.436724'),
 	(1599, 631, 0, '2021-10-05 20:26:18.305726'),
 	(1599, 647, 0, '2021-10-05 18:02:09.418621'),
 	(1599, 649, 0, '2021-10-05 20:33:43.807349'),
@@ -3495,29 +3516,47 @@ INSERT INTO `token_owner` (`member_no`, `token_no`, `on_auction`, `own_date`) VA
 	(1599, 708, 0, '2021-10-05 20:29:25.696217'),
 	(1599, 715, 0, '2021-10-05 20:28:57.517341'),
 	(1599, 720, 0, '2021-10-05 20:13:35.128845'),
-	(1599, 789, 0, '2021-10-05 20:26:18.381289'),
+	(1599, 789, 1, '2021-10-05 20:26:18.381289'),
 	(1599, 792, 0, '2021-10-05 20:29:58.593952'),
 	(1599, 805, 0, '2021-10-05 20:29:58.790828'),
 	(1599, 811, 0, '2021-10-05 20:33:43.917024'),
+	(1599, 826, 0, '2021-10-07 16:43:41.831748'),
 	(1599, 827, 0, '2021-10-05 20:28:12.361967'),
 	(1599, 833, 0, '2021-10-05 20:26:18.284632'),
 	(1599, 842, 0, '2021-10-05 20:26:18.212902'),
+	(1599, 850, 0, '2021-10-07 16:43:41.882765'),
+	(1599, 858, 0, '2021-10-07 15:18:17.976714'),
+	(1599, 867, 0, '2021-10-07 16:43:41.867411'),
+	(1599, 870, 0, '2021-10-07 16:43:41.885747'),
 	(1599, 871, 0, '2021-10-05 20:28:57.570534'),
 	(1599, 872, 0, '2021-10-05 20:29:25.879034'),
 	(1599, 888, 0, '2021-10-05 20:29:25.805774'),
 	(1599, 890, 0, '2021-10-05 20:28:12.274349'),
-	(1599, 900, 0, '2021-10-05 20:28:57.389217'),
+	(1599, 900, 1, '2021-10-05 20:28:57.389217'),
 	(1599, 901, 0, '2021-10-05 20:29:58.773095'),
 	(1599, 915, 0, '2021-10-05 20:29:58.556772'),
+	(1599, 924, 0, '2021-10-07 15:18:17.954322'),
 	(1599, 961, 0, '2021-10-05 20:29:25.752462'),
 	(1599, 994, 0, '2021-10-05 20:29:25.643253'),
+	(1599, 996, 0, '2021-10-07 15:18:18.049067'),
+	(1599, 1000, 0, '2021-10-07 15:18:18.029170'),
+	(1599, 1014, 0, '2021-10-07 15:18:17.938316'),
+	(1599, 1018, 0, '2021-10-07 16:43:41.795632'),
 	(1599, 1024, 0, '2021-10-05 20:33:43.957646'),
 	(1599, 1035, 1, '2021-10-05 20:13:35.194858'),
-	(1599, 1036, 1, '2021-10-05 20:29:58.666817');
+	(1599, 1036, 1, '2021-10-05 20:29:58.666817'),
+	(1619, 525, 0, '2021-10-06 10:40:02.097558'),
+	(1619, 531, 0, '2021-10-06 10:40:02.243534'),
+	(1619, 862, 0, '2021-10-06 10:40:02.206554'),
+	(1625, 456, 0, '2021-10-06 10:51:13.320059'),
+	(1628, 154, 0, '2021-10-06 11:35:43.480736'),
+	(1628, 210, 0, '2021-10-06 11:35:43.484186'),
+	(1628, 402, 0, '2021-10-06 11:44:10.956030'),
+	(1628, 501, 0, '2021-10-06 11:35:43.490849'),
+	(1628, 683, 0, '2021-10-06 11:35:43.473295');
 /*!40000 ALTER TABLE `token_owner` ENABLE KEYS */;
 
 -- 테이블 blockChain.transaction 구조 내보내기
-DROP TABLE IF EXISTS `transaction`;
 CREATE TABLE IF NOT EXISTS `transaction` (
   `transaction_no` bigint(20) NOT NULL,
   `transaction_bhash` varchar(500) DEFAULT NULL,
@@ -3547,7 +3586,6 @@ DELETE FROM `transaction`;
 /*!40000 ALTER TABLE `transaction` ENABLE KEYS */;
 
 -- 테이블 blockChain.wallets 구조 내보내기
-DROP TABLE IF EXISTS `wallets`;
 CREATE TABLE IF NOT EXISTS `wallets` (
   `wallet_no` bigint(20) NOT NULL,
   `wallet_add` varchar(500) DEFAULT NULL,
@@ -3560,13 +3598,19 @@ CREATE TABLE IF NOT EXISTS `wallets` (
   CONSTRAINT `FK3uesuelp5y4em1kttg19q44lc` FOREIGN KEY (`member`) REFERENCES `member` (`member_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 테이블 데이터 blockChain.wallets:~3 rows (대략적) 내보내기
+-- 테이블 데이터 blockChain.wallets:~9 rows (대략적) 내보내기
 DELETE FROM `wallets`;
 /*!40000 ALTER TABLE `wallets` DISABLE KEYS */;
 INSERT INTO `wallets` (`wallet_no`, `wallet_add`, `wallet_balance`, `wallet_cash`, `wallet_rc`, `member`) VALUES
-	(1600, '0x9C68C25682a6442B5Fa17Ee5384662DBB604C55f', 14.00, 0, 0, 1599),
+	(1600, '0x9C68C25682a6442B5Fa17Ee5384662DBB604C55f', 36.00, 0, 0, 1599),
 	(1602, '0x6Ec1cE5b25D43A7204A436e2143Bbaddc312DA2e', 2.00, 0, 0, 5),
-	(1603, '0x9B7664C14F555a5b1765d490b14fc3B4484f9b6D', 11.00, 0, 0, 1598);
+	(1603, '0x9B7664C14F555a5b1765d490b14fc3B4484f9b6D', 9.00, 0, 0, 1598),
+	(1620, '0xc737a628F636D2D30e752eE22E96E5583cbd47cE', 7.00, 0, 0, 1619),
+	(1626, '0xdcd7db5774B53A06C1930d13cE4123ECf0d63a25', 4.00, 0, 0, 1625),
+	(1629, '0xdA5fB59295197f755FAa64888D28B2f3072b5832', 5.00, 0, 0, 1628),
+	(1635, '0xaC42E9d897a70D4e5c79894DC2bB2b7672a839f0', 7.00, 0, 0, 1634),
+	(1638, '0x1B7e7bB470b352Cfe594599eBfC46dcBBe77236B', 7.00, 0, 0, 1637),
+	(1645, '0x409f60cBa168901863A96a8BFd5266bD7055610b', 7.00, 0, 0, 1644);
 /*!40000 ALTER TABLE `wallets` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
