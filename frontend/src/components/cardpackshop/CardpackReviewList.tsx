@@ -11,10 +11,9 @@ import CreateIcon from "@mui/icons-material/Create";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root1: {
-      width: "100%",
+      width: "90%",
       maxWidth: "1000px",
       margin: "auto",
-
     },
     inline: {
       display: "inline",
@@ -38,7 +37,7 @@ function CardpackReviewList(props: any): JSX.Element {
 
   const [reviews, setreviews] = useState<any[]>([]);
   const [currentPage, setcurrentPage] = useState(1);
-  const [reviewsPerPage, setreviewsPerPage] = useState(5);
+  const [reviewsPerPage, setreviewsPerPage] = useState(15);
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -47,12 +46,14 @@ function CardpackReviewList(props: any): JSX.Element {
           cardpackNo: props.cardpackNo,
         })
         .then((res) => {
+          console.log(res.data.res);
           setreviews(res.data.res);
         })
         .catch(() => {});
     };
     fetchReviews();
   }, []);
+
   // Get current reviews
   const indexOfLastReview = currentPage * reviewsPerPage;
   const indexOfFirstReview = indexOfLastReview - reviewsPerPage;
@@ -74,8 +75,17 @@ function CardpackReviewList(props: any): JSX.Element {
         )
         .then((res) => {
           setreview("");
-        })
+        });
     }
+  }
+  function loadreviews() {
+    axios
+      .get(`/api/cardPack/${props.cardpackNo}/review`, {
+        cardpackNo: props.cardpackNo,
+      })
+      .then((res) => {
+        setreviews(res.data.res);
+      });
   }
   return (
     <div>
@@ -98,6 +108,12 @@ function CardpackReviewList(props: any): JSX.Element {
           onChange={(e) => {
             setreview(e.target.value);
           }}
+          onKeyPress={(e) => {
+            if (e.key === "Enter") {
+              createreview();
+              loadreviews();
+            }
+          }}
         />
         <br />
         <br />
@@ -107,6 +123,7 @@ function CardpackReviewList(props: any): JSX.Element {
             className={classes.createicon}
             onClick={() => {
               createreview();
+              loadreviews();
             }}
           />
         ) : (

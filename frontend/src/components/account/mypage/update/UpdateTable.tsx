@@ -267,6 +267,9 @@ function UpdateTable() {
                 onChange={handleMemberNick}
                 helperText={nickCheck === 2 ? "이미 존재하는 닉네임입니다" : ""}
                 error={nickCheck === 2 ? true : false}
+                inputProps={{
+                  maxlength: 8,
+                }}
               />
               <Button
                 className="joinCheckBtn"

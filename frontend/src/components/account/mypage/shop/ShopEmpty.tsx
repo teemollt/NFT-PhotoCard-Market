@@ -16,14 +16,7 @@ function ShopEmpty() {
 
   const [recommend, setRecommend] = useState<Array<Recommend>>([]);
   const [celeb, setCeleb] = useState<string>("");
-
-  useEffect(() => {
-    axios
-      .get("/api/saleCard")
-      .then((res) =>
-        setRecommend(res.data.res.sort(() => Math.random() - 0.5).slice(0, 3))
-      );
-  }, []);
+  const [success, setsuccess] = useState(false);
   useEffect(() => {
     axios
       .get("/api/member/mypage", {
@@ -33,19 +26,88 @@ function ShopEmpty() {
         let celebNo = res.data.mypage.celebNo;
         if (celebNo === 0) {
           setCeleb("태 연");
+          axios
+            .get("/api/search/all/" + "태연", {
+              keyword: "태연",
+            })
+            .then((res) => {
+              setRecommend(
+                res.data.cardPackList
+                  .sort(() => Math.random() - 0.5)
+                  .slice(0, 3)
+              );
+            });
         } else if (celebNo === 1) {
           setCeleb("티파니");
+          axios
+            .get("/api/search/all/" + "티파니", {
+              keyword: "티파니",
+            })
+            .then((res) => {
+              setRecommend(
+                res.data.cardPackList
+                  .sort(() => Math.random() - 0.5)
+                  .slice(0, 3)
+              );
+            });
         } else if (celebNo === 2) {
           setCeleb("서 현");
+          axios
+            .get("/api/search/all/" + "서현", {
+              keyword: "서현",
+            })
+            .then((res) => {
+              setRecommend(
+                res.data.cardPackList
+                  .sort(() => Math.random() - 0.5)
+                  .slice(0, 3)
+              );
+            });
         } else if (celebNo === 3) {
           setCeleb("현 아");
+          axios
+            .get("/api/search/all/" + "현아", {
+              keyword: "현아",
+            })
+            .then((res) => {
+              setRecommend(
+                res.data.cardPackList
+                  .sort(() => Math.random() - 0.5)
+                  .slice(0, 3)
+              );
+            });
         } else if (celebNo === 4) {
           setCeleb("G-DRAGON");
+          axios
+            .get("/api/search/all/" + "GD", {
+              keyword: "GD",
+            })
+            .then((res) => {
+              setRecommend(
+                res.data.cardPackList
+                  .sort(() => Math.random() - 0.5)
+                  .slice(0, 3)
+              );
+            });
         } else if (celebNo === 5) {
           setCeleb("아이유");
+          axios
+            .get("/api/search/all/" + "아이유", {
+              keyword: "아이유",
+            })
+            .then((res) => {
+              setRecommend(
+                res.data.cardPackList
+                  .sort(() => Math.random() - 0.5)
+                  .slice(0, 3)
+              );
+            });
         }
       });
   }, []);
+  // useEffect(() => {
+
+  // }, []);
 
   const handleToShop = (data: any) => {
     history.push({

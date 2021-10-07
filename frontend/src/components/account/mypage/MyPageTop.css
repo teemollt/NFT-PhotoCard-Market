@@ -21,12 +21,14 @@
 }
 
 .mypageGrade {
+  font-size: 20px;
+  margin-top: 12px;
   margin-bottom: 0;
 }
 
 .mypageUserInfos {
   float: left;
-  width: 400px;
+  width: 299px;
 }
 
 .mypageAccount > p {
@@ -42,7 +44,6 @@
 .mypageUserUpdate {
   float: right;
   text-align: right;
-  /* width: 170px; */
 }
 
 .tablinkMyPage {
@@ -56,6 +57,8 @@
 .mypageUpdateBtn,
 .mypageAccountBtn {
   background-color: white !important;
+  width: 105px;
+  height: 40px;
 }
 
 .mypageAccountBtn {

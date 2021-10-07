@@ -36,6 +36,13 @@
   margin-left: 10px;
 }
 
+.marketCardTitle {
+  width: 210px;
+  height: 20px;
+  text-align: left;
+  overflow: hidden;
+}
+
 .marketCardPriceTitle,
 .marketCardPrice {
   float: right;

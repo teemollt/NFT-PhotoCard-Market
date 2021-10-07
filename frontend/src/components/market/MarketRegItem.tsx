@@ -28,7 +28,6 @@ function MarketRegItem() {
       })
       .then((res) => {
         setmycardlist(res.data.res);
-
       });
   }, []);
   //
@@ -170,6 +169,9 @@ function MarketRegItem() {
             variant="standard"
             onChange={(e) => {
               setselectedcardtitle(e.target.value);
+            }}
+            inputProps={{
+              maxlength: 10,
             }}
           />
           <TextField

@@ -29,7 +29,8 @@ function CardpackReview(props: any): JSX.Element {
                         {review.reviewUser}
                       </Typography>
                       &nbsp;&nbsp;&nbsp;&nbsp;{review.reviewDate.slice(0, 10)}
-                      {review.reviewDate.slice(14, 19)}
+                      &nbsp;
+                      {review.reviewDate.slice(11, 16)}
                     </React.Fragment>
                   }
                   secondary={

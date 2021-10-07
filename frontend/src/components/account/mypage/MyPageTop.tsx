@@ -6,7 +6,6 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import SaveIcon from "@mui/icons-material/Save";
 import "./MyPageTop.css";
 import Web3 from "web3";
-import { ConstructionRounded } from "@mui/icons-material";
 
 interface MyPageTopProps {
   memberNick: string;
@@ -34,20 +33,15 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
   const [userBalance, setBalance] = useState<string>("0");
 
   const walletCheck = async () => {
-    console.log("walletchecktry");
     try {
       const res = await axios.get("/api/wallet/", {
         headers: { Authorization: localStorage.getItem("token") },
       });
-      console.log(res.data);
       if (res.data.success === true) {
         setAddress(res.data.address);
         setBalance(res.data.walletBal);
-        console.log("walletcheck");
       }
-    } catch (err) {
-      console.log(err);
-    }
+    } catch {}
   };
 
   useEffect(() => {
@@ -60,7 +54,6 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
     setmakingwallet(true);
     // 계정 생성 - 추후에 비밀번호 직접 입력 가능하게
     const newAccount = await web3.eth.personal.newAccount("123");
-    console.log(newAccount);
     setAddress(newAccount);
     setmakingwallet(false);
     // 생성된 주소 서버로 넘겨서 저장하기
@@ -73,7 +66,6 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
   const [charging, setcharging] = useState(false);
   // 이더 충전 횟수 제한 혹은 일정 잔액 이하일때만 충전 가능하게 api로 변경
   const chargeEth = async () => {
-    console.log(userAddress);
     setcharging(true);
     const tx = {
       from: admin,
@@ -89,23 +81,16 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
         "qwer1234",
         6000
       );
-      console.log(adminUnlock);
       const unlock = await web3.eth.personal.unlockAccount(
         userAddress,
         "123",
         6000
       );
-      console.log(unlock);
-    } catch (err) {
-      console.log(err);
-    }
+    } catch {}
     try {
       const charge = await web3.eth.sendTransaction(tx, "qwer1234");
-      console.log(charge);
       setcharging(false);
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
     walletCheck();
   };
   return (
@@ -118,8 +103,9 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
           <p className="mypageGrade">{memberGrade}</p>
           {userAddress !== "" ? (
             <div className="mypageAccount">
-              {/* <p>지갑주소: {userAddress}</p> */}
-              <h1 style={{ marginTop: "5px" }}>잔액: {userBalance} </h1>
+              <h1 style={{ marginTop: "0", marginBottom: "0" }}>
+                잔액: {Math.floor(Number(userBalance))} coin
+              </h1>
             </div>
           ) : null}
           <br />
@@ -144,9 +130,10 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
                     color: "black",
                     backgroundColor: "white",
                     marginLeft: "5px",
+                    width: "130px",
                   }}
                 >
-                  지갑생성중
+                  지갑 생성중
                 </LoadingButton>
               ) : (
                 <Button
@@ -170,9 +157,10 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
                   backgroundColor: "white",
                   marginLeft: "5px",
                   marginTop: "10px",
+                  width: "140px",
                 }}
               >
-                충전중
+                COIN 충전중
               </LoadingButton>
             ) : (
               <Button
@@ -181,7 +169,7 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
                 size="medium"
                 onClick={chargeEth}
               >
-                이더 충전
+                COIN 충전
               </Button>
             )}
           </div>
@@ -191,7 +179,7 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
       <div className="mypageShop">
         <div className="mypageOrder">
           <p>구매 내역</p>
-          <span>{countAuctionRegist}</span>
+          <span>{countSalesOrder}</span>
         </div>
         <div className="mypageOrder">
           <p>관심 상품</p>
@@ -199,7 +187,7 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
         </div>
         <div className="mypageOrder">
           <p>경매 등록</p>
-          <span>{countSalesOrder}</span>
+          <span>{countAuctionRegist}</span>
         </div>
       </div>
     </div>
