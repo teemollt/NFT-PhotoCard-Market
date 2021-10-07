@@ -26,38 +26,19 @@ function Stack(props: any): JSX.Element {
   }
   return (
     <div
-      className="container"
+      className="containercardpack"
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
       onClick={() => {
         buycardpack(props.cardpackinfo);
       }}
     >
-      <div style={{ textAlign: "center", marginBottom: "0" }}>
+      <div style={{ textAlign: "center" }}>
         <h3>{props.cardpackinfo.salesNM}</h3>
       </div>
-      {cards.map(({ z, opacity }, index) => (
-        <animated.div
-          key={index}
-          style={{
-            opacity,
-            transform: to(
-              [z, f.to([0, 0.2, 0.6, 1], [0, index, index, 0]), r],
-              (z, f, r) => `translate3d(0,0,0px) rotateX(0deg)`
-            ),
-          }}
-        >
-          {index === 4 && (
-            <animated.img
-              style={{
-                transform: f.to([1, 0], ["scale(1.3)", "scale(1.5)"]),
-                width: "150px",
-              }}
-              src={props.image}
-            />
-          )}
-        </animated.div>
-      ))}
+      <div style={{ textAlign: "center", marginBottom: "50px" }}>
+        <img src={props.image} alt="" />
+      </div>
     </div>
   );
 }
@@ -86,7 +67,7 @@ function MainSearchAll() {
           <div className="result1">
             {resultcardpack.map((pack, i) => (
               <Stack
-                image="/image/cardpack.png"
+                image={pack.salesImg}
                 background="#52649e"
                 cardpackinfo={pack}
                 key={i}

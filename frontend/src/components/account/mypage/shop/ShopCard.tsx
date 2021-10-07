@@ -28,7 +28,7 @@ function ShopCard(props: ShopCardProps) {
   return (
     <div className="shopCard" onClick={() => handleToShop(props.card)}>
       <div className="shopCardImg">
-        <img src="/image/cardpack.png" alt="" />
+        <img src={salesImg} alt="" />
       </div>
       <div>
         <div className="shopCardInfo">

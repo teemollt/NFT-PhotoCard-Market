@@ -135,7 +135,7 @@ function ShopEmpty() {
             key={index}
           >
             <div className="shopCardImg">
-              <img src="/image/cardpack.png" alt="" />
+              <img src={card.salesImg} alt="" />
             </div>
             <div>
               <div className="shopCardInfo">

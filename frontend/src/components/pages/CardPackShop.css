@@ -4,13 +4,11 @@
   margin: 0 auto;
 }
 
-.container {
-  /* width: 300px;
-  height: 200px; */
-  /* transform-style: flat; */
+.containercardpack {
+
 }
 
-.container > div {
+.containercardpack > div {
   /* position: absolute; */
   /* width: 300px;
   height: 200px; */

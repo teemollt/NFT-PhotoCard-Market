@@ -113,7 +113,9 @@ function CardPackDetail(): JSX.Element {
       <Container className={classes.container}>
         <Grid container spacing={5}>
           <Grid item xs={12}>
-            <img src="/image/card.gif" alt="" width="20%" />
+            <div style={{ marginTop: "30px" }}>
+              <img src={location.state.data.salesImg} alt="" width="30%" />
+            </div>
           </Grid>
           <Grid item xs={12}>
             <h2>{location.state.data.salesNM}</h2>
