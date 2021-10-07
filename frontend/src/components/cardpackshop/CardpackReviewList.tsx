@@ -46,7 +46,6 @@ function CardpackReviewList(props: any): JSX.Element {
           cardpackNo: props.cardpackNo,
         })
         .then((res) => {
-          console.log(res.data.res);
           setreviews(res.data.res);
         })
         .catch(() => {});
@@ -73,8 +72,15 @@ function CardpackReviewList(props: any): JSX.Element {
           },
           { headers: { Authorization: localStorage.getItem("token") } }
         )
-        .then((res) => {
+        .then(() => {
           setreview("");
+          axios
+            .get(`/api/cardPack/${props.cardpackNo}/review`, {
+              cardpackNo: props.cardpackNo,
+            })
+            .then((res) => {
+              setreviews(res.data.res);
+            });
         });
     }
   }
