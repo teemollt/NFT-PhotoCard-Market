@@ -380,3 +380,5 @@ miner.stop()
 
 #### 시연스크립트
 
+![image-20211008120442538](C:\Users\multicampus\AppData\Roaming\Typora\typora-user-images\image-20211008120442538.png)
+
