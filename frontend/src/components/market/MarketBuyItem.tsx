@@ -118,12 +118,18 @@ function MarketBuyItem(props: any): JSX.Element {
           const tokenSer = parseInt(props.itemtoken);
           try {
             // 언락
-            await web3.eth.personal.unlockAccount(userAddress, "123", 10000);
-            await web3.eth.personal.unlockAccount(
+            const myunlock = await web3.eth.personal.unlockAccount(
+              userAddress,
+              "123",
+              10000
+            );
+            console.log(myunlock);
+            const yourUnlock = await web3.eth.personal.unlockAccount(
               props.sellerwallet,
               "123",
               10000
             );
+            console.log(yourUnlock);
             // 구매 api요청
             const res = await axios.post(
               "/api/auction/buy",
@@ -132,29 +138,31 @@ function MarketBuyItem(props: any): JSX.Element {
               },
               { headers: { Authorization: localStorage.getItem("token") } }
             );
-
+            console.log(res);
             // 결제
             if (res.data.success) {
-              await myContract.methods.buyCard(tokenSer).send({
+              const payEth = await myContract.methods.buyCard(tokenSer).send({
                 from: userAddress,
                 value: props.price * Math.pow(10, 18),
               });
-
+              console.log(payEth);
               setOpen(false);
               setloading(false);
               // 소유권 이전
-              await myContract.methods
+              const change = await myContract.methods
                 .transferFrom(props.sellerwallet, userAddress, tokenSer)
                 .send({
                   from: props.sellerwallet,
                 });
+              console.log(change);
             } else {
               alert(res.data.msg);
             }
             history.push({
               pathname: "/market",
             });
-          } catch {
+          } catch (err) {
+            console.log(err);
             setOpen(false);
             setloading(false);
             alert("구매 실패");
