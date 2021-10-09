@@ -155,6 +155,8 @@ function MarketBuyItem(props: any): JSX.Element {
                   from: props.sellerwallet,
                 });
               console.log(change);
+              // 구매성공함수
+              handleOpenSuccess();
             } else {
               alert(res.data.msg);
             }
@@ -165,7 +167,9 @@ function MarketBuyItem(props: any): JSX.Element {
             console.log(err);
             setOpen(false);
             setloading(false);
-            alert("구매 실패");
+            // alert("구매 실패");
+            // 구매실패함수
+            handleOpenFailed();
           }
         } else {
           alert("잔액이 부족합니다.");
@@ -288,7 +292,40 @@ function MarketBuyItem(props: any): JSX.Element {
         });
       });
   }
-
+  // 구매성공버튼
+  const [OpenSuccess, setOpenSuccess] = useState(false);
+  const handleOpenSuccess = () => {
+    setOpenSuccess(true);
+    setTimeout(() => {
+      setOpenSuccess(false);
+      history.push({
+        pathname: "/market",
+      });
+    }, 2000);
+  };
+  const handleCloseSuccess = () => {
+    setOpenSuccess(false);
+    history.push({
+      pathname: "/market",
+    });
+  };
+  // 구매실패버튼
+  const [OpenFailed, setOpenFailed] = useState(false);
+  const handleOpenFailed = () => {
+    setOpenFailed(true);
+    setTimeout(() => {
+      setOpenFailed(false);
+      history.push({
+        pathname: "/market",
+      });
+    }, 2000);
+  };
+  const handleCloseFailed = () => {
+    setOpenFailed(false);
+    history.push({
+      pathname: "/market",
+    });
+  };
   return (
     <div>
       {parseInt(props.memberNo) === parseInt(props.Iam) ? (
@@ -441,6 +478,26 @@ function MarketBuyItem(props: any): JSX.Element {
             <h6>* 거래시, 일정 수수료가 부과됩니다.</h6>
           </div>
         </DialogContent>
+      </Dialog>
+      {/* 구매성공 */}
+      <Dialog
+        open={OpenSuccess}
+        onClose={handleCloseSuccess}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <Alert severity="success">
+          해당 아이템을 성공적으로 구매하였습니다
+        </Alert>
+      </Dialog>
+      {/* 구매실패 */}
+      <Dialog
+        open={OpenFailed}
+        onClose={handleCloseFailed}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <Alert severity="error">해당 아이템을 구매하는데 실패하였습니다</Alert>
       </Dialog>
     </div>
   );
