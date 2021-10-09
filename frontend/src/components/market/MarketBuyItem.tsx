@@ -148,6 +148,7 @@ function MarketBuyItem(props: any): JSX.Element {
               console.log(payEth);
               setOpen(false);
               setloading(false);
+              handleOpenSuccess();
               // 소유권 이전
               const change = await myContract.methods
                 .transferFrom(props.sellerwallet, userAddress, tokenSer)
@@ -156,7 +157,7 @@ function MarketBuyItem(props: any): JSX.Element {
                 });
               console.log(change);
               // 구매성공함수
-              handleOpenSuccess();
+              gotomarket();
             } else {
               alert(res.data.msg);
             }
@@ -296,6 +297,8 @@ function MarketBuyItem(props: any): JSX.Element {
   const [OpenSuccess, setOpenSuccess] = useState(false);
   const handleOpenSuccess = () => {
     setOpenSuccess(true);
+  };
+  const gotomarket = () => {
     setTimeout(() => {
       setOpenSuccess(false);
       history.push({
