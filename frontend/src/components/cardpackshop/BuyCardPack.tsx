@@ -82,11 +82,11 @@ const DialogActions = withStyles((theme: Theme) => ({
 function BuyCardPack(props: any): JSX.Element {
   // web3 객체
   const Web3 = require("web3");
-  const web3 = new Web3("http://13.125.37.55:8548");
+  const web3 = new Web3("http://13.125.37.55:9991");
   // contract 객체
-  const myContractAddress = "0xf1C563Ad18747384222dD4F8D21445bb0Fe4F51D"
+  const myContractAddress = "0xaB86d44D5EcA170F8E10a149738AE10f6d6332f6";
   const myContract = new web3.eth.Contract(contractAbi, myContractAddress)
-  const admin = "0x8BBa1857fD94CF79c78BBE90f977055be015E17E"
+  const admin = "0x7a7FA87bE0BDc8659c55F0454753B5fe270081A7";
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
@@ -147,7 +147,7 @@ function BuyCardPack(props: any): JSX.Element {
             cardpackNo: props.cardpackNo,
           })
           // api 요청 성공하면 돈보내기
-          await web3.eth.sendTransaction(tx, "qwer1234")
+          await web3.eth.sendTransaction(tx, "asdf1234")
           handleClickcardOpen()
           setnewcardlist(res.data.cardList)
           const tokenIds = res.data.cardList

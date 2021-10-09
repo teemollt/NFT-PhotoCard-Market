@@ -24,9 +24,9 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
     countSalesOrder,
   } = props;
   const Web3 = require("web3");
-  const web3 = new Web3("http://13.125.37.55:8548");
+  const web3 = new Web3("http://13.125.37.55:9991");
   // 관리자 계정(이더 많은거)
-  const admin = "0x8BBa1857fD94CF79c78BBE90f977055be015E17E";
+  const admin = "0x7a7FA87bE0BDc8659c55F0454753B5fe270081A7";
   // api 통해 불러온 유저 계정
   const [userAddress, setAddress] = useState<string>("");
   // 잔액
@@ -78,7 +78,7 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
     try {
       const adminUnlock = await web3.eth.personal.unlockAccount(
         admin,
-        "qwer1234",
+        "asdf1234",
         6000
       );
       const unlock = await web3.eth.personal.unlockAccount(
@@ -88,7 +88,7 @@ function MyPageTop(props: MyPageTopProps): JSX.Element {
       );
     } catch {}
     try {
-      const charge = await web3.eth.sendTransaction(tx, "qwer1234");
+      const charge = await web3.eth.sendTransaction(tx, "asdf1234");
       setcharging(false);
     } catch (err) {}
     walletCheck();
