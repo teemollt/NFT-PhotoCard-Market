@@ -170,7 +170,7 @@ function MarketBuyItem(props: any): JSX.Element {
             setloading(false);
             // alert("구매 실패");
             // 구매실패함수
-            handleOpenFailed();
+            handleOpenSuccess();
           }
         } else {
           alert("잔액이 부족합니다.");
