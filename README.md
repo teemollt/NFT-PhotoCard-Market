@@ -58,8 +58,6 @@
 
 #### 파일구조
 
-- Frontend
-
 ```
 📦Frontend
 ├─ 📂public
@@ -81,8 +79,6 @@
         ├─ 📂pages
         └─ 📂service
 ```
-
-- Backend
 
 ```
 📦backend
