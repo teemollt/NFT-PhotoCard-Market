@@ -62,7 +62,7 @@ NFT를 발행해 포토카드에 희소성과 고유성을 부여하고 소유�
 </div>
 
 <h2 align="left">폴더</h2>
-<div align="center" style="text-align: left">
+<div align="left" style="text-align: left">
 .\<br>
 |-- backend\<br>
 |-- frontend\<br>
