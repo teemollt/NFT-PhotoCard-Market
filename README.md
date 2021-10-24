@@ -50,7 +50,7 @@
 <h4 style="text-align: center">갤러리 - 갤러리 게시판</h4>
 </div>
 
-<h2 style="text-align: left">갤러리</h2>
+<h2 align="left">갤러리</h2>
 <div align="center" style="text-align: left">
 아이돌 소속사와 협력한다는 가정 하에 포토카드 NFT를 출시하고 이를 거래할 수 있는 웹서비스 입니다.
 이더리움 프라이빗 네트워크를 구성해 그 안에서 유저의 개인계정과 이더리움을 통해 거래를 할 수 있게 하였고,  
@@ -61,13 +61,13 @@ NFT를 발행해 포토카드에 희소성과 고유성을 부여하고 소유�
 갤러리와 갤러리 게시판을 통해 전시도 가능하게 하여 유저들의 수집욕구를 더욱 높였습니다.
 </div>
 
-<h2 style="text-align: left">폴더</h2>
+<h2 align="left">폴더</h2>
 <div align="center" style="text-align: left">
-.\
-|-- backend\
-|-- frontend\
-|-- exec\
-|  |-- Dummy.sql
-|  |-- 포팅_매뉴얼.md
+.\<br>
+|-- backend\<br>
+|-- frontend\<br>
+|-- exec\<br>
+|  |-- Dummy.sql<br>
+|  |-- 포팅_매뉴얼.md<br>
 |-- smartcontract\
 </div>
